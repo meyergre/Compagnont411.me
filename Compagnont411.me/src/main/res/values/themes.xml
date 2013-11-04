@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the theme applied to the application or activity -->
+
+    <!-- Start of Light KitKat theme -->
+
+    <style name="CustomActionBarLightTheme"
+        parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/MyLightActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyLightActionBar</item>
+    </style>
+    <style name="MyLightActionBar"
+        parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:icon">@drawable/ic_empty</item>
+        <item name="android:titleTextStyle">@style/MyLightActionBarTitleText</item>
+        <item name="android:subtitleTextStyle">@style/MyLightActionBarSubTitleText</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@android:color/transparent</item>
+        <item name="titleTextStyle">@style/MyLightActionBarTitleText</item>
+        <item name="textAllCaps">true</item>
+        <item name="icon">@drawable/ic_empty</item>
+
+    </style>
+
+    <!-- ActionBar title text -->
+    <style name="MyLightActionBarTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">#555</item>
+        <!-- The textColor property is backward compatible with the Support Library -->
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="MyLightActionBarSubTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">#44000000</item>
+        <!-- The textColor property is backward compatible with the Support Library -->
+    </style>
+    <!-- End of Light KitKat theme -->
+
+
+    <style name="CustomActionBarTheme"
+        parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+        parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/actionbar_new</item>
+        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+        <item name="android:subtitleTextStyle">@style/MyActionBarSubTitleText</item>
+
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/actionbar_new</item>
+        <item name="titleTextStyle">@style/MyActionBarTitleText</item>
+
+    </style>
+
+    <!-- ActionBar title text -->
+    <style name="MyActionBarTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#FFF</item>
+        <!-- The textColor property is backward compatible with the Support Library -->
+    </style>
+
+    <style name="MyActionBarSubTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">#77FFFFFF</item>
+        <!-- The textColor property is backward compatible with the Support Library -->
+    </style>
+
+    <color name="t411_action_blue">#002244</color>
+    <color name="t411_action_grey">#555</color>
+    <color name="t411_action_lightgrey">#AAA</color>
+</resources>

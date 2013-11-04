@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/torrent_card"
+            android:layout_gravity="center"
+            android:baselineAligned="false"
+            android:layout_margin="4dp">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="left|center_vertical">
+
+                <ImageView
+                        android:id="@+id/tIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_new_t411"
+                        android:focusable="false"/>
+
+                <TextView
+                        android:id="@+id/tNom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:text=".Torrent title"
+                        android:layout_weight="1"
+                        android:textColor="@color/t411_blue"
+                        android:layout_gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textStyle="bold"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:lines="1"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="#33000000"
+                    android:layout_marginBottom="6dp">
+            </FrameLayout>
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="4dp">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout4">
+
+                        <TextView
+                                android:id="@+id/textView7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Taille :"
+                                android:textColor="#000"
+                                android:textSize="14sp"/>
+
+                        <TextView
+                                android:id="@+id/tTaille"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="700 Mo"
+                                android:textColor="#88000000"
+                                android:textSize="14sp"
+                                android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout">
+
+                        <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Uploader :"
+                                android:textColor="#000"
+                                android:textSize="14sp"/>
+
+                        <TextView
+                                android:id="@+id/tUploader"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="meyerglive"
+                                android:textColor="#88000000"
+                                android:textSize="14sp"
+                                android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout2">
+
+                        <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Age :"
+                                android:textColor="#000"
+                                android:textSize="14sp"/>
+
+                        <TextView
+                                android:id="@+id/tAge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="6 ans"
+                                android:textColor="#88000000"
+                                android:textSize="14sp"
+                                android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout7">
+
+                        <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ratio :"
+                                android:textColor="#000"
+                                android:textSize="14sp"/>
+
+                        <TextView
+                                android:id="@+id/tRatioBase"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="0.75"
+                                android:textColor="#88000000"
+                                android:textSize="14sp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"/>
+
+                        <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="→"
+                                android:textColor="#44000000"
+                                android:textSize="14sp"/>
+
+                        <TextView
+                                android:id="@+id/tRatio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="0.75"
+                                android:textColor="#88000000"
+                                android:textSize="14sp"
+                                android:layout_marginLeft="5dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical">
+
+                        <TextView
+                                android:id="@+id/tSeeders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="73"
+                                android:textColor="@color/t411_green"
+                                android:textSize="14sp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_marginRight="5dp"/>
+
+                        <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="Seeders"
+                                android:textColor="@color/t411_green"
+                                android:textSize="14sp"
+                                android:singleLine="true"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:id="@+id/linearLayout5">
+
+                        <TextView
+                                android:id="@+id/tLeechers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="4"
+                                android:textColor="@color/t411_red"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:gravity="right"
+                                android:layout_marginRight="5dp"/>
+
+                        <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Leechers"
+                                android:textColor="@color/t411_red"
+                                android:textSize="14sp"
+                                android:singleLine="true"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:id="@+id/linearLayout6">
+
+                        <TextView
+                                android:id="@+id/tComments"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="18"
+                                android:textColor="#88000000"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:gravity="right"
+                                android:layout_marginRight="5dp"/>
+
+                        <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="Avis"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                android:singleLine="true"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:id="@+id/linearLayout3">
+
+                        <TextView
+                                android:id="@+id/tCompleted"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="62"
+                                android:textColor="#88000000"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:gravity="right"
+                                android:layout_marginRight="5dp"/>
+
+                        <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="complets"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                android:singleLine="true"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

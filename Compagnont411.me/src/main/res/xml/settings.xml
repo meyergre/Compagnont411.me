@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Compte utilisateur -->
+    <PreferenceScreen
+        android:title="@string/settings_caption_useraccount"
+        android:icon="@drawable/ic_settings_useraccount"
+        android:summary="@string/settings_caption_useraccount_summary"
+        android:persistent="false">
+        <PreferenceCategory android:title="@string/connect">
+            <EditTextPreference
+                android:key="login"
+                android:title="@string/main_login"
+                android:summary="@string/main_login_summary"/>
+            <EditTextPreference
+                android:key="password"
+                android:title="@string/main_password"
+                android:summary="@string/main_password_summary"
+                android:password="true"/>
+        </PreferenceCategory>
+        <PreferenceCategory android:title="Ratio">
+            <EditTextPreference
+                android:key="ratioMinimum"
+                android:title="Ratio Min."
+                android:summary="@string/lowRatio_summary"
+                android:numeric="integer"/>
+            <EditTextPreference
+                android:key="ratioCible"
+                android:title="@string/target_ratio"
+                android:summary="@string/targetRatio_summary"
+                android:numeric="integer"/>
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+    <!-- Connexion -->
+    <PreferenceScreen
+        android:title="@string/settings_caption_connection"
+        android:icon="@drawable/ic_settings_connect"
+        android:summary="@string/settings_caption_connection_summary">
+
+            <CheckBoxPreference
+                android:key="useHTTPS"
+                android:title="@string/settings_use_https"
+                android:summaryOn="@string/settings_use_https_summary_on"
+                android:summaryOff="@string/settings_use_https_summary_off"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference
+                android:key="rtcMode"
+                android:title="@string/settings_RTC"
+                android:summary="@string/settings_RTC_details"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference
+                android:key="wifiOnly"
+                android:title="@string/settings_only_wifi"
+                android:summary="@string/settings_wifi_only_details"
+                android:defaultValue="false" />
+
+            <PreferenceScreen
+                android:title="@string/settings_caption_connection_advanced"
+                android:summary="@string/settings_caption_connection_advanced_summary">
+
+                <EditTextPreference
+                    android:key="User-Agent"
+                    android:title="User-Agent" />
+
+                <EditTextPreference
+                    android:title="Timeout"
+                    android:key="timeoutValue"
+                    android:numeric="integer"/>
+
+            </PreferenceScreen>
+
+    </PreferenceScreen>
+
+    <!-- Mise  à jour -->
+    <PreferenceScreen
+        android:title="@string/auto_update"
+        android:icon="@drawable/ic_settings_autoupdate"
+        android:summary="@string/auto_update_summary">
+
+        <CheckBoxPreference
+            android:key="autoUpdate"
+            android:title="@string/auto_update"
+            android:summary="@string/auto_update_summary"
+            android:defaultValue="true" />
+        <EditTextPreference
+            android:key="updateFreq"
+            android:title="@string/frequency"
+            android:summary="@string/description_frequency"
+            android:defaultValue="60"
+            android:numeric="integer"/>
+
+    </PreferenceScreen>
+
+    <!-- Notifications -->
+    <PreferenceScreen
+        android:title="Notifications"
+        android:icon="@drawable/ic_settings_notif"
+        android:summary="@string/notification_settings">
+        <CheckBoxPreference
+            android:key="ratioAlert"
+            android:title="@string/chk_ratioAlert"
+            android:summary="@string/description_ratioAlert"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="mailAlert"
+            android:title="@string/chk_msgAlert"
+            android:summary="@string/description_mailAlert"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="notificationWidget"
+            android:title="@string/useNotificationWidget"
+            android:summary="@string/useNotificationWidget_description"
+            android:defaultValue="false" />
+    </PreferenceScreen>
+
+    <!-- Téléchargement -->
+    <PreferenceScreen
+        android:title="@string/search_and_download"
+        android:icon="@drawable/ic_settings_searchdl">
+
+        <Preference
+            android:title="@string/save_path"
+            android:summary="Définit le chemin de téléchargement"
+            android:key="savePath"
+            />
+
+        <CheckBoxPreference
+            android:key="hadopi"
+            android:title="Avertissement hadopi"
+            android:summary="Affiche un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
+            android:defaultValue="false" />
+
+    </PreferenceScreen>
+
+</PreferenceScreen>

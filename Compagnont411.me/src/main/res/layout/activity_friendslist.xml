@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#fff"
+              android:orientation="vertical">
+
+    <GridView
+            android:id="@+id/malistviewperso"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:divider="#eee"
+            android:dividerHeight="0dp"
+            android:listSelector="@drawable/androidt411_btn"
+            android:background="#ddd"
+            android:columnWidth="260dp"
+            android:numColumns="auto_fit"
+            android:scrollingCache="false"/>
+
+</LinearLayout>

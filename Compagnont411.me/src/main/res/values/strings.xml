@@ -1,0 +1,270 @@
+<resources>
+
+    <color name="t411_blue">#0059B4</color>
+    <color name="t411_red">#b40000</color>
+    <color name="t411_green">#129b00</color>
+    <color name="t411_black">#000000</color>
+    <color name="t411_purple">#9900ad</color>
+    <color name="t411_gold">#f4a140</color>
+    <color name="t411_grey">#787878</color>
+    <color name="t411_darkred">#c90900</color>
+    <color name="t411_salmon">#fe3333</color>
+
+    <string name="app_name">t411 companion</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">t411 companion</string>
+    <string name="main_login">Username</string>
+    <string name="main_password">Password</string>
+    <string name="main_connect">Save</string>
+    <string name="description_logo">t411.me logo</string>
+    <string name="service_settings">Settings</string>
+    <string name="button_mail">Inbox</string>
+    <string name="button_service">Settings</string>
+    <string name="button_useraccount">User account</string>
+    <string name="toggle_ON">ON</string>
+    <string name="toggle_OFF">OFF</string>
+    <string name="chk_ratioAlert">Ratio alert</string>
+    <string name="chk_lowLimit">Low limit</string>
+    <string name="chk_msgAlert">Message alert</string>
+    <string name="msgAlertEnabled">Enabled</string>
+    <string name="msgAlertDisabled">Disabled</string>
+    <string name="active">Enable</string>
+    <string name="default_username">Username</string>
+    <string name="lastUpdate">"Last update : "</string>
+    <string name="savedData">Saved.</string>
+    <string name="btnStartService">(Re)start service</string>
+    <string name="about">About…</string>
+    <string name="description_ratioAlert">Notify if ratio is lower than the fixed limit.</string>
+    <string name="description_mailAlert">Notify on new message.</string>
+    <string name="repeatTime">Frequency (mn)</string>
+    <string name="description_frequency">Define interval between updates. Warning : lower value
+        means higher battery use…
+    </string>
+    <string name="show_notifs">System notifications</string>
+    <string name="description_notifSystem">Notify on update</string>
+    <string name="WhatToDo">Choose an action</string>
+    <string name="open_app">Open app</string>
+    <string name="update_now">Update now</string>
+    <string name="read_mails">Inbox</string>
+    <string name="goto_t411">Browse t411.me</string>
+    <string name="widget_action">Widget action…</string>
+    <string name="answer">Answer</string>
+    <string name="delete">Delete</string>
+    <string name="archive">Archive</string>
+
+    <string name="notif_update">Updating…</string>
+    <string name="notif_upd_title">Upading</string>
+    <string name="notif_upd_content">Downloading data…</string>
+
+    <string name="notif_message">New messages</string>
+    <string name="notif_msg_title">You have new messages on t411</string>
+    <string name="notif_msg_content">Touch to read</string>
+
+    <string name="notif_ratio">Low ratio</string>
+    <string name="notif_ratio_title">Your ratio is low</string>
+    <string name="notif_ratio_content">Touch to configure</string>
+
+    <string name="waiting_for_update">Waiting for update...</string>
+    <string name="askWhatToDo">Always ask</string>
+    <string name="ChooseAction">Chose action</string>
+
+    <string name="pleasewait">Please wait</string>
+    <string name="getMesages">Getting messages list...</string>
+    <string name="getMesageContent">Getting message content...</string>
+
+    <string name="donate">Buy me a beer ! ;o)</string>
+    <string name="considerDonate">Enjoy the app? consider donating € 1 !</string>
+
+    <string name="appwidget_huge">t411 Clock</string>
+    <string name="appwidget_full">t411 companion (standard)</string>
+    <string name="appwidget_half">t411 companion (mini)</string>
+    <string name="appwidget_nano">t411 companion (1x1)</string>
+    <string name="appwidget_plus">t411 companion (+)</string>
+
+    <string name="dateFormat">"EEE LLLL d"</string>
+
+    <string name="DownloadLeft">before low ratio.</string>
+    <string name="UploadLeft">to seed before wished ratio.</string>
+
+    <string name="statistics">My statistics</string>
+    <string name="noConError">t411 app is not able to reach Internet...</string>
+    <string name="title_search">Torrent download</string>
+
+    <string name="launcher_messages">t411 PM</string>
+
+    <string name="appwidget_search">t411 search widget</string>
+    <string name="placeholder_search">Search...</string>
+    <string name="search_cat_all">All categories</string>
+    <string name="search_cat_audio">Audio</string>
+    <string name="search_cat_eBooks">eBooks</string>
+    <string name="search_cat_videogames">Video Games</string>
+    <string name="search_cat_GPS">GPS</string>
+    <string name="search_cat_movies">Films/Videos</string>
+    <string name="search_cat_applications">Applications</string>
+    <string name="messages_compose">Compose</string>
+    <string name="messages_compose_to">To :</string>
+    <string name="messages_compose_subject">Subject :</string>
+    <string name="messages_compose_message">Message :</string>
+    <string name="messages_compose_send">Send</string>
+
+    <string name="settings_removeAd">Remove Ads</string>
+    <string name="settings_removeAd_details">Remove all ads in the app (needs it to be completely
+        closed and then re-opened). No condition.
+    </string>
+    <string name="settings_caption_service">Service settings</string>
+    <string name="settings_caption_general">General settings</string>
+    <string name="settings_caption_other">Other settings</string>
+    <string name="settings_only_wifi">Update only on Wifi network</string>
+    <string name="settings_wifi_only_details">Perform updates only when connected to a Wifi network
+        (saves DATA plan)
+    </string>
+    <string name="settings_caption_development">Development settings</string>
+    <string name="settings_caption_useraccount">User account</string>
+    <string name="settings_useraccount_details">Please double-check your credentials : no
+        verification will be made.
+    </string>
+    <string name="user_manual">User manual</string>
+    <string name="shoutbox">Shoutbox</string>
+    <string name="news_widget">t411 News</string>
+    <string name="Share">Share</string>
+    <string name="shareText">Checkout "t411 Companion" on Google Play !
+        https://play.google.com/store/apps/details?id=fr.lepetitpingouin.android.t411
+    </string>
+    <string name="contribute_for_free">Wanna contribute for free ? tell your friends about the app
+        !
+    </string>
+    <string name="donate_050e">Buy me a chewing gum ! (€ 0.5)</string>
+    <string name="donate_100e">Buy me a baguette ! (€ 1,-)</string>
+    <string name="donate_200e">Buy me a Coke ! (€ 2,-)</string>
+    <string name="donate_500e">Buy me a BIG beer :D ! (€ 5,-)</string>
+    <string name="calculator">Calculator</string>
+    <string name="enable_dev_functions">Enable development functions</string>
+    <string name="description_dev_preview">Enable everything in the app, including tools and
+        functions that are still in development.
+    </string>
+    <string name="settings_RTC">Do not update in standby mode</string>
+    <string name="settings_RTC_details">Use RTC alarm instead of RTC_WAKEUP to perform updates. This
+        increase battery life, but does not respect the refresh rate.
+    </string>
+    <string name="settings_use_https">Use HTTPS</string>
+    <string name="settings_grab_avatar">Use t411\'s avatar on widgets</string>
+    <string name="settings_grab_avatar_details">Use your avatar on t411 on widgets instead of
+        application\'s logo
+    </string>
+    <string name="download_simulation">Download Simulation</string>
+    <string name="DL_left">Download left</string>
+    <string name="UP_left">Upload left</string>
+    <string name="support_t411_text">Making a donation to t411.me, you\'re twice a winner : on the
+        first hand you participate to the websites costs, and on the other hand you got an extra GB
+        bonus !
+    </string>
+    <string name="RaZ">Rst.</string>
+    <string name="upload_simulation">Upload Simulation</string>
+    <string name="calc_simulation">Simulation</string>
+    <string name="btn_forum">Discussion thread</string>
+    <string name="btn_news">t411 News</string>
+    <string name="contribute_on_t411">Support t411.me !</string>
+    <string name="learn_more">Learn more…</string>
+    <string name="shareSignature">Sent from the t411 companion app for Android</string>
+    <string name="top_100">Top torrents…</string>
+    <string name="simulation_seed_duration">Seed duration</string>
+    <string name="target_ratio">Ratio idéal</string>
+    <string name="upload_speed">Upload Speed</string>
+    <string name="current_ratio">Current ratio</string>
+    <string name="second">second</string>
+    <string name="minute">minute</string>
+    <string name="hour">hour</string>
+    <string name="day">day</string>
+    <string name="week">week</string>
+    <string name="month">month</string>
+    <string name="year">year</string>
+    <string name="order_by">Sort by :</string>
+    <string name="no_result">No result… :(</string>
+    <string name="direct_download">Direct download</string>
+    <string name="download_redirect">Redirect to website</string>
+    <string name="description_directdownload">Try to download the torrent file directly from within
+        the application.
+    </string>
+    <string name="description_downloadredirect">Open the .torrent\'s URL using the default internet
+        browser. Consider this if the method above does not work on your phone.
+    </string>
+    <string name="menu_options">Menu options</string>
+    <string name="settings_menu_notes">Choose which links to hide on the main menu.</string>
+    <string name="connect">Connect</string>
+    <string name="welcome">Welcome !</string>
+    <string name="please_login">First of all, you should login using your t411.me credentials…
+    </string>
+    <string name="need_an_account">Need an account ?</string>
+    <string name="longclick_share">Share on long press</string>
+    <string name="longclick_download">Download on long press</string>
+    <string name="description_longpress_share">Partager le lien vers un .torrent par un appui long
+    </string>
+    <string name="description_longpress_download">Télécharger directement le .torrent via un appui
+        long, sans passer par la prez.
+    </string>
+    <string name="sort_none">No filter</string>
+    <string name="sort_comm">Comments</string>
+    <string name="sort_date">Added date</string>
+    <string name="sort_size">Size</string>
+    <string name="sort_done">Completed</string>
+    <string name="sort_seed">Seeders</string>
+    <string name="sort_leech">Leechers</string>
+
+    <string name="location">Location</string>
+    <string name="cant_read_folder">folder can\'t be read!</string>
+    <string name="nnew">New</string>
+    <string name="select">Select</string>
+    <string name="file_name">File name:</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Save</string>
+    <string name="no_data">No Data</string>
+    <color name="gray">#ffff0000</color>
+    <string name="err">Error</string>
+    <string name="save_path">Save path</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="my_searches">My Searches</string>
+    <string name="longclic_future">Long clic to add to wishlist</string>
+    <string name="description_longpress_future">Add torrent to wishlist by long-pressing</string>
+    <string name="longpress_closetag">Long press to close tag</string>
+    <string name="sentMessage">Sending message…</string>
+    <string name="fast_torrents">Fast torrents</string>
+    <string name="daily_torrents">Daily torrents</string>
+    <string name="weekly_torrents">Weekly torrents</string>
+    <string name="monthly_torrents">Monthly torrents</string>
+    <string name="torrentTitleSingleLine">Display torrent title on one line</string>
+    <string name="Timeout">Timeout</string>
+    <string name="description_timeout">Set the timeout (in sec.) for every web request (0 = no
+        limit)
+    </string>
+    <string name="useNotificationWidget">Notification widget</string>
+    <string name="useNotificationWidget_description">Display the current status of your t411.me
+        account in the notification area.
+    </string>
+    <string name="settings_caption_network">Network settings</string>
+    <string name="service_settings_advanced">Advanced settings</string>
+    <string name="other_apps">Other apps</string>
+    <string name="my_friends">My friends</string>
+    <string name="my_uploads">My uploads</string>
+    <string name="no_data_from_server">Can\'t get data fromserver. Please check your connection
+        settings.
+    </string>
+    <string name="settings_caption_useraccount_summary">Identifiants du compte t411</string>
+    <string name="main_login_summary">Nom d\'utilisateur t411</string>
+    <string name="main_password_summary">Mot de passe t411</string>
+    <string name="settings_caption_connection">Paramètres de connexion</string>
+    <string name="settings_caption_connection_summary">Définir les paramètres des connexions au serveur t411.me</string>
+    <string name="settings_use_https_summary_on">Chiffrer les données lors des transferts</string>
+    <string name="settings_use_https_summary_off">Ne pas chiffrer les données lors des transferts</string>
+    <string name="settings_caption_connection_advanced_summary">Définir les réglages avancés</string>
+    <string name="settings_caption_connection_advanced">Avancé</string>
+    <string name="notification_settings">Paramètres de notification</string>
+    <string name="auto_update">Mise à jour automatique</string>
+    <string name="auto_update_summary">Configurer la mise à jour automatique des données</string>
+    <string name="frequency">Fréquence de mise à jour</string>
+    <string name="search_and_download">Recherche et téléchargement</string>
+    <string name="lowRatio_summary">Définit la limite de ratio faible (0.75 sur le site)</string>
+    <string name="targetRatio_summary">Définit le ratio visé dans l\'idéal</string>
+    <string name="title_settings">Configuration</string>
+    <string name="title_savePath">DOSSIER DE TELECHARGEMENT</string>
+</resources>

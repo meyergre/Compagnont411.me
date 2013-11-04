@@ -1,0 +1,200 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+    <LinearLayout
+            android:id="@+id/wClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_gravity="center"
+        android:gravity="top"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+                android:id="@+id/wHour"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|top"
+                android:shadowColor="#555"
+            android:shadowDy="0"
+                android:shadowRadius="4"
+                android:text="13"
+            android:textColor="#FFF"
+                android:textSize="75dp"
+            android:shadowDx="0"
+            android:layout_margin="0dp" />
+
+        <TextView
+                android:id="@+id/wMinutes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|top"
+                android:shadowColor="#555"
+            android:shadowDy="0"
+                android:shadowRadius="4"
+                android:text=":37"
+            android:textColor="#FFF"
+                android:textSize="75dp"
+            android:shadowDx="0"
+            android:layout_margin="0dp" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:id="@+id/fond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/widget_top_background"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                <TextView
+                        android:id="@+id/wDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="JEU. 22 NOVEMBRE"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#FFF"
+                        android:textSize="12dp"/>
+
+                <LinearLayout
+                        android:id="@+id/topLogo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/widget_content_background"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/wUpload"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="↑ ???.?? GB"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/t411_green"
+                                android:textSize="14dp"/>
+
+                        <TextView
+                                android:id="@+id/wDownload"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="↓ ???.?? MB"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/t411_red"
+                                android:textSize="14dp"/>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                        <TextView
+                                android:id="@+id/wMails"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="32dip"
+                                android:layout_marginRight="32dip"
+                                android:layout_weight="1"
+                                android:background="@drawable/wl_mail_on"
+                                android:gravity="center"
+                                android:text="2"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/t411_blue"
+                                android:textSize="15dp"
+                                android:textStyle="bold"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="right|center_vertical">
+
+                        <TextView
+                                android:id="@+id/wRatio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical|right"
+                                android:text=" ?.??"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/t411_black"
+                                android:textSize="22dp"/>
+
+                        <ImageView
+                                android:id="@+id/wSmiley"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/smiley_unknown"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                        android:id="@+id/wUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:shadowColor="#FFF"
+                        android:text="meyerglive"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#FFF"
+                        android:textSize="11dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/widget_btm_background">
+
+                <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="1dp"
+                        android:src="@drawable/ic_refresh_mini"/>
+
+                <TextView
+                        android:id="@+id/updatedTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="---"
+                        android:layout_weight="1"
+                        android:textColor="#99000000"
+                        android:textSize="10dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

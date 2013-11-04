@@ -1,0 +1,503 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:background="#e8e8e8"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:id="@+id/linearLayout6"
+            android:layout_gravity="center">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/torrent_card"
+                android:layout_weight="1"
+                android:minWidth="180dp"
+                android:id="@+id/linearLayout7">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/current_ratio"
+                    android:id="@+id/textView7"
+                    android:layout_gravity="left|center_vertical"
+                    android:textColor="#012f54"
+                    android:textStyle="italic"
+                    android:layout_margin="3dp"/>
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="#33000000"
+                    android:layout_margin="3dp"
+                    android:id="@+id/frameLayout9"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="-"
+                    android:id="@+id/calc_ratio"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="#88000000"
+                    android:layout_margin="3dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/torrent_card"
+                android:layout_weight="1"
+                android:minWidth="180dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/notif_ratio"
+                    android:id="@+id/textView14"
+                    android:layout_gravity="left|center_vertical"
+                    android:textColor="#012f54"
+                    android:textStyle="italic"
+                    android:layout_margin="3dp"/>
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="#33000000"
+                    android:layout_margin="3dp"
+                    android:id="@+id/frameLayout7"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0.75"
+                    android:id="@+id/calc_lowratio"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="#88000000"
+                    android:layout_margin="3dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/torrent_card"
+                android:layout_weight="1"
+                android:minWidth="180dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/target_ratio"
+                    android:id="@+id/textView16"
+                    android:layout_gravity="left|center_vertical"
+                    android:textColor="#012f54"
+                    android:textStyle="italic"
+                    android:layout_margin="3dp"/>
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="#33000000"
+                    android:layout_margin="3dp"
+                    android:id="@+id/frameLayout8"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="42.0"
+                    android:id="@+id/calc_targetratio"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="#88000000"
+                    android:layout_margin="3dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/scrollView">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/torrent_card"
+                        android:layout_weight="1"
+                        android:minWidth="180dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/DL_left"
+                            android:id="@+id/textView3"
+                            android:layout_gravity="left|center_vertical"
+                            android:textColor="#012f54"
+                            android:textStyle="italic"
+                            android:layout_margin="3dp"/>
+
+                    <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:background="#33000000"
+                            android:layout_margin="3dp"
+                            android:id="@+id/frameLayout2"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="0.00 Go"
+                            android:id="@+id/calc_dlleft"
+                            android:layout_gravity="right|center_vertical"
+                            android:textColor="#88000000"
+                            android:layout_margin="3dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/torrent_card"
+                        android:layout_weight="1"
+                        android:minWidth="180dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/UP_left"
+                            android:id="@+id/textView6"
+                            android:layout_gravity="left|center_vertical"
+                            android:textColor="#012f54"
+                            android:textStyle="italic"
+                            android:layout_margin="3dp"/>
+
+                    <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="left|center_vertical"
+                            android:background="#33000000"
+                            android:layout_margin="3dp"
+                            android:id="@+id/frameLayout3"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="0.00 Go"
+                            android:id="@+id/calc_upleft"
+                            android:layout_gravity="right|center_vertical"
+                            android:textColor="#88000000"
+                            android:layout_margin="3dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/torrent_card"
+                    android:layout_margin="5dp"
+                    android:id="@+id/linearLayout2"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:minWidth="360dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="left|center_vertical">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/calc_simulation"
+                            android:id="@+id/textView4"
+                            android:textColor="#012f54"
+                            android:textStyle="italic"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp" />
+
+                    <FrameLayout
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:background="#33000000"
+                            android:id="@+id/frameLayout4"/>
+
+                    <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="@string/RaZ"
+                            android:id="@+id/calc_simu_raz"
+                            android:background="@drawable/androidt411_btn"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"/>
+                </LinearLayout>
+
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#33000000"
+                        android:layout_margin="3dp">
+                </FrameLayout>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/download_simulation"
+                        android:id="@+id/textView8"
+                        android:textColor="#012f54"
+                        android:textStyle="italic"
+                        android:layout_margin="3dp"
+                        android:textSize="15sp"
+                        android:layout_gravity="left|center_vertical"/>
+
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar_downloadSimu"
+                        android:layout_margin="5dp"
+                        android:max="2124"
+                        android:progress="1"
+                        android:indeterminate="false"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0 Mo"
+                        android:id="@+id/Text_downloadSimu"
+                        android:layout_gravity="right|center_vertical"
+                        android:textColor="#88000000"
+                        android:layout_margin="3dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/upload_simulation"
+                        android:id="@+id/textView2"
+                        android:textColor="#012f54"
+                        android:textStyle="italic"
+                        android:layout_margin="3dp"
+                        android:textSize="15sp"
+                        android:layout_gravity="left|center_vertical"/>
+
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar_uploadSimu"
+                        android:layout_margin="5dp"
+                        android:max="2124"
+                        android:progress="1"
+                        android:indeterminate="false"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0 Mo"
+                        android:id="@+id/Text_uploadSimu"
+                        android:layout_gravity="right|center_vertical"
+                        android:textColor="#88000000"
+                        android:layout_margin="3dp"/>
+
+                <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#33000000"
+                        android:id="@+id/frameLayout"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:padding="3dp"
+                        android:id="@+id/linearLayout4">
+
+                    <TextView
+                            android:id="@+id/calc_ratio1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#888"
+                            android:layout_weight="1"
+                            android:textSize="24sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"/>
+
+                    <FrameLayout
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:background="#33000000">
+                    </FrameLayout>
+
+                    <TextView
+                            android:id="@+id/calc_ratio2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="--"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#012f54"
+                            android:layout_weight="1"
+                            android:textSize="24sp"
+                            android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/torrent_card"
+                    android:layout_margin="5dp"
+                    android:id="@+id/linearLayout5"
+                    android:orientation="vertical"
+                    android:padding="3dp"
+                    android:minWidth="360dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="left|center_vertical">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/simulation_seed_duration"
+                            android:id="@+id/textView5"
+                            android:textColor="#012f54"
+                            android:textStyle="italic"
+                            android:layout_margin="3dp"
+                        android:layout_gravity="center" />
+
+                    <FrameLayout
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:background="#33000000"
+                            android:id="@+id/frameLayout5"/>
+
+                    <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="@string/RaZ"
+                            android:id="@+id/simulation_raz_seedduration"
+                            android:background="@drawable/androidt411_btn"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"/>
+                </LinearLayout>
+
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#33000000"
+                        android:layout_margin="3dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/upload_speed"
+                        android:id="@+id/textView10"
+                        android:textColor="#012f54"
+                        android:textStyle="italic"
+                        android:layout_margin="3dp"
+                        android:textSize="15sp"
+                        android:layout_gravity="left|center_vertical"/>
+
+                <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarUpSpeed"
+                        android:layout_margin="5dp"
+                        android:max="1023"
+                        android:progress="1"
+                        android:indeterminate="false"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="0 KB/s"
+                        android:id="@+id/upspeedsimu"
+                        android:layout_gravity="right|center_vertical"
+                        android:textColor="#88000000"
+                        android:layout_margin="3dp"/>
+
+                <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#33000000"
+                        android:id="@+id/frameLayout6"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:padding="3dp"
+                        android:id="@+id/linearLayout3">
+
+                    <TextView
+                            android:id="@+id/upSpeedResult"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="left"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#012f54"
+                            android:layout_weight="1"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

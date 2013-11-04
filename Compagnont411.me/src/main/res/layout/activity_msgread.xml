@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:background="#FFF">
+
+    <TextView
+            android:id="@+id/readMailSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Sujet"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:color="#0c335c"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            android:layout_gravity="left|center_vertical"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="4dp"
+            android:background="#ee478ac9">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+            <TextView
+                    android:id="@+id/readMailSender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Expéditeur"
+                    android:textColor="#FFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:color="#0c335c"/>
+
+            <TextView
+                    android:id="@+id/readMailDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:text="01/01/0101 01:01:01"
+                    android:textColor="#FFF"
+                    android:textSize="10sp"
+                    android:color="#0c335c"/>
+
+        </LinearLayout>
+
+        <ImageButton
+                android:id="@+id/btnReply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/androidt411_btn"
+                android:src="@drawable/ic_messages_answer"
+                android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+    <WebView
+            android:id="@+id/www"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#00DDDDDD"/>
+
+</LinearLayout>
