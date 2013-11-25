@@ -1,7 +1,7 @@
 <manifest
     package="fr.lepetitpingouin.android.t411"
-    android:versionCode="84"
-    android:versionName="2013.11-84 ActionBar"
+    android:versionCode="94"
+    android:versionName="2013.11-94"
     android:installLocation="auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -20,6 +20,7 @@
     <application
         android:icon="@drawable/ic_newlauncher"
         android:label="@string/app_name"
+        android:debuggable="false"
         android:theme="@style/CustomActionBarTheme">
         <activity
             android:name=".MainActivity"
@@ -123,18 +124,13 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".Settings"
-            android:configChanges="orientation"
-            android:theme="@style/CustomActionBarLightTheme" />
-
         <service
             android:name=".t411UpdateService"
             android:enabled="true" />
 
         <activity
             android:name=".messagesActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout"
             android:parentActivityName=".MainActivity"
             android:process=":messages"
             android:taskAffinity="fr.lepetitpingouin.android.t411.messagesActivity"
@@ -157,11 +153,12 @@
             android:name=".readMailActivity"
             android:parentActivityName=".messagesActivity"
             android:icon="@drawable/ic_launcher_messages"
-            android:configChanges="orientation" />
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout" />
         <activity
             android:name=".actionSelector"
             android:taskAffinity="fr.lepetitpingouin.android.t411.actionSelector"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            android:label="@string/WhatToDo"
             android:process=":t411action" />
         <activity
             android:name=".SearchActivity"
@@ -174,7 +171,7 @@
         <activity android:name="CalculatorActivity" />
         <activity
             android:name=".torrentDetailsActivity"
-            android:configChanges="orientation">
+            android:configChanges="orientation|screenSize" >
             <intent-filter android:priority="200">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -201,7 +198,7 @@
         </activity>
         <activity
             android:name=".torrentsActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".SearchActivity"/>
         <activity
             android:name=".friendsActivity"
@@ -221,12 +218,16 @@
             android:icon="@drawable/folder"/>
 
         <activity android:name=".NfoActivity" />
+        <activity android:name=".ChatiActivity" />
         <activity android:name=".UserPrefsActivity"
             android:allowTaskReparenting="true"
             android:label="@string/title_settings"
             android:theme="@style/CustomActionBarLightTheme"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".FilesListActivity" />
+        <activity android:name=".DonateActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+            android:label="Offrez-moi une bière :)" />
     </application>
 
 </manifest>

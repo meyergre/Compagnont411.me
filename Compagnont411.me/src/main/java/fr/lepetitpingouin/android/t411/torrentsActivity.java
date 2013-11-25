@@ -1,6 +1,5 @@
 package fr.lepetitpingouin.android.t411;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +13,9 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,13 +29,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
-import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +44,7 @@ public class torrentsActivity extends ActionBarActivity {
 
     String id;
 
-    AlertDialog.Builder alert;
+    HashMap<String, String> itemMmap;
 
     public ProgressDialog dialog;
 
@@ -200,44 +200,15 @@ public class torrentsActivity extends ActionBarActivity {
 
         id = getIntent().getStringExtra("id");
 
-        maListViewPerso.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                HashMap<String, String> map = (HashMap<String, String>) maListViewPerso
-                        .getItemAtPosition(i);
-
-                if (prefs.getBoolean("lpShare", false)) {
-
-                    Intent share = new Intent(Intent.ACTION_SEND);
-                    share.setType("text/plain");
-                    share.putExtra(Intent.EXTRA_TEXT, Default.URL_GET_PREZ + map.get("ID") + "\n\n-\n" + getApplicationContext().getString(R.string.shareSignature));
-                    share.putExtra(Intent.EXTRA_SUBJECT, "[t411] " + map.get("nom"));
-
-                    startActivity(Intent.createChooser(share,
-                            getApplicationContext().getString(R.string.Share)));
-                } else if (prefs.getBoolean("lpDownload", false)) {
-                    Torrent torrent = new Torrent(getApplicationContext(), map.get("nomComplet"), map.get("ID"));
-                    torrent.download();
-                } else if (prefs.getBoolean("lpFuture", false)) {
-                    Toast.makeText(getApplicationContext(), "Envoi en cours...", Toast.LENGTH_LONG).show();
-                    Torrent torrent = new Torrent(getApplicationContext(), map.get("nomComplet"), map.get("ID"));
-                    torrent.bookmark();
-                }
-                return true;
-            }
-        });
-
         maListViewPerso.setOnItemClickListener(new OnItemClickListener() {
             @Override
             @SuppressWarnings("unchecked")
             public void onItemClick(AdapterView<?> a, View v, int position,
                                     long id) {
-                HashMap<String, String> map = (HashMap<String, String>) maListViewPerso
-                        .getItemAtPosition(position);
+                HashMap<String, String> map = (HashMap<String, String>) maListViewPerso.getItemAtPosition(position);
 
                 Intent i;
-                if (prefs.getBoolean("dlModeDirect", false)) {
+                if (!prefs.getBoolean("dlModeRedirect", false)) {
                     i = new Intent();
                     i.setClass(getApplicationContext(), torrentDetailsActivity.class);
                     i.putExtra("url", Default.URL_GET_PREZ + map.get("ID"));
@@ -253,7 +224,63 @@ public class torrentsActivity extends ActionBarActivity {
 
             }
         });
+        registerForContextMenu(maListViewPerso);
         update();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.malistviewperso) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.torrent_context_menu, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        itemMmap = (HashMap<String, String>) maListViewPerso.getItemAtPosition(info.position);
+        switch(item.getItemId()) {
+            case R.id.torrent_context_menu_open:
+
+                Intent i;
+                if (!prefs.getBoolean("dlModeRedirect", false)) {
+                    i = new Intent();
+                    i.setClass(getApplicationContext(), torrentDetailsActivity.class);
+                    i.putExtra("url", Default.URL_GET_PREZ + itemMmap.get("ID"));
+                    i.putExtra("nom", itemMmap.get("nomComplet"));
+                    i.putExtra("ID", itemMmap.get("ID"));
+                    i.putExtra("icon", Integer.valueOf(itemMmap.get("icon")));
+                    i.putExtra("DlLater", connectUrl.equals(Default.URL_BOOKMARKS));
+                } else {
+                    i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(Default.URL_GET_PREZ.replace("torrents/torrents/", "torrents/") + itemMmap.get("ID")));
+                }
+                startActivity(i);
+
+                return true;
+            case R.id.torrent_context_menu_download:
+                new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID")).download();
+                return true;
+            case R.id.torrent_context_menu_download_later:
+                Toast.makeText(getApplicationContext(), "Envoi en cours...", Toast.LENGTH_LONG).show();
+                new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID")).bookmark();
+                return true;
+            case R.id.torrent_context_menu_download_later_not:
+                Toast.makeText(getApplicationContext(), "Demande en cours...", Toast.LENGTH_LONG).show();
+                new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID")).unbookmark();
+                return true;
+            case R.id.torrent_context_menu_share:
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, Default.URL_GET_PREZ + itemMmap.get("ID") + "\n\n-\n" + getApplicationContext().getString(R.string.shareSignature));
+                share.putExtra(Intent.EXTRA_SUBJECT, "[t411] " + itemMmap.get("nom"));
+                startActivity(Intent.createChooser(share,getApplicationContext().getString(R.string.Share)));
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     public void switchList(String catCode) {
@@ -307,7 +334,7 @@ public class torrentsActivity extends ActionBarActivity {
                     .getString("password", "");
 
             try {
-                res = Jsoup
+                /*res = Jsoup
                         .connect(Default.URL_LOGIN)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
@@ -326,7 +353,14 @@ public class torrentsActivity extends ActionBarActivity {
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .execute().parse();
 
-                msg = doc.select("#messages ").first().text();
+                msg = doc.select("#messages ").first().text();*/
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(Default.URL_UNFAVORITE)
+                        .addData("submit", "Supprimer")
+                        .addData("ids[]", id)
+                        .executeInAsyncTask());
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -360,6 +394,7 @@ public class torrentsActivity extends ActionBarActivity {
         protected Void doInBackground(Void... voids) {
 
             try {
+                /*
                 res = Jsoup
                         .connect(Default.URL_LOGIN)
                         .data("login", username, "password", password)
@@ -391,9 +426,18 @@ public class torrentsActivity extends ActionBarActivity {
                 }, 999);
 
                 doc = res.parse();
+                */
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(Default.URL_SEARCH_SAVE + (connectUrl.substring(connectUrl.lastIndexOf("=")) + "&order=" + order + "&type=" + type))
+                        .addData("submit", "Valider")
+                        .addData("name", name)
+                        .executeInAsyncTask());
+
+
 
                 msg = doc.select(".content ").first().text();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -436,6 +480,7 @@ public class torrentsActivity extends ActionBarActivity {
 
                 url += "&order=" + order + "&type=" + type + "&page=" + paginator;
 
+                /*
                 res = Jsoup.connect(url)
                         .cookies(Jsoup
                                 .connect(Default.URL_LOGIN)
@@ -452,6 +497,13 @@ public class torrentsActivity extends ActionBarActivity {
                         .execute();
 
                 doc = res.parse();
+                */
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(prefs.getString("login", ""), prefs.getString("password", ""))
+                        .connect(url)
+                        .executeInAsyncTask());
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -580,7 +632,7 @@ public class torrentsActivity extends ActionBarActivity {
 
                 maListViewPerso.setAdapter(mTorrentsAdapter);
 
-                if ((doc == null) || (res == null)) {
+                if (doc == null) {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();
                 }
 

@@ -11,8 +11,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -40,23 +38,12 @@ public class aboutActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        final RadioGroup radioGrp = (RadioGroup) findViewById(R.id.radioGroup1);
-
         LinearLayout paypal = (LinearLayout) findViewById(R.id.paypal);
         paypal.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                RadioButton checkedItem = (RadioButton) findViewById(radioGrp
-                        .getCheckedRadioButtonId());
-                String amount = ((String) checkedItem.getTag()).replace(",",
-                        "%2e");
-                Intent i = new Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=meyergre%40gmail%2ecom&lc=FR&item_name=t411%2dcompanion&amount="
-                                + amount
-                                + "&currency_code=EUR&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"));
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), DonateActivity.class));
             }
         });
 
@@ -110,8 +97,8 @@ public class aboutActivity extends ActionBarActivity {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("Changelog.txt"), "UTF-8"));
                     String mLine = reader.readLine();
                     while (mLine != null) {
-                        mLine = reader.readLine();
                         chlog += mLine + "\n";
+                        mLine = reader.readLine();
                     }
                     reader.close();
                 } catch (IOException e) {

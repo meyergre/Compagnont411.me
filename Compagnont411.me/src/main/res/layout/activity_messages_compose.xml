@@ -7,19 +7,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#FFF">
 
         <EditText
                 android:id="@+id/composeTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/txtedit"
-                android:ems="10"
+            android:ems="10"
                 android:hint="@string/messages_compose_to"
                 android:padding="9dp"
                 android:singleLine="true"
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal|bottom">
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="#00000000">
 
             <requestFocus/>
         </EditText>
@@ -34,21 +35,45 @@
             android:layout_weight="0" />
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"></FrameLayout>
+
     <EditText
             android:id="@+id/composeSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/txtedit"
+            android:background="#FFF"
             android:ems="10"
             android:hint="@string/messages_compose_subject"
             android:padding="9dp"
             android:singleLine="true"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"
+        android:id="@+id/frameLayout"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/messages_compose_message"
+            android:inputType="textMultiLine"
+            android:background="#FFF"
+        android:padding="2dp" />
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/torrent_card">
+        android:background="@drawable/abc_ab_bottom_solid_light_holo">
 
         <HorizontalScrollView
                 android:layout_width="wrap_content"
@@ -173,16 +198,5 @@
         </HorizontalScrollView>
 
     </LinearLayout>
-
-    <EditText
-            android:id="@+id/editTextMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="@string/messages_compose_message"
-            android:inputType="textMultiLine"
-            android:background="@drawable/txtedit"/>
 
 </LinearLayout>

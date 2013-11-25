@@ -77,10 +77,10 @@
     <string name="considerDonate">Enjoy the app? consider donating € 1 !</string>
 
     <string name="appwidget_huge">t411 Clock</string>
-    <string name="appwidget_full">t411 companion (standard)</string>
+    <string name="appwidget_full">t411 companion (t411)</string>
     <string name="appwidget_half">t411 companion (mini)</string>
     <string name="appwidget_nano">t411 companion (1x1)</string>
-    <string name="appwidget_plus">t411 companion (+)</string>
+    <string name="appwidget_plus">t411 companion (android)</string>
 
     <string name="dateFormat">"EEE LLLL d"</string>
 
@@ -267,4 +267,25 @@
     <string name="targetRatio_summary">Définit le ratio visé dans l\'idéal</string>
     <string name="title_settings">Configuration</string>
     <string name="title_savePath">DOSSIER DE TELECHARGEMENT</string>
+    <string name="download">Téléchargement</string>
+    <string name="search">Recherche</string>
+    <string name="widgets_settings">Configurer les widgets</string>
+    <string name="widgets_settings_summary">Définit l\'action à effectuer au clic sur un widget</string>
+    <string name="messages_read">Read message</string>
+    <string name="confirmDeleteMessage">Do you really want to delete \"%MESSAGE%\" ?\"</string>
+    <string name="confirmArchiveMessage">Do you really want to archive \"%MESSAGE%\" ?\"</string>
+    <string name="torrent_read_prez">Read prez</string>
+    <string name="torrent_context_add_to_later">Add to future downloads</string>
+    <string name="torrent_context_del_from_later">Delete from future downloads</string>
+    <string name="support_the_dev">Support the developper !</string>
+    <string name="bitcoinCopied">My Bitcoin address has been coiped to your clipboard !</string>
+
+
+    <string-array name="widget_actions">
+        <item>@string/open_app</item>
+        <item>@string/update_now</item>
+        <item>@string/read_mails</item>
+        <item>@string/goto_t411</item>
+        <item>@string/askWhatToDo</item>
+    </string-array>
 </resources>

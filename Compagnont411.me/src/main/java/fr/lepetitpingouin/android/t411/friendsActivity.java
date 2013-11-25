@@ -20,7 +20,6 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
-import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -126,6 +125,8 @@ public class friendsActivity extends ActionBarActivity {
                 url = CONNECTURL.replace("http://", "https://");
 
             try {
+
+                /*
                 res = Jsoup
                         .connect(url)
                         .data("login", username, "password", password)
@@ -143,6 +144,13 @@ public class friendsActivity extends ActionBarActivity {
                                 .execute().cookies())
                         .ignoreContentType(true).execute();
                 doc = res.parse();
+
+                */
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(url)
+                        .executeInAsyncTask());
 
             } catch (Exception e) {
                 Log.e("erreur", e.toString());

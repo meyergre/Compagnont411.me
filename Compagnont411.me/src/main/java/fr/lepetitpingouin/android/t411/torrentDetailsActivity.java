@@ -18,13 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
-import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.util.Map;
 
 public class torrentDetailsActivity extends ActionBarActivity {
 
@@ -200,7 +197,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
             Document doc = null;
 
             try {
-                res = Jsoup
+                /*res = Jsoup
                         .connect(Default.URL_SAY_THANKS + torrent_ID)
                         .data("login", username, "password", password)
                         .method(Method.POST)
@@ -209,7 +206,11 @@ public class torrentDetailsActivity extends ActionBarActivity {
 .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
                         .ignoreContentType(true).execute();
 
-                doc = res.parse();
+                doc = res.parse();*/
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(Default.URL_SAY_THANKS+torrent_ID)
+                        .executeInAsyncTask());
 
                 msg = doc.select(".content ").first().text();
 
@@ -248,7 +249,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
             try {
 
-                res = Jsoup
+                /*res = Jsoup
                         .connect(Default.URL_LOGIN)
                         .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
                         .method(Connection.Method.POST)
@@ -269,7 +270,12 @@ public class torrentDetailsActivity extends ActionBarActivity {
 .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
                         .ignoreContentType(true).execute();
 
-                doc = res.parse();
+                doc = res.parse();*/
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(torrent_URL)
+                        .executeInAsyncTask());
 
                 try {
                     html_filelist = doc.select(".accordion div").get(1).outerHtml();

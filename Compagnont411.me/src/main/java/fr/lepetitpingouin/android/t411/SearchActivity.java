@@ -11,9 +11,11 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -44,6 +46,7 @@ public class SearchActivity extends ActionBarActivity {
     favoritesFetcher fF;
 
     ImageView ivSort, ivCat;
+    EditText keywords;
 
     int icon_sort, icon_category = R.drawable.ic_new_t411;
 
@@ -72,6 +75,17 @@ public class SearchActivity extends ActionBarActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setCustomView(R.layout.action_search);
+        keywords = (EditText)getSupportActionBar().getCustomView().findViewById(R.id.action_search_keywords);
+        keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    onSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         loading = (ProgressBar) findViewById(R.id.subcat_progressbar);
 
@@ -394,7 +408,7 @@ public class SearchActivity extends ActionBarActivity {
                     .getString("password", "");
 
             try {
-                res = Jsoup
+                /*res = Jsoup
                         .connect(Default.URL_SEARCH_GET)
                         .data("login", username, "password", password)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -403,7 +417,12 @@ public class SearchActivity extends ActionBarActivity {
                         .method(Connection.Method.POST)
                         .execute();
 
-                doc = res.parse();
+                doc = res.parse();*/
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(Default.URL_SEARCH_GET)
+                        .executeInAsyncTask());
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -457,7 +476,7 @@ public class SearchActivity extends ActionBarActivity {
 
             try {
 
-                doc = Jsoup.connect(Default.URL_GET_SUBCAT + catCode)
+                /*doc = Jsoup.connect(Default.URL_GET_SUBCAT + catCode)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
 
@@ -470,7 +489,12 @@ public class SearchActivity extends ActionBarActivity {
                                 .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
 .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                                 .execute().cookies())
-                        .get();
+                        .get();*/
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(prefs.getString("login", ""), prefs.getString("password", ""))
+                        .connect(Default.URL_GET_SUBCAT + catCode)
+                        .executeInAsyncTask());
 
                 Elements options = doc.select("#search-subcat > option");
 
@@ -503,7 +527,7 @@ public class SearchActivity extends ActionBarActivity {
     }
 
     public void onSearch() {
-        EditText keywords = (EditText)getSupportActionBar().getCustomView().findViewById(R.id.action_search_keywords);
+
         String searchTerms = keywords.getText().toString().replaceAll(" ", "%20");
         searchTerms = searchTerms.replaceAll("[/\\|]", "");
         searchTerms = searchTerms.replaceAll("[éÉ]", "%E9");

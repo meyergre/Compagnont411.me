@@ -62,7 +62,7 @@ public class Widget_huge extends AppWidgetProvider {
             try {
                 Log.v("widget t411", "D�finition de l'Intent");
 
-                ratio = (ratio == null) ? prefs.getString("lastRatio", "?.??")
+                ratio = (ratio == null) ? prefs.getString("lastRatio", "0.00")
                         : ratio;
                 upload = (upload == null) ? prefs.getString("lastUpload",
                         "  ???.?? MB") : upload;
@@ -75,34 +75,30 @@ public class Widget_huge extends AppWidgetProvider {
                 username = (username == null) ? String.valueOf(prefs.getInt(
                         "lastUsername", 0)) : username;
 
-                switch (prefs.getInt("widgetAction", 5)) {
-                    case 0:
-                        myIntent.setClassName("fr.lepetitpingouin.android.t411",
-                                "fr.lepetitpingouin.android.t411.MainActivity");
-                        pIntent = PendingIntent
-                                .getActivity(context, 0, myIntent, 0);
-                        break;
-                    case 1:
-                        myIntent.setClassName("fr.lepetitpingouin.android.t411",
-                                "fr.lepetitpingouin.android.t411.t411UpdateService");
-                        pIntent = PendingIntent.getService(context, 0, myIntent, 0);
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        String url = "http://www.t411.me";
-                        myIntent = new Intent(Intent.ACTION_VIEW);
-                        myIntent.setData(Uri.parse(url));
-                        pIntent = PendingIntent
-                                .getActivity(context, 0, myIntent, 0);
-                        break;
-                    default:
-                        myIntent.setClassName("fr.lepetitpingouin.android.t411",
-                                "fr.lepetitpingouin.android.t411.actionSelector");
-                        pIntent = PendingIntent
-                                .getActivity(context, 0, myIntent, 0);
-                        break;
+                String[] choices = context.getResources().getStringArray(R.array.widget_actions);
+
+                if(prefs.getString("widgetAction", "").equals(choices[0])) {
+                    myIntent.setClassName("fr.lepetitpingouin.android.t411","fr.lepetitpingouin.android.t411.MainActivity");
+                    pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
+
+                } else if(prefs.getString("widgetAction", "").equals(choices[1])) {
+                    myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.t411UpdateService");
+                    pIntent = PendingIntent.getService(context, 0, myIntent, 0);
+
+                } else if(prefs.getString("widgetAction", "").equals(choices[2])) {
+                    myIntent.setClass(context.getApplicationContext(), messagesActivity.class);
+                    pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
+                } else if(prefs.getString("widgetAction", "").equals(choices[3])) {
+                    String url = "http://www.t411.me";
+                    myIntent = new Intent(Intent.ACTION_VIEW);
+                    myIntent.setData(Uri.parse(url));
+                    pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
+                } else {
+                    myIntent.setClassName("fr.lepetitpingouin.android.t411",
+                            "fr.lepetitpingouin.android.t411.actionSelector");
+                    pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
                 }
+
                 views.setOnClickPendingIntent(R.id.topLogo, pIntent);
             } catch (Exception ex) {
                 Log.e("widget t411 - lancement de l'Intent", ex.toString());

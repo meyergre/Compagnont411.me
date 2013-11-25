@@ -7,13 +7,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -85,17 +82,7 @@ public class Widget_Plus extends AppWidgetProvider {
 
             views.setImageViewResource(R.id.topLogo, R.drawable.t411_search_icon);
 
-            String encodedImage = prefs.getString("avatar", "");
-            if (!encodedImage.equalsIgnoreCase("")) {
-                try {
-                    byte[] b = Base64.decode(encodedImage);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0,
-                            b.length);
-                    views.setImageViewBitmap(R.id.topLogo, bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            views.setImageViewBitmap(R.id.topLogo, new AvatarFactory().getFromPrefs(prefs));
 
             /*if (prefs.getBoolean("useHTTPS", false)) {
                 views.setImageViewResource(R.id.topLogo, R.drawable.ic_padlock);

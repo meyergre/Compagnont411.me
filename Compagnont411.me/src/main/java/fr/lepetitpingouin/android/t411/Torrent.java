@@ -100,7 +100,7 @@ public class Torrent {
 
     private class AsyncDlLaterNot extends AsyncTask<Void, String[], Void> {
 
-        String msg;
+        String msg = "";
 
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -134,7 +134,7 @@ public class Torrent {
 
                 doc = res.parse();
 
-                msg = doc.select("#messages ").first().text();
+                msg = doc.select("div#messages").first().text();
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -144,7 +144,8 @@ public class Torrent {
 
         @Override
         protected void onPostExecute(Void result) {
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+            if(!msg.equals(""))
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -157,22 +158,38 @@ public class Torrent {
         protected Void doInBackground(Void... arg0) {
             String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
-            Connection.Response res = null;
-            Document doc = null;
+            Connection.Response res;
+            Document doc;
 
             try {
+
                 res = Jsoup
-                        .connect(Default.URL_BOOKMARK + id)
+                        .connect(Default.URL_LOGIN)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                        .execute();
+
+                Map<String, String> Cookies = res.cookies();
+
+                res = Jsoup
+                        .connect(Default.URL_BOOKMARK + id)
+                        .cookies(Cookies)
+                        .data("login", username, "password", password)
+                        .method(Connection.Method.POST)
+                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
                         .ignoreContentType(true).execute();
 
                 doc = res.parse();
 
-                msg = doc.select("#messages ").first().text();
+                //doc = Jsoup.parse(new SuperT411HttpBrowser(context).login(username, password).connect(Default.URL_BOOKMARK + id).executeInAsyncTask());
+
+                //Log.e("bookmark", doc.body().toString());
+                    msg = doc.select("div.fade").first().text();
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -205,6 +222,7 @@ public class Torrent {
             Connection.Response resTorrent = null;
 
             try {
+
                 resTorrent = Jsoup
                         .connect(Default.URL_GET_TORRENT + id)
                         .data("login", username, "password", password)
@@ -212,10 +230,18 @@ public class Torrent {
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-
+                        .cookies(Jsoup
+                                .connect(Default.URL_LOGIN)
+                                .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
+                                .method(Connection.Method.POST)
+                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT)).timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                                .maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                                .execute().cookies())
                         .ignoreContentType(true).execute();
 
                 torrentFileContent = resTorrent.bodyAsBytes();
+
+
 
             } catch (Exception e) {
             }
@@ -225,8 +251,11 @@ public class Torrent {
 
         @Override
         protected void onPostExecute(Void result) {
-            String path = prefs.getString("savePath", Environment.getExternalStorageDirectory().getPath());
+
+            String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
+
             File file = new File(path + File.separator + name.replaceAll("/", "-") + ".torrent");
+
             try { file.createNewFile(); } catch (Exception e) {}
             try {
                 OutputStream fo = new FileOutputStream(file);
@@ -242,15 +271,15 @@ public class Torrent {
                 doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
             } catch (IOException e) {
                 Intent i = new Intent();
-                i.setClass(context, Settings.class);
+                i.setClass(context, UserPrefsActivity.class);
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
             } catch (Exception e) {
                 Intent i = new Intent();
-                i.setClass(context, null);
+                i.setClass(context, UserPrefsActivity.class);
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
                 if (file.exists() && file.length() == 0) {
-                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier.", Integer.valueOf(id), pI);
+                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
                 } else if (!file.exists()) {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nImpossible de créer le fichier.", Integer.valueOf(id), pI);
                 } else {

@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -139,22 +138,29 @@ public class FirstLoginActivity extends Activity {
         @Override
         protected Void doInBackground(Void... arg0) {
 
-            Connection.Response res = null;
-            Document doc = null;
+            //Connection.Response res = null;
+            Document doc;
             try {
-                res = Jsoup
+                /*res = Jsoup
                         .connect(Default.URL_LOGIN)
                         .data("login", login.getText().toString(), "password", passwd.getText().toString())
                         .method(Connection.Method.POST)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
                         .ignoreContentType(true).execute();
 
-                doc = res.parse();
+                doc = res.parse();*/
 
-                message = doc.select("#messages > p").first().text();
+                String html = new SuperT411HttpBrowser(getApplicationContext())
+                                .login(login.getText().toString(), passwd.getText().toString())
+                                .connect(Default.URL_LOGIN)
+                                .executeLoginForMessage();
 
+                if(!html.equals("OK")) {
+                    doc = Jsoup.parse(html);
+                    message = doc.select("#messages > p").first().text();
+                } else message = "Connexion réussie !";
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -182,9 +188,11 @@ public class FirstLoginActivity extends Activity {
                     edit.commit();
 
                     try {
-                        startActivity(new Intent().setClass(getApplicationContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startService(new Intent(getApplicationContext(), t411UpdateService.class));
                         finish();
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             } catch (Exception e) {

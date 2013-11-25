@@ -9,8 +9,8 @@
 
     <ImageView
             android:id="@+id/mailstate"
-            android:layout_width="36dip"
-            android:layout_height="42dip"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_marginRight="6dip"
             android:src="@drawable/mail_read"
             android:scaleType="fitXY"/>
@@ -19,7 +19,8 @@
             android:orientation="vertical"
             android:layout_width="0dip"
             android:layout_weight="1"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
 
         <LinearLayout
                 android:layout_width="fill_parent"
@@ -55,7 +56,8 @@
                 android:gravity="left"
                 android:text="Subject"
                 android:textColor="#0c335c"
-                android:textSize="14dp"/>
+                android:textSize="14dp"
+            android:singleLine="true" />
 
     </LinearLayout>
 </LinearLayout>

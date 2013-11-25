@@ -1,8 +1,10 @@
 package fr.lepetitpingouin.android.t411;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -11,7 +13,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +25,6 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
-import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -40,6 +43,7 @@ public class messagesActivity extends ActionBarActivity {
     mailFetcher mF;
 
     HashMap<String, String> map;
+    HashMap<String, String> itemMap;
 
     ListView maListViewPerso;
     ArrayList<HashMap<String, String>> listItem;
@@ -63,6 +67,7 @@ public class messagesActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.button_mail));
 
         maListViewPerso = (ListView) findViewById(R.id.malistviewperso);
+        registerForContextMenu(maListViewPerso);
 
         listItem = new ArrayList<HashMap<String, String>>();
 
@@ -113,7 +118,7 @@ public class messagesActivity extends ActionBarActivity {
             if (prefs.getBoolean("useHTTPS", false))
                 url = CONNECTURL.replace("http://", "https://");
 
-            try {
+            try {/*
                 res = Jsoup
                         .connect(url)
                         .data("login", username, "password", password)
@@ -122,7 +127,11 @@ public class messagesActivity extends ActionBarActivity {
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
 .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
                         .ignoreContentType(true).execute();
-                doc = res.parse();
+                doc = res.parse();*/
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(url)
+                        .executeInAsyncTask());
 
             } catch (Exception e) {
                 Log.e("erreur", e.toString());
@@ -188,8 +197,7 @@ public class messagesActivity extends ActionBarActivity {
                             .getItemAtPosition(position);
 
                     Intent myIntent = new Intent();
-                    myIntent.setClass(getApplicationContext(),
-                            readMailActivity.class);
+                    myIntent.setClass(getApplicationContext(), readMailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("id", map.get("id"));
                     bundle.putString("de", map.get("de"));
@@ -224,6 +232,73 @@ public class messagesActivity extends ActionBarActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.malistviewperso) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.message_context_menu, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        itemMap = (HashMap)maListViewPerso.getItemAtPosition(info.position);
+        switch(item.getItemId()) {
+            case R.id.messages_context_menu_read:
+                // Open mail here
+                Intent myIntent = new Intent();
+                myIntent.setClass(getApplicationContext(), readMailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", itemMap.get("id"));
+                bundle.putString("de", itemMap.get("de"));
+                bundle.putString("objet", itemMap.get("objet"));
+                bundle.putString("date", itemMap.get("date"));
+                myIntent.putExtras(bundle);
+                startActivity(myIntent);
+                return true;
+            case R.id.messages_context_menu_delete:
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.delete) + " ?")
+                        .setMessage(getString(R.string.confirmDeleteMessage).replace("%MESSAGE%", itemMap.get("objet")))
+                        .setPositiveButton(getString(R.string.delete).toUpperCase(), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // Remove mail here
+                                new Message(getApplicationContext(), itemMap.get("id")).delete();
+
+                            }
+
+                        })
+                        .setNegativeButton(getString(R.string.cancel).toUpperCase(), null)
+                        .show();
+                return true;
+            case R.id.messages_context_menu_archive:
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.archive) + " ?")
+                        .setMessage(getString(R.string.confirmArchiveMessage).replace("%MESSAGE%", itemMap.get("objet")))
+                        .setPositiveButton(getString(R.string.archive).toUpperCase(), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // Archive mail here
+                                new Message(getApplicationContext()).delete();
+
+                            }
+
+                        })
+                        .setNegativeButton(getString(R.string.cancel).toUpperCase(), null)
+                        .show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 }

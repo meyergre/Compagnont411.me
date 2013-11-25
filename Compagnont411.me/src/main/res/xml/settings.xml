@@ -24,12 +24,14 @@
                 android:key="ratioMinimum"
                 android:title="Ratio Min."
                 android:summary="@string/lowRatio_summary"
-                android:numeric="integer"/>
+                android:defaultValue="0.75"
+                android:numeric="decimal"/>
             <EditTextPreference
                 android:key="ratioCible"
                 android:title="@string/target_ratio"
                 android:summary="@string/targetRatio_summary"
-                android:numeric="integer"/>
+                android:numeric="decimal"
+                android:defaultValue="1" />
         </PreferenceCategory>
 
     </PreferenceScreen>
@@ -65,11 +67,15 @@
 
                 <EditTextPreference
                     android:key="User-Agent"
-                    android:title="User-Agent" />
+                    android:title="User-Agent"
+                    android:summary="Définir le User-Agent utilisé par le névigateur interne" />
+                    <!--android:defaultValue="Android (Compagnon t411 internal browser)"-->
 
                 <EditTextPreference
                     android:title="Timeout"
                     android:key="timeoutValue"
+                    android:summary="Définir le délai avant l'abandon de le connexion"
+                    android:defaultValue="10"
                     android:numeric="integer"/>
 
             </PreferenceScreen>
@@ -118,22 +124,49 @@
             android:defaultValue="false" />
     </PreferenceScreen>
 
+    <!-- Widgets -->
+    <PreferenceScreen
+        android:title="Widgets"
+        android:icon="@drawable/ic_settings_widgets"
+        android:summary="@string/widgets_settings">
+        <ListPreference
+            android:key="widgetAction"
+            android:entries="@array/widget_actions"
+            android:entryValues="@array/widget_actions"
+            android:summary="@string/widgets_settings_summary"
+            android:title="@string/widget_action" />
+    </PreferenceScreen>
+
     <!-- Téléchargement -->
     <PreferenceScreen
         android:title="@string/search_and_download"
         android:icon="@drawable/ic_settings_searchdl">
 
-        <Preference
-            android:title="@string/save_path"
-            android:summary="Définit le chemin de téléchargement"
-            android:key="savePath"
-            />
+        <PreferenceCategory android:title="@string/search">
 
-        <CheckBoxPreference
-            android:key="hadopi"
-            android:title="Avertissement hadopi"
-            android:summary="Affiche un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
-            android:defaultValue="false" />
+            <CheckBoxPreference
+                android:key="hadopi"
+                android:title="Avertissement hadopi"
+                android:summary="Afficher un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
+                android:defaultValue="false" />
+
+            <CheckBoxPreference
+                android:key="dlModeRedirect"
+                android:title="@string/download_redirect"
+                android:summary="@string/description_downloadredirect"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/download">
+
+            <Preference
+                android:title="@string/save_path"
+                android:summary="Définir le chemin de téléchargement"
+                android:key="savePath"
+                />
+
+        </PreferenceCategory>
 
     </PreferenceScreen>
 

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- size = (74 x n) - 2 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:minWidth="294dp"
-                    android:minHeight="50dp"
-                    android:initialLayout="@layout/widget_full"
-                    android:resizeMode="horizontal"
-                    android:minResizeWidth="220dp"
-                    android:widgetCategory="keyguard|home_screen"
-        />
+    android:minWidth="294dp"
+    android:minHeight="120dp"
+    android:initialLayout="@layout/widget_full2"
+    android:resizeMode="horizontal|vertical"
+    android:previewImage="@drawable/preview_widgett411"
+    android:minResizeWidth="200dp"
+    android:minResizeHeight="42dp"
+    android:widgetCategory="keyguard|home_screen"
+/>

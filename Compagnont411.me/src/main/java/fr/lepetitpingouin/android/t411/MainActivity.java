@@ -6,12 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -30,7 +29,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -127,16 +125,16 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout = (android.support.v4.widget.DrawerLayout)findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, R.drawable.ic_actionbar_menu, 0, 0) {
             public void onDrawerClosed(View view) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                ActivityCompat.invalidateOptionsMenu(MainActivity.this); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                ActivityCompat.invalidateOptionsMenu(MainActivity.this); // creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportActionBar().setSubtitle(prefs.getString("lastDate", ""));
@@ -333,15 +331,6 @@ public class MainActivity extends ActionBarActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         });
-        connectButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent myIntent = new Intent(MainActivity.this, Settings.class);
-                myIntent.putExtra("advanced", true);
-                MainActivity.this.startActivity(myIntent);
-                return true;
-            }
-        });
 
         btnUploads = (LinearLayout) findViewById(R.id.btnUploads);
         btnUploads.setOnClickListener(new View.OnClickListener() {
@@ -365,6 +354,16 @@ public class MainActivity extends ActionBarActivity {
                 // Perform action on click
                 Intent myIntent = new Intent(MainActivity.this,
                         aboutActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        LinearLayout chatiButton = (LinearLayout) findViewById(R.id.btn_chati);
+        chatiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Perform action on click
+                Intent myIntent = new Intent(MainActivity.this, ChatiActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
@@ -441,17 +440,7 @@ public class MainActivity extends ActionBarActivity {
         hSmiley.setImageResource(new Ratio(this).getSmiley());
 
         hAvatar = (ImageView) findViewById(R.id.hAvatar);
-        String encodedImage = prefs.getString("avatar", "");
-        if (!encodedImage.equalsIgnoreCase("")) {
-            try {
-                byte[] b = Base64.decode(encodedImage);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0,
-                        b.length);
-                hAvatar.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        hAvatar.setImageBitmap(new AvatarFactory().getFromPrefs(prefs));
 
         try {
             String classe = prefs.getString("classe", "???");
@@ -497,11 +486,11 @@ public class MainActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 Intent updateIntent = new Intent(MainActivity.this, t411UpdateService.class);
-                MainActivity.this.startService(updateIntent);
+                startService(updateIntent);
                 return true;
             case R.id.action_search:
                 Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                startActivity(myIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

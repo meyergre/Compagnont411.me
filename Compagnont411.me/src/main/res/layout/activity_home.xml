@@ -35,8 +35,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/t411_search_icon"
                     android:padding="6dp"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/bg_menu_button"/>
+                    android:scaleType="fitCenter" />
 
             <TextView
                     android:id="@+id/textView2"
@@ -132,7 +131,8 @@
                     android:layout_gravity="center"
                     android:layout_margin="4dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/avatar_default"/>
+                    android:src="@drawable/avatar_default"
+                android:background="#00000000" />
 
             <LinearLayout
                     android:id="@+id/hWidget"
@@ -270,29 +270,42 @@
                             android:textStyle="italic"/>
                 </LinearLayout>
 
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearLayout3"
+                    android:id="@+id/seedbox"
+                    android:orientation="horizontal"
+                        android:visibility="visible">
+
+                    <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:id="@+id/imageView10"
+                            android:src="@drawable/ic_seedbox"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_gravity="center"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Seedbox / Optique / Dédié déclaré(e)."
+                            android:id="@+id/textView6"
+                            android:layout_gravity="center"
+                            android:textColor="@color/t411_grey"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
-
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="#33000000">
-        </FrameLayout>
 
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-            <TextView
-                    android:id="@+id/hLastUpdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="..."
-                    android:textColor="#66000000"
-                    android:textSize="9sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -384,10 +397,10 @@
             android:layout_centerHorizontal="true"
         android:background="@drawable/torrent_card"
             android:id="@+id/frameLayout2"
-            android:layout_below="@+id/seedbox"
-            android:layout_marginLeft="4dp"
+        android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-        android:layout_above="@+id/linearLayout2">
+        android:layout_above="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout3">
 
         <WebView
                 android:layout_width="match_parent"
@@ -402,37 +415,7 @@
                 />
     </FrameLayout>
 
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout3"
-        android:id="@+id/seedbox"
-            android:background="@drawable/torrent_card"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView10"
-                android:src="@drawable/ic_seedbox"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_gravity="center"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Seedbox / Optique / Dédié déclaré(e)."
-                android:id="@+id/textView6"
-                android:layout_gravity="center"
-                android:textColor="@color/t411_grey"/>
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
     <ScrollView
         android:layout_width="300dp"
         android:layout_height="match_parent"
@@ -443,12 +426,13 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="fill_parent"
+            android:paddingRight="6dp">
 
             <LinearLayout
                 android:id="@+id/btnMails"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:minWidth="280dp"
@@ -489,10 +473,19 @@
 
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout10" />
+
             <LinearLayout
                 android:id="@+id/btnTop100"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:visibility="visible"
@@ -518,16 +511,24 @@
                     android:textColor="@color/t411_action_blue"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:background="@drawable/abc_spinner_ab_holo_light"
                     android:layout_weight="1"
                     android:textSize="18sp"/>
 
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout9" />
+
             <LinearLayout
                 android:id="@+id/btnBookmarks"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:visibility="visible"
@@ -558,10 +559,19 @@
                     android:textSize="18sp"/>
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout8" />
+
             <LinearLayout
                 android:id="@+id/btnFriends"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -588,10 +598,19 @@
                     android:textSize="18sp"/>
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout7" />
+
             <LinearLayout
                 android:id="@+id/btnUploads"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -618,10 +637,19 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout6" />
+
             <LinearLayout
                 android:id="@+id/btnStats"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -649,10 +677,19 @@
                     android:textSize="18sp"/>
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout5" />
+
             <LinearLayout
                 android:id="@+id/btnCalculator"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -679,10 +716,19 @@
                     android:textSize="18sp"/>
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout4" />
+
             <LinearLayout
                 android:id="@+id/btn_news"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -710,9 +756,48 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_chati"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/androidt411_btn"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:minWidth="280dp">
+
+                <ImageView
+                    android:id="@+id/imageView99"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/ic_newlauncher"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Chati"
+                    android:textColor="@color/t411_action_blue"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout3" />
+
+            <LinearLayout
                 android:id="@+id/btnForum"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -750,7 +835,7 @@
             <LinearLayout
                 android:id="@+id/btnService"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
@@ -777,10 +862,19 @@
                     android:textSize="18sp"/>
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="#15000000"
+                android:layout_margin="2dp"
+                android:clickable="false"
+                android:id="@+id/frameLayout" />
+
             <LinearLayout
                 android:id="@+id/LinearLayout01"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"

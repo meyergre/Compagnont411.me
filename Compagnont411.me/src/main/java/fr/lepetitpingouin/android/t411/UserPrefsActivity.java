@@ -30,7 +30,7 @@ public class UserPrefsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent(getBaseContext(), FileDialog.class);
-                intent.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getPath());
+                intent.putExtra(FileDialog.START_PATH, prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
 
                 intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
                 intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);

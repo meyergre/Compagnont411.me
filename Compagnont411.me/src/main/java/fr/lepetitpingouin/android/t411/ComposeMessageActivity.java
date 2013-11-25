@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,6 @@ import android.widget.Toast;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import java.util.Map;
 
 public class ComposeMessageActivity extends ActionBarActivity {
 
@@ -194,6 +193,14 @@ public class ComposeMessageActivity extends ActionBarActivity {
         _message.getText().replace(Math.min(start, end), Math.max(start, end),
                 string, 0, string.length());
     }
+    
+    private String htmlEncode(String value) {
+        value = value.replaceAll("\n", "#BR#");
+        value = Html.escapeHtml(value);
+        value = value.replaceAll("#BR#", "\n");
+
+        return value;
+    }
 
     protected class mailSender extends AsyncTask<Void, Void, Void> {
 
@@ -202,8 +209,9 @@ public class ComposeMessageActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             to = destinataire.getText().toString();
-            subject = objet.getText().toString();
-            message = _message.getText().toString();
+
+            subject = (objet.getText().toString());
+            message = htmlEncode(_message.getText().toString());
         }
 
         @Override
@@ -215,7 +223,7 @@ public class ComposeMessageActivity extends ActionBarActivity {
             Document doc = null;
 
             try {
-                res = Jsoup
+                /* res = Jsoup
                         .connect(Default.URL_LOGIN)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
@@ -236,7 +244,19 @@ public class ComposeMessageActivity extends ActionBarActivity {
                         .method(Connection.Method.POST)
                         .execute();
 
-                doc = res.parse();
+                doc = res.parse(); */
+
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                                        .login(username, password)
+                                        .connect(Default.URL_SENDMAIL)
+                                        .addData("receiverName", to)
+                                        .addData("subject", subject)
+                                        .addData("msg", message)
+                                        .addData("save", "1")
+                                        .addData("id", "")
+                                        .addData("receiver", "")
+                                        .executeInAsyncTask());
+
                 value = doc.select("#messages").first().text();
 
             } catch (Exception e) {
@@ -248,7 +268,8 @@ public class ComposeMessageActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Void result) {
             dialog.dismiss();
-            Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+            if(!value.equals(""))
+                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
             finish();
         }
     }

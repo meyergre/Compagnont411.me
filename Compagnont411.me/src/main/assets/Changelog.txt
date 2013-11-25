@@ -3,6 +3,65 @@ CHANGELOG
 (Versionnement : ANNEE {point} MOIS {tiret} build)
 
 --
+2013.11-94
+- Correction du nom du torrent affiché lors d'un téléchargement depuis la liste des résultats
+- Correction des info-bulles vides lors de l'ajout aux futurs téléchargements
+
+
+2013.11-93
+- Ajout d'actions au long-clic sur les torrents
+- Ajout d'actions au long-clic sur les messages
+
+
+2013.11-92
+- Bugfix
+
+
+2013.11-91
+- Correction du chemin de téléchargement
+
+
+2013.11-90
+- Correction de l'encodage des caractères accentués reçus
+- Correction du téléchargement de torrents corrompus
+
+
+2013.11-89
+- Correction du chemin d'enregistrement des fichiers dans le sélecteur
+- Mise à jour de Jsoup en version 1.7.3
+- Changement de navigateur interne
+- Correction des erreurs d'encodage dans l'objet des messages
+- Correction des erreurs de connexion ou de "mot de passe incorrect"
+- Correction des accès https
+- Correction des plantages de l'horloge
+
+
+2013.11-88
+- La touche Entrée valide la recherche
+- Mise à jour des grands widgets (nom et disposition)
+
+
+2013.11-87
+- Correction de l'accès au panneau latéral pour les anciennes versions d'android
+- Redesign de la messagerie
+- Correction de l'encodage des MP
+- Plus de rechargement au changement d'orientation dans les messages
+
+
+2013.11-86
+- Fix d'un problème d'ouverture pour les anciennes versions d'android
+
+
+2013.11-85
+- Autorisation des virgules pour les ratios minimum/maximum
+- Restauration des choix d'action du widget
+- Retour de la possibilité d'ouvrir les prez dans le navigateur
+- Lors de rotation d'écran, les prez et les résultats de recherche ne sont plus rechargés
+- Correction de la connexion HTTPS pour le téléchargement
+- Correction de l'interface tablette
+(Merci à Kévin S)
+
+
 2013.11-84
 - Réécriture partielle de l'application
 - Implémentation de l'ActionBar native
@@ -10,6 +69,7 @@ CHANGELOG
 - Implémentation du menu de préférences natif
 - Redesign du widget Plus
 - Support de uTorrent Remote lors de l'ouverture d'un torrent
+- Mise à jour du lien vers mes autres apps
 
 
 2013.10-83
