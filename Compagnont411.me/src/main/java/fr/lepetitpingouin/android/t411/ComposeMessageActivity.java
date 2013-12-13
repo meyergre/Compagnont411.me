@@ -26,6 +26,9 @@ public class ComposeMessageActivity extends ActionBarActivity {
     mailSender mS;
     ProgressDialog dialog;
 
+    SuperT411HttpBrowser browser;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -246,8 +249,9 @@ public class ComposeMessageActivity extends ActionBarActivity {
 
                 doc = res.parse(); */
 
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
-                                        .login(username, password)
+                browser = new SuperT411HttpBrowser(getApplicationContext());
+
+                doc = Jsoup.parse(browser.login(username, password)
                                         .connect(Default.URL_SENDMAIL)
                                         .addData("receiverName", to)
                                         .addData("subject", subject)
@@ -268,8 +272,8 @@ public class ComposeMessageActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Void result) {
             dialog.dismiss();
-            if(!value.equals(""))
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+            if(!browser.getErrorMessage().equals(""))
+                Toast.makeText(getApplicationContext(), browser.getErrorMessage(), Toast.LENGTH_SHORT).show();
             finish();
         }
     }

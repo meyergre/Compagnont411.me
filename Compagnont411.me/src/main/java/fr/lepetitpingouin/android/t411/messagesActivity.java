@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -135,9 +134,7 @@ public class messagesActivity extends ActionBarActivity {
 
             } catch (Exception e) {
                 Log.e("erreur", e.toString());
-                Toast.makeText(getApplicationContext(),
-                        "Erreur lors de la r�cup�ration des messages...",
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Erreur lors de la récupération des messages...", Toast.LENGTH_SHORT).show();
             }
 
             return null;
@@ -272,7 +269,7 @@ public class messagesActivity extends ActionBarActivity {
 
                                 // Remove mail here
                                 new Message(getApplicationContext(), itemMap.get("id")).delete();
-
+                                update();
                             }
 
                         })
@@ -289,7 +286,8 @@ public class messagesActivity extends ActionBarActivity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 // Archive mail here
-                                new Message(getApplicationContext()).delete();
+                                new Message(getApplicationContext(), itemMap.get("id")).archive();
+                                update();
 
                             }
 

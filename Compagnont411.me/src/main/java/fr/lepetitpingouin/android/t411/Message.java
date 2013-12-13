@@ -5,10 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 /**
  * Created by gregory on 22/11/2013.
@@ -18,14 +14,12 @@ public class Message {
     public String id;
     private Context context;
     private SharedPreferences prefs;
-    String t411message = "OK";
+    String t411message = "";
 
-    public Message(Context context) {
-        this.context = context.getApplicationContext();
-    }
+    SuperT411HttpBrowser browser;
 
     public Message(Context context, String id) {
-        this.context = context.getApplicationContext();
+        this.context = context;
         this.id = id;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -45,10 +39,7 @@ public class Message {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(
-                    context,
-                    context.getString(R.string.pleasewait)
-                            + "...", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,context.getString(R.string.pleasewait)+ "...", Toast.LENGTH_SHORT).show();
             super.onPreExecute();
         }
 
@@ -57,26 +48,26 @@ public class Message {
 
             String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
-            Document doc;
+            Log.d("Message", "Delete");
+            String html = "";
             try {
-                doc = Jsoup.parse(
-                        new SuperT411HttpBrowser(context)
-                                .login(username, password)
-                                .connect(Default.URL_MESSAGE_DEL + id)
-                                .executeInAsyncTask()
-                );
+                browser = new SuperT411HttpBrowser(context);
+                browser.login(username, password)
+                        .connect(Default.URL_MESSAGE_DEL + id)
+                        .executeInAsyncTask();
 
-                t411message = doc.select("#messages").first().text();
+                t411message = browser.getFadeMessage();
             } catch (Exception ex) {
-                Log.e("Archivage message", ex.toString());
+                Log.e("Delete message", ex.toString());
             }
+            Log.d("Message", t411message);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            if(t411message != null)
-                Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
+            //if(t411message != null)
+                //Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -85,10 +76,7 @@ public class Message {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(
-                    context,
-                    context.getString(R.string.pleasewait)
-                            + "...", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,context.getString(R.string.pleasewait)+ "...", Toast.LENGTH_SHORT).show();
             super.onPreExecute();
         }
 
@@ -96,16 +84,14 @@ public class Message {
         protected Void doInBackground(Void... arg0) {
 
             String username = prefs.getString("login", ""), password = prefs.getString("password", "");
-
-            Document doc;
             try {
 
-                doc = Jsoup.parse(new SuperT411HttpBrowser(context)
-                        .login(username, password)
+                browser = new SuperT411HttpBrowser(context);
+                browser.login(username, password)
                         .connect(Default.URL_MESSAGE_ARC + id)
-                        .executeInAsyncTask());
+                        .executeInAsyncTask();
 
-                t411message = doc.select("#messages").first().text();
+                t411message = browser.getFadeMessage();
             } catch (Exception ex) {
                 Log.e("Archivage message", ex.toString());
             }
@@ -114,8 +100,8 @@ public class Message {
 
         @Override
         protected void onPostExecute(Void result) {
-            if(t411message != null)
-                Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
+            //if(!t411message.equals(""))
+                //Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
         }
 
     }

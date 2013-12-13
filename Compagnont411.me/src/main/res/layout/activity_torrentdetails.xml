@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
@@ -71,14 +71,27 @@
 
     </LinearLayout-->
 
+    <WebView
+            android:id="@+id/prez"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#DDD"
+            android:minHeight="200dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_below="@+id/infolayout" />
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="#ddd"
-            android:id="@+id/linearLayout"
+            android:id="@+id/infolayout"
             android:orientation="horizontal"
-            android:padding="3dp">
+            android:padding="3dp"
+        android:visibility="visible">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -231,22 +244,55 @@
 
     </LinearLayout>
 
-    <WebView
-            android:id="@+id/prez"
-            android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#ddd"
+        android:baselineAligned="true"
+        android:id="@+id/linearLayout3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_fakemenu"
+            android:layout_gravity="center"
+            android:background="@drawable/androidt411_btn"
+            android:scaleType="fitCenter"
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:onClick="onFakemenuClick" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"></FrameLayout>
+
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#DDD"
-            android:minHeight="200dp"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            />
+            android:text="@string/download"
+            android:id="@+id/button"
+            android:background="@drawable/t411_btn_green"
+            android:textColor="#FFF"
+            android:onClick="onDownloadClick"
+            android:minWidth="175dp"
+            android:maxWidth="250dp" />
+
+    </LinearLayout>
 
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="48dp"
-            android:background="#012f54"
-        android:baselineAligned="true">
+            android:background="#ddd"
+        android:baselineAligned="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:visibility="gone"
+        android:id="@+id/fakemenu">
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -254,24 +300,26 @@
                 android:id="@+id/btnTorrentShare"
                 android:src="@drawable/ic_share"
                 android:layout_gravity="center"
-                android:background="@drawable/androidt411_btn"
+                android:background="@drawable/t411_btn"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:scaleType="fitCenter"
                 android:layout_weight="1"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"/>
+                android:paddingBottom="4dp"
+            android:padding="5dp" />
 
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:id="@+id/btnDlLater"
                 android:src="@drawable/ic_dllater"
-                android:background="@drawable/androidt411_btn"
+                android:background="@drawable/t411_btn"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:scaleType="fitCenter"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+            android:padding="5dp" />
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -289,45 +337,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:id="@+id/btn_nfo"
-                android:background="@drawable/androidt411_btn"
+                android:background="@drawable/t411_btn"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:scaleType="fitCenter"
                 android:layout_weight="1"
-                android:src="@drawable/ic_nfo_file"/>
+                android:src="@drawable/ic_nfo_file"
+            android:padding="5dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:id="@+id/btn_listfiles"
-            android:background="@drawable/androidt411_btn"
+            android:background="@drawable/t411_btn"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:src="@drawable/ic_list_files" />
+            android:src="@drawable/ic_list_files"
+            android:padding="5dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+            android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:id="@+id/btnThx"
                 android:src="@drawable/ic_thx"
-                android:background="@drawable/androidt411_btn"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"/>
+                android:background="@drawable/t411_btn"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:padding="5dp" />
 
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:id="@+id/btnTorrentDownload"
                 android:src="@drawable/ic_download_torrent"
-                android:background="@drawable/androidt411_btn"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"/>
+                android:background="@drawable/t411_btn_green"
+            android:scaleType="fitCenter"
+                android:layout_weight="1"
+            android:padding="5dp" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

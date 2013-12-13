@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,13 +109,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, torrent_URL + "\n\n-\n" + getApplicationContext().getString(R.string.shareSignature));
-                share.putExtra(Intent.EXTRA_SUBJECT, "[t411] " + torrent_Name);
-
-                startActivity(Intent.createChooser(share,
-                        getApplicationContext().getString(R.string.Share)));
+                Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID);
+                torrent.share();
             }
         });
 
@@ -183,6 +179,15 @@ public class torrentDetailsActivity extends ActionBarActivity {
         }
     }
 
+    public void onDownloadClick(View v) {
+        Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID);
+        torrent.download();
+    }
+
+    public void onFakemenuClick(View v) {
+        LinearLayout fakemenu = (LinearLayout)findViewById(R.id.fakemenu);
+        fakemenu.setVisibility(fakemenu.getVisibility()==View.GONE?View.VISIBLE:View.GONE);
+    }
 
     private class AsyncThx extends AsyncTask<Void, String[], Void> {
 
@@ -323,58 +328,61 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 prez += "<img src=\"file:///android_asset/picts/top.png\" onclick=\"scroll(0,0);\" style='z-index: 99999; position: fixed; top: 2px; right: 2px;' />";
                 prez += "<img src=\"file:///android_asset/picts/bottom.png\" onclick=\"scroll(0,document.body.scrollHeight);\" style='z-index: 99999; position: fixed; bottom: 2px; right: 2px;' />";
 
-                //commentaires
-                Elements objects = comments.select("tr");
+                Elements objects;
+                try {
+                    //commentaires
+                    objects = comments.select("tr");
 
-                for (Element object : objects) {
+                    for (Element object : objects) {
+                        String cusername = object.select("th").first().select("a").first().text();
 
-                    String cusername = object.select("th").first().select("a").first().text();
+                        String colorPseudo = "darkblue";
+                        String arrowPict = "arrow.png";
+                        String bubbleStyle = "border: 1px solid #dfdfdf; padding: 3px; border-radius: 5px; background: #f6f6f6; font-size: 0.8em";
 
-                    String colorPseudo = "darkblue";
-                    String arrowPict = "arrow.png";
-                    String bubbleStyle = "border: 1px solid #dfdfdf; padding: 3px; border-radius: 5px; background: #f6f6f6; font-size: 0.8em";
+                        if (cusername.equals(tduploader) && !cusername.equals("")) {
+                            colorPseudo = "darkgrey";
+                            cusername = cusername + " (uploader)";
+                            arrowPict = "arrowBlack.png";
+                            bubbleStyle = "border: 1px solid #000000; padding: 3px; border-radius: 5px; background: #303030; color: #EFEFEF; font-size: 0.8em";
+                        }
 
-                    if (cusername.equals(tduploader) && !cusername.equals("")) {
-                        colorPseudo = "darkgrey";
-                        cusername = cusername + " (uploader)";
-                        arrowPict = "arrowBlack.png";
-                        bubbleStyle = "border: 1px solid #000000; padding: 3px; border-radius: 5px; background: #303030; color: #EFEFEF; font-size: 0.8em";
+                        String comm_username = "<b style='color: " + colorPseudo + ";'>" + cusername + "</b>";
+                        String comm_avatar = "<img width=50 src=\"http://www.t411.me/" + object.select("th").first().select("img.avatar").first().attr("src") + "\" />";
+                        String comm_up = object.select("th").first().select("span").get(1).outerHtml();
+                        String comm_down = object.select("th").first().select("span").get(2).outerHtml();
+                        String comm_ratio = object.select("th").first().select("span").get(3).outerHtml();
+
+                        String comm_comm = "<img src=\'file:///android_asset/picts/" + arrowPict + "\' width=10 style='position: relative; left: -13px; top: 3px;' />";
+                        comm_comm += object.select("td").first().select("p").first().html();
+
+                        String comm_date = "<div style='text-align: right;'>" + object.select("td").first().select("div").first().html() + "</div>";
+
+
+                        try {
+                            String comment = ""
+                                    + "<tr><td colspan=2><br/>" + comm_username + "</td></tr>"
+                                    + "<tr valign='top' style='margin-top: -5px;'>"
+                                    + "<td style='font-size: 0.5em;'>" + comm_avatar + "<br/>" + comm_up + "<br/>" + comm_down + "<br/>" + comm_ratio + "<br/></td>"
+                                    + "<td><div style='" + bubbleStyle + " word-wrap:break-word; overflow-wrap: break-word; max-width: 300px; font-size: 0.8em;'>" + comm_comm + "<br/>" + comm_date + "</div></td>"
+                                    + "</tr>";
+                            prez += comment;
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
-
-                    String comm_username = "<b style='color: " + colorPseudo + ";'>" + cusername + "</b>";
-                    String comm_avatar = "<img width=50 src=\"http://www.t411.me/" + object.select("th").first().select("img.avatar").first().attr("src") + "\" />";
-                    String comm_up = object.select("th").first().select("span").get(1).outerHtml();
-                    String comm_down = object.select("th").first().select("span").get(2).outerHtml();
-                    String comm_ratio = object.select("th").first().select("span").get(3).outerHtml();
-
-                    String comm_comm = "<img src=\'file:///android_asset/picts/" + arrowPict + "\' width=10 style='position: relative; left: -13px; top: 3px;' />";
-                    comm_comm += object.select("td").first().select("p").first().html();
-
-                    String comm_date = "<div style='text-align: right;'>" + object.select("td").first().select("div").first().html() + "</div>";
-
-
-                    try {
-                        String comment = ""
-                                + "<tr><td colspan=2><br/>" + comm_username + "</td></tr>"
-                                + "<tr valign='top' style='margin-top: -5px;'>"
-                                + "<td style='font-size: 0.5em;'>" + comm_avatar + "<br/>" + comm_up + "<br/>" + comm_down + "<br/>" + comm_ratio + "<br/></td>"
-                                + "<td><div style='" + bubbleStyle + " word-wrap:break-word; overflow-wrap: break-word; max-width: 300px; font-size: 0.8em;'>" + comm_comm + "<br/>" + comm_date + "</div></td>"
-                                + "</tr>";
-                        prez += comment;
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                prez += "<table></body></html>";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }                prez += "</table></body></html>";
 
                 prez = prez.replaceAll("_____", "");
 
                 if (comments.select("tr").size() > 0)
                     prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411.me...<br/><br/></center></a>";
 
+                try {
                 //vidéos youtube
                 objects = doc.select("object");
                 for (Element object : objects) {
@@ -384,9 +392,41 @@ public class torrentDetailsActivity extends ActionBarActivity {
                     } catch (Exception e) {
                         prez = prez.replace(object.outerHtml(), "");
                     }
-
+                }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("Youtube", "Error");
                 }
 
+                //vidéos youtube 2
+
+                objects = doc.select("iframe[src~=youtube]");
+                for (Element object : objects) {
+                    Log.e("iframe", object.toString());
+                    try {
+                        String youtube_src = object.attr("src");
+
+                        //String[] youtube_array = youtube_src.split("/");
+                        //String youtube_id = youtube_array[youtube_array.length-1];
+                        String youtube_id = youtube_src.substring(youtube_src.lastIndexOf("/")+1);
+                        Log.e(youtube_src, youtube_id);
+
+                        String youtube_thumb = "http://img.youtube.com/vi/"+youtube_id+"/0.jpg";
+                        String youtube_link = "http://www.youtube.com/watch?v="+youtube_id;
+                        //file:///android_asset/picts/yt_play_vid.png
+                        prez = prez.replace(object.outerHtml(),
+                                "<a href=\"" + youtube_link + "\" style='position: relative;'>" +
+                                        "<span style='position: absolute; bottom: 20px; right: 0px; color: white; background: red; border-top-left-radius: 6px; border-bottom-left-radius: 6px;  padding: 6px 24px 6px 6px;'> ▶  Voir sur youtube</span>"+
+                                        "<img src=\""+youtube_thumb+"\"/>" +
+                                        "</a>");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        prez = prez.replace(object.outerHtml(), "");
+                    }
+                }
+
+
+                /*
                 //liens
                 objects = doc.select("a");
                 for (Element object : objects) {
@@ -397,14 +437,14 @@ public class torrentDetailsActivity extends ActionBarActivity {
                     }
 
                 }
+                */
 
                 prez = prez.replaceAll("src=\"/", "src=\"http://www.t411.me/");
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
+                e.printStackTrace();
             } finally {
-
-                details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", prez, mimeType, encoding, "");
 
                 ImageView btn_NFO = (ImageView) findViewById(R.id.btn_nfo);
                 btn_NFO.setOnClickListener(new View.OnClickListener() {
@@ -431,7 +471,10 @@ public class torrentDetailsActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Void result) {
 
+            details_www.loadDataWithBaseURL(null, prez, mimeType, encoding, "");
+
             try {
+
                 getSupportActionBar().setSubtitle(tduploader.toString());
 
                 tdt_seeders = doc.select(".details table tr td.up").first().text();

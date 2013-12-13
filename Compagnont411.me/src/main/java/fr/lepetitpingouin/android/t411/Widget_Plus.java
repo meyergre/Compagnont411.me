@@ -105,7 +105,6 @@ public class Widget_Plus extends AppWidgetProvider {
         ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget_Plus.class.getName());
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
 
-
         if (intent.getAction().equals(Default.Appwidget_flag_updating)) {
             for (int widgetId : appWidgetIds) {
                 RemoteViews views = new RemoteViews(context.getPackageName(),

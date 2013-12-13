@@ -47,22 +47,6 @@ public class aboutActivity extends ActionBarActivity {
             }
         });
 
-        Button shareBtn = (Button) findViewById(R.id.btn_share);
-        shareBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                String message = getApplicationContext().getString(
-                        R.string.shareText);
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, message);
-
-                startActivity(Intent.createChooser(share,
-                        getApplicationContext().getString(R.string.Share)));
-            }
-        });
-
         Button OtherAppsBtn = (Button) findViewById(R.id.btnOtherApps);
         OtherAppsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

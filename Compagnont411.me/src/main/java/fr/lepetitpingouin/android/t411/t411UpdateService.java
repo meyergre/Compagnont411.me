@@ -37,6 +37,7 @@ public class t411UpdateService extends Service {
     public Handler handler;
 
     AsyncUpdate upd;
+    SuperT411HttpBrowser browser;
 
     AlarmManager alarmManager;
 
@@ -90,6 +91,7 @@ public class t411UpdateService extends Service {
 
         if (!prefs.getBoolean("wifiOnly", false) || (prefs.getBoolean("wifiOnly", false) && isConnectedToWifi())) {
             Log.d("", "LANCEMENT DES ASYNCTASKS");
+
             upd = new AsyncUpdate();
             upd.execute();
             new newsFetcher().execute();
@@ -148,27 +150,19 @@ public class t411UpdateService extends Service {
         doc = res.parse();
         */
 
-        doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext()).login(login, password).connect(url).executeInAsyncTask());
+        browser = new SuperT411HttpBrowser(getApplicationContext());
+        doc = Jsoup.parse(browser.login(login, password).connect(url).executeInAsyncTask());
 
         if (doc.title().contains("503"))
             doNotify(R.drawable.ic_maintenance, "Maintenance", "t411 est actuellement indisponible.", 411, null);
         else
             cancelNotify(411);
 
-        try {
-            conError = doc.select("#messages").first().text();
-            timeout = true;
-        } catch (Exception ex) {
-            Log.e("conError", ex.toString());
-            timeout = true;
-        }
-        Log.d("DEBUGT411 - ConError",conError+"(using password '"+password+"')");
-        if (!conError.equals("")
-                && !conError.contains("identifi�")) {
+        if (!browser.getErrorMessage().equals("")) {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(t411UpdateService.this, conError, Toast.LENGTH_LONG).show();
+                    Toast.makeText(t411UpdateService.this, browser.getErrorMessage(), Toast.LENGTH_LONG).show();
                 }
             });
             Log.e("conError :", conError);
@@ -437,6 +431,15 @@ public class t411UpdateService extends Service {
             try {
                 update(prefs.getString("login", ""),
                         prefs.getString("password", ""));
+
+
+            } catch (ClassCastException ccex) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(t411UpdateService.this, "Mise à jour impossible. Veuillez désinstaller/réinstaller l'application pour corriger le problème.", Toast.LENGTH_LONG).show();
+                    }
+                });
             } catch (Exception ex) {
                 Log.v("Credentials :", prefs.getString("login", "") + ":"
                         + prefs.getString("password", ""));

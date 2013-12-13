@@ -64,6 +64,20 @@ public class Torrent {
         }
     }
 
+    public void share() {
+
+        String url = Default.URL_SHARE;
+        if(prefs.getBoolean("shareDirectLink", false))
+            url = Default.URL_GET_PREZ;
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, url+this.id + "\n\n-\n" + context.getString(R.string.shareSignature));
+        share.putExtra(Intent.EXTRA_SUBJECT, "[t411] " + this.name);
+
+        context.startActivity(Intent.createChooser(share, context.getString(R.string.Share)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
+
     public void doNotify(int icon, String title, String subtitle, int id, PendingIntent pendingIntent) {
         try {
             if (pendingIntent == null)
@@ -96,6 +110,11 @@ public class Torrent {
             } catch (Exception e) {
             }
         }
+    }
+
+    public void cancelNotify(int id) {
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancel(id);
     }
 
     private class AsyncDlLaterNot extends AsyncTask<Void, String[], Void> {
@@ -264,11 +283,26 @@ public class Torrent {
 
                 Intent i = new Intent();
                 i.setAction(android.content.Intent.ACTION_VIEW);
-                //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension(".torrent"));
-                i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
-                //i.setData(Uri.fromFile(file));
+                //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension("torrent"));
+                if(prefs.getBoolean("addMimeType", false))
+                    i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+                else //auto-detect
+                    //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.getName().substring(file.getName().lastIndexOf(".")+1)));
+                    i.setData(Uri.fromFile(file));
+
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
+                if(prefs.getBoolean("openAfterDl", false)) {
+                    //ouvrir le fichier
+                    try {
+                        context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT|Intent.FLAG_FROM_BACKGROUND));
+                        if(prefs.getBoolean("openAfterDlCancelNotify", false))
+                        cancelNotify(Integer.valueOf(id));
+                    } catch(Exception e) {
+                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Erreur d'ouverture du torrent\nAucune application trouvée.", Integer.valueOf(id), null);
+                    }
+                }
+
             } catch (IOException e) {
                 Intent i = new Intent();
                 i.setClass(context, UserPrefsActivity.class);

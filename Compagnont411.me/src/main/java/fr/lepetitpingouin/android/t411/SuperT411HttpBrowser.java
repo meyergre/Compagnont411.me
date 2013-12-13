@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,6 +22,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,17 +36,19 @@ public class SuperT411HttpBrowser {
 
     SharedPreferences prefs;
 
-    String username, password, url;
+    String username, password, url, errorMessage = "", fadeMessage = "";
 
     List<NameValuePair> data = new ArrayList<NameValuePair>(9);
 
     public SuperT411HttpBrowser(Context context) {
+        Log.d("SuperT411HttpBrowser", "constructor");
         cookieStore = new BasicCookieStore();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         //new LoginTask().execute(Default.URL_LOGIN);
     }
 
     public SuperT411HttpBrowser connect(String mUrl) {
+        Log.d("SuperT411HttpBrowser", "connect");
         this.url = mUrl;
 
         if(prefs.getBoolean("useHTTPS", false))
@@ -53,13 +57,23 @@ public class SuperT411HttpBrowser {
         return this;
     }
 
+    public String getErrorMessage() {
+        return this.errorMessage;
+    }
+
+    public String getFadeMessage() {
+        return this.fadeMessage;
+    }
+
     public SuperT411HttpBrowser login(String username, String password) {
+        Log.d("SuperT411HttpBrowser", "login");
         this.username = username;
         this.password = password;
         return this;
     }
 
     public String execute() {
+        Log.d("SuperT411HttpBrowser", "execute");
         String value = "";
         try {
             value = new LoginTask(username, password).execute(url).get();
@@ -77,6 +91,7 @@ public class SuperT411HttpBrowser {
     }
 
     public String executeLoginForMessage() {
+        Log.d("SuperT411HttpBrowser", "loginForMessage");
         HttpContext clientcontext;
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
@@ -145,6 +160,7 @@ public class SuperT411HttpBrowser {
     }
 
     public String executeInAsyncTask() {
+        Log.d("SuperT411HttpBrowser", "executeAsync");
         HttpContext clientcontext;
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
@@ -183,6 +199,16 @@ public class SuperT411HttpBrowser {
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
+
+            try {
+                String conError = Jsoup.parse(responseString).select("div.fade").first().text();
+                if (!conError.equals("") && !conError.contains("identifié")) {
+                    errorMessage = conError;
+                }
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
+
         } catch (Exception ex) {
             //TODO Handle problems..
         }
@@ -199,13 +225,23 @@ public class SuperT411HttpBrowser {
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-                responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-                //responseString = EntityUtils.toString(response.getEntity(), "windows-1252");
+                //responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
+                responseString = EntityUtils.toString(response.getEntity(), "windows-1252");
             } else{
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
+
+            try {
+                String conError = Jsoup.parse(responseString).select("div.fade").first().text();
+                if (!conError.equals("")) {
+                    fadeMessage = conError;
+                }
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
+
         } catch (Exception ex) {
             //TODO Handle problems..
         }

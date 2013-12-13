@@ -31,13 +31,10 @@
     <string name="description_mailAlert">Afficher une notification à la réception d\'un message.
     </string>
     <string name="repeatTime">Fréquence (mn)</string>
-    <string name="description_frequency">Définir l\'intervalle entre 2 mises à jour. Attention, une
+    <string name="description_frequency">Définir l\'intervalle entre 2 mises à jour (en minutes). Attention, une
         fréquence haute consomme davantage de batterie…
     </string>
     <string name="show_notifs">Notifications système</string>
-    <string name="description_notifSystem">Afficher une notification furtive lors d\'une mise à jour
-        des données
-    </string>
     <string name="WhatToDo">Que faire ?</string>
     <string name="open_app">Ouvrir l\'application</string>
     <string name="update_now">Mettre à jour</string>
@@ -129,16 +126,7 @@
     <string name="shareText">Découvrez "Compagnon t411" sur Google Play !
         https://play.google.com/store/apps/details?id=fr.lepetitpingouin.android.t411
     </string>
-    <string name="contribute_for_free">Contribuer gratuitement ? Parlez-en !</string>
-    <string name="donate_050e">Offrez-moi un malabar ! (€ 0.5)</string>
-    <string name="donate_100e">Offrez-moi un café ! (€ 1,-)</string>
-    <string name="donate_200e">Offrez-moi un forfait Free ! (€ 2,-)</string>
-    <string name="donate_500e">Offrez-moi une ÉNORME bière :D (€ 5,-)</string>
-    <string name="enable_dev_functions">Activer les fonctions expérimentales</string>
-    <string name="description_dev_preview">Donne accès à tous les outils et toutes les
-        fonctionnalités, y compris celles encore en cours de développement, et donc potentiellement
-        instables.
-    </string>
+
     <string name="calculator">Calculatrice</string>
     <string name="settings_RTC">Ne pas mettre à jour en veille</string>
     <string name="settings_RTC_details">Utilise les alarmes RTC au lieu de RTC_WAKEUP pour les mises
@@ -276,6 +264,16 @@
     <string name="torrent_context_del_from_later">Retirer des futurs téléchargements</string>
     <string name="support_the_dev">Soutenez le développeur !</string>
     <string name="bitcoinCopied">Mon adresse Bitcoin a été copiée dans votre presse-papier !</string>
+    <string name="open_after_dl">Ouverture automatique</string>
+    <string name="description_open_after_dl">Ouvrir automatiquement les fichiers une fois le téléchargement terminé, sans passer par une notivication</string>
+    <string name="open_after_dl_cancelNotify">Effacer la notification</string>
+    <string name="description_open_after_dl_cancelNotify">Effacer la notification de téléchargement terminé</string>
+    <string name="misc">Divers</string>
+    <string name="search_results">Résultats de recherche</string>
+    <string name="settings_addMime">Forcer le type MIME</string>
+    <string name="description_settings_addMime">Forcer le type MIME du torrent lors de la commande d\'ouverture du fichier (application/x-bittorrent)</string>
+    <string name="share_direct_link">Partager le torrent</string>
+    <string name="description_share_direct_link">Partager le lien direct vers le .torrent plutôt que le lien vers la prez (nécessite que le destinataire soit connecté à t411).</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

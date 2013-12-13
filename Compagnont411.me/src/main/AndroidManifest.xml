@@ -1,7 +1,7 @@
 <manifest
     package="fr.lepetitpingouin.android.t411"
-    android:versionCode="94"
-    android:versionName="2013.11-94"
+    android:versionCode="96"
+    android:versionName="2013.12-96"
     android:installLocation="auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 

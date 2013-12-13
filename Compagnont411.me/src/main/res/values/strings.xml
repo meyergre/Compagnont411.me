@@ -279,6 +279,16 @@
     <string name="torrent_context_del_from_later">Delete from future downloads</string>
     <string name="support_the_dev">Support the developper !</string>
     <string name="bitcoinCopied">My Bitcoin address has been coiped to your clipboard !</string>
+    <string name="open_after_dl">Ouverture automatique</string>
+    <string name="description_open_after_dl">Ouvrir automatiquement les fichiers une fois le téléchargement terminé, sans passer par une notivication</string>
+    <string name="open_after_dl_cancelNotify">Effacer la notification</string>
+    <string name="description_open_after_dl_cancelNotify">Effacer la notification de téléchargement terminé</string>
+    <string name="misc">Divers</string>
+    <string name="search_results">Résultats de recherche</string>
+    <string name="settings_addMime">Préciser le type MIME</string>
+    <string name="description_settings_addMime">Préciser le type MIME d\'un .torrent lors de la commande d\'ouverture du fichier.</string>
+    <string name="share_direct_link">Partager le torrent</string>
+    <string name="description_share_direct_link">Partager le lien direct vers le .torrent plutôt que le lien vers la prez (nécessite que le destinataire soit connecté à t411).</string>
 
 
     <string-array name="widget_actions">

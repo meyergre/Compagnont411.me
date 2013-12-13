@@ -24,7 +24,7 @@ import java.io.InputStreamReader;
 
 public class readMailActivity extends ActionBarActivity {
 
-
+    SuperT411HttpBrowser browser;
 
     SharedPreferences prefs;
 
@@ -57,6 +57,8 @@ public class readMailActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_msgread);
+
+        browser = new SuperT411HttpBrowser(getApplicationContext());
 
         mD = new mailDeleter();
         mA = new mailArchiver();
@@ -155,14 +157,13 @@ public class readMailActivity extends ActionBarActivity {
                         .ignoreContentType(true).execute();
 
                 doc = res.parse();*/
-                doc = Jsoup.parse(
-                        new SuperT411HttpBrowser(getApplicationContext())
-                        .login(username, password)
-                        .connect(Default.URL_MESSAGE_DEL + id)
-                        .executeInAsyncTask()
-                );
+                //doc = Jsoup.parse(
+                        browser.login(username, password)
+                                .connect(Default.URL_MESSAGE_DEL + id)
+                                .executeInAsyncTask();
+                //);
 
-                t411message = doc.select("#messages").first().text();
+                t411message = browser.getFadeMessage();
             } catch (Exception ex) {
                 Log.e("Archivage message", ex.toString());
             }

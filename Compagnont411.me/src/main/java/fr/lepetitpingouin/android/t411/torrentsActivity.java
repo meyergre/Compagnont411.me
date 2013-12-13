@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOutOfMemoryException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -272,11 +273,7 @@ public class torrentsActivity extends ActionBarActivity {
                 new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID")).unbookmark();
                 return true;
             case R.id.torrent_context_menu_share:
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, Default.URL_GET_PREZ + itemMmap.get("ID") + "\n\n-\n" + getApplicationContext().getString(R.string.shareSignature));
-                share.putExtra(Intent.EXTRA_SUBJECT, "[t411] " + itemMmap.get("nom"));
-                startActivity(Intent.createChooser(share,getApplicationContext().getString(R.string.Share)));
+                new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID")).share();
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -618,6 +615,7 @@ public class torrentsActivity extends ActionBarActivity {
                             map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
                             map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", ""))));
                             listItem.add(map);
+                            Log.d("map", "+1");
 
                         } catch (Exception e) {
                         }
@@ -646,7 +644,11 @@ public class torrentsActivity extends ActionBarActivity {
                     }, 1000);
                 }
                 dialog.cancel();
-            } catch (Exception e) {
+            } catch (SQLiteOutOfMemoryException oome) {
+                Toast.makeText(getApplicationContext(), "La mémoire de votre périphérique est insuffisante pour traiter cette requête.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            catch (Exception e) {
                 Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();
                 finish();
             }

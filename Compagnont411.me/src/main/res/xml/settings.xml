@@ -68,7 +68,7 @@
                 <EditTextPreference
                     android:key="User-Agent"
                     android:title="User-Agent"
-                    android:summary="Définir le User-Agent utilisé par le névigateur interne" />
+                    android:summary="Définir le User-Agent utilisé par le navigateur interne" />
                     <!--android:defaultValue="Android (Compagnon t411 internal browser)"-->
 
                 <EditTextPreference
@@ -142,7 +142,7 @@
         android:title="@string/search_and_download"
         android:icon="@drawable/ic_settings_searchdl">
 
-        <PreferenceCategory android:title="@string/search">
+        <PreferenceCategory android:title="@string/search_results">
 
             <CheckBoxPreference
                 android:key="hadopi"
@@ -151,9 +151,9 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference
-                android:key="dlModeRedirect"
-                android:title="@string/download_redirect"
-                android:summary="@string/description_downloadredirect"
+                android:key="shareDirectLink"
+                android:title="@string/share_direct_link"
+                android:summary="@string/description_share_direct_link"
                 android:defaultValue="false" />
 
         </PreferenceCategory>
@@ -166,7 +166,37 @@
                 android:key="savePath"
                 />
 
+            <CheckBoxPreference
+                android:key="openAfterDl"
+                android:title="@string/open_after_dl"
+                android:summary="@string/description_open_after_dl"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference
+                android:key="openAfterDlCancelNotify"
+                android:title="@string/open_after_dl_cancelNotify"
+                android:summary="@string/description_open_after_dl_cancelNotify"
+                android:dependency="openAfterDl"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference
+                android:key="addMimeType"
+                android:title="@string/settings_addMime"
+                android:summary="@string/description_settings_addMime"
+                android:defaultValue="true" />
+
         </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/misc">
+
+            <CheckBoxPreference
+                android:key="dlModeRedirect"
+                android:title="@string/download_redirect"
+                android:summary="@string/description_downloadredirect"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
+
 
     </PreferenceScreen>
 

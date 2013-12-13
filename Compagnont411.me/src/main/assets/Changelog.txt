@@ -3,6 +3,21 @@ CHANGELOG
 (Versionnement : ANNEE {point} MOIS {tiret} build)
 
 --
+2013.12-96
+- Possibilité de forcer ou non le type MIME lors de l'ouverture d'un torrent
+- Possibilité d'envoyer le lien direct vers le torrent dans le message de partage
+- Simplification de l'interface de la page de téléchargement
+- Amélioration de la lisibilité du titre des torrents dans les résultats de recherche
+- Corrections diverses dans les textes des messages
+
+
+2013.12-95
+- Redirection vers youtube des vidéos en IFRAME dans les prez
+- Option pour ouvrir directement un torrent après un téléchargement
+- Rétablissement des messages d'erreur de connexion
+- Correction des plantages à l'envoi de MP
+
+
 2013.11-94
 - Correction du nom du torrent affiché lors d'un téléchargement depuis la liste des résultats
 - Correction des info-bulles vides lors de l'ajout aux futurs téléchargements
