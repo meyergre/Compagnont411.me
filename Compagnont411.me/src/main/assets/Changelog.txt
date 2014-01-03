@@ -3,6 +3,24 @@ CHANGELOG
 (Versionnement : ANNEE {point} MOIS {tiret} build)
 
 --
+2014.01-99/100
+- Correction du chargement des top torrents
+- Correction du chargement des uploads
+- Affichage de la progression lors du chargement des résultats de recherche
+
+
+2014.01-98
+- Corrections diverses pour android < 2.3.3
+- Corrections de l'affichage du contenu des messages
+
+
+2013.12-97
+- Correction des traductions (anglais)
+- Correction de fautes de frappes
+- Recompilation avec le dernier SDK (v19, KitKat)
+- Corrections diverses
+
+
 2013.12-96
 - Possibilité de forcer ou non le type MIME lors de l'ouverture d'un torrent
 - Possibilité d'envoyer le lien direct vers le torrent dans le message de partage

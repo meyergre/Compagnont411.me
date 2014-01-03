@@ -5,7 +5,8 @@
     <!-- Start of Light KitKat theme -->
 
     <style name="CustomActionBarLightTheme"
-        parent="@style/Theme.AppCompat.Light">
+        parent="@style/Theme.Base.AppCompat.Light">
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:actionBarStyle">@style/MyLightActionBar</item>
 
         <!-- Support library compatibility -->

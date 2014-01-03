@@ -68,12 +68,12 @@
                 <EditTextPreference
                     android:key="User-Agent"
                     android:title="User-Agent"
-                    android:summary="Définir le User-Agent utilisé par le navigateur interne" />
-                    <!--android:defaultValue="Android (Compagnon t411 internal browser)"-->
+                    android:summary="Définir le User-Agent utilisé par le navigateur interne"
+                    android:defaultValue="Android (Compagnon t411 internal browser)" />
 
                 <EditTextPreference
-                    android:title="Timeout"
                     android:key="timeoutValue"
+                    android:title="Timeout"
                     android:summary="Définir le délai avant l'abandon de le connexion"
                     android:defaultValue="10"
                     android:numeric="integer"/>
@@ -161,9 +161,9 @@
         <PreferenceCategory android:title="@string/download">
 
             <Preference
+                android:key="savePath"
                 android:title="@string/save_path"
                 android:summary="Définir le chemin de téléchargement"
-                android:key="savePath"
                 />
 
             <CheckBoxPreference

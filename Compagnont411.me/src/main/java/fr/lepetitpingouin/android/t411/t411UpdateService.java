@@ -153,7 +153,7 @@ public class t411UpdateService extends Service {
         browser = new SuperT411HttpBrowser(getApplicationContext());
         doc = Jsoup.parse(browser.login(login, password).connect(url).executeInAsyncTask());
 
-        if (doc.title().contains("503"))
+        if (doc.select("title").contains("503"))
             doNotify(R.drawable.ic_maintenance, "Maintenance", "t411 est actuellement indisponible.", 411, null);
         else
             cancelNotify(411);
@@ -486,33 +486,21 @@ public class t411UpdateService extends Service {
 
                 if (doc != null) {
                     edit = prefs.edit();
-                    edit.putString("title1", doc.select(".newsWrapper .title")
-                            .get(0).text());
-                    edit.putString("article1",
-                            doc.select(".newsWrapper .announce").get(0).html());
+                    edit.putString("title1", doc.select(".newsWrapper .title").get(0).text());
+                    edit.putString("article1",doc.select(".newsWrapper .announce").get(0).html());
                     edit.putString("readMore1", url + doc.select(".newsWrapper .readmore").get(0).attr("href"));
                     edit.commit();
                     Log.d("news", "OK");
                     edit = prefs.edit();
-                    edit.putString("title2", doc.select(".newsWrapper  .title")
-                            .get(1).text());
-                    edit.putString("article2",
-                            doc.select(".newsWrapper  .announce").get(1).html());
-                    edit.putString("readMore2",
-                            url
-                                    + doc.select(".newsWrapper  .readmore")
-                                    .get(1).attr("href"));
+                    edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
+                    edit.putString("article2",doc.select(".newsWrapper  .announce").get(1).html());
+                    edit.putString("readMore2",url+ doc.select(".newsWrapper  .readmore").get(1).attr("href"));
                     edit.commit();
                     Log.d("news", "OK");
                     edit = prefs.edit();
-                    edit.putString("title3", doc.select(".newsWrapper  .title")
-                            .get(2).text());
-                    edit.putString("article3",
-                            doc.select(".newsWrapper  .announce").get(2).html());
-                    edit.putString("readMore3",
-                            url
-                                    + doc.select(".newsWrapper  .readmore")
-                                    .get(2).attr("href"));
+                    edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
+                    edit.putString("article3",doc.select(".newsWrapper  .announce").get(2).html());
+                    edit.putString("readMore3",url+ doc.select(".newsWrapper  .readmore").get(2).attr("href"));
                     edit.commit();
                     Log.d("news", "OK");
                 }
@@ -564,8 +552,10 @@ public class t411UpdateService extends Service {
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true).execute();
                 doc = res.parse(); */
 
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext()).login(username, password).connect(url + prefs.getString("usernumber", "0")).executeInAsyncTask());
-
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(url + prefs.getString("usernumber", "0"))
+                        .executeInAsyncTask());
 
                 try {
                     pagecontent = "<html><head>"

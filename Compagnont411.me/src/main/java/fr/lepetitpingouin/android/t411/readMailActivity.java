@@ -286,11 +286,6 @@ public class readMailActivity extends ActionBarActivity {
 
                 message = message+messageBody;
 
-                final String mimeType = "text/html";
-                final String encoding = "utf-8";
-
-                tvmsg.loadDataWithBaseURL(null, message, mimeType, encoding, "");
-
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
             }
@@ -300,6 +295,9 @@ public class readMailActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            final String mimeType = "text/html";
+            final String encoding = "utf-8";
+            tvmsg.loadDataWithBaseURL(null, message, mimeType, encoding, "");
             dialog.dismiss();
             if(messageBody == null) {
                 Toast.makeText(getApplicationContext(), getString(R.string.noConError), Toast.LENGTH_SHORT).show();

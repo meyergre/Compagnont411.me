@@ -1,13 +1,13 @@
 <manifest
     package="fr.lepetitpingouin.android.t411"
-    android:versionCode="96"
-    android:versionName="2013.12-96"
+    android:versionCode="100"
+    android:versionName="2014.01-100"
     android:installLocation="auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,6 +19,8 @@
 
     <application
         android:icon="@drawable/ic_newlauncher"
+        android:largeHeap="true"
+        android:vmSafeMode="true"
         android:label="@string/app_name"
         android:debuggable="false"
         android:theme="@style/CustomActionBarTheme">
@@ -214,8 +216,7 @@
             android:label="@string/title_savePath"
             android:allowTaskReparenting="true"
             android:parentActivityName=".UserPrefsActivity"
-            android:theme="@style/CustomActionBarLightTheme"
-            android:icon="@drawable/folder"/>
+            android:theme="@style/CustomActionBarLightTheme" />
 
         <activity android:name=".NfoActivity" />
         <activity android:name=".ChatiActivity" />

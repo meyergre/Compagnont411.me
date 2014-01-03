@@ -305,6 +305,9 @@ public class SearchActivity extends ActionBarActivity {
                 String url = Default.URL_SEARCH
                         + map.get("code");
 
+                fF = null;
+                scF = null;
+
                 if (prefs.getBoolean("useHTTPS", false))
                     url = url.replace("http://", "https://");
 

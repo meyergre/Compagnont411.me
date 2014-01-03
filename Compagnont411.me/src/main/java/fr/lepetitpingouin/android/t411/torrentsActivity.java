@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteOutOfMemoryException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -305,8 +304,11 @@ public class torrentsActivity extends ActionBarActivity {
     }
 
     public void update() {
-        dialog = ProgressDialog.show(this, "t411.me",
-                this.getString(R.string.pleasewait), true, true);
+        try {
+            dialog = ProgressDialog.show(this, "t411.me", this.getString(R.string.pleasewait), true, true);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         mF = new torrentFetcher();
         try {
             mF.execute();
@@ -331,26 +333,6 @@ public class torrentsActivity extends ActionBarActivity {
                     .getString("password", "");
 
             try {
-                /*res = Jsoup
-                        .connect(Default.URL_LOGIN)
-                        .data("login", username, "password", password)
-                        .method(Connection.Method.POST)
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .execute();
-
-                Cookies = res.cookies();
-
-                doc = Jsoup
-                        .connect(Default.URL_UNFAVORITE)
-                        .cookies(Cookies)
-                        .data("submit", "Supprimer")
-                        .data("ids[]", id)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .execute().parse();
-
-                msg = doc.select("#messages ").first().text();*/
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
@@ -391,39 +373,6 @@ public class torrentsActivity extends ActionBarActivity {
         protected Void doInBackground(Void... voids) {
 
             try {
-                /*
-                res = Jsoup
-                        .connect(Default.URL_LOGIN)
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .execute();
-
-                mCookies = res.cookies();
-
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        try {
-                            res = Jsoup
-                                    .connect(Default.URL_SEARCH_SAVE + (connectUrl.substring(connectUrl.lastIndexOf("=")) + "&order=" + order + "&type=" + type))
-                                    .header("Content-Type", "application/x-www-form-urlencoded")
-                                    .header("Referer", connectUrl)
-                                    .header("Cookie", mCookies.toString().replace("{", "").replace("}", ""))
-                                    .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                    .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                                    .data("submit", "Valider", "name", name)
-                                    .method(Method.POST)
-                                    .execute();
-                        } catch (Exception e) {
-                        }
-                    }
-                }, 999);
-
-                doc = res.parse();
-                */
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
                         .connect(Default.URL_SEARCH_SAVE + (connectUrl.substring(connectUrl.lastIndexOf("=")) + "&order=" + order + "&type=" + type))
@@ -449,13 +398,14 @@ public class torrentsActivity extends ActionBarActivity {
         }
     }
 
-    private class torrentFetcher extends AsyncTask<Void, String[], Void> {
+    private class torrentFetcher extends AsyncTask<Void, Integer, Void> {
 
         Connection.Response res = null;
         Document doc = null;
 
         @Override
         protected void onPreExecute() {
+            dialog.setMessage(getString(R.string.connecting));
             super.onPreExecute();
         }
 
@@ -477,25 +427,6 @@ public class torrentsActivity extends ActionBarActivity {
 
                 url += "&order=" + order + "&type=" + type + "&page=" + paginator;
 
-                /*
-                res = Jsoup.connect(url)
-                        .cookies(Jsoup
-                                .connect(Default.URL_LOGIN)
-                                .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
-                                .method(Connection.Method.POST)
-                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-
-                                .maxBodySize(0).followRedirects(true).ignoreContentType(true).execute().cookies())
-                        .method(Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .execute();
-
-                doc = res.parse();
-                */
-
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(prefs.getString("login", ""), prefs.getString("password", ""))
                         .connect(url)
@@ -505,122 +436,146 @@ public class torrentsActivity extends ActionBarActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //dialog.cancel();
+
+            try {
+                map = new HashMap<String, String>();
+                map.put("icon", String.valueOf(R.drawable.ic_new_t411));
+                map.put("name", "-- Tout --");
+                map.put("code", "");
+                catListItem.add(map);
+
+                for (Element hCat : doc.select("h3")) {
+                    map = new HashMap<String, String>();
+                    map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("img").first().attr("class").substring(4)).getIcon()));
+                    map.put("name", hCat.text());
+                    map.put("code", hCat.nextElementSibling().select("img").last().attr("class").substring(4));
+                    catListItem.add(map);
+                }
+
+                for (Element page : doc.select(".pagebar").select("a")) {
+                    if (!page.hasAttr("rel")) {
+                        map = new HashMap<String, String>();
+                        map.put("icon", String.valueOf(R.drawable.file));
+                        map.put("name", page.text());
+                        map.put("code", page.attr("href").substring(page.attr("href").lastIndexOf("=") + 1));
+                        pageListItem.add(map);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Element elmtPrev = doc.select(".pagebar a").first();
+                strPrev = null;
+                if (elmtPrev.hasAttr("rel")) {
+                    strPrev = elmtPrev.attr("href").substring(elmtPrev.attr("href").lastIndexOf("=") + 1);
+                    prev = (ImageButton) findViewById(R.id.navbtn_prev);
+                    prev.setVisibility(View.VISIBLE);
+                }
+
+                Element elmtNext = doc.select(".pagebar a").last();
+                strNext = null;
+                if (elmtNext.hasAttr("rel")) {
+                    strNext = elmtNext.attr("href").substring(elmtNext.attr("href").lastIndexOf("=") + 1);
+                    next = (ImageButton) findViewById(R.id.navbtn_next);
+                    next.setVisibility(View.VISIBLE);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            int base = connectUrl.equals(Default.URL_BOOKMARKS) ? 1 : 0;
+
+            int count = 0;
+
+            for (Element table : doc.select("table.results tbody")) {
+                for (Element row : table.select("tr")) {
+                    Elements tds = row.select("td");
+
+                    String catCode = tds.get(base + 0).select(".category img").first().attr("class").replace("cat-", "");
+
+                    try {
+                        publishProgress(++count);
+                        map = new HashMap<String, String>();
+                        map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
+                        map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
+                        map.put("age", tds.get(base + 4).text());
+                        map.put("taille", new BSize(tds.get(base + 5).text()).convert());
+                        map.put("avis", tds.get(base + 3).text());
+                        map.put("seeders", tds.get(base + 7).text());
+                        map.put("leechers", tds.get(base + 8).text());
+                        map.put("uploader", tds.get(base + 1).select("dd > a.profile").text());
+                        map.put("completed", tds.get(base + 6).text());
+                        map.put("cat", catCode);
+
+                        String tSize = tds.get(base + 5).text();
+                        double estimatedDl = new BSize(prefs.getString("lastDownload", "? 0.00 GB")).getInMB() + new BSize(tSize).getInMB();
+                        String estimatedRatio = String.format("%.2f", (new BSize(prefs.getString("lastUpload", "? 0.00 GB")).getInMB() / estimatedDl) - 0.01);
+
+                        map.put("ratio", estimatedRatio);
+                        map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
+                        map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", ""))));
+                        listItem.add(map);
+
+                    } catch (Exception e) {
+                    }
+                }
+            }
 
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... value) {
+            try {
+                dialog.setMessage(value[0] + " " + getString(R.string.torrents_found));
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+
+            super.onProgressUpdate();
         }
 
         @Override
         protected void onPostExecute(Void result) {
 
             try {
-                try {
+                mSchedule = new SimpleAdapter(
+                        getBaseContext(), catListItem,
+                        R.layout.item_searchoptions, new String[]{"icon", "name",
+                        "code"}, new int[]{R.id.lso_icon,
+                        R.id.lso_title, R.id.lso_code});
 
-                    map = new HashMap<String, String>();
-                    map.put("icon", String.valueOf(R.drawable.ic_new_t411));
-                    map.put("name", "-- Tout --");
-                    map.put("code", "");
-                    catListItem.add(map);
+                catList.setAdapter(mSchedule);
 
-                    for (Element hCat : doc.select("h3")) {
-                        map = new HashMap<String, String>();
-                        map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("img").first().attr("class").substring(4)).getIcon()));
-                        map.put("name", hCat.text());
-                        map.put("code", hCat.nextElementSibling().select("img").last().attr("class").substring(4));
-                        catListItem.add(map);
-                    }
+                pageName = doc.select(".pagebar").select("span").first().text();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
 
-                    mSchedule = new SimpleAdapter(
-                            getBaseContext(), catListItem,
-                            R.layout.item_searchoptions, new String[]{"icon", "name",
-                            "code"}, new int[]{R.id.lso_icon,
-                            R.id.lso_title, R.id.lso_code});
+            try {
+                mSchedule = new SimpleAdapter(
+                        getBaseContext(), pageListItem,
+                        R.layout.item_searchoptions, new String[]{"icon", "name",
+                        "code"}, new int[]{R.id.lso_icon,
+                        R.id.lso_title, R.id.lso_code});
 
-                    catList.setAdapter(mSchedule);
+                PagesList.setAdapter(mSchedule);
+                navbar.setVisibility(PagesList.getCount() > 0 ? View.VISIBLE : View.GONE);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
 
-                    pageName = doc.select(".pagebar").select("span").first().text();
+            try {
+                TextView tv = (TextView) findViewById(R.id.navbar_pagesText);
+                tv.setText(pageName);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                    for (Element page : doc.select(".pagebar").select("a")) {
-                        if (!page.hasAttr("rel")) {
-                            map = new HashMap<String, String>();
-                            map.put("icon", String.valueOf(R.drawable.file));
-                            map.put("name", page.text());
-                            map.put("code", page.attr("href").substring(page.attr("href").lastIndexOf("=") + 1));
-                            pageListItem.add(map);
-                        }
-                    }
-
-                    try {
-                        Element elmtPrev = doc.select(".pagebar a").first();
-                        strPrev = null;
-                        if (elmtPrev.hasAttr("rel")) {
-                            strPrev = elmtPrev.attr("href").substring(elmtPrev.attr("href").lastIndexOf("=") + 1);
-                            prev = (ImageButton) findViewById(R.id.navbtn_prev);
-                            prev.setVisibility(View.VISIBLE);
-                        }
-
-                        Element elmtNext = doc.select(".pagebar a").last();
-                        strNext = null;
-                        if (elmtNext.hasAttr("rel")) {
-                            strNext = elmtNext.attr("href").substring(elmtNext.attr("href").lastIndexOf("=") + 1);
-                            next = (ImageButton) findViewById(R.id.navbtn_next);
-                            next.setVisibility(View.VISIBLE);
-                        }
-
-                        mSchedule = new SimpleAdapter(
-                                getBaseContext(), pageListItem,
-                                R.layout.item_searchoptions, new String[]{"icon", "name",
-                                "code"}, new int[]{R.id.lso_icon,
-                                R.id.lso_title, R.id.lso_code});
-
-                        PagesList.setAdapter(mSchedule);
-                        navbar.setVisibility(PagesList.getCount() > 0 ? View.VISIBLE : View.GONE);
-
-                        TextView tv = (TextView) findViewById(R.id.navbar_pagesText);
-                        tv.setText(pageName);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                int base = connectUrl.equals(Default.URL_BOOKMARKS) ? 1 : 0;
-
-                for (Element table : doc.select("table.results tbody")) {
-                    for (Element row : table.select("tr")) {
-                        Elements tds = row.select("td");
-
-                        String catCode = tds.get(base + 0).select(".category img").first().attr("class").replace("cat-", "");
-
-                        try {
-                            map = new HashMap<String, String>();
-                            map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
-                            map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
-                            map.put("age", tds.get(base + 4).text());
-                            map.put("taille", new BSize(tds.get(base + 5).text()).convert());
-                            map.put("avis", tds.get(base + 3).text());
-                            map.put("seeders", tds.get(base + 7).text());
-                            map.put("leechers", tds.get(base + 8).text());
-                            map.put("uploader", tds.get(base + 1).select("dd > a.profile").text());
-                            map.put("completed", tds.get(base + 6).text());
-                            map.put("cat", catCode);
-
-                            String tSize = tds.get(base + 5).text();
-                            double estimatedDl = new BSize(prefs.getString("lastDownload", "? 0.00 GB")).getInMB() + new BSize(tSize).getInMB();
-                            String estimatedRatio = String.format("%.2f", (new BSize(prefs.getString("lastUpload", "? 0.00 GB")).getInMB() / estimatedDl) - 0.01);
-
-                            map.put("ratio", estimatedRatio);
-                            map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
-                            map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", ""))));
-                            listItem.add(map);
-                            Log.d("map", "+1");
-
-                        } catch (Exception e) {
-                        }
-                    }
-                }
+            try {
 
                 mTorrentsAdapter = new SimpleAdapter(
                         torrentsActivity.this.getBaseContext(), listItem,
@@ -634,19 +589,20 @@ public class torrentsActivity extends ActionBarActivity {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();
                 }
 
+                Handler handler = new Handler();
                 if (maListViewPerso.getCount() < 1) {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_result), Toast.LENGTH_LONG).show();
-                    Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             finish();
                         }
                     }, 1000);
                 }
-                dialog.cancel();
-            } catch (SQLiteOutOfMemoryException oome) {
-                Toast.makeText(getApplicationContext(), "La mémoire de votre périphérique est insuffisante pour traiter cette requête.", Toast.LENGTH_LONG).show();
-                finish();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        dialog.cancel();
+                    }
+                }, 500);
             }
             catch (Exception e) {
                 Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();

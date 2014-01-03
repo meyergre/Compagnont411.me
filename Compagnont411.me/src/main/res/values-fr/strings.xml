@@ -265,7 +265,7 @@
     <string name="support_the_dev">Soutenez le développeur !</string>
     <string name="bitcoinCopied">Mon adresse Bitcoin a été copiée dans votre presse-papier !</string>
     <string name="open_after_dl">Ouverture automatique</string>
-    <string name="description_open_after_dl">Ouvrir automatiquement les fichiers une fois le téléchargement terminé, sans passer par une notivication</string>
+    <string name="description_open_after_dl">Ouvrir automatiquement les fichiers une fois le téléchargement terminé, sans passer par une notification</string>
     <string name="open_after_dl_cancelNotify">Effacer la notification</string>
     <string name="description_open_after_dl_cancelNotify">Effacer la notification de téléchargement terminé</string>
     <string name="misc">Divers</string>
@@ -274,6 +274,8 @@
     <string name="description_settings_addMime">Forcer le type MIME du torrent lors de la commande d\'ouverture du fichier (application/x-bittorrent)</string>
     <string name="share_direct_link">Partager le torrent</string>
     <string name="description_share_direct_link">Partager le lien direct vers le .torrent plutôt que le lien vers la prez (nécessite que le destinataire soit connecté à t411).</string>
+    <string name="torrents_found">torrents trouvés</string>
+    <string name="connecting">Chargement de la page...</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

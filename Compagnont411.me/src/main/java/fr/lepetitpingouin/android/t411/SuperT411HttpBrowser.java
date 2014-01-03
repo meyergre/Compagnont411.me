@@ -36,6 +36,8 @@ public class SuperT411HttpBrowser {
 
     SharedPreferences prefs;
 
+    String encoding = "windows-1525";
+
     String username, password, url, errorMessage = "", fadeMessage = "";
 
     List<NameValuePair> data = new ArrayList<NameValuePair>(9);
@@ -69,6 +71,11 @@ public class SuperT411HttpBrowser {
         Log.d("SuperT411HttpBrowser", "login");
         this.username = username;
         this.password = password;
+        return this;
+    }
+
+    public SuperT411HttpBrowser setEncoding(String encoding) {
+        this.encoding = encoding;
         return this;
     }
 
@@ -170,8 +177,8 @@ public class SuperT411HttpBrowser {
         HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout))*1000);
         HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout))*1000);
 
-
         HttpPost httppost = new HttpPost(Default.URL_LOGIN);
+        httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
         HttpResponse response;
         String responseString = null;
@@ -226,7 +233,7 @@ public class SuperT411HttpBrowser {
             StatusLine statusLine = response.getStatusLine();
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                 //responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-                responseString = EntityUtils.toString(response.getEntity(), "windows-1252");
+                responseString = EntityUtils.toString(response.getEntity(), encoding);
             } else{
                 //Closes the connection.
                 response.getEntity().getContent().close();

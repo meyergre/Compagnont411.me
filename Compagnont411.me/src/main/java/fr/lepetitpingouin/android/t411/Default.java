@@ -42,9 +42,9 @@ public class Default {
     public static String URL_BOOKMARKS = "http://www.t411.me/my/bookmarks/";
     public static String URL_BOOKMARK = "http://www.t411.me/my/bookmarks/?add="; //+ ID
     public static String URL_UNBOOKMARK = "http://www.t411.me/my/bookmarks/"; // Authentification requise au préalable
-    public static String URL_SEARCH_SAVE = "http://www.t411.me/my/search-save/?search="; //+ ID // Authentification requise au préalable
-    public static String URL_SEARCH_GET = "http://www.t411.me/my/search";
-    public static String URL_UNFAVORITE = "http://www.t411.me/my/search-delete"; // Authentification requise au préalable
+    public static String URL_SEARCH_SAVE = "http://www.t411.me/my/search-save/"; //+ ID // Authentification requise au préalable
+    public static String URL_SEARCH_GET = "http://www.t411.me/my/search/";
+    public static String URL_UNFAVORITE = "http://www.t411.me/my/search-delete/"; // Authentification requise au préalable
     public static String URL_SENDMAIL = "http://www.t411.me/mailbox/compose/"; // Authentification requise au préalable
     public static final String URL_STATS = "http://www.t411.me/users/daily-stats/?id=";
     public static String URL_UPLOADS = "http://www.t411.me/my/torrents/?order=added&type=desc";

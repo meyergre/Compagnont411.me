@@ -45,8 +45,8 @@ public class MainActivity extends ActionBarActivity {
 
     WebView www;
 
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -113,6 +113,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -123,7 +130,12 @@ public class MainActivity extends ActionBarActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         mDrawerLayout = (android.support.v4.widget.DrawerLayout)findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, R.drawable.ic_actionbar_menu, 0, 0) {
+        mDrawerToggle = new ActionBarDrawerToggle(
+                MainActivity.this,
+                mDrawerLayout,
+                R.drawable.ic_actionbar_menu,
+                R.string.app_name,
+                R.string.app_name) {
             public void onDrawerClosed(View view) {
                 ActivityCompat.invalidateOptionsMenu(MainActivity.this); // creates call to onPrepareOptionsMenu()
             }
@@ -134,8 +146,8 @@ public class MainActivity extends ActionBarActivity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         getSupportActionBar().setSubtitle(prefs.getString("lastDate", ""));
 

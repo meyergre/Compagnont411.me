@@ -20,7 +20,6 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Map;
 
 public class Torrent {
@@ -45,6 +44,7 @@ public class Torrent {
         try {
             tDL.execute();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -225,6 +225,7 @@ public class Torrent {
 
     private class torrentFileGetter extends AsyncTask<Void, String[], Void> {
 
+        Connection.Response resTorrent;
         byte[] torrentFileContent;
 
         @Override
@@ -235,34 +236,32 @@ public class Torrent {
         @Override
         protected Void doInBackground(Void... arg0) {
 
-            String username = prefs.getString("login", ""), password = prefs
-                    .getString("password", "");
-
-            Connection.Response resTorrent = null;
+            String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
             try {
-
-                resTorrent = Jsoup
-                        .connect(Default.URL_GET_TORRENT + id)
+                resTorrent = Jsoup.connect(Default.URL_GET_TORRENT + id)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                        //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
                         .cookies(Jsoup
                                 .connect(Default.URL_LOGIN)
-                                .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
+                                .data("login", username, "password", password)
                                 .method(Connection.Method.POST)
-                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT)).timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                                .maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                                //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
+                                .maxBodySize(0)
+                                .followRedirects(true)
+                                .ignoreContentType(true)
                                 .execute().cookies())
-                        .ignoreContentType(true).execute();
+                        .execute();
 
                 torrentFileContent = resTorrent.bodyAsBytes();
-
-
+                Log.e("torrentFileContent's length", torrentFileContent.toString());
 
             } catch (Exception e) {
+                e.printStackTrace();
             }
 
             return null;
@@ -271,13 +270,19 @@ public class Torrent {
         @Override
         protected void onPostExecute(Void result) {
 
+
             String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
 
-            File file = new File(path + File.separator + name.replaceAll("/", "-") + ".torrent");
+            File file = new File(path, name.replaceAll("/", "_") + ".torrent");
+            file.setWritable(true, false);
 
-            try { file.createNewFile(); } catch (Exception e) {}
+            Log.e("PATH", file.getAbsolutePath());
+            Log.e("PATH", Environment.getExternalStorageDirectory().getPath());
+
+            try { file.createNewFile(); } catch (Exception e) {e.printStackTrace();}
             try {
-                OutputStream fo = new FileOutputStream(file);
+
+                FileOutputStream fo = new FileOutputStream(file);
                 fo.write(torrentFileContent);
                 fo.close();
 
@@ -308,12 +313,14 @@ public class Torrent {
                 i.setClass(context, UserPrefsActivity.class);
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
+                e.printStackTrace();
             } catch (Exception e) {
                 Intent i = new Intent();
                 i.setClass(context, UserPrefsActivity.class);
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
                 if (file.exists() && file.length() == 0) {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
+                    e.printStackTrace();
                 } else if (!file.exists()) {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nImpossible de créer le fichier.", Integer.valueOf(id), pI);
                 } else {

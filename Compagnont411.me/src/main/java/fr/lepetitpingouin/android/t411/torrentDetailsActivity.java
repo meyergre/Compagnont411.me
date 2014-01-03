@@ -533,7 +533,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 if (note > 4.7)
                     star5.setImageResource(R.drawable.ic_star_on);
             } catch (Exception e) {
-                details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + doc.select(".block > p").first().text(), mimeType, encoding, "");
+                //details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + doc.select(".block").first().text(), mimeType, encoding, "");
+                details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + e.getMessage(), mimeType, encoding, "");
             }
 
             dialog.dismiss();

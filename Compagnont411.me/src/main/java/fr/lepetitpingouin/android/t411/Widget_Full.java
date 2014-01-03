@@ -28,15 +28,6 @@ public class Widget_Full extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_full2);
-            if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 22
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 27)
-                views.setImageViewResource(R.id.topLogo, R.drawable.ic_xmas);
-
-            if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 0
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 23)
-                views.setImageViewResource(R.id.topLogo, R.drawable.ic_xmastree);
 
             views.setImageViewResource(R.id.hLED_T411, LED_T411);
             views.setImageViewResource(R.id.hLED_NETWORK, LED_Net);
@@ -106,6 +97,16 @@ public class Widget_Full extends AppWidgetProvider {
             views.setImageViewResource(R.id.topLogo, R.drawable.t411_search_icon);
 
             views.setImageViewBitmap(R.id.topLogo, new AvatarFactory().getFromPrefs(prefs));
+
+            if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
+                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 0
+                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 23)
+                views.setImageViewResource(R.id.topLogo, R.drawable.ic_xmastree);
+
+            if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
+                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 22
+                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 27)
+                views.setImageViewResource(R.id.topLogo, R.drawable.ic_xmas);
 
             /*if (prefs.getBoolean("useHTTPS", false)) {
                 views.setImageViewResource(R.id.topLogo, R.drawable.ic_padlock);
