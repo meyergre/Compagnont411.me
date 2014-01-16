@@ -1,7 +1,7 @@
 <manifest
     package="fr.lepetitpingouin.android.t411"
-    android:versionCode="100"
-    android:versionName="2014.01-100"
+    android:versionCode="101"
+    android:versionName="2014.01-101"
     android:installLocation="auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -168,8 +168,13 @@
             android:configChanges="orientation|keyboard|keyboardHidden"
             android:parentActivityName=".MainActivity"
             android:exported="true"/>
-        <activity android:name="ComposeMessageActivity"
-            android:icon="@drawable/ic_launcher_messages" />
+        <activity android:name="ComposeMessageActivity" android:icon="@drawable/ic_launcher_messages" >
+            <intent-filter android:label="@string/sendPM">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*"/>
+            </intent-filter>
+        </activity>
         <activity android:name="CalculatorActivity" />
         <activity
             android:name=".torrentDetailsActivity"
@@ -183,19 +188,19 @@
                 <data
                     android:host="t411.me"
                     android:scheme="http"
-                    android:pathPrefix="/torrents/torrents/" />
+                    android:pathPrefix="/torrents/" />
                 <data
                     android:host="www.t411.me"
                     android:scheme="http"
-                    android:pathPrefix="/torrents/torrents/" />
+                    android:pathPrefix="/torrents/" />
                 <data
                     android:host="t411.me"
                     android:scheme="https"
-                    android:pathPrefix="/torrents/torrents/" />
+                    android:pathPrefix="/torrents/" />
                 <data
                     android:host="www.t411.me"
                     android:scheme="https"
-                    android:pathPrefix="/torrents/torrents/" />
+                    android:pathPrefix="/torrents/" />
             </intent-filter>
         </activity>
         <activity

@@ -78,13 +78,12 @@ public class MainActivity extends ActionBarActivity {
     public void onDestroy() {
         super.onDestroy();
 
+        trimCache(this);
         try {
-            trimCache(this);
             unregisterReceiver(receiver);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void trimCache(Context context) {
@@ -196,7 +195,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        final Dialog dialogTOP = new Dialog(this);
+        final Dialog dialogTOP = new Dialog(this, R.style.MyDialogTheme);
         dialogTOP.setContentView(R.layout.dialog_listview);
         dialogTOP.setTitle(getString(R.string.top_100));
 
@@ -339,7 +338,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // Perform action on click
                 Intent myIntent = new Intent(MainActivity.this, UserPrefsActivity.class);
-                myIntent.putExtra("advanced", false);
                 MainActivity.this.startActivity(myIntent);
             }
         });

@@ -92,18 +92,32 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
         getSupportActionBar().setIcon(getIntent().getIntExtra("icon", R.drawable.ic_new_t411));
 
+        dialog.show();
+
         torrent_URL = getIntent().getStringExtra("url");
         torrent_Name = getIntent().getStringExtra("nom");
         torrent_ID = getIntent().getStringExtra("ID");
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             torrent_URL = getIntent().getData().toString();
-            torrent_ID = torrent_URL.split("=")[1];
-            torrent_Name = torrent_ID;
+
+            //test
+
+            String htmlpage = new SuperT411HttpBrowser(getApplicationContext()).connect(torrent_URL).execute();
+            String href = Jsoup.parse(htmlpage).select(".shortlink").attr("href").toString();
+            String _id = href.substring(href.lastIndexOf("/")+1);
+            String _title = Jsoup.parse(htmlpage).select("span:has(a.shortlink)").html().replaceAll("<a\\b[^>]+>([^<]*(?:(?!</a)<[^<]*)*)</a>", "").toString();
+
+            //test
+
+            //torrent_ID = torrent_URL.split("=")[1];
+            torrent_ID = _id;
+                    //torrent_Name = torrent_ID;
+            torrent_Name = _title;
             //Toast.makeText(getApplicationContext(),torrent_URL, Toast.LENGTH_SHORT).show();
         }
 
-        getSupportActionBar().setTitle(torrent_Name);
+        //getSupportActionBar().setTitle(torrent_Name);
 
         btnShare = (ImageView) findViewById(R.id.btnTorrentShare);
         btnShare.setOnClickListener(new View.OnClickListener() {
@@ -236,7 +250,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
         String tdt_seeders, tdt_leechers, tdt_note, tdt_votes, tdt_complets, tdt_taille;
         double note = 0;
 
-        String prez = "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />Erreur lors de la récupération des données...";
+        String prez = "<meta name=\"viewport\" content=\"width=400; user-scalable=no\" />Erreur lors de la récupération des données...";
         String tduploader = "";
 
         Connection.Response res = null;
@@ -474,8 +488,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
             details_www.loadDataWithBaseURL(null, prez, mimeType, encoding, "");
 
             try {
-
-                getSupportActionBar().setSubtitle(tduploader.toString());
+                getSupportActionBar().setTitle("Prez "+(tduploader.toString().length()>0?"("+tduploader.toString()+")":""));
+                getSupportActionBar().setSubtitle(torrent_Name);
 
                 tdt_seeders = doc.select(".details table tr td.up").first().text();
                 tdt_leechers = doc.select(".details table tr td.down").first().text();

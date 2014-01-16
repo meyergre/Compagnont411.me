@@ -1,6 +1,7 @@
 package fr.lepetitpingouin.android.t411;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -188,6 +189,8 @@ public class ComposeMessageActivity extends ActionBarActivity {
                     Toast.makeText(ComposeMessageActivity.this, "Destinataire non renseigné", Toast.LENGTH_SHORT).show();
             }
         });
+
+        _message.setText(getIntent().getStringExtra(Intent.EXTRA_TEXT));
     }
 
     private void append(String string) {
@@ -199,7 +202,12 @@ public class ComposeMessageActivity extends ActionBarActivity {
     
     private String htmlEncode(String value) {
         value = value.replaceAll("\n", "#BR#");
-        value = Html.escapeHtml(value);
+        try {
+            value = Html.escapeHtml(value);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         value = value.replaceAll("#BR#", "\n");
 
         return value;

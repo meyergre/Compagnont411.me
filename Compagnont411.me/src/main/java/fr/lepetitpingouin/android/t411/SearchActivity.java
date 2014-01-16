@@ -94,7 +94,7 @@ public class SearchActivity extends ActionBarActivity {
 
         sortMode = (CheckBox) findViewById(R.id.sortOrder);
 
-        cat_dialog = new Dialog(this);
+        cat_dialog = new Dialog(this, R.style.MyDialogTheme);
         cat_dialog.setContentView(R.layout.dialog_listview);
         cat_dialog.setTitle("Choisir une catégorie...");
 
@@ -197,7 +197,7 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
 
-        sort_dialog = new Dialog(this);
+        sort_dialog = new Dialog(this, R.style.MyDialogTheme);
         sort_dialog.setContentView(R.layout.dialog_listview);
         sort_dialog.setTitle("Choisir un mode de tri...");
 
@@ -286,7 +286,7 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
 
-        favorites_dialog = new Dialog(this);
+        favorites_dialog = new Dialog(this, R.style.MyDialogTheme);
         favorites_dialog.setContentView(R.layout.dialog_listview);
         favorites_dialog.setTitle("Recherches personnalisées...");
 
@@ -321,6 +321,7 @@ public class SearchActivity extends ActionBarActivity {
                 i.putExtra("order", "added");
                 i.putExtra("sender", "search");
                 i.putExtra("type", "DESC");
+                i.putExtra("tx_order", ((TextView) findViewById(R.id.lst_sort)).getText());
 
                 //i.putExtra("icon_category", icon_category);
                 //i.putExtra("icon_sort", icon_sort);
@@ -339,7 +340,7 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
 
-        subcat_dialog = new Dialog(this);
+        subcat_dialog = new Dialog(this, R.style.MyDialogTheme);
         subcat_dialog.setContentView(R.layout.dialog_listview);
         subcat_dialog.setTitle("Choisir une sous-catégorie...");
 
@@ -558,7 +559,7 @@ public class SearchActivity extends ActionBarActivity {
         i.putExtra("order", sort);
         i.putExtra("sender", "search");
         i.putExtra("type", sortMode.isChecked() ? "DESC" : "ASC");
-
+        i.putExtra("tx_order", ((TextView) findViewById(R.id.lst_sort)).getText());
         i.putExtra("icon_category", icon_category);
         i.putExtra("icon_sort", icon_sort);
         startActivity(i);

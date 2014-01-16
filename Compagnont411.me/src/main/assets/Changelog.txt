@@ -3,6 +3,13 @@ CHANGELOG
 (Versionnement : ANNEE {point} MOIS {tiret} build)
 
 --
+2014.01-101
+- Support des liens t411 (ouvrir avec...)
+- Possibilité d'envoyer un MP depuis le menu "Partager" du système
+- BugFix android 2.3 (envoi de messages)
+- Optimisations visuelles
+
+
 2014.01-99/100
 - Correction du chargement des top torrents
 - Correction du chargement des uploads

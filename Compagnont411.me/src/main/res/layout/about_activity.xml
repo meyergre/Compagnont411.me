@@ -10,7 +10,7 @@
             android:layout_weight="1"
             android:gravity="center|top"
             android:orientation="vertical"
-        android:background="#fbfbfb">
+        android:background="#eee">
 
         <ScrollView
                 android:id="@+id/scrollView1"

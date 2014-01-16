@@ -51,7 +51,7 @@ public class torrentsActivity extends ActionBarActivity {
     SharedPreferences prefs;
     Handler handler;
 
-    String order, type;
+    String order, type, tx_order;
 
     torrentFetcher mF;
 
@@ -77,7 +77,10 @@ public class torrentsActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onResume() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_torrentslist);
+
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connManager.getActiveNetworkInfo();
         if (!(netInfo != null && netInfo.isConnectedOrConnecting())) {
@@ -86,16 +89,9 @@ public class torrentsActivity extends ActionBarActivity {
             i.putExtra("LED_Net", false);
             sendBroadcast(i);
 
-            //Toast.makeText(getApplicationContext(), getString(R.string.noConError), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.noConError), Toast.LENGTH_SHORT).show();
             finish();
         }
-        super.onResume();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_torrentslist);
 
         handler = new Handler();
 
@@ -105,7 +101,11 @@ public class torrentsActivity extends ActionBarActivity {
         order = getIntent().getStringExtra("order");
         type = getIntent().getStringExtra("type");
 
+        tx_order = getIntent().getStringExtra("tx_order");
+
         getSupportActionBar().setTitle(searchTerms);
+
+        getSupportActionBar().setSubtitle(tx_order + ", " + type);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -121,7 +121,7 @@ public class torrentsActivity extends ActionBarActivity {
             }
         });
 
-        cat_dialog = new Dialog(this);
+        cat_dialog = new Dialog(this, R.style.MyDialogTheme);
         cat_dialog.setContentView(R.layout.dialog_listview);
         cat_dialog.setTitle("Filtrer...");
 
@@ -144,7 +144,7 @@ public class torrentsActivity extends ActionBarActivity {
             }
         });
 
-        pages_dialog = new Dialog(this);
+        pages_dialog = new Dialog(this, R.style.MyDialogTheme);
         pages_dialog.setContentView(R.layout.dialog_listview);
         pages_dialog.setTitle("Aller à...");
 
@@ -398,10 +398,11 @@ public class torrentsActivity extends ActionBarActivity {
         }
     }
 
-    private class torrentFetcher extends AsyncTask<Void, Integer, Void> {
+    private class torrentFetcher extends AsyncTask<Void, String, Void> {
 
         Connection.Response res = null;
         Document doc = null;
+        int count = 0;
 
         @Override
         protected void onPreExecute() {
@@ -444,14 +445,20 @@ public class torrentsActivity extends ActionBarActivity {
                 map.put("code", "");
                 catListItem.add(map);
 
+                publishProgress(getString(R.string.fetchingCat));
+                count = 0;
+
                 for (Element hCat : doc.select("h3")) {
                     map = new HashMap<String, String>();
                     map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("img").first().attr("class").substring(4)).getIcon()));
                     map.put("name", hCat.text());
                     map.put("code", hCat.nextElementSibling().select("img").last().attr("class").substring(4));
                     catListItem.add(map);
+                    publishProgress(++count + " " + getString(R.string.catFetched));
                 }
 
+                publishProgress(getString(R.string.fetchingPages));
+                count = 0;
                 for (Element page : doc.select(".pagebar").select("a")) {
                     if (!page.hasAttr("rel")) {
                         map = new HashMap<String, String>();
@@ -460,10 +467,13 @@ public class torrentsActivity extends ActionBarActivity {
                         map.put("code", page.attr("href").substring(page.attr("href").lastIndexOf("=") + 1));
                         pageListItem.add(map);
                     }
+                    publishProgress(++count + " " + getString(R.string.pagesFetched));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            publishProgress(getString(R.string.connecting));
 
             try {
                 Element elmtPrev = doc.select(".pagebar a").first();
@@ -488,7 +498,7 @@ public class torrentsActivity extends ActionBarActivity {
 
             int base = connectUrl.equals(Default.URL_BOOKMARKS) ? 1 : 0;
 
-            int count = 0;
+            count = 0;
 
             for (Element table : doc.select("table.results tbody")) {
                 for (Element row : table.select("tr")) {
@@ -497,7 +507,7 @@ public class torrentsActivity extends ActionBarActivity {
                     String catCode = tds.get(base + 0).select(".category img").first().attr("class").replace("cat-", "");
 
                     try {
-                        publishProgress(++count);
+                        publishProgress(++count + " " + getString(R.string.torrents_found));
                         map = new HashMap<String, String>();
                         map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
                         map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
@@ -528,9 +538,9 @@ public class torrentsActivity extends ActionBarActivity {
         }
 
         @Override
-        protected void onProgressUpdate(Integer... value) {
+        protected void onProgressUpdate(String... value) {
             try {
-                dialog.setMessage(value[0] + " " + getString(R.string.torrents_found));
+                dialog.setMessage(value[0]);
             } catch(Exception e) {
                 e.printStackTrace();
             }

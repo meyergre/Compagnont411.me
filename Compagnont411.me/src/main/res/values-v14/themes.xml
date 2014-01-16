@@ -6,8 +6,9 @@
 
     <style name="CustomActionBarLightTheme"
         parent="@style/Theme.Base.AppCompat.Light">
-        <item name="android:background">#fbfbfb</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:actionBarStyle">@style/MyLightActionBar</item>
+
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyLightActionBar</item>
     </style>
@@ -45,9 +46,9 @@
     <!-- End of Light KitKat theme -->
 
     <style name="MyDialogTheme"
-        parent="@android:style/Theme.Dialog">
-        <item name="android:background">#fbfbfb</item>
+        parent="@android:style/Theme.Holo.Light.Dialog">
     </style>
+
 
     <style name="CustomActionBarTheme"
         parent="@style/Theme.AppCompat.Light.DarkActionBar">

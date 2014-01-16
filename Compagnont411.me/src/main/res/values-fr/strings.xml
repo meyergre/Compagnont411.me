@@ -129,7 +129,7 @@
 
     <string name="calculator">Calculatrice</string>
     <string name="settings_RTC">Ne pas mettre à jour en veille</string>
-    <string name="settings_RTC_details">Utilise les alarmes RTC au lieu de RTC_WAKEUP pour les mises
+    <string name="settings_RTC_details">Utiliser les alarmes RTC au lieu de RTC_WAKEUP pour les mises
         à jour. Augmente l\'autonomie, mais ne respecte pas la fréquence ci-dessus.
     </string>
     <string name="settings_use_https">Chiffrer la connexion (HTTPS)</string>
@@ -276,6 +276,11 @@
     <string name="description_share_direct_link">Partager le lien direct vers le .torrent plutôt que le lien vers la prez (nécessite que le destinataire soit connecté à t411).</string>
     <string name="torrents_found">torrents trouvés</string>
     <string name="connecting">Chargement de la page...</string>
+    <string name="sendPM">Envoyer un MP</string>
+    <string name="fetchingCat">Récupération des catégories...</string>
+    <string name="catFetched">catégories trouvées</string>
+    <string name="pagesFetched">pages trouvées</string>
+    <string name="fetchingPages">Comptage des pages...</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

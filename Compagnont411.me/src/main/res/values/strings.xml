@@ -291,6 +291,11 @@
     <string name="description_share_direct_link">Share the direct link to a torrent instead of its presentation page (needs your recipient to be logged in to t411).</string>
     <string name="torrents_found">Torrents found</string>
     <string name="connecting">Getting page\'s content...</string>
+    <string name="sendPM">Send a PM</string>
+    <string name="fetchingCat">Retrieving categories...</string>
+    <string name="catFetched">categories found</string>
+    <string name="pagesFetched">pages found</string>
+    <string name="fetchingPages">listing pages...</string>
 
 
     <string-array name="widget_actions">

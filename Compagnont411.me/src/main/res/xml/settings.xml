@@ -50,12 +50,6 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference
-                android:key="rtcMode"
-                android:title="@string/settings_RTC"
-                android:summary="@string/settings_RTC_details"
-                android:defaultValue="false" />
-
-            <CheckBoxPreference
                 android:key="wifiOnly"
                 android:title="@string/settings_only_wifi"
                 android:summary="@string/settings_wifi_only_details"
@@ -99,6 +93,11 @@
             android:summary="@string/description_frequency"
             android:defaultValue="60"
             android:numeric="integer"/>
+        <CheckBoxPreference
+            android:key="rtcMode"
+            android:title="@string/settings_RTC"
+            android:summary="@string/settings_RTC_details"
+            android:defaultValue="false" />
 
     </PreferenceScreen>
 
