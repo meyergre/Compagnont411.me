@@ -128,7 +128,7 @@ public class MainActivity extends ActionBarActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        mDrawerLayout = (android.support.v4.widget.DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerLayout = (android.support.v4.widget.DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
                 MainActivity.this,
                 mDrawerLayout,
@@ -364,16 +364,6 @@ public class MainActivity extends ActionBarActivity {
                 // Perform action on click
                 Intent myIntent = new Intent(MainActivity.this,
                         aboutActivity.class);
-                MainActivity.this.startActivity(myIntent);
-            }
-        });
-
-        LinearLayout chatiButton = (LinearLayout) findViewById(R.id.btn_chati);
-        chatiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Perform action on click
-                Intent myIntent = new Intent(MainActivity.this, ChatiActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

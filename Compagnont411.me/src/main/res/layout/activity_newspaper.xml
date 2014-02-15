@@ -1,165 +1,164 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
     <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scrollView"
-            android:background="#e8e8e8">
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:background="#e8e8e8">
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:padding="9dp"
-                    android:background="@drawable/torrent_card"
-                    android:layout_margin="4dp">
+                android:layout_height="fill_parent"
+                android:padding="9dp"
+                android:background="@drawable/torrent_card"
+                android:layout_margin="4dp">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Titre de l'article 1"
-                        android:id="@+id/news_titre1"
-                        android:textSize="20sp"
-                        android:textColor="#012f54"
-                        android:textStyle="bold"
-                        android:textIsSelectable="true"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Titre de l'article 1"
+                    android:id="@+id/news_titre1"
+                    android:textSize="20sp"
+                    android:textColor="#012f54"
+                    android:textStyle="bold"
+                    android:textIsSelectable="true" />
 
                 <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:background="#33000000"
-                        android:layout_margin="3dp">
-                </FrameLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="#33000000"
+                    android:layout_margin="3dp"></FrameLayout>
 
                 <WebView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/www_article1"
-                        android:layout_gravity="left|center_vertical"
-                        android:layout_weight="1"
-                        android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/www_article1"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_weight="1"
+                    android:background="#fff"
                     android:focusable="false"
                     android:clickable="false" />
 
                 <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/learn_more"
-                        android:id="@+id/news_readmore1"
-                        android:layout_gravity="right|center_vertical"
-                        android:textColor="#000"
-                        android:padding="10dp"
-                        android:background="@drawable/androidt411_btn"
-                        android:textSize="16dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/learn_more"
+                    android:id="@+id/news_readmore1"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@drawable/androidt411_btn"
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:padding="9dp"
-                    android:background="@drawable/torrent_card"
-                    android:layout_margin="4dp"
-                    android:id="@+id/linearLayout">
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="9dp"
+                android:background="@drawable/torrent_card"
+                android:layout_margin="4dp"
+                android:id="@+id/linearLayout">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Titre de l'article 2"
-                        android:id="@+id/news_titre2"
-                        android:textSize="20sp"
-                        android:textColor="#012f54"
-                        android:textStyle="bold"
-                        android:textIsSelectable="true"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Titre de l'article 2"
+                    android:id="@+id/news_titre2"
+                    android:textSize="20sp"
+                    android:textColor="#012f54"
+                    android:textStyle="bold"
+                    android:textIsSelectable="true" />
 
                 <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:background="#33000000"
-                        android:layout_margin="3dp"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="#33000000"
+                    android:layout_margin="3dp" />
 
                 <WebView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/www_article2"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/www_article2"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="#fff"
                     android:focusable="false"
                     android:clickable="false" />
 
                 <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/learn_more"
-                        android:id="@+id/news_readmore2"
-                        android:layout_gravity="right|center_vertical"
-                        android:textColor="#000"
-                        android:padding="10dp"
-                        android:background="@drawable/androidt411_btn"
-                        android:textSize="16dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/learn_more"
+                    android:id="@+id/news_readmore2"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@drawable/androidt411_btn"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:padding="9dp"
-                    android:background="@drawable/torrent_card"
-                    android:layout_margin="4dp"
-                    android:id="@+id/linearLayout2">
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="9dp"
+                android:background="@drawable/torrent_card"
+                android:layout_margin="4dp"
+                android:id="@+id/linearLayout2">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Titre de l'article 3"
-                        android:id="@+id/news_titre3"
-                        android:textSize="20sp"
-                        android:textColor="#012f54"
-                        android:textStyle="bold"
-                        android:textIsSelectable="true"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Titre de l'article 3"
+                    android:id="@+id/news_titre3"
+                    android:textSize="20sp"
+                    android:textColor="#012f54"
+                    android:textStyle="bold"
+                    android:textIsSelectable="true" />
 
                 <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:background="#33000000"
-                        android:layout_margin="3dp"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="#33000000"
+                    android:layout_margin="3dp" />
 
                 <WebView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/www_article3"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/www_article3"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="#fff"
                     android:focusable="false"
                     android:clickable="false" />
 
                 <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/learn_more"
-                        android:id="@+id/news_readmore3"
-                        android:layout_gravity="right|center_vertical"
-                        android:textColor="#000"
-                        android:padding="10dp"
-                        android:background="@drawable/androidt411_btn"
-                        android:textSize="16dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/learn_more"
+                    android:id="@+id/news_readmore3"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@drawable/androidt411_btn"
+                    android:textSize="16dp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- size = (74 x n) - 2 -->
+<?xml version="1.0" encoding="utf-8"?><!-- size = (74 x n) - 2 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="294dp"
     android:minHeight="120dp"
@@ -8,5 +7,4 @@
     android:previewImage="@drawable/preview_widgett411"
     android:minResizeWidth="200dp"
     android:minResizeHeight="42dp"
-    android:widgetCategory="keyguard|home_screen"
-/>
+    android:widgetCategory="keyguard|home_screen" />

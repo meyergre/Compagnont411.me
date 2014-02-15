@@ -87,7 +87,7 @@ public class t411UpdateService extends Service {
 
         refreshWidget();
 
-        Log.d("Wifi check...", prefs.getBoolean("wifiOnly", false)+"");
+        Log.d("Wifi check...", prefs.getBoolean("wifiOnly", false) + "");
 
         if (!prefs.getBoolean("wifiOnly", false) || (prefs.getBoolean("wifiOnly", false) && isConnectedToWifi())) {
             Log.d("", "LANCEMENT DES ASYNCTASKS");
@@ -117,11 +117,11 @@ public class t411UpdateService extends Service {
 
         // RTC = 1 (AlarmManager.RTC)
         // RTC_WAKEUP = 0 (AlarmManager.RTC_WAKEUP)
-        int RTC_mode = (prefs.getBoolean("rtcMode", false)?1:0);
+        int RTC_mode = (prefs.getBoolean("rtcMode", false) ? 1 : 0);
         alarmManager.set(RTC_mode, calendar.getTimeInMillis(), pendingIntent);
     }
 
-    public void update(String login, String password) throws IOException {
+    public void update(String login, String password) throws IOException, ClassCastException {
 
         Log.v("Service t411", "Update()...");
         sendBroadcast(new Intent(Default.Appwidget_flag_updating));
@@ -132,23 +132,9 @@ public class t411UpdateService extends Service {
 
         // is HTPPS ?
         String url = CONNECTURL;
-        if (prefs.getBoolean("useHTTPS", false))
-            url = CONNECTURL.replace("http://", "https://");
+        //if (prefs.getBoolean("useHTTPS", false)) // Géré par le navigateur interne
+        //    url = CONNECTURL.replace("http://", "https://");
 
-        /*
-        res = Jsoup
-                .connect(url)
-                .data("login", login, "password", password)
-                .method(Method.POST)
-                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                .maxBodySize(0).followRedirects(true)
-                .execute();
-
-        Log.v("Service t411", "JSoup ex?cut?");
-        Log.d("update()", "Parsing...");
-        doc = res.parse();
-        */
 
         browser = new SuperT411HttpBrowser(getApplicationContext());
         doc = Jsoup.parse(browser.login(login, password).connect(url).executeInAsyncTask());
@@ -354,7 +340,8 @@ public class t411UpdateService extends Service {
             try {
                 grapher grfx = new grapher();
                 grfx.execute();
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
 
 
             editor.commit();
@@ -473,8 +460,8 @@ public class t411UpdateService extends Service {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 url = Default.URL_INDEX;
 
-                if (prefs.getBoolean("useHTTPS", false))
-                    url = url.replace("http://", "https://");
+                //if (prefs.getBoolean("useHTTPS", false))
+                //    url = url.replace("http://", "https://");
 
                 /* res = Jsoup.connect(url)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -487,20 +474,20 @@ public class t411UpdateService extends Service {
                 if (doc != null) {
                     edit = prefs.edit();
                     edit.putString("title1", doc.select(".newsWrapper .title").get(0).text());
-                    edit.putString("article1",doc.select(".newsWrapper .announce").get(0).html());
+                    edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
                     edit.putString("readMore1", url + doc.select(".newsWrapper .readmore").get(0).attr("href"));
                     edit.commit();
                     Log.d("news", "OK");
                     edit = prefs.edit();
                     edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
-                    edit.putString("article2",doc.select(".newsWrapper  .announce").get(1).html());
-                    edit.putString("readMore2",url+ doc.select(".newsWrapper  .readmore").get(1).attr("href"));
+                    edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
+                    edit.putString("readMore2", url + doc.select(".newsWrapper  .readmore").get(1).attr("href"));
                     edit.commit();
                     Log.d("news", "OK");
                     edit = prefs.edit();
                     edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
-                    edit.putString("article3",doc.select(".newsWrapper  .announce").get(2).html());
-                    edit.putString("readMore3",url+ doc.select(".newsWrapper  .readmore").get(2).attr("href"));
+                    edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
+                    edit.putString("readMore3", url + doc.select(".newsWrapper  .readmore").get(2).attr("href"));
                     edit.commit();
                     Log.d("news", "OK");
                 }
@@ -538,9 +525,9 @@ public class t411UpdateService extends Service {
             Document doc = null;
 
             String url = Default.URL_STATS;
-            if (prefs.getBoolean("useHTTPS", false)) {
-                url = url.replace("http://", "https://");
-            }
+            //if (prefs.getBoolean("useHTTPS", false)) {
+            //    url = url.replace("http://", "https://");
+            //}
 
             try {
                 /* res = Jsoup

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/torrent_context_menu_open"
+    <item
+        android:id="@+id/torrent_context_menu_open"
         android:title="@string/torrent_read_prez" />
-    <item android:id="@+id/torrent_context_menu_download"
+    <item
+        android:id="@+id/torrent_context_menu_download"
         android:title="@string/download" />
-    <item android:id="@+id/torrent_context_menu_download_later"
+    <item
+        android:id="@+id/torrent_context_menu_download_later"
         android:title="@string/torrent_context_add_to_later" />
-    <item android:id="@+id/torrent_context_menu_download_later_not"
+    <item
+        android:id="@+id/torrent_context_menu_download_later_not"
         android:title="@string/torrent_context_del_from_later" />
-    <item android:id="@+id/torrent_context_menu_share"
+    <item
+        android:id="@+id/torrent_context_menu_share"
         android:title="@string/Share" />
 </menu>

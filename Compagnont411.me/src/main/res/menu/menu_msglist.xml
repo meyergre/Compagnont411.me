@@ -1,12 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fr.lepetitpingouin.android.t411="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_compose"
+    <item
+        android:id="@+id/action_compose"
         android:title="Archiver"
         android:icon="@drawable/ic_messages_compose"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
         fr.lepetitpingouin.android.t411:showAsAction="ifRoom" />
-    <item android:id="@+id/action_update"
+    <item
+        android:id="@+id/action_update"
         android:title="Supprimer"
         android:icon="@drawable/ic_update"
         android:orderInCategory="100"

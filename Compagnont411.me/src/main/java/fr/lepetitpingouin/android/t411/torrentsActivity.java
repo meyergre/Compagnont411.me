@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.app.ProgressDialog.show;
+
 public class torrentsActivity extends ActionBarActivity {
     String connectUrl, searchTerms;
     String name = null;
@@ -46,7 +48,7 @@ public class torrentsActivity extends ActionBarActivity {
 
     HashMap<String, String> itemMmap;
 
-    public ProgressDialog dialog;
+    ProgressDialog dialog;
 
     SharedPreferences prefs;
     Handler handler;
@@ -105,7 +107,8 @@ public class torrentsActivity extends ActionBarActivity {
 
         getSupportActionBar().setTitle(searchTerms);
 
-        getSupportActionBar().setSubtitle(tx_order + ", " + type);
+        if (tx_order != null)
+            getSupportActionBar().setSubtitle(tx_order + ", " + type);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -231,7 +234,7 @@ public class torrentsActivity extends ActionBarActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if (v.getId()==R.id.malistviewperso) {
+        if (v.getId() == R.id.malistviewperso) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.torrent_context_menu, menu);
         }
@@ -241,7 +244,7 @@ public class torrentsActivity extends ActionBarActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         itemMmap = (HashMap<String, String>) maListViewPerso.getItemAtPosition(info.position);
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.torrent_context_menu_open:
 
                 Intent i;
@@ -305,8 +308,8 @@ public class torrentsActivity extends ActionBarActivity {
 
     public void update() {
         try {
-            dialog = ProgressDialog.show(this, "t411.me", this.getString(R.string.pleasewait), true, true);
-        } catch(Exception e) {
+            dialog = show(torrentsActivity.this, "t411.me", this.getString(R.string.pleasewait), true, true);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         mF = new torrentFetcher();
@@ -379,7 +382,6 @@ public class torrentsActivity extends ActionBarActivity {
                         .addData("submit", "Valider")
                         .addData("name", name)
                         .executeInAsyncTask());
-
 
 
                 msg = doc.select(".content ").first().text();
@@ -483,7 +485,11 @@ public class torrentsActivity extends ActionBarActivity {
                     prev = (ImageButton) findViewById(R.id.navbtn_prev);
                     prev.setVisibility(View.VISIBLE);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+            try {
                 Element elmtNext = doc.select(".pagebar a").last();
                 strNext = null;
                 if (elmtNext.hasAttr("rel")) {
@@ -500,38 +506,50 @@ public class torrentsActivity extends ActionBarActivity {
 
             count = 0;
 
-            for (Element table : doc.select("table.results tbody")) {
-                for (Element row : table.select("tr")) {
-                    Elements tds = row.select("td");
+            try {
+                for (Element table : doc.select("table.results tbody")) {
+                    for (Element row : table.select("tr")) {
+                        Elements tds = row.select("td");
 
-                    String catCode = tds.get(base + 0).select(".category img").first().attr("class").replace("cat-", "");
+                        String catCode = tds.get(base + 0).select(".category img").first().attr("class").replace("cat-", "");
 
-                    try {
-                        publishProgress(++count + " " + getString(R.string.torrents_found));
-                        map = new HashMap<String, String>();
-                        map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
-                        map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
-                        map.put("age", tds.get(base + 4).text());
-                        map.put("taille", new BSize(tds.get(base + 5).text()).convert());
-                        map.put("avis", tds.get(base + 3).text());
-                        map.put("seeders", tds.get(base + 7).text());
-                        map.put("leechers", tds.get(base + 8).text());
-                        map.put("uploader", tds.get(base + 1).select("dd > a.profile").text());
-                        map.put("completed", tds.get(base + 6).text());
-                        map.put("cat", catCode);
+                        try {
+                            publishProgress(++count + " " + getString(R.string.torrents_found));
+                            map = new HashMap<String, String>();
+                            map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
+                            map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
+                            map.put("age", tds.get(base + 4).text());
+                            map.put("taille", new BSize(tds.get(base + 5).text()).convert());
+                            map.put("avis", tds.get(base + 3).text());
+                            map.put("seeders", tds.get(base + 7).text());
+                            map.put("leechers", tds.get(base + 8).text());
+                            map.put("uploader", tds.get(base + 1).select("dd > a.profile").text());
+                            map.put("completed", tds.get(base + 6).text());
+                            map.put("cat", catCode);
 
-                        String tSize = tds.get(base + 5).text();
-                        double estimatedDl = new BSize(prefs.getString("lastDownload", "? 0.00 GB")).getInMB() + new BSize(tSize).getInMB();
-                        String estimatedRatio = String.format("%.2f", (new BSize(prefs.getString("lastUpload", "? 0.00 GB")).getInMB() / estimatedDl) - 0.01);
+                            String tSize = tds.get(base + 5).text();
+                            double estimatedDl = new BSize(prefs.getString("lastDownload", "? 0.00 GB")).getInMB() + new BSize(tSize).getInMB();
+                            String estimatedRatio = String.format("%.2f", (new BSize(prefs.getString("lastUpload", "? 0.00 GB")).getInMB() / estimatedDl) - 0.01);
 
-                        map.put("ratio", estimatedRatio);
-                        map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
-                        map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", ""))));
-                        listItem.add(map);
+                            map.put("ratio", estimatedRatio);
+                            map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
+                            map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", ""))));
+                            listItem.add(map);
 
-                    } catch (Exception e) {
+                        } catch (Exception e) {
+                        }
                     }
                 }
+            } catch (RuntimeException rte) {
+
+                new Handler().post(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.runtime_ex), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             return null;
@@ -541,7 +559,7 @@ public class torrentsActivity extends ActionBarActivity {
         protected void onProgressUpdate(String... value) {
             try {
                 dialog.setMessage(value[0]);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -561,7 +579,7 @@ public class torrentsActivity extends ActionBarActivity {
                 catList.setAdapter(mSchedule);
 
                 pageName = doc.select(".pagebar").select("span").first().text();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -574,7 +592,14 @@ public class torrentsActivity extends ActionBarActivity {
 
                 PagesList.setAdapter(mSchedule);
                 navbar.setVisibility(PagesList.getCount() > 0 ? View.VISIBLE : View.GONE);
-            } catch(Exception e) {
+
+                prev = (ImageButton) findViewById(R.id.navbtn_prev);
+                prev.setVisibility(strPrev == null ? View.INVISIBLE : View.VISIBLE);
+
+                next = (ImageButton) findViewById(R.id.navbtn_next);
+                next.setVisibility(strNext == null ? View.INVISIBLE : View.VISIBLE);
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -613,8 +638,7 @@ public class torrentsActivity extends ActionBarActivity {
                         dialog.cancel();
                     }
                 }, 500);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();
                 finish();
             }

@@ -31,18 +31,18 @@ public class Widget_nano extends AppWidgetProvider {
 
                 String[] choices = context.getResources().getStringArray(R.array.widget_actions);
 
-                if(prefs.getString("widgetAction", "").equals(choices[0])) {
-                    myIntent.setClassName("fr.lepetitpingouin.android.t411","fr.lepetitpingouin.android.t411.MainActivity");
+                if (prefs.getString("widgetAction", "").equals(choices[0])) {
+                    myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.MainActivity");
                     pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
 
-                } else if(prefs.getString("widgetAction", "").equals(choices[1])) {
+                } else if (prefs.getString("widgetAction", "").equals(choices[1])) {
                     myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.t411UpdateService");
                     pIntent = PendingIntent.getService(context, 0, myIntent, 0);
 
-                } else if(prefs.getString("widgetAction", "").equals(choices[2])) {
+                } else if (prefs.getString("widgetAction", "").equals(choices[2])) {
                     myIntent.setClass(context.getApplicationContext(), messagesActivity.class);
                     pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
-                } else if(prefs.getString("widgetAction", "").equals(choices[3])) {
+                } else if (prefs.getString("widgetAction", "").equals(choices[3])) {
                     String url = "http://www.t411.me";
                     myIntent = new Intent(Intent.ACTION_VIEW);
                     myIntent.setData(Uri.parse(url));
@@ -54,7 +54,8 @@ public class Widget_nano extends AppWidgetProvider {
                 }
 
                 views.setOnClickPendingIntent(R.id.topLogo, pIntent);
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
 
             Log.v("widget t411", "mise � jour des valeurs");
 

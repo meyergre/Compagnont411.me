@@ -67,12 +67,12 @@ public class Torrent {
     public void share() {
 
         String url = Default.URL_SHARE;
-        if(prefs.getBoolean("shareDirectLink", false))
+        if (prefs.getBoolean("shareDirectLink", false))
             url = Default.URL_GET_PREZ;
 
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
-        share.putExtra(Intent.EXTRA_TEXT, url+this.id + "\n\n-\n" + context.getString(R.string.shareSignature));
+        share.putExtra(Intent.EXTRA_TEXT, url + this.id + "\n\n-\n" + context.getString(R.string.shareSignature));
         share.putExtra(Intent.EXTRA_SUBJECT, "[t411] " + this.name);
 
         context.startActivity(Intent.createChooser(share, context.getString(R.string.Share)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -136,7 +136,7 @@ public class Torrent {
                         .method(Connection.Method.POST)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .execute();
 
                 Map<String, String> Cookies = res.cookies();
@@ -146,7 +146,7 @@ public class Torrent {
                         .cookies(Cookies)
                         .data("id", "", "submit", "Supprimer", "ids[]", id)
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                         .method(Connection.Method.POST)
                         .execute();
@@ -163,7 +163,7 @@ public class Torrent {
 
         @Override
         protected void onPostExecute(Void result) {
-            if(!msg.equals(""))
+            if (!msg.equals(""))
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
 
@@ -208,7 +208,7 @@ public class Torrent {
                 //doc = Jsoup.parse(new SuperT411HttpBrowser(context).login(username, password).connect(Default.URL_BOOKMARK + id).executeInAsyncTask());
 
                 //Log.e("bookmark", doc.body().toString());
-                    msg = doc.select("div.fade").first().text();
+                msg = doc.select("div.fade").first().text();
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -244,13 +244,13 @@ public class Torrent {
                         .method(Connection.Method.POST)
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
+                                //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
                         .cookies(Jsoup
                                 .connect(Default.URL_LOGIN)
                                 .data("login", username, "password", password)
                                 .method(Connection.Method.POST)
                                 .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
+                                        //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
                                 .maxBodySize(0)
                                 .followRedirects(true)
                                 .ignoreContentType(true)
@@ -279,7 +279,11 @@ public class Torrent {
             Log.e("PATH", file.getAbsolutePath());
             Log.e("PATH", Environment.getExternalStorageDirectory().getPath());
 
-            try { file.createNewFile(); } catch (Exception e) {e.printStackTrace();}
+            try {
+                file.createNewFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             try {
 
                 FileOutputStream fo = new FileOutputStream(file);
@@ -289,7 +293,7 @@ public class Torrent {
                 Intent i = new Intent();
                 i.setAction(android.content.Intent.ACTION_VIEW);
                 //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension("torrent"));
-                if(prefs.getBoolean("addMimeType", false))
+                if (prefs.getBoolean("addMimeType", false))
                     i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
                 else //auto-detect
                     //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.getName().substring(file.getName().lastIndexOf(".")+1)));
@@ -297,13 +301,13 @@ public class Torrent {
 
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
-                if(prefs.getBoolean("openAfterDl", false)) {
+                if (prefs.getBoolean("openAfterDl", false)) {
                     //ouvrir le fichier
                     try {
-                        context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT|Intent.FLAG_FROM_BACKGROUND));
-                        if(prefs.getBoolean("openAfterDlCancelNotify", false))
-                        cancelNotify(Integer.valueOf(id));
-                    } catch(Exception e) {
+                        context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT | Intent.FLAG_FROM_BACKGROUND));
+                        if (prefs.getBoolean("openAfterDlCancelNotify", false))
+                            cancelNotify(Integer.valueOf(id));
+                    } catch (Exception e) {
                         doNotify(R.drawable.ic_notif_torrent_failure, name, "Erreur d'ouverture du torrent\nAucune application trouvée.", Integer.valueOf(id), null);
                     }
                 }

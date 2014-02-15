@@ -105,14 +105,14 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
             String htmlpage = new SuperT411HttpBrowser(getApplicationContext()).connect(torrent_URL).execute();
             String href = Jsoup.parse(htmlpage).select(".shortlink").attr("href").toString();
-            String _id = href.substring(href.lastIndexOf("/")+1);
+            String _id = href.substring(href.lastIndexOf("/") + 1);
             String _title = Jsoup.parse(htmlpage).select("span:has(a.shortlink)").html().replaceAll("<a\\b[^>]+>([^<]*(?:(?!</a)<[^<]*)*)</a>", "").toString();
 
             //test
 
             //torrent_ID = torrent_URL.split("=")[1];
             torrent_ID = _id;
-                    //torrent_Name = torrent_ID;
+            //torrent_Name = torrent_ID;
             torrent_Name = _title;
             //Toast.makeText(getApplicationContext(),torrent_URL, Toast.LENGTH_SHORT).show();
         }
@@ -199,8 +199,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
     }
 
     public void onFakemenuClick(View v) {
-        LinearLayout fakemenu = (LinearLayout)findViewById(R.id.fakemenu);
-        fakemenu.setVisibility(fakemenu.getVisibility()==View.GONE?View.VISIBLE:View.GONE);
+        LinearLayout fakemenu = (LinearLayout) findViewById(R.id.fakemenu);
+        fakemenu.setVisibility(fakemenu.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
     }
 
     private class AsyncThx extends AsyncTask<Void, String[], Void> {
@@ -228,7 +228,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 doc = res.parse();*/
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
-                        .connect(Default.URL_SAY_THANKS+torrent_ID)
+                        .connect(Default.URL_SAY_THANKS + torrent_ID)
                         .executeInAsyncTask());
 
                 msg = doc.select(".content ").first().text();
@@ -389,7 +389,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                }                prez += "</table></body></html>";
+                }
+                prez += "</table></body></html>";
 
                 prez = prez.replaceAll("_____", "");
 
@@ -397,16 +398,16 @@ public class torrentDetailsActivity extends ActionBarActivity {
                     prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411.me...<br/><br/></center></a>";
 
                 try {
-                //vidéos youtube
-                objects = doc.select("object");
-                for (Element object : objects) {
-                    try {
-                        String youtube_link = object.select("embed").first().attr("src");
-                        prez = prez.replace(object.outerHtml(), "<a href=\"" + youtube_link + "\"><img src=\"file:///android_asset/picts/yt_play_vid.png\"/></a>");
-                    } catch (Exception e) {
-                        prez = prez.replace(object.outerHtml(), "");
+                    //vidéos youtube
+                    objects = doc.select("object");
+                    for (Element object : objects) {
+                        try {
+                            String youtube_link = object.select("embed").first().attr("src");
+                            prez = prez.replace(object.outerHtml(), "<a href=\"" + youtube_link + "\"><img src=\"file:///android_asset/picts/yt_play_vid.png\"/></a>");
+                        } catch (Exception e) {
+                            prez = prez.replace(object.outerHtml(), "");
+                        }
                     }
-                }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("Youtube", "Error");
@@ -422,16 +423,16 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
                         //String[] youtube_array = youtube_src.split("/");
                         //String youtube_id = youtube_array[youtube_array.length-1];
-                        String youtube_id = youtube_src.substring(youtube_src.lastIndexOf("/")+1);
+                        String youtube_id = youtube_src.substring(youtube_src.lastIndexOf("/") + 1);
                         Log.e(youtube_src, youtube_id);
 
-                        String youtube_thumb = "http://img.youtube.com/vi/"+youtube_id+"/0.jpg";
-                        String youtube_link = "http://www.youtube.com/watch?v="+youtube_id;
+                        String youtube_thumb = "http://img.youtube.com/vi/" + youtube_id + "/0.jpg";
+                        String youtube_link = "http://www.youtube.com/watch?v=" + youtube_id;
                         //file:///android_asset/picts/yt_play_vid.png
                         prez = prez.replace(object.outerHtml(),
                                 "<a href=\"" + youtube_link + "\" style='position: relative;'>" +
-                                        "<span style='position: absolute; bottom: 20px; right: 0px; color: white; background: red; border-top-left-radius: 6px; border-bottom-left-radius: 6px;  padding: 6px 24px 6px 6px;'> ▶  Voir sur youtube</span>"+
-                                        "<img src=\""+youtube_thumb+"\"/>" +
+                                        "<span style='position: absolute; bottom: 20px; right: 0px; color: white; background: red; border-top-left-radius: 6px; border-bottom-left-radius: 6px;  padding: 6px 24px 6px 6px;'> ▶  Voir sur youtube</span>" +
+                                        "<img src=\"" + youtube_thumb + "\"/>" +
                                         "</a>");
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -488,7 +489,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
             details_www.loadDataWithBaseURL(null, prez, mimeType, encoding, "");
 
             try {
-                getSupportActionBar().setTitle("Prez "+(tduploader.toString().length()>0?"("+tduploader.toString()+")":""));
+                getSupportActionBar().setTitle("Prez " + (tduploader.toString().length() > 0 ? "(" + tduploader.toString() + ")" : ""));
                 getSupportActionBar().setSubtitle(torrent_Name);
 
                 tdt_seeders = doc.select(".details table tr td.up").first().text();

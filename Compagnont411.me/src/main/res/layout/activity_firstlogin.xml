@@ -1,126 +1,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="#012f54"
-              android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#012f54"
+    android:orientation="vertical">
 
     <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/bg_girl"
-            android:padding="5dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_girl"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/please_login"
-                android:id="@+id/txtloginplease"
-                android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/please_login"
+            android:id="@+id/txtloginplease"
+            android:layout_gravity="center"
             android:textColor="#FFF" />
 
         <LinearLayout
-                android:layout_width="200dp"
-                android:orientation="vertical"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center|bottom"
-                android:gravity=""
-                android:layout_marginTop="33dp">
+            android:layout_width="200dp"
+            android:orientation="vertical"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center|bottom"
+            android:gravity=""
+            android:layout_marginTop="33dp">
 
             <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/loginLogin"
-                    android:layout_gravity="center"
-                    android:background="@drawable/txtedit"
-                    android:hint="@string/default_username"
-                    android:textColor="#000"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:singleLine="true"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginLogin"
+                android:layout_gravity="center"
+                android:background="@drawable/txtedit"
+                android:hint="@string/default_username"
+                android:textColor="#000"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:singleLine="true" />
 
             <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/loginPassword"
-                    android:layout_gravity="center"
-                    android:background="@drawable/txtedit"
-                    android:textColor="#000"
-                    android:inputType="textPassword"
-                    android:password="true"
-                    android:hint="@string/main_password"
-                    android:paddingRight="15dp"
-                    android:paddingLeft="15dp"
-                    android:singleLine="true"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginPassword"
+                android:layout_gravity="center"
+                android:background="@drawable/txtedit"
+                android:textColor="#000"
+                android:inputType="textPassword"
+                android:password="true"
+                android:hint="@string/main_password"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:singleLine="true" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Info"
-                    android:id="@+id/txtInfoError"
-                    android:textColor="@color/t411_red"
-                    android:visibility="visible"
-                    android:background="#66FFFFFF"
-                    android:padding="8dp"
-                    android:layout_gravity="center"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Info"
+                android:id="@+id/txtInfoError"
+                android:textColor="@color/t411_red"
+                android:visibility="visible"
+                android:background="#66FFFFFF"
+                android:padding="8dp"
+                android:layout_gravity="center" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#BBB"
-            >
-    </FrameLayout>
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#BBB"></FrameLayout>
 
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:background="#DDD">
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#DDD">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="right"
-                android:padding="3dp"
-                android:background="#DDD"
-                android:orientation="horizontal"
-                android:id="@+id/loginBar">
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:padding="3dp"
+            android:background="#DDD"
+            android:orientation="horizontal"
+            android:id="@+id/loginBar">
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:text="@string/need_an_account"
-                    android:id="@+id/btnCreateAccount"
-                    android:background="@drawable/androidt411_btn"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="@string/need_an_account"
+                android:id="@+id/btnCreateAccount"
+                android:background="@drawable/androidt411_btn"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:textColor="#000" />
 
             <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
-            </FrameLayout>
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"></FrameLayout>
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/t411_btn"
-                    android:text="@string/connect"
-                    android:id="@+id/loginConnect"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textColor="#fff"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/t411_btn"
+                android:text="@string/connect"
+                android:id="@+id/loginConnect"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
         </LinearLayout>
     </LinearLayout>

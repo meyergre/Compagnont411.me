@@ -153,11 +153,11 @@ public class FirstLoginActivity extends Activity {
                 doc = res.parse();*/
 
                 String html = new SuperT411HttpBrowser(getApplicationContext())
-                                .login(login.getText().toString(), passwd.getText().toString())
-                                .connect(Default.URL_LOGIN)
-                                .executeLoginForMessage();
+                        .login(login.getText().toString(), passwd.getText().toString())
+                        .connect(Default.URL_LOGIN)
+                        .executeLoginForMessage();
 
-                if(!html.equals("OK")) {
+                if (!html.equals("OK")) {
                     doc = Jsoup.parse(html);
                     message = doc.select("#messages > p").first().text();
                 } else message = "Connexion réussie !";

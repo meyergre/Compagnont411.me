@@ -1,133 +1,132 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:orientation="vertical"
-              tools:context="torrentsActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="torrentsActivity">
 
     <GridView
-            android:id="@+id/malistviewperso"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/widget_content_background"
-            android:cacheColorHint="#00000000"
-            android:padding="5dip"
-            android:divider="#00000000"
-            android:focusable="false"
-            android:longClickable="true"
-            android:clipToPadding="false"
-            android:smoothScrollbar="true"
-            android:fastScrollEnabled="true"
-            android:listSelector="@drawable/androidt411_btn"
-            android:columnWidth="450dp"
-            android:numColumns="auto_fit"/>
+        android:id="@+id/malistviewperso"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/widget_content_background"
+        android:cacheColorHint="#00000000"
+        android:padding="5dip"
+        android:divider="#00000000"
+        android:focusable="false"
+        android:longClickable="true"
+        android:clipToPadding="false"
+        android:smoothScrollbar="true"
+        android:fastScrollEnabled="true"
+        android:listSelector="@drawable/androidt411_btn"
+        android:columnWidth="450dp"
+        android:numColumns="auto_fit" />
 
     <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/t411_btn"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/category_filter"
+        android:layout_weight="0"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_width="42dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/ivCatListFilter"
+            android:src="@drawable/ic_new_t411" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="-- Tout --"
+            android:id="@+id/tvCatListFilter"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#FFF"
+            android:singleLine="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@drawable/ic_dropdown"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:layout_margin="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:id="@+id/navbar"
+        android:background="@drawable/abc_ab_bottom_solid_light_holo">
+
+        <ImageButton
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:id="@+id/navbtn_prev"
+            android:background="@drawable/t411_btn"
+            android:src="@drawable/ic_prev"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:padding="5dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/t411_btn"
             android:clickable="true"
             android:focusable="true"
-            android:id="@+id/category_filter"
-            android:layout_weight="0"
+            android:id="@+id/navbtn_list"
+            android:layout_weight="1"
+            android:layout_gravity="center"
             android:padding="4dp">
 
-        <ImageView
+            <ProgressBar
                 android:layout_width="42dp"
                 android:layout_height="fill_parent"
-                android:id="@+id/ivCatListFilter"
-                android:src="@drawable/ic_new_t411"/>
+                android:id="@+id/subcat_progressbar"
+                android:indeterminate="false"
+                android:visibility="invisible"
+                android:padding="8dp"
+                android:layout_weight="0" />
 
-        <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="-- Tout --"
-                android:id="@+id/tvCatListFilter"
+                android:text="1 - 50"
+                android:id="@+id/navbar_pagesText"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="#FFF"
-                android:singleLine="true"/>
+                android:singleLine="true" />
 
-        <ImageView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
+                android:id="@+id/imageView4"
                 android:src="@drawable/ic_dropdown"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                android:layout_margin="4dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:id="@+id/navbar"
-        android:background="@drawable/abc_ab_bottom_solid_light_holo">
-
-        <ImageButton
-                android:layout_width="42dp"
-                android:layout_height="match_parent"
-                android:id="@+id/navbtn_prev"
-                android:background="@drawable/t411_btn"
-                android:src="@drawable/ic_prev"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:padding="5dp"
-                />
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/t411_btn"
-                android:clickable="true"
-                android:focusable="true"
-                android:id="@+id/navbtn_list"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:padding="4dp">
-
-            <ProgressBar
-                    android:layout_width="42dp"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/subcat_progressbar"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    android:padding="8dp"
-                    android:layout_weight="0"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="1 - 50"
-                    android:id="@+id/navbar_pagesText"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="#FFF"
-                    android:singleLine="true"/>
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView4"
-                    android:src="@drawable/ic_dropdown"
-                    android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    android:layout_margin="4dp"/>
+                android:layout_margin="4dp" />
         </LinearLayout>
 
         <ImageButton
-                android:layout_width="42dp"
-                android:layout_height="match_parent"
-                android:id="@+id/navbtn_next"
-                android:background="@drawable/t411_btn"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_next"
-                android:padding="5dp"/>
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:id="@+id/navbtn_next"
+            android:background="@drawable/t411_btn"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_next"
+            android:padding="5dp" />
 
     </LinearLayout>
 </LinearLayout>

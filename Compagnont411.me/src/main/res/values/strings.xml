@@ -296,6 +296,7 @@
     <string name="catFetched">categories found</string>
     <string name="pagesFetched">pages found</string>
     <string name="fetchingPages">listing pages...</string>
+    <string name="runtime_ex">Runtime Exception. Please try again !</string>
 
 
     <string-array name="widget_actions">

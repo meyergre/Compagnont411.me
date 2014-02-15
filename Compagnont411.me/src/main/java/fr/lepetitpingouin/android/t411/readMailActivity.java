@@ -158,9 +158,9 @@ public class readMailActivity extends ActionBarActivity {
 
                 doc = res.parse();*/
                 //doc = Jsoup.parse(
-                        browser.login(username, password)
-                                .connect(Default.URL_MESSAGE_DEL + id)
-                                .executeInAsyncTask();
+                browser.login(username, password)
+                        .connect(Default.URL_MESSAGE_DEL + id)
+                        .executeInAsyncTask();
                 //);
 
                 t411message = browser.getFadeMessage();
@@ -172,8 +172,8 @@ public class readMailActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            if(t411message != null)
-                Toast.makeText(getApplicationContext(), t411message,Toast.LENGTH_SHORT).show();
+            if (t411message != null)
+                Toast.makeText(getApplicationContext(), t411message, Toast.LENGTH_SHORT).show();
 
             finish();
         }
@@ -225,8 +225,8 @@ public class readMailActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            if(t411message != null)
-            Toast.makeText(getApplicationContext(), t411message,Toast.LENGTH_SHORT).show();
+            if (t411message != null)
+                Toast.makeText(getApplicationContext(), t411message, Toast.LENGTH_SHORT).show();
 
             finish();
         }
@@ -284,7 +284,7 @@ public class readMailActivity extends ActionBarActivity {
                 // 'stylage' du message
                 messageBody = messageBody.replaceAll(Default.MSG_SEPARATOR, Default.MSG_REPLACEMENT);
 
-                message = message+messageBody;
+                message = message + messageBody;
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
@@ -299,7 +299,7 @@ public class readMailActivity extends ActionBarActivity {
             final String encoding = "utf-8";
             tvmsg.loadDataWithBaseURL(null, message, mimeType, encoding, "");
             dialog.dismiss();
-            if(messageBody == null) {
+            if (messageBody == null) {
                 Toast.makeText(getApplicationContext(), getString(R.string.noConError), Toast.LENGTH_SHORT).show();
                 finish();
             }

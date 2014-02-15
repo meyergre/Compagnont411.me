@@ -281,6 +281,7 @@
     <string name="catFetched">catégories trouvées</string>
     <string name="pagesFetched">pages trouvées</string>
     <string name="fetchingPages">Comptage des pages...</string>
+    <string name="runtime_ex">Erreur d\'exécution. Veuillez réessayer ultérieurement.</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

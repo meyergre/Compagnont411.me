@@ -1,161 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#77333333">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#77333333">
 
     <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:id="@+id/nw_avatar"
-            android:layout_gravity="left|center_vertical"
-            android:src="@drawable/avatar_default"
-            android:scaleType="fitCenter"/>
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/nw_avatar"
+        android:layout_gravity="left|center_vertical"
+        android:src="@drawable/avatar_default"
+        android:scaleType="fitCenter" />
 
     <LinearLayout
-            android:orientation="vertical"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <LinearLayout
             android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/app_name"
+                android:id="@+id/textView2"
+                android:layout_gravity="right|center_vertical"
+                android:textSize="9sp"
+                android:textColor="#55ffffff"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="01/01/1970 00:00:00"
+                android:id="@+id/nw_date"
+                android:layout_gravity="right|center_vertical"
+                android:textSize="9sp"
+                android:textColor="#55ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center"
+            android:layout_gravity="left|center_vertical"
             android:layout_weight="1">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Pseudonyme"
+                android:id="@+id/nw_username"
+                android:textColor="#CCffffff"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-"
+                android:id="@+id/nw_mails"
+                android:layout_gravity="center"
+                android:textColor="#99ffffff"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/ic_mail"
+                android:layout_gravity="center"
+                android:layout_margin="4dp" />
+        </LinearLayout>
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:id="@+id/imageView3"
+                android:src="@drawable/ic_upload"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="---"
+                android:id="@+id/nw_up"
+                android:textColor="#DDD"
+                android:layout_gravity="center"
+                android:textSize="13sp" />
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"></FrameLayout>
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_download"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="---"
+                android:id="@+id/nw_down"
+                android:layout_gravity="center"
+                android:textColor="#DDD"
+                android:textSize="13sp" />
+
+            <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="@string/app_name"
-                    android:id="@+id/textView2"
-                    android:layout_gravity="right|center_vertical"
-                    android:textSize="9sp"
-                    android:textColor="#55ffffff"
-                    android:layout_weight="1"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="01/01/1970 00:00:00"
-                    android:id="@+id/nw_date"
-                    android:layout_gravity="right|center_vertical"
-                    android:textSize="9sp"
-                    android:textColor="#55ffffff"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
+                android:layout_height="fill_parent"
                 android:layout_weight="1">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Pseudonyme"
-                    android:id="@+id/nw_username"
-                    android:textColor="#CCffffff"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="-"
-                    android:id="@+id/nw_mails"
-                    android:layout_gravity="center"
-                    android:textColor="#99ffffff"
-                    android:textSize="14sp"/>
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView"
-                    android:src="@drawable/ic_mail"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_weight="1">
-
-            <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:id="@+id/imageView3"
-                    android:src="@drawable/ic_upload"
-                    android:layout_gravity="center"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="---"
-                    android:id="@+id/nw_up"
-                    android:textColor="#DDD"
-                    android:layout_gravity="center"
-                    android:textSize="13sp"/>
-
-            <FrameLayout
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    >
-            </FrameLayout>
-
-            <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:id="@+id/imageView2"
-                    android:src="@drawable/ic_download"
-                    android:layout_gravity="center"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="---"
-                    android:id="@+id/nw_down"
-                    android:layout_gravity="center"
-                    android:textColor="#DDD"
-                    android:textSize="13sp"/>
-
-            <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
 
             </FrameLayout>
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="-,--"
-                    android:id="@+id/nw_ratio"
-                    android:layout_gravity="center"
-                    android:textColor="#ddd"
-                    android:textSize="14sp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="-,--"
+                android:id="@+id/nw_ratio"
+                android:layout_gravity="center"
+                android:textColor="#ddd"
+                android:textSize="14sp" />
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/nw_smiley"
-                    android:layout_gravity="right|center_vertical"
-                    android:src="@drawable/smiley_neutral"
-                    android:layout_marginLeft="3dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nw_smiley"
+                android:layout_gravity="right|center_vertical"
+                android:src="@drawable/smiley_neutral"
+                android:layout_marginLeft="3dp" />
 
         </LinearLayout>
 

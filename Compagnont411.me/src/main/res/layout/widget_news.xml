@@ -1,120 +1,119 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
-            android:id="@+id/newspaper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_newspaper"
-            android:orientation="horizontal">
+        android:id="@+id/newspaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_newspaper"
+        android:orientation="horizontal">
 
         <LinearLayout
-                android:id="@+id/news1"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="#33000000"
-                android:orientation="vertical"
-                android:padding="2dp"
-                android:paddingBottom="0dp">
+            android:id="@+id/news1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#33000000"
+            android:orientation="vertical"
+            android:padding="2dp"
+            android:paddingBottom="0dp">
 
             <TextView
-                    android:id="@+id/title1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="News#1"
-                    android:textAllCaps="true"
-                    android:textColor="#000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="serif"/>
+                android:id="@+id/title1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="News#1"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
 
             <TextView
-                    android:id="@+id/article1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="end"
-                    android:text="content goes here..."
-                    android:textColor="#DD000000"
-                    android:textSize="12sp"
-                    android:typeface="serif"/>
+                android:id="@+id/article1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:text="content goes here..."
+                android:textColor="#DD000000"
+                android:textSize="12sp"
+                android:typeface="serif" />
 
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="2dp"
-                android:paddingBottom="0dp">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="2dp"
+            android:paddingBottom="0dp">
 
             <LinearLayout
-                    android:id="@+id/news2"
+                android:id="@+id/news2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title2"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:text="News#2"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <TextView
-                        android:id="@+id/title2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="News#2"
-                        android:textAllCaps="true"
-                        android:textColor="#000"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:typeface="serif"/>
-
-                <TextView
-                        android:id="@+id/article2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:text="content goes here..."
-                        android:textColor="#AA000000"
-                        android:textSize="11sp"
-                        android:typeface="serif"/>
+                    android:id="@+id/article2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="content goes here..."
+                    android:textColor="#AA000000"
+                    android:textSize="11sp"
+                    android:typeface="serif" />
 
             </LinearLayout>
 
             <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="2dp"
-                    android:background="#33000000">
-            </FrameLayout>
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="2dp"
+                android:background="#33000000"></FrameLayout>
 
             <LinearLayout
-                    android:id="@+id/news3"
+                android:id="@+id/news3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title3"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:text="News#3"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <TextView
-                        android:id="@+id/title3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="News#3"
-                        android:textAllCaps="true"
-                        android:textColor="#000"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:typeface="serif"/>
-
-                <TextView
-                        android:id="@+id/article3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:text="content goes here..."
-                        android:textColor="#AA000000"
-                        android:textSize="9sp"
-                        android:typeface="serif"/>
+                    android:id="@+id/article3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="content goes here..."
+                    android:textColor="#AA000000"
+                    android:textSize="9sp"
+                    android:typeface="serif" />
 
             </LinearLayout>
         </LinearLayout>

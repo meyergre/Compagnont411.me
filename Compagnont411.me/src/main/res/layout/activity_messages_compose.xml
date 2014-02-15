@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="#fff"
-              android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,27 +11,27 @@
         android:background="#FFF">
 
         <EditText
-                android:id="@+id/composeTo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:id="@+id/composeTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ems="10"
-                android:hint="@string/messages_compose_to"
-                android:padding="9dp"
-                android:singleLine="true"
+            android:hint="@string/messages_compose_to"
+            android:padding="9dp"
+            android:singleLine="true"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal|bottom"
             android:background="#00000000">
 
-            <requestFocus/>
+            <requestFocus />
         </EditText>
 
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/btn_send"
-                android:src="@drawable/ic_next"
-                android:background="@drawable/t411_btn_green"
-                android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_send"
+            android:src="@drawable/ic_next"
+            android:background="@drawable/t411_btn_green"
+            android:padding="10dp"
             android:layout_weight="0" />
     </LinearLayout>
 
@@ -41,14 +41,14 @@
         android:background="#33000000"></FrameLayout>
 
     <EditText
-            android:id="@+id/composeSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFF"
-            android:ems="10"
-            android:hint="@string/messages_compose_subject"
-            android:padding="9dp"
-            android:singleLine="true"/>
+        android:id="@+id/composeSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:ems="10"
+        android:hint="@string/messages_compose_subject"
+        android:padding="9dp"
+        android:singleLine="true" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -63,129 +63,127 @@
         android:layout_height="fill_parent">
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="2dp">
 
             <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/horizontalScrollView">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horizontalScrollView">
 
                 <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:gravity="center">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:gravity="center">
 
                     <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="42dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/bg_widget_search"
-                            android:id="@+id/linearLayout">
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_widget_search"
+                        android:id="@+id/linearLayout">
 
                         <Button
-                                android:layout_width="36dp"
-                                android:layout_height="wrap_content"
-                                android:text="B"
-                                android:id="@+id/txtctrl_bold"
-                                android:background="@drawable/androidt411_btn"
-                                android:textSize="22sp"
-                                android:textStyle="bold"
-                                android:textColor="#fff"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:text="B"
+                            android:id="@+id/txtctrl_bold"
+                            android:background="@drawable/androidt411_btn"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
 
                         <Button
-                                android:layout_width="36dp"
-                                android:layout_height="wrap_content"
-                                android:text="I"
-                                android:id="@+id/txtctrl_italic"
-                                android:background="@drawable/androidt411_btn"
-                                android:textSize="22sp"
-                                android:textColor="#fff"
-                                android:textStyle="italic"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:text="I"
+                            android:id="@+id/txtctrl_italic"
+                            android:background="@drawable/androidt411_btn"
+                            android:textSize="22sp"
+                            android:textColor="#fff"
+                            android:textStyle="italic"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
 
                         <Button
-                                android:layout_width="36dp"
-                                android:layout_height="wrap_content"
-                                android:text="u"
-                                android:id="@+id/txtctrl_underlined"
-                                android:background="@drawable/androidt411_btn"
-                                android:textSize="22sp"
-                                android:textColor="#fff"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:text="u"
+                            android:id="@+id/txtctrl_underlined"
+                            android:background="@drawable/androidt411_btn"
+                            android:textSize="22sp"
+                            android:textColor="#fff"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
                     </LinearLayout>
 
                     <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="42dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_widget_search">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:id="@+id/txtctrl_list"
+                            android:src="@drawable/ic_icon_list"
                             android:layout_gravity="center"
-                            android:background="@drawable/bg_widget_search"
-                            >
+                            android:scaleType="fitCenter"
+                            android:background="@drawable/androidt411_btn"
+                            android:padding="3dp" />
 
                         <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:id="@+id/txtctrl_list"
-                                android:src="@drawable/ic_icon_list"
-                                android:layout_gravity="center"
-                                android:scaleType="fitCenter"
-                                android:background="@drawable/androidt411_btn"
-                                android:padding="3dp"/>
-
-                        <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:id="@+id/txtctrl_spoiler"
-                                android:src="@drawable/ic_icon_spoiler"
-                                android:scaleType="fitCenter"
-                                android:background="@drawable/androidt411_btn"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:id="@+id/txtctrl_spoiler"
+                            android:src="@drawable/ic_icon_spoiler"
+                            android:scaleType="fitCenter"
+                            android:background="@drawable/androidt411_btn"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
 
                         <FrameLayout
-                                android:layout_width="1dp"
-                                android:layout_height="fill_parent"
-                                android:background="#44ffffff"
-                                android:layout_margin="3dp">
-                        </FrameLayout>
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:background="#44ffffff"
+                            android:layout_margin="3dp"></FrameLayout>
 
                         <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/txtctrl_quote"
-                                android:src="@drawable/ic_icon_quote"
-                                android:scaleType="fitCenter"
-                                android:background="@drawable/androidt411_btn"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtctrl_quote"
+                            android:src="@drawable/ic_icon_quote"
+                            android:scaleType="fitCenter"
+                            android:background="@drawable/androidt411_btn"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
 
                         <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/txtctrl_link"
-                                android:src="@drawable/ic_icon_link"
-                                android:scaleType="fitCenter"
-                                android:background="@drawable/androidt411_btn"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtctrl_link"
+                            android:src="@drawable/ic_icon_link"
+                            android:scaleType="fitCenter"
+                            android:background="@drawable/androidt411_btn"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
 
                         <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/txtctrl_img"
-                                android:src="@drawable/ic_icon_img"
-                                android:scaleType="fitCenter"
-                                android:background="@drawable/androidt411_btn"
-                                android:padding="3dp"
-                                android:layout_gravity="center"/>
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtctrl_img"
+                            android:src="@drawable/ic_icon_img"
+                            android:scaleType="fitCenter"
+                            android:background="@drawable/androidt411_btn"
+                            android:padding="3dp"
+                            android:layout_gravity="center" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -194,15 +192,15 @@
         </LinearLayout>
 
         <EditText
-                android:id="@+id/editTextMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="top"
-                android:hint="@string/messages_compose_message"
-                android:inputType="textMultiLine"
-                android:background="#FFF"
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/messages_compose_message"
+            android:inputType="textMultiLine"
+            android:background="#FFF"
             android:padding="2dp" />
     </LinearLayout>
 

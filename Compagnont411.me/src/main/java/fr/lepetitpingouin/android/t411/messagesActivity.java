@@ -114,8 +114,8 @@ public class messagesActivity extends ActionBarActivity {
             Log.v("Credentials :", username + "/" + password);
 
             String url = CONNECTURL;
-            if (prefs.getBoolean("useHTTPS", false))
-                url = CONNECTURL.replace("http://", "https://");
+            //if (prefs.getBoolean("useHTTPS", false))
+            //    url = CONNECTURL.replace("http://", "https://");
 
             try {/*
                 res = Jsoup
@@ -235,7 +235,7 @@ public class messagesActivity extends ActionBarActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if (v.getId()==R.id.malistviewperso) {
+        if (v.getId() == R.id.malistviewperso) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.message_context_menu, menu);
         }
@@ -244,8 +244,8 @@ public class messagesActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        itemMap = (HashMap)maListViewPerso.getItemAtPosition(info.position);
-        switch(item.getItemId()) {
+        itemMap = (HashMap) maListViewPerso.getItemAtPosition(info.position);
+        switch (item.getItemId()) {
             case R.id.messages_context_menu_read:
                 // Open mail here
                 Intent myIntent = new Intent();

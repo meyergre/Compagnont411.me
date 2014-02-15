@@ -12,12 +12,12 @@
             <EditTextPreference
                 android:key="login"
                 android:title="@string/main_login"
-                android:summary="@string/main_login_summary"/>
+                android:summary="@string/main_login_summary" />
             <EditTextPreference
                 android:key="password"
                 android:title="@string/main_password"
                 android:summary="@string/main_password_summary"
-                android:password="true"/>
+                android:password="true" />
         </PreferenceCategory>
         <PreferenceCategory android:title="Ratio">
             <EditTextPreference
@@ -25,7 +25,7 @@
                 android:title="Ratio Min."
                 android:summary="@string/lowRatio_summary"
                 android:defaultValue="0.75"
-                android:numeric="decimal"/>
+                android:numeric="decimal" />
             <EditTextPreference
                 android:key="ratioCible"
                 android:title="@string/target_ratio"
@@ -42,37 +42,37 @@
         android:icon="@drawable/ic_settings_connect"
         android:summary="@string/settings_caption_connection_summary">
 
-            <CheckBoxPreference
-                android:key="useHTTPS"
-                android:title="@string/settings_use_https"
-                android:summaryOn="@string/settings_use_https_summary_on"
-                android:summaryOff="@string/settings_use_https_summary_off"
-                android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="useHTTPS"
+            android:title="@string/settings_use_https"
+            android:summaryOn="@string/settings_use_https_summary_on"
+            android:summaryOff="@string/settings_use_https_summary_off"
+            android:defaultValue="false" />
 
-            <CheckBoxPreference
-                android:key="wifiOnly"
-                android:title="@string/settings_only_wifi"
-                android:summary="@string/settings_wifi_only_details"
-                android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="wifiOnly"
+            android:title="@string/settings_only_wifi"
+            android:summary="@string/settings_wifi_only_details"
+            android:defaultValue="false" />
 
-            <PreferenceScreen
-                android:title="@string/settings_caption_connection_advanced"
-                android:summary="@string/settings_caption_connection_advanced_summary">
+        <PreferenceScreen
+            android:title="@string/settings_caption_connection_advanced"
+            android:summary="@string/settings_caption_connection_advanced_summary">
 
-                <EditTextPreference
-                    android:key="User-Agent"
-                    android:title="User-Agent"
-                    android:summary="Définir le User-Agent utilisé par le navigateur interne"
-                    android:defaultValue="Android (Compagnon t411 internal browser)" />
+            <EditTextPreference
+                android:key="User-Agent"
+                android:title="User-Agent"
+                android:summary="Définir le User-Agent utilisé par le navigateur interne"
+                android:defaultValue="Android (Compagnon t411 internal browser)" />
 
-                <EditTextPreference
-                    android:key="timeoutValue"
-                    android:title="Timeout"
-                    android:summary="Définir le délai avant l'abandon de le connexion"
-                    android:defaultValue="10"
-                    android:numeric="integer"/>
+            <EditTextPreference
+                android:key="timeoutValue"
+                android:title="Timeout"
+                android:summary="Définir le délai avant l'abandon de le connexion"
+                android:defaultValue="10"
+                android:numeric="integer" />
 
-            </PreferenceScreen>
+        </PreferenceScreen>
 
     </PreferenceScreen>
 
@@ -92,7 +92,7 @@
             android:title="@string/frequency"
             android:summary="@string/description_frequency"
             android:defaultValue="60"
-            android:numeric="integer"/>
+            android:numeric="integer" />
         <CheckBoxPreference
             android:key="rtcMode"
             android:title="@string/settings_RTC"
@@ -162,8 +162,7 @@
             <Preference
                 android:key="savePath"
                 android:title="@string/save_path"
-                android:summary="Définir le chemin de téléchargement"
-                />
+                android:summary="Définir le chemin de téléchargement" />
 
             <CheckBoxPreference
                 android:key="openAfterDl"

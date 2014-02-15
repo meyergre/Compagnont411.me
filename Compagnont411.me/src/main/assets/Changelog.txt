@@ -1,8 +1,18 @@
 CHANGELOG
 
-(Versionnement : ANNEE {point} MOIS {tiret} build)
 
---
+2014.02-103
+- Fix certains FC lors du listing des torrents
+- Fix des erreurs d'ICC à l'ouverture des paramètres
+- Fix de la pagination des torrents dans les résultats de recherche
+- Cosmétique (critères inexistants dans les listes de torrents)
+
+
+2014.02-102
+- Fix connexion HTTPS
+- Fix certains FC lors des recherches
+
+
 2014.01-101
 - Support des liens t411 (ouvrir avec...)
 - Possibilité d'envoyer un MP depuis le menu "Partager" du système

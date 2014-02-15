@@ -75,7 +75,7 @@ public class SearchActivity extends ActionBarActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setCustomView(R.layout.action_search);
-        keywords = (EditText)getSupportActionBar().getCustomView().findViewById(R.id.action_search_keywords);
+        keywords = (EditText) getSupportActionBar().getCustomView().findViewById(R.id.action_search_keywords);
         keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -308,8 +308,8 @@ public class SearchActivity extends ActionBarActivity {
                 fF = null;
                 scF = null;
 
-                if (prefs.getBoolean("useHTTPS", false))
-                    url = url.replace("http://", "https://");
+                //if (prefs.getBoolean("useHTTPS", false))
+                //url = url.replace("http://", "https://");
 
                 Intent i;
                 i = new Intent();
@@ -548,8 +548,8 @@ public class SearchActivity extends ActionBarActivity {
                 + searchTerms
                 + "&cat=" + catCode + "&submit=Recherche&subcat=" + subCatCode;
 
-        if (prefs.getBoolean("useHTTPS", false))
-            url = url.replace("http://", "https://");
+        //if (prefs.getBoolean("useHTTPS", false))
+        //url = url.replace("http://", "https://");
 
         Intent i;
         i = new Intent();

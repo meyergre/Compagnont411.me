@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -199,15 +200,12 @@ public class ComposeMessageActivity extends ActionBarActivity {
         _message.getText().replace(Math.min(start, end), Math.max(start, end),
                 string, 0, string.length());
     }
-    
+
     private String htmlEncode(String value) {
         value = value.replaceAll("\n", "#BR#");
-        try {
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.JELLY_BEAN)
             value = Html.escapeHtml(value);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
         value = value.replaceAll("#BR#", "\n");
 
         return value;
@@ -260,14 +258,14 @@ public class ComposeMessageActivity extends ActionBarActivity {
                 browser = new SuperT411HttpBrowser(getApplicationContext());
 
                 doc = Jsoup.parse(browser.login(username, password)
-                                        .connect(Default.URL_SENDMAIL)
-                                        .addData("receiverName", to)
-                                        .addData("subject", subject)
-                                        .addData("msg", message)
-                                        .addData("save", "1")
-                                        .addData("id", "")
-                                        .addData("receiver", "")
-                                        .executeInAsyncTask());
+                        .connect(Default.URL_SENDMAIL)
+                        .addData("receiverName", to)
+                        .addData("subject", subject)
+                        .addData("msg", message)
+                        .addData("save", "1")
+                        .addData("id", "")
+                        .addData("receiver", "")
+                        .executeInAsyncTask());
 
                 value = doc.select("#messages").first().text();
 
@@ -280,7 +278,7 @@ public class ComposeMessageActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Void result) {
             dialog.dismiss();
-            if(!browser.getErrorMessage().equals(""))
+            if (!browser.getErrorMessage().equals(""))
                 Toast.makeText(getApplicationContext(), browser.getErrorMessage(), Toast.LENGTH_SHORT).show();
             finish();
         }

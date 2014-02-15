@@ -121,8 +121,8 @@ public class friendsActivity extends ActionBarActivity {
             Log.v("Credentials :", username + "/" + password);
 
             String url = CONNECTURL;
-            if (prefs.getBoolean("useHTTPS", false))
-                url = CONNECTURL.replace("http://", "https://");
+            //if (prefs.getBoolean("useHTTPS", false))
+            //    url = CONNECTURL.replace("http://", "https://");
 
             try {
 
@@ -180,14 +180,14 @@ public class friendsActivity extends ActionBarActivity {
                                 .connect("http://www.t411.me/users/profile/?id=" + friend.select(".pm").first().attr("href").substring(friend.select(".pm").first().attr("href").lastIndexOf("=") + 1))
                                 .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                                 .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
+                                .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
                                 .cookies(Jsoup
                                         .connect(Default.URL_LOGIN)
                                         .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
                                         .method(Connection.Method.POST)
                                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                                         .execute().cookies())
                                 .ignoreContentType(true).get();
 

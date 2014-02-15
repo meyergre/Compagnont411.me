@@ -67,7 +67,7 @@ public class Message {
         @Override
         protected void onPostExecute(Void result) {
             //if(t411message != null)
-                //Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -101,7 +101,7 @@ public class Message {
         @Override
         protected void onPostExecute(Void result) {
             //if(!t411message.equals(""))
-                //Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, t411message,Toast.LENGTH_SHORT).show();
         }
 
     }

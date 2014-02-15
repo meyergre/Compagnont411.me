@@ -16,7 +16,11 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
@@ -29,9 +33,17 @@ import org.jsoup.Jsoup;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class SuperT411HttpBrowser {
     CookieStore cookieStore;
@@ -44,19 +56,47 @@ public class SuperT411HttpBrowser {
 
     List<NameValuePair> data = new ArrayList<NameValuePair>(9);
 
+    Context ctx;
+
     public SuperT411HttpBrowser(Context context) {
+        ctx = context;
         Log.d("SuperT411HttpBrowser", "constructor");
         cookieStore = new BasicCookieStore();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        //new LoginTask().execute(Default.URL_LOGIN);
     }
 
     public SuperT411HttpBrowser connect(String mUrl) {
         Log.d("SuperT411HttpBrowser", "connect");
         this.url = mUrl;
 
-        if(prefs.getBoolean("useHTTPS", false))
+        if (prefs.getBoolean("useHTTPS", false)) {
             this.url = this.url.replace("http://", "https://");
+            try {
+                SSLContext ctx = SSLContext.getInstance("TLS");
+                ctx.init(null, new TrustManager[]{
+                        new X509TrustManager() {
+                            public void checkClientTrusted(X509Certificate[] chain, String authType) {
+                            }
+
+                            public void checkServerTrusted(X509Certificate[] chain, String authType) {
+                            }
+
+                            public X509Certificate[] getAcceptedIssuers() {
+                                return new X509Certificate[]{};
+                            }
+                        }
+                }, null);
+                HttpsURLConnection.setDefaultSSLSocketFactory(ctx.getSocketFactory());
+
+                HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         return this;
     }
@@ -109,8 +149,9 @@ public class SuperT411HttpBrowser {
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout))*1000);
-        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout))*1000);
+        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
         HttpPost httppost = new HttpPost(Default.URL_LOGIN);
 
@@ -130,9 +171,9 @@ public class SuperT411HttpBrowser {
 
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-            } else{
+            } else {
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
@@ -141,7 +182,7 @@ public class SuperT411HttpBrowser {
             //TODO Handle problems..
         }
         httpclient.close();
-        if(responseString == null)
+        if (responseString == null)
             responseString = "OK";
         return responseString;
     }
@@ -150,7 +191,8 @@ public class SuperT411HttpBrowser {
 
         String username, password, url;
 
-        public LoginTask() {}
+        public LoginTask() {
+        }
 
         public LoginTask(String username, String password) {
             this.username = username;
@@ -175,12 +217,20 @@ public class SuperT411HttpBrowser {
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
 
+        X509HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+        SSLSocketFactory sslsf = SSLSocketFactory.getSocketFactory();
+        sslsf.setHostnameVerifier(hostnameVerifier);
+
         AndroidHttpClient httpclient = AndroidHttpClient.newInstance(prefs.getString("User-Agent", Default.USER_AGENT));
+
+        httpclient.getConnectionManager().getSchemeRegistry().register(new Scheme("https", sslsf, 443));
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout))*1000);
-        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout))*1000);
+        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        HttpClientParams.setRedirecting(httpclient.getParams(), true);
+
 
         HttpPost httppost = new HttpPost(Default.URL_LOGIN);
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -201,12 +251,13 @@ public class SuperT411HttpBrowser {
 
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            Log.e("STATUS CODE", "" + statusLine.getStatusCode());
+            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 response.getEntity().writeTo(out);
                 out.close();
                 responseString = out.toString();
-            } else{
+            } else {
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
@@ -217,16 +268,19 @@ public class SuperT411HttpBrowser {
                 if (!conError.equals("") && !conError.contains("identifié")) {
                     errorMessage = conError;
                 }
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
         } catch (Exception ex) {
             //TODO Handle problems..
+            ex.printStackTrace();
         }
         //return responseString;
+        Log.e("html", responseString);
 
         httppost = new HttpPost(url);
+
 
         try {
 
@@ -236,10 +290,10 @@ public class SuperT411HttpBrowser {
 
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 //responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
                 responseString = EntityUtils.toString(response.getEntity(), encoding);
-            } else{
+            } else {
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
@@ -250,12 +304,13 @@ public class SuperT411HttpBrowser {
                 if (!conError.equals("")) {
                     fadeMessage = conError;
                 }
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
         } catch (Exception ex) {
             //TODO Handle problems..
+            ex.printStackTrace();
         }
 
         httpclient.close();
@@ -266,7 +321,11 @@ public class SuperT411HttpBrowser {
         } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         }
+
+        Log.e("url2", url);
+        Log.e("html2", retValue);
         return retValue;
     }
+
 
 }

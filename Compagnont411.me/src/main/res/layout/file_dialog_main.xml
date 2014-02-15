@@ -1,149 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        android:id="@+id/relativeLayout01"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    android:id="@+id/relativeLayout01"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <LinearLayout
-            android:id="@+id/fdLinearLayoutList"
+        android:id="@+id/fdLinearLayoutList"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/fdLinearLayoutSelect"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
 
-        <LinearLayout
-                android:id="@+id/fdLinearLayoutSelect"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                >
-
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
                 <Button
-                        android:id="@+id/fdButtonNew"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:text="@string/nnew"
-                        android:background="@drawable/t411_btn"
-                        android:padding="10dp"
-                        android:textColor="#fff"
-                        android:textSize="18sp"></Button>
+                    android:id="@+id/fdButtonNew"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/nnew"
+                    android:background="@drawable/t411_btn"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></Button>
 
                 <Button
-                        android:id="@+id/fdButtonSelect"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:text="@string/select"
-                        android:background="@drawable/androidt411_btn"
-                        android:padding="10dp"
-                        android:textColor="#3366FF"
-                        android:textSize="18sp"></Button>
+                    android:id="@+id/fdButtonSelect"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/select"
+                    android:background="@drawable/androidt411_btn"
+                    android:padding="10dp"
+                    android:textColor="#3366FF"
+                    android:textSize="18sp"></Button>
 
                 <Button
-                        android:id="@+id/cancelFileDialog"
-                        android:layout_height="fill_parent"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:text="@string/cancel"
-                        android:background="@drawable/androidt411_btn"
-                        android:padding="10dp"
-                        android:textColor="#50000000"
-                        android:textSize="18sp"/>
+                    android:id="@+id/cancelFileDialog"
+                    android:layout_height="fill_parent"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/cancel"
+                    android:background="@drawable/androidt411_btn"
+                    android:padding="10dp"
+                    android:textColor="#50000000"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/fdLinearLayoutCreate"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp">
+            android:id="@+id/fdLinearLayoutCreate"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
             <TextView
-                    android:id="@+id/textViewFilename"
-                    android:text="@string/file_name"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"/>
+                android:id="@+id/textViewFilename"
+                android:text="@string/file_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
             <EditText
-                    android:text=""
-                    android:id="@+id/fdEditTextFile"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"></EditText>
+                android:text=""
+                android:id="@+id/fdEditTextFile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></EditText>
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
                 <Button
-                        android:id="@+id/fdButtonCancel"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dip"
-                        android:layout_weight=".3"
-                        android:text="@string/cancel"
-                        android:background="@drawable/t411_btn"
-                        android:padding="10dp"
-                        android:textColor="#fff"
-                        android:textSize="18sp"></Button>
+                    android:id="@+id/fdButtonCancel"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight=".3"
+                    android:text="@string/cancel"
+                    android:background="@drawable/t411_btn"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></Button>
 
                 <Button
-                        android:id="@+id/fdButtonCreate"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dip"
-                        android:layout_weight=".7"
-                        android:text="@string/create"
-                        android:background="@drawable/t411_btn"
-                        android:padding="10dp"
-                        android:textColor="#fff"
-                        android:textSize="18sp"></Button>
+                    android:id="@+id/fdButtonCreate"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight=".7"
+                    android:text="@string/create"
+                    android:background="@drawable/t411_btn"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textSize="18sp"></Button>
             </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_above="@+id/fdLinearLayoutList">
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/fdLinearLayoutList">
 
         <TextView
-                android:id="@+id/path"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:padding="5dp"
-                android:ellipsize="start"
+            android:id="@+id/path"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:ellipsize="start"
             android:textColor="#AAA"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" />
 
         <ListView
-                android:id="@android:id/list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:divider="#00000000"
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="#00000000"
             android:textFilterEnabled="false"
             android:choiceMode="singleChoice" />
 
         <TextView
-                android:id="@android:id/empty"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="@string/no_data"/>
+            android:id="@android:id/empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/no_data" />
     </LinearLayout>
 
 

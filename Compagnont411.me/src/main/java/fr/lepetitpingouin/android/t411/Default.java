@@ -54,7 +54,8 @@ public class Default {
     public static String Intent_Update_News = "android.appwidget.action.UPDATE_NEWS";
     public static String Intent_Refresh_Newspaper = "android.appwidget.action.REFRESH_NEWSPAPER";
 
-    public static String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.95 Safari/537.36";;
+    public static String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.95 Safari/537.36";
+    ;
 
     public static String BITCOIN_ADDRESS = "1Mp5oQy5BR4gvDkdZW5RUtpP3HTUcaZcBC";
 }
