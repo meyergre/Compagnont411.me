@@ -46,7 +46,7 @@ public class SearchActivity extends ActionBarActivity {
     favoritesFetcher fF;
 
     ImageView ivSort, ivCat;
-    EditText keywords;
+    EditText keywords, tx_description, tx_uploader, tx_fichier;
 
     int icon_sort, icon_category = R.drawable.ic_new_t411;
 
@@ -86,6 +86,11 @@ public class SearchActivity extends ActionBarActivity {
                 return false;
             }
         });
+        keywords.requestFocus();
+
+        tx_fichier = (EditText)findViewById(R.id.et_fichier);
+        tx_description = (EditText)findViewById(R.id.et_description);
+        tx_uploader = (EditText)findViewById(R.id.et_uploader);
 
         loading = (ProgressBar) findViewById(R.id.subcat_progressbar);
 
@@ -532,7 +537,16 @@ public class SearchActivity extends ActionBarActivity {
 
     public void onSearch() {
 
-        String searchTerms = keywords.getText().toString().replaceAll(" ", "%20");
+        String searchTerms = keywords.getText().toString()
+                + "&file=" +tx_fichier.getText().toString()
+                + "&description=" + tx_description.getText().toString()
+                + "&uploader=" + tx_uploader.getText().toString()
+                + "&search="
+                + (!keywords.getText().toString().equals("") ?"%40name+"+keywords.getText().toString():"")
+                + (!tx_description.getText().toString().equals("") ?"+%40description+"+tx_description.getText().toString():"")
+                + (!tx_fichier.getText().toString().equals("") ?"+%40file+"+tx_fichier.getText().toString():"")
+                + (!tx_uploader.getText().toString().equals("") ?"+%40user+"+tx_uploader.getText().toString():"")
+                .replaceAll(" ", "%20");
         searchTerms = searchTerms.replaceAll("[/\\|]", "");
         searchTerms = searchTerms.replaceAll("[éÉ]", "%E9");
         searchTerms = searchTerms.replaceAll("[èÈ]", "%E8");
@@ -555,6 +569,7 @@ public class SearchActivity extends ActionBarActivity {
         i = new Intent();
         i.setClass(getApplicationContext(), torrentsActivity.class);
         i.putExtra("url", url);
+        Log.e("uuurl", url);
         i.putExtra("keywords", keywords.getText().toString());
         i.putExtra("order", sort);
         i.putExtra("sender", "search");

@@ -18,9 +18,9 @@ public class Default {
     public static String URL_MAILS = "http://www.t411.me/mailbox/";
     public static String URL_LOGIN = "http://www.t411.me/users/login/?returnto=/users/login/";
     public static String URL_LOGOUT = "http://www.t411.me/users/logout/";
-    public static String URL_SEARCH = "http://www.t411.me/torrents/search/?search="; // + terms
+    public static String URL_SEARCH = "http://www.t411.me/torrents/search/?name="; // + terms
     public static String URL_SAY_THANKS = "http://www.t411.me/torrents/thanks/?id="; //+ ID
-    public static String URL_SHARE = "http://www.t411.me/torrent/torrent/?id="; //+ ID
+    public static String URL_SHARE = "http://www.t411.me/t/"; //+ ID
 
     public static String URL_MESSAGE = "http://www.t411.me/mailbox/mail/?id=";//+ID
     public static final String URL_MESSAGE_DEL = "http://www.t411.me/mailbox/delete/?id=";//+ID

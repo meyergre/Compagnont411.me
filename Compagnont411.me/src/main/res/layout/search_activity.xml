@@ -17,6 +17,29 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_description"
+                android:hint="Description..."
+                android:background="@drawable/txtedit" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_fichier"
+                android:hint="Fichier..."
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/txtedit" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_uploader"
+                android:hint="Uploader..."
+                android:layout_gravity="right"
+                android:background="@drawable/txtedit" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
