@@ -169,7 +169,7 @@
     <string name="shareSignature">Sent from the t411 companion app for Android</string>
     <string name="top_100">Top torrents…</string>
     <string name="simulation_seed_duration">Seed duration</string>
-    <string name="target_ratio">Ratio idéal</string>
+    <string name="target_ratio">Target Ratio</string>
     <string name="upload_speed">Upload Speed</string>
     <string name="current_ratio">Current ratio</string>
     <string name="second">second</string>
@@ -198,10 +198,9 @@
     <string name="need_an_account">Need an account ?</string>
     <string name="longclick_share">Share on long press</string>
     <string name="longclick_download">Download on long press</string>
-    <string name="description_longpress_share">Partager le lien vers un .torrent par un appui long
+    <string name="description_longpress_share">Long press to share the .torrent link
     </string>
-    <string name="description_longpress_download">Télécharger directement le .torrent via un appui
-        long, sans passer par la prez.
+    <string name="description_longpress_download">Long press to download the .torrent, without seeing the pez.
     </string>
     <string name="sort_none">No filter</string>
     <string name="sort_comm">Comments</string>
