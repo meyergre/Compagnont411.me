@@ -1,5 +1,15 @@
 CHANGELOG
 
+2014.06-106
+- correction des traductions
+- optimisations du code
+- ajout de la déconnexion dans le slide menu
+
+
+2014.03-105
+- correction des plantages en cas de présence d'espaces dans les termes de recherche
+
+
 2014.03-104
 - Prise en compte des nouvelles options de recherche du site
 

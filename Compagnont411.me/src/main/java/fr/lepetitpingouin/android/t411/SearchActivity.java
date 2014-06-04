@@ -537,7 +537,7 @@ public class SearchActivity extends ActionBarActivity {
 
     public void onSearch() {
 
-        String searchTerms = keywords.getText().toString()
+        String searchTerms = (keywords.getText().toString()
                 + "&file=" +tx_fichier.getText().toString()
                 + "&description=" + tx_description.getText().toString()
                 + "&uploader=" + tx_uploader.getText().toString()
@@ -545,7 +545,7 @@ public class SearchActivity extends ActionBarActivity {
                 + (!keywords.getText().toString().equals("") ?"%40name+"+keywords.getText().toString():"")
                 + (!tx_description.getText().toString().equals("") ?"+%40description+"+tx_description.getText().toString():"")
                 + (!tx_fichier.getText().toString().equals("") ?"+%40file+"+tx_fichier.getText().toString():"")
-                + (!tx_uploader.getText().toString().equals("") ?"+%40user+"+tx_uploader.getText().toString():"")
+                + (!tx_uploader.getText().toString().equals("") ?"+%40user+"+tx_uploader.getText().toString():""))
                 .replaceAll(" ", "%20");
         searchTerms = searchTerms.replaceAll("[/\\|]", "");
         searchTerms = searchTerms.replaceAll("[éÉ]", "%E9");

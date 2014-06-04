@@ -1,8 +1,10 @@
 package fr.lepetitpingouin.android.t411;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -27,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -116,6 +119,30 @@ public class MainActivity extends ActionBarActivity {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
+    }
+
+    public void onDisconnectPressed(View v) {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_disconnect)
+                .setTitle(R.string.disconnectConfirmTitle)
+                .setMessage(R.string.disconnectConfirmMessage)
+                .setPositiveButton(R.string.YES, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), R.string.button_disconnect, Toast.LENGTH_SHORT).show();
+                        SharedPreferences.Editor edit = prefs.edit();
+                        edit.remove("firstLogin");
+                        edit.remove("login");
+                        edit.remove("password");
+                        edit.putBoolean("autoUpdate", false);
+                        edit.commit();
+                        finish();
+                    }
+
+                })
+                .setNegativeButton(R.string.NO, null)
+                .show();
     }
 
     @Override

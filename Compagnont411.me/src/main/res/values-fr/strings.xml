@@ -66,6 +66,7 @@
     <string name="getMesageContent">Récupération du contenu…</string>
 
     <string name="donate">Faire un don</string>
+    <string name="donateWarning">Le don est adressé au développeur de l\'application, et n\'est pas lié au système de donation du site.</string>
     <string name="considerDonate">Vous aimez l\'appli ?</string>
 
     <string name="appwidget_huge">Horloge t411</string>
@@ -282,6 +283,11 @@
     <string name="pagesFetched">pages trouvées</string>
     <string name="fetchingPages">Comptage des pages...</string>
     <string name="runtime_ex">Erreur d\'exécution. Veuillez réessayer ultérieurement.</string>
+    <string name="button_disconnect">Déconnexion...</string>
+    <string name="disconnectConfirmTitle">Déconnexion</string>
+    <string name="disconnectConfirmMessage">Une fois vos identifiants de connexion effacés, l\'application ne pourra plus être ouverte sans se connecter à nouveau. En outre, l\'actualisation automatique des données sera désactivée, et devra être réactivée manuellement dans les réglages. Voulez-vous continuer ?</string>
+    <string name="NO">No</string>
+    <string name="YES">Yes</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

@@ -74,6 +74,7 @@
     <string name="getMesageContent">Getting message content...</string>
 
     <string name="donate">Buy me a beer ! ;o)</string>
+    <string name="donateWarning">Note that the money will go to the developer, not the website.</string>
     <string name="considerDonate">Enjoy the app? consider donating € 1 !</string>
 
     <string name="appwidget_huge">t411 Clock</string>
@@ -108,10 +109,6 @@
     <string name="messages_compose_message">Message :</string>
     <string name="messages_compose_send">Send</string>
 
-    <string name="settings_removeAd">Remove Ads</string>
-    <string name="settings_removeAd_details">Remove all ads in the app (needs it to be completely
-        closed and then re-opened). No condition.
-    </string>
     <string name="settings_caption_service">Service settings</string>
     <string name="settings_caption_general">General settings</string>
     <string name="settings_caption_other">Other settings</string>
@@ -296,6 +293,11 @@
     <string name="pagesFetched">pages found</string>
     <string name="fetchingPages">listing pages...</string>
     <string name="runtime_ex">Runtime Exception. Please try again !</string>
+    <string name="button_disconnect">Disconnect</string>
+    <string name="disconnectConfirmTitle">Disconnection</string>
+    <string name="disconnectConfirmMessage">Are you sure you want to disconnect ? you won\'t be able to open the app unless you arre logged back in, and the app will no more be able to sync itself without your login information. Continue ?</string>
+    <string name="NO">No</string>
+    <string name="YES">Yes</string>
 
 
     <string-array name="widget_actions">
