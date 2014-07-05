@@ -277,7 +277,7 @@ public class SuperT411HttpBrowser {
             ex.printStackTrace();
         }
         //return responseString;
-        Log.e("html", responseString);
+        //Log.e("html", responseString);
 
         httppost = new HttpPost(url);
 
@@ -323,7 +323,7 @@ public class SuperT411HttpBrowser {
         }
 
         Log.e("url2", url);
-        Log.e("html2", retValue);
+        //Log.e("html2", retValue);
         return retValue;
     }
 

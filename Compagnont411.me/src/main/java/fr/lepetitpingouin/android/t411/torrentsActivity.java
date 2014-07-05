@@ -452,9 +452,9 @@ public class torrentsActivity extends ActionBarActivity {
 
                 for (Element hCat : doc.select("h3")) {
                     map = new HashMap<String, String>();
-                    map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("img").first().attr("class").substring(4)).getIcon()));
+                    map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]).getIcon()));
                     map.put("name", hCat.text());
-                    map.put("code", hCat.nextElementSibling().select("img").last().attr("class").substring(4));
+                    map.put("code", hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]);
                     catListItem.add(map);
                     publishProgress(++count + " " + getString(R.string.catFetched));
                 }
@@ -511,9 +511,12 @@ public class torrentsActivity extends ActionBarActivity {
                     for (Element row : table.select("tr")) {
                         Elements tds = row.select("td");
 
-                        String catCode = tds.get(base + 0).select(".category img").first().attr("class").replace("cat-", "");
+                        Log.e("Table row", "ok");
+
+                        String catCode = tds.get(base + 0).select("a").first().attr("href").split("=", 2)[1];
 
                         try {
+                            Log.e("TRY", "EnterTry");
                             publishProgress(++count + " " + getString(R.string.torrents_found));
                             map = new HashMap<String, String>();
                             map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
@@ -537,16 +540,17 @@ public class torrentsActivity extends ActionBarActivity {
                             listItem.add(map);
 
                         } catch (Exception e) {
+                            Log.e("ERR. TORRENT", e.toString());
                         }
                     }
                 }
             } catch (RuntimeException rte) {
 
-                new Handler().post(new Runnable() {
+                /*new Handler().post(new Runnable() {
                     public void run() {
                         Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.runtime_ex), Toast.LENGTH_LONG).show();
                     }
-                });
+                });*/
 
             } catch (Exception e) {
                 e.printStackTrace();

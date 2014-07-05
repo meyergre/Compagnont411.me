@@ -124,40 +124,19 @@ public class friendsActivity extends ActionBarActivity {
             //if (prefs.getBoolean("useHTTPS", false))
             //    url = CONNECTURL.replace("http://", "https://");
 
-            try {
-
-                /*
-                res = Jsoup
-                        .connect(url)
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                        .cookies(Jsoup
-                                .connect(Default.URL_LOGIN)
-                                .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
-                                .method(Connection.Method.POST)
-                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                                .execute().cookies())
-                        .ignoreContentType(true).execute();
-                doc = res.parse();
-
-                */
+           // try {
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
                         .connect(url)
                         .executeInAsyncTask());
 
-            } catch (Exception e) {
+            /*} catch (Exception e) {
                 Log.e("erreur", e.toString());
                 Toast.makeText(getApplicationContext(),
                         "Erreur lors de la récupération des amis...",
                         Toast.LENGTH_SHORT).show();
-            }
+            }*/
 
             try {
                 int unread = 0;
@@ -175,7 +154,7 @@ public class friendsActivity extends ActionBarActivity {
 
                     map.put("smiley", String.valueOf(R.drawable.smiley_unknown));
 
-                    try {
+                    //try {
                         Document profile = Jsoup
                                 .connect("http://www.t411.me/users/profile/?id=" + friend.select(".pm").first().attr("href").substring(friend.select(".pm").first().attr("href").lastIndexOf("=") + 1))
                                 .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -197,9 +176,9 @@ public class friendsActivity extends ActionBarActivity {
                         map.put("ratio", String.format("%.2f", Double.valueOf(ratio)));
 
                         map.put("smiley", String.valueOf(new Ratio(getApplicationContext()).getSmiley(Double.valueOf(ratio))));
-                    } catch (Exception e) {
+                    /*} catch (Exception e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                     listItem.add(map);
                 }

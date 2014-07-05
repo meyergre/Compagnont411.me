@@ -1,5 +1,10 @@
 CHANGELOG
 
+2014.07-107
+- Adaptation aux changements du site (changement de l'affichage du code de catégorie) dans les résultats de recherche et les top torrents
+- correction des traductions
+
+
 2014.06-106
 - correction des traductions
 - optimisations du code

@@ -286,8 +286,8 @@
     <string name="button_disconnect">Déconnexion...</string>
     <string name="disconnectConfirmTitle">Déconnexion</string>
     <string name="disconnectConfirmMessage">Une fois vos identifiants de connexion effacés, l\'application ne pourra plus être ouverte sans se connecter à nouveau. En outre, l\'actualisation automatique des données sera désactivée, et devra être réactivée manuellement dans les réglages. Voulez-vous continuer ?</string>
-    <string name="NO">No</string>
-    <string name="YES">Yes</string>
+    <string name="NO">Non</string>
+    <string name="YES">Oui</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>
