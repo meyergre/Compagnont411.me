@@ -42,7 +42,6 @@
         means higher battery use…
     </string>
     <string name="show_notifs">System notifications</string>
-    <string name="description_notifSystem">Notify on update</string>
     <string name="WhatToDo">Choose an action</string>
     <string name="open_app">Open app</string>
     <string name="update_now">Update now</string>
@@ -122,33 +121,17 @@
         verification will be made.
     </string>
     <string name="user_manual">User manual</string>
-    <string name="shoutbox">Shoutbox</string>
     <string name="news_widget">t411 News</string>
     <string name="Share">Share</string>
     <string name="shareText">Checkout "t411 Companion" on Google Play !
         https://play.google.com/store/apps/details?id=fr.lepetitpingouin.android.t411
     </string>
-    <string name="contribute_for_free">Wanna contribute for free ? tell your friends about the app
-        !
-    </string>
-    <string name="donate_050e">Buy me a chewing gum ! (€ 0.5)</string>
-    <string name="donate_100e">Buy me a baguette ! (€ 1,-)</string>
-    <string name="donate_200e">Buy me a Coke ! (€ 2,-)</string>
-    <string name="donate_500e">Buy me a BIG beer :D ! (€ 5,-)</string>
     <string name="calculator">Calculator</string>
-    <string name="enable_dev_functions">Enable development functions</string>
-    <string name="description_dev_preview">Enable everything in the app, including tools and
-        functions that are still in development.
-    </string>
     <string name="settings_RTC">Do not update in standby mode</string>
     <string name="settings_RTC_details">Use RTC alarm instead of RTC_WAKEUP to perform updates. This
         increase battery life, but does not respect the refresh rate.
     </string>
     <string name="settings_use_https">Use HTTPS</string>
-    <string name="settings_grab_avatar">Use t411\'s avatar on widgets</string>
-    <string name="settings_grab_avatar_details">Use your avatar on t411 on widgets instead of
-        application\'s logo
-    </string>
     <string name="download_simulation">Download Simulation</string>
     <string name="DL_left">Download left</string>
     <string name="UP_left">Upload left</string>
@@ -158,7 +141,7 @@
     </string>
     <string name="RaZ">Rst.</string>
     <string name="upload_simulation">Upload Simulation</string>
-    <string name="calc_simulation">Simulation</string>
+    <string name="calc_simulation" translatable="false">Simulation</string>
     <string name="btn_forum">Discussion thread</string>
     <string name="btn_news">t411 News</string>
     <string name="contribute_on_t411">Support t411.me !</string>

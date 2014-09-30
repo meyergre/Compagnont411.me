@@ -614,7 +614,7 @@
                 android:minWidth="280dp">
 
                 <ImageView
-                    android:id="@+id/imageView11"
+                    android:id="@+id/imageView112"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_uploads"
@@ -622,7 +622,7 @@
                     android:layout_margin="4dp" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/textView72"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"

@@ -310,12 +310,20 @@ public class SearchActivity extends ActionBarActivity {
                 String url = Default.URL_SEARCH
                         + map.get("code");
 
+                keywords.setText(map.get("code"));
+                tx_description.setText("");
+                tx_fichier.setText("");
+                tx_uploader.setText("");
+
                 fF = null;
                 scF = null;
+
+                onSearch();
 
                 //if (prefs.getBoolean("useHTTPS", false))
                 //url = url.replace("http://", "https://");
 
+                /*
                 Intent i;
                 i = new Intent();
                 i.setClass(getApplicationContext(), torrentsActivity.class);
@@ -331,6 +339,7 @@ public class SearchActivity extends ActionBarActivity {
                 //i.putExtra("icon_category", icon_category);
                 //i.putExtra("icon_sort", icon_sort);
                 startActivity(i);
+                */
 
             }
         });

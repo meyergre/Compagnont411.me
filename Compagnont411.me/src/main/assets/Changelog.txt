@@ -1,5 +1,11 @@
 CHANGELOG
 
+2014.09-108
+- Mise à jour des outils de développement
+- Retrait du lien messagerie imposé dans la liste des applications
+- Fix de "Mes recherches" ne renvoyany pas les bons résultats
+
+
 2014.07-107
 - Adaptation aux changements du site (changement de l'affichage du code de catégorie) dans les résultats de recherche et les top torrents
 - correction des traductions

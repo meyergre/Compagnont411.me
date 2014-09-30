@@ -217,7 +217,7 @@ public class SuperT411HttpBrowser {
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
 
-        X509HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+        X509HostnameVerifier hostnameVerifier = SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
         SSLSocketFactory sslsf = SSLSocketFactory.getSocketFactory();
         sslsf.setHostnameVerifier(hostnameVerifier);
 

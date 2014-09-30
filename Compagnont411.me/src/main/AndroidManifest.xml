@@ -17,7 +17,6 @@
         android:vmSafeMode="true"
         android:label="@string/app_name"
         android:allowBackup="true"
-        android:debuggable="false"
         android:theme="@style/CustomActionBarTheme">
         <activity
             android:name=".MainActivity"
@@ -168,7 +167,7 @@
             android:icon="@drawable/ic_launcher_messages">
             <intent-filter android:label="@string/sendPM">
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <!--category android:name="android.intent.category.DEFAULT" /-->
                 <data android:mimeType="text/*" />
             </intent-filter>
         </activity>
