@@ -15,7 +15,6 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,32 +61,9 @@ public class MainActivity extends ActionBarActivity {
                 setSupportProgressBarIndeterminateVisibility(false);
                 updateValues();
             }
-            Log.d("ACTIVITY", " received INTENT :)");
+
         }
     };
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        updateValues();
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        trimCache(this);
-        try {
-            unregisterReceiver(receiver);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void trimCache(Context context) {
         try {
@@ -115,6 +91,29 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        updateValues();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        trimCache(this);
+        try {
+            unregisterReceiver(receiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
@@ -126,8 +125,7 @@ public class MainActivity extends ActionBarActivity {
                 .setIcon(R.drawable.ic_disconnect)
                 .setTitle(R.string.disconnectConfirmTitle)
                 .setMessage(R.string.disconnectConfirmMessage)
-                .setPositiveButton(R.string.YES, new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), R.string.button_disconnect, Toast.LENGTH_SHORT).show();
@@ -461,7 +459,6 @@ public class MainActivity extends ActionBarActivity {
         hLogin.setTextColor(context.getResources().getColor(R.color.t411_blue));
         hLogin.setTextColor(new Ratio(this).getTitleColor());
 
-        Log.v("widget t411", "mise à jour du smiley");
 
         hSmiley = (ImageView) findViewById(R.id.homeSmiley);
         hSmiley.setImageResource(new Ratio(this).getSmiley());
@@ -484,7 +481,7 @@ public class MainActivity extends ActionBarActivity {
         try {
             stopService(new Intent(MainActivity.this, t411UpdateService.class));
         } catch (Exception ex) {
-            Log.e("erreur service", ex.toString());
+
         }
         startService(new Intent(MainActivity.this, t411UpdateService.class));
 

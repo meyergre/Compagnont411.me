@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
@@ -156,7 +155,7 @@ public class Torrent {
                 msg = doc.select("div#messages").first().text();
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
+
             }
             return null;
         }
@@ -211,7 +210,7 @@ public class Torrent {
                 msg = doc.select("div.fade").first().text();
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
+
             }
             return null;
         }
@@ -258,7 +257,7 @@ public class Torrent {
                         .execute();
 
                 torrentFileContent = resTorrent.bodyAsBytes();
-                Log.e("torrentFileContent's length", torrentFileContent.toString());
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -276,8 +275,6 @@ public class Torrent {
             File file = new File(path, name.replaceAll("/", "_") + ".torrent");
             file.setWritable(true, false);
 
-            Log.e("PATH", file.getAbsolutePath());
-            Log.e("PATH", Environment.getExternalStorageDirectory().getPath());
 
             try {
                 file.createNewFile();
@@ -299,7 +296,7 @@ public class Torrent {
                     //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.getName().substring(file.getName().lastIndexOf(".")+1)));
                     i.setData(Uri.fromFile(file));
 
-                PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
                 if (prefs.getBoolean("openAfterDl", false)) {
                     //ouvrir le fichier
@@ -315,13 +312,13 @@ public class Torrent {
             } catch (IOException e) {
                 Intent i = new Intent();
                 i.setClass(context, UserPrefsActivity.class);
-                PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
                 e.printStackTrace();
             } catch (Exception e) {
                 Intent i = new Intent();
                 i.setClass(context, UserPrefsActivity.class);
-                PendingIntent pI = PendingIntent.getActivity(context, 0, i, Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
                 if (file.exists() && file.length() == 0) {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
                     e.printStackTrace();

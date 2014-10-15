@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 public class Widget_nano extends AppWidgetProvider {
@@ -25,7 +24,7 @@ public class Widget_nano extends AppWidgetProvider {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_mini);
 
             try {
-                Log.v("widget t411", "D�finition de l'Intent");
+
 
                 prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -57,7 +56,6 @@ public class Widget_nano extends AppWidgetProvider {
             } catch (Exception ex) {
             }
 
-            Log.v("widget t411", "mise � jour des valeurs");
 
             views.setTextViewText(R.id.updatedTime, prefs.getString("lastDate", "?????"));
             views.setTextViewText(R.id.wMails, String.valueOf(prefs.getInt("lastMails", 0)));

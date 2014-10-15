@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -98,6 +97,8 @@ public class friendsActivity extends ActionBarActivity {
 
         Connection.Response res = null;
         Document doc = null;
+        String username = prefs.getString("login", ""), password = prefs
+                .getString("password", "");
 
         @Override
         protected void onPreExecute() {
@@ -110,29 +111,24 @@ public class friendsActivity extends ActionBarActivity {
             super.onCancelled();
         }
 
-        String username = prefs.getString("login", ""), password = prefs
-                .getString("password", "");
-
         @Override
         protected Void doInBackground(Void... arg0) {
             listItem.clear();
 
 
-            Log.v("Credentials :", username + "/" + password);
-
             String url = CONNECTURL;
             //if (prefs.getBoolean("useHTTPS", false))
             //    url = CONNECTURL.replace("http://", "https://");
 
-           // try {
+            // try {
 
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
-                        .login(username, password)
-                        .connect(url)
-                        .executeInAsyncTask());
+            doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                    .login(username, password)
+                    .connect(url)
+                    .executeInAsyncTask());
 
             /*} catch (Exception e) {
-                Log.e("erreur", e.toString());
+               
                 Toast.makeText(getApplicationContext(),
                         "Erreur lors de la récupération des amis...",
                         Toast.LENGTH_SHORT).show();
@@ -155,27 +151,27 @@ public class friendsActivity extends ActionBarActivity {
                     map.put("smiley", String.valueOf(R.drawable.smiley_unknown));
 
                     //try {
-                        Document profile = Jsoup
-                                .connect("http://www.t411.me/users/profile/?id=" + friend.select(".pm").first().attr("href").substring(friend.select(".pm").first().attr("href").lastIndexOf("=") + 1))
-                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                                .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                                .cookies(Jsoup
-                                        .connect(Default.URL_LOGIN)
-                                        .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
-                                        .method(Connection.Method.POST)
-                                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                                        .execute().cookies())
-                                .ignoreContentType(true).get();
+                    Document profile = Jsoup
+                            .connect("http://www.t411.me/users/profile/?id=" + friend.select(".pm").first().attr("href").substring(friend.select(".pm").first().attr("href").lastIndexOf("=") + 1))
+                            .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                            .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                            .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
+                            .cookies(Jsoup
+                                    .connect(Default.URL_LOGIN)
+                                    .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
+                                    .method(Connection.Method.POST)
+                                    .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                                    .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                                    .maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                                    .execute().cookies())
+                            .ignoreContentType(true).get();
 
-                        map.put("up", new BSize(profile.select(".itemWrapperHalf").last().select(".block dd").get(0).text()).convert());
-                        map.put("down", new BSize(profile.select(".itemWrapperHalf").last().select(".block dd").get(1).text()).convert());
-                        String ratio = profile.select(".itemWrapperHalf").last().select(".block dd .alignleft").html().replaceAll("&nbsp;", "").trim();
-                        map.put("ratio", String.format("%.2f", Double.valueOf(ratio)));
+                    map.put("up", new BSize(profile.select(".itemWrapperHalf").last().select(".block dd").get(0).text()).convert());
+                    map.put("down", new BSize(profile.select(".itemWrapperHalf").last().select(".block dd").get(1).text()).convert());
+                    String ratio = profile.select(".itemWrapperHalf").last().select(".block dd .alignleft").html().replaceAll("&nbsp;", "").trim();
+                    map.put("ratio", String.format("%.2f", Double.valueOf(ratio)));
 
-                        map.put("smiley", String.valueOf(new Ratio(getApplicationContext()).getSmiley(Double.valueOf(ratio))));
+                    map.put("smiley", String.valueOf(new Ratio(getApplicationContext()).getSmiley(Double.valueOf(ratio))));
                     /*} catch (Exception e) {
                         e.printStackTrace();
                     }*/
@@ -187,7 +183,7 @@ public class friendsActivity extends ActionBarActivity {
                 edit.commit();
 
             } catch (Exception ex) {
-                Log.e("Erreur test TD", ex.toString());
+
             }
 
             return null;

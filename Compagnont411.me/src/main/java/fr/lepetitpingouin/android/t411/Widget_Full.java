@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.util.Calendar;
@@ -35,7 +34,7 @@ public class Widget_Full extends AppWidgetProvider {
             date = new Date();
 
             try {
-                Log.v("widget t411", "D�finition de l'Intent");
+
 
                 prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -65,7 +64,7 @@ public class Widget_Full extends AppWidgetProvider {
 
                 views.setOnClickPendingIntent(R.id.topLogo, pIntent);
             } catch (Exception ex) {
-                Log.e("widget t411 - lancement de l'Intent", ex.toString());
+
             }
 
             views.setOnClickPendingIntent(R.id.wbtn_config, PendingIntent.getActivity(context.getApplicationContext(), widgetId, new Intent(context.getApplicationContext(), UserPrefsActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
@@ -74,7 +73,7 @@ public class Widget_Full extends AppWidgetProvider {
 
             views.setOnClickPendingIntent(R.id.wbtn_search, PendingIntent.getActivity(context.getApplicationContext(), widgetId, new Intent(context.getApplicationContext(), SearchActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
 
-            Log.v("widget t411", "mise � jour des valeurs");
+
             views.setTextViewText(R.id.updatedTime, prefs.getString("lastDate", "?????"));
             views.setTextViewText(R.id.wUpload, new BSize(prefs.getString("lastUpload", "0.00")).convert());
             views.setTextViewText(R.id.wDownload, new BSize(prefs.getString("lastDownload", "0.00")).convert());
@@ -123,7 +122,7 @@ public class Widget_Full extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.v("widget t411", "onReceive a re�u le Broadcast Intent");
+
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget_Full.class.getName());

@@ -484,6 +484,12 @@ public class Base64 {
 	/* ******** D E T E R M I N E W H I C H A L H A B E T ******** */
 
     /**
+     * Defeats instantiation.
+     */
+    private Base64() {
+    }
+
+    /**
      * Returns one of the _SOMETHING_ALPHABET byte arrays depending on the
      * options specified. It's possible, though silly, to specify ORDERED
      * <b>and</b> URLSAFE in which case one of them will be picked, though there
@@ -514,12 +520,6 @@ public class Base64 {
             return _STANDARD_DECODABET;
         }
     } // end getAlphabet
-
-    /**
-     * Defeats instantiation.
-     */
-    private Base64() {
-    }
 
 	/* ******** E N C O D I N G M E T H O D S ******** */
 

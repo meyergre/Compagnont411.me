@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.io.IOException;
@@ -28,7 +27,7 @@ public class NotificationWidget {
     }
 
     public boolean updateNotificationWidget() {
-        Log.d("NotificationWidget", "Entering");
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

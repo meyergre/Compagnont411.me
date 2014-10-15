@@ -11,6 +11,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:background="@drawable/searchbox"
+        android:textCursorDrawable="@null"
         android:gravity="center_vertical"
         android:hint="@string/placeholder_search"
         android:singleLine="true"

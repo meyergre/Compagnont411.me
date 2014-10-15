@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -26,14 +27,10 @@ import org.jsoup.select.Elements;
 
 public class torrentDetailsActivity extends ActionBarActivity {
 
+    public String html_filelist = "";
     SharedPreferences prefs;
-
     torrentDetailsGetter tG;
     AsyncThx thx;
-
-    public String html_filelist = "";
-
-
     ProgressDialog dialog;
 
     WebView details_www;
@@ -247,19 +244,15 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
     private class torrentDetailsGetter extends AsyncTask<Void, String[], Void> {
 
-        String tdt_seeders, tdt_leechers, tdt_note, tdt_votes, tdt_complets, tdt_taille;
-        double note = 0;
-
-        String prez = "<meta name=\"viewport\" content=\"width=400; user-scalable=no\" />Erreur lors de la récupération des données...";
-        String tduploader = "";
-
-        Connection.Response res = null;
-        Document doc = null;
-
-        int nbHadopi = 0;
-
         final String mimeType = "text/html";
         final String encoding = "utf-8";
+        String tdt_seeders, tdt_leechers, tdt_note, tdt_votes, tdt_complets, tdt_taille;
+        double note = 0;
+        String prez = "<meta name=\"viewport\" content=\"width=400; user-scalable=no\" />Erreur lors de la récupération des données...";
+        String tduploader = "";
+        Connection.Response res = null;
+        Document doc = null;
+        int nbHadopi = 0;
 
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -335,7 +328,15 @@ public class torrentDetailsActivity extends ActionBarActivity {
                     }
                 }
 
-                String customCSS = "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')}</style>";
+                String viewport = "400";
+                if ((getResources().getConfiguration().screenLayout &
+                        Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                        Configuration.SCREENLAYOUT_SIZE_XLARGE || (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
+                    viewport = "720";
+
+                }
+
+                String customCSS = "<meta name=\"viewport\" content=\"width=" + viewport + "; user-scalable=no\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')}</style>";
                 prez = customCSS + "<body>" + hadopi + "<br/>" + qualite + doc.select(".description").first().html() + "<br/><table width=100%>";// + comments+"</body></html>";
                 torrent_NFO = doc.select("pre").first().text();
 

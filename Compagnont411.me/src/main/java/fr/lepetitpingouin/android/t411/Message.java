@@ -12,11 +12,10 @@ import android.util.Log;
 public class Message {
 
     public String id;
+    String t411message = "";
+    SuperT411HttpBrowser browser;
     private Context context;
     private SharedPreferences prefs;
-    String t411message = "";
-
-    SuperT411HttpBrowser browser;
 
     public Message(Context context, String id) {
         this.context = context;

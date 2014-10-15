@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -53,7 +52,7 @@ public class actionSelector extends Activity {
                     stopService(new Intent(actionSelector.this,
                             t411UpdateService.class));
                 } catch (Exception ex) {
-                    Log.e("erreur service", ex.toString());
+
                 }
                 startService(new Intent(actionSelector.this, t411UpdateService.class));
                 finish();

@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -345,7 +344,7 @@ public class torrentsActivity extends ActionBarActivity {
                         .executeInAsyncTask());
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
+
             }
             return null;
         }
@@ -396,7 +395,7 @@ public class torrentsActivity extends ActionBarActivity {
         protected void onPostExecute(Void result) {
             Toast.makeText(getApplicationContext(), "COOKIE :" + mCookies.toString(), Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-            Log.e("Cookie", mCookies.toString());
+
         }
     }
 
@@ -511,12 +510,11 @@ public class torrentsActivity extends ActionBarActivity {
                     for (Element row : table.select("tr")) {
                         Elements tds = row.select("td");
 
-                        Log.e("Table row", "ok");
 
                         String catCode = tds.get(base + 0).select("a").first().attr("href").split("=", 2)[1];
 
                         try {
-                            Log.e("TRY", "EnterTry");
+
                             publishProgress(++count + " " + getString(R.string.torrents_found));
                             map = new HashMap<String, String>();
                             map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
@@ -540,7 +538,7 @@ public class torrentsActivity extends ActionBarActivity {
                             listItem.add(map);
 
                         } catch (Exception e) {
-                            Log.e("ERR. TORRENT", e.toString());
+
                         }
                     }
                 }

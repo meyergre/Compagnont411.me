@@ -29,36 +29,18 @@ import java.util.TreeMap;
 public class FileDialog extends ListActivity {
 
     /**
-     * Chave de um item da lista de paths.
-     */
-    private static final String ITEM_KEY = "key";
-
-    /**
-     * Imagem de um item da lista de paths (diretorio ou arquivo).
-     */
-    private static final String ITEM_IMAGE = "image";
-
-    /**
-     * Diretorio raiz.
-     */
-    private static final String ROOT = "/";
-
-    /**
      * Parametro de entrada da Activity: path inicial. Padrao: ROOT.
      */
     public static final String START_PATH = "START_PATH";
-
     /**
      * Parametro de entrada da Activity: filtro de formatos de arquivos. Padrao:
      * null.
      */
     public static final String FORMAT_FILTER = "FORMAT_FILTER";
-
     /**
      * Parametro de saida da Activity: path escolhido. Padrao: null.
      */
     public static final String RESULT_PATH = "RESULT_PATH";
-
     /**
      * Parametro de entrada da Activity: tipo de selecao: pode criar novos paths
      * ou nao. Padrao: nao permite.
@@ -66,26 +48,33 @@ public class FileDialog extends ListActivity {
      * @see {@link SelectionMode}
      */
     public static final String SELECTION_MODE = "SELECTION_MODE";
-
     /**
      * Parametro de entrada da Activity: se e permitido escolher diretorios.
      * Padrao: falso.
      */
     public static final String CAN_SELECT_DIR = "CAN_SELECT_DIR";
-
+    /**
+     * Chave de um item da lista de paths.
+     */
+    private static final String ITEM_KEY = "key";
+    /**
+     * Imagem de um item da lista de paths (diretorio ou arquivo).
+     */
+    private static final String ITEM_IMAGE = "image";
+    /**
+     * Diretorio raiz.
+     */
+    private static final String ROOT = "/";
+    private String currentPath = ROOT;
     private List<String> path = null;
     private TextView myPath;
     private EditText mFileName;
     private ArrayList<HashMap<String, Object>> mList;
-
     private Button selectButton, cancelButton;
-
     private LinearLayout layoutSelect;
     private LinearLayout layoutCreate;
     private InputMethodManager inputManager;
     private String parentPath;
-    private String currentPath = ROOT;
-
     private int selectionMode = SelectionMode.MODE_CREATE;
 
     private String[] formatFilter = null;

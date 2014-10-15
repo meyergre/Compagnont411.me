@@ -12,7 +12,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -89,126 +88,6 @@ public class messagesActivity extends ActionBarActivity {
         }
     }
 
-    private class mailFetcher extends AsyncTask<Void, String[], Void> {
-
-        Connection.Response res = null;
-        Document doc = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onCancelled() {
-            this.cancel(true);
-            super.onCancelled();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            listItem.clear();
-
-            String username = prefs.getString("login", ""), password = prefs
-                    .getString("password", "");
-            Log.v("Credentials :", username + "/" + password);
-
-            String url = CONNECTURL;
-            //if (prefs.getBoolean("useHTTPS", false))
-            //    url = CONNECTURL.replace("http://", "https://");
-
-            try {/*
-                res = Jsoup
-                        .connect(url)
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                        .ignoreContentType(true).execute();
-                doc = res.parse();*/
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
-                        .login(username, password)
-                        .connect(url)
-                        .executeInAsyncTask());
-
-            } catch (Exception e) {
-                Log.e("erreur", e.toString());
-                //Toast.makeText(getApplicationContext(), "Erreur lors de la récupération des messages...", Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-
-            try {
-                int unread = 0;
-                for (Element table : doc.select("table.mailbox tbody")) {
-                    for (Element row : table.select("tr")) {
-                        Elements tds = row.select("td");
-                        // Log.e("Test TD = ",tds.get(1).text());
-                        int mailStatus;
-                        if (row.hasAttr("class")) {
-                            mailStatus = R.drawable.mail_unread;
-                            unread++;
-                        } else
-                            mailStatus = R.drawable.mail_read;
-                        Log.v("export de la ligne " + tds.get(2).text(),
-                                row.className());
-                        map = new HashMap<String, String>();
-                        map.put("de", tds.get(1).text());
-                        map.put("objet", tds.get(2).text());
-                        map.put("etat", String.valueOf(mailStatus));
-                        map.put("id", tds.get(0).select("input").val());
-                        map.put("date", tds.get(3).text());
-                        listItem.add(map);
-                    }
-                }
-                edit = prefs.edit();
-                edit.putString("mails", String.valueOf(unread));
-                edit.commit();
-
-            } catch (Exception ex) {
-                Log.e("Erreur test TD", ex.toString());
-            }
-
-            SimpleAdapter mSchedule = new SimpleAdapter(
-                    messagesActivity.this.getBaseContext(), listItem,
-                    R.layout.item_msglist, new String[]{"de", "objet",
-                    "etat", "date"}, new int[]{R.id.fromuser,
-                    R.id.mailsubject, R.id.mailstate, R.id.maildate});
-
-            try {
-                maListViewPerso.setAdapter(mSchedule);
-            } catch (Exception ex) {
-            }
-
-            maListViewPerso.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                @SuppressWarnings("unchecked")
-                public void onItemClick(AdapterView<?> a, View v, int position,
-                                        long id) {
-                    HashMap<String, String> map = (HashMap<String, String>) maListViewPerso
-                            .getItemAtPosition(position);
-
-                    Intent myIntent = new Intent();
-                    myIntent.setClass(getApplicationContext(), readMailActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("id", map.get("id"));
-                    bundle.putString("de", map.get("de"));
-                    bundle.putString("objet", map.get("objet"));
-                    bundle.putString("date", map.get("date"));
-                    myIntent.putExtras(bundle);
-                    startActivity(myIntent);
-                }
-            });
-
-            dialog.cancel();
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -244,7 +123,7 @@ public class messagesActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        itemMap = (HashMap) maListViewPerso.getItemAtPosition(info.position);
+        itemMap = (HashMap<String, String>) maListViewPerso.getItemAtPosition(info.position);
         switch (item.getItemId()) {
             case R.id.messages_context_menu_read:
                 // Open mail here
@@ -297,6 +176,122 @@ public class messagesActivity extends ActionBarActivity {
                 return true;
             default:
                 return super.onContextItemSelected(item);
+        }
+    }
+
+    private class mailFetcher extends AsyncTask<Void, String[], Void> {
+
+        Connection.Response res = null;
+        Document doc = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onCancelled() {
+            this.cancel(true);
+            super.onCancelled();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            listItem.clear();
+
+            String username = prefs.getString("login", ""), password = prefs
+                    .getString("password", "");
+
+
+            String url = CONNECTURL;
+            //if (prefs.getBoolean("useHTTPS", false))
+            //    url = CONNECTURL.replace("http://", "https://");
+
+            try {/*
+                res = Jsoup
+                        .connect(url)
+                        .data("login", username, "password", password)
+                        .method(Method.POST)
+                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
+                        .ignoreContentType(true).execute();
+                doc = res.parse();*/
+                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                        .login(username, password)
+                        .connect(url)
+                        .executeInAsyncTask());
+
+            } catch (Exception e) {
+
+                //Toast.makeText(getApplicationContext(), "Erreur lors de la récupération des messages...", Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            try {
+                int unread = 0;
+                for (Element table : doc.select("table.mailbox tbody")) {
+                    for (Element row : table.select("tr")) {
+                        Elements tds = row.select("td");
+                        int mailStatus;
+                        if (row.hasAttr("class")) {
+                            mailStatus = R.drawable.mail_unread;
+                            unread++;
+                        } else
+                            mailStatus = R.drawable.mail_read;
+                        map = new HashMap<String, String>();
+                        map.put("de", tds.get(1).text());
+                        map.put("objet", tds.get(2).text());
+                        map.put("etat", String.valueOf(mailStatus));
+                        map.put("id", tds.get(0).select("input").val());
+                        map.put("date", tds.get(3).text());
+                        listItem.add(map);
+                    }
+                }
+                edit = prefs.edit();
+                edit.putString("mails", String.valueOf(unread));
+                edit.commit();
+
+            } catch (Exception ex) {
+            }
+
+            SimpleAdapter mSchedule = new SimpleAdapter(
+                    messagesActivity.this.getBaseContext(), listItem,
+                    R.layout.item_msglist, new String[]{"de", "objet",
+                    "etat", "date"}, new int[]{R.id.fromuser,
+                    R.id.mailsubject, R.id.mailstate, R.id.maildate});
+
+            try {
+                maListViewPerso.setAdapter(mSchedule);
+            } catch (Exception ex) {
+            }
+
+            maListViewPerso.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                @SuppressWarnings("unchecked")
+                public void onItemClick(AdapterView<?> a, View v, int position,
+                                        long id) {
+                    HashMap<String, String> map = (HashMap<String, String>) maListViewPerso
+                            .getItemAtPosition(position);
+
+                    Intent myIntent = new Intent();
+                    myIntent.setClass(getApplicationContext(), readMailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", map.get("id"));
+                    bundle.putString("de", map.get("de"));
+                    bundle.putString("objet", map.get("objet"));
+                    bundle.putString("date", map.get("date"));
+                    myIntent.putExtras(bundle);
+                    startActivity(myIntent);
+                }
+            });
+
+            dialog.cancel();
         }
     }
 }

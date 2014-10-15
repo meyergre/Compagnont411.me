@@ -12,22 +12,6 @@ import java.io.IOException;
 public class AvatarFactory {
     Bitmap bitmap;
 
-    Bitmap getFromPrefs(SharedPreferences prefs) {
-        String encodedImage = prefs.getString("avatar", "");
-        if (!encodedImage.equalsIgnoreCase("")) {
-            try {
-                byte[] b = Base64.decode(encodedImage);
-                bitmap = BitmapFactory.decodeByteArray(b, 0,
-                        b.length);
-                //bitmap = eraseBG(bitmap, -1);         // use for white background
-                //bitmap = eraseBG(bitmap, -16777216);  // use for black background
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return bitmap;
-    }
-
     private static Bitmap eraseBG(Bitmap src, int color) {
         int width = src.getWidth();
         int height = src.getHeight();
@@ -46,5 +30,21 @@ public class AvatarFactory {
         b.setPixels(pixels, 0, width, 0, 0, width, height);
 
         return b;
+    }
+
+    Bitmap getFromPrefs(SharedPreferences prefs) {
+        String encodedImage = prefs.getString("avatar", "");
+        if (!encodedImage.equalsIgnoreCase("")) {
+            try {
+                byte[] b = Base64.decode(encodedImage);
+                bitmap = BitmapFactory.decodeByteArray(b, 0,
+                        b.length);
+                //bitmap = eraseBG(bitmap, -1);         // use for white background
+                //bitmap = eraseBG(bitmap, -16777216);  // use for black background
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bitmap;
     }
 }

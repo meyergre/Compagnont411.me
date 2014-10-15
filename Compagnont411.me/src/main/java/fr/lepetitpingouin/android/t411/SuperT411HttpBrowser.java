@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -60,13 +59,13 @@ public class SuperT411HttpBrowser {
 
     public SuperT411HttpBrowser(Context context) {
         ctx = context;
-        Log.d("SuperT411HttpBrowser", "constructor");
+
         cookieStore = new BasicCookieStore();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public SuperT411HttpBrowser connect(String mUrl) {
-        Log.d("SuperT411HttpBrowser", "connect");
+
         this.url = mUrl;
 
         if (prefs.getBoolean("useHTTPS", false)) {
@@ -110,7 +109,7 @@ public class SuperT411HttpBrowser {
     }
 
     public SuperT411HttpBrowser login(String username, String password) {
-        Log.d("SuperT411HttpBrowser", "login");
+
         this.username = username;
         this.password = password;
         return this;
@@ -122,7 +121,7 @@ public class SuperT411HttpBrowser {
     }
 
     public String execute() {
-        Log.d("SuperT411HttpBrowser", "execute");
+
         String value = "";
         try {
             value = new LoginTask(username, password).execute(url).get();
@@ -140,7 +139,7 @@ public class SuperT411HttpBrowser {
     }
 
     public String executeLoginForMessage() {
-        Log.d("SuperT411HttpBrowser", "loginForMessage");
+
         HttpContext clientcontext;
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
@@ -187,32 +186,8 @@ public class SuperT411HttpBrowser {
         return responseString;
     }
 
-    class LoginTask extends AsyncTask<String, String, String> {
-
-        String username, password, url;
-
-        public LoginTask() {
-        }
-
-        public LoginTask(String username, String password) {
-            this.username = username;
-            this.password = password;
-        }
-
-        @Override
-        protected String doInBackground(String... uri) {
-            this.url = uri[0];
-            return executeInAsyncTask();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-        }
-    }
-
     public String executeInAsyncTask() {
-        Log.d("SuperT411HttpBrowser", "executeAsync");
+
         HttpContext clientcontext;
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
@@ -251,7 +226,7 @@ public class SuperT411HttpBrowser {
 
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
-            Log.e("STATUS CODE", "" + statusLine.getStatusCode());
+
             if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 response.getEntity().writeTo(out);
@@ -322,9 +297,33 @@ public class SuperT411HttpBrowser {
             e1.printStackTrace();
         }
 
-        Log.e("url2", url);
+
         //Log.e("html2", retValue);
         return retValue;
+    }
+
+    class LoginTask extends AsyncTask<String, String, String> {
+
+        String username, password, url;
+
+        public LoginTask() {
+        }
+
+        public LoginTask(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        @Override
+        protected String doInBackground(String... uri) {
+            this.url = uri[0];
+            return executeInAsyncTask();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
     }
 
 

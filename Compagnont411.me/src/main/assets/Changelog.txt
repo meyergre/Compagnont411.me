@@ -1,9 +1,22 @@
 CHANGELOG
 
+2014.10-110
+- Fix de l'affichage des descriptions sur tablettes / format paysage
+- Nettoyage des logs dans le logcat
+
+
+
+2014.10-109
+- Fix des erreurs de mots-clé dans les recherches
+- Fix de la messagerie qui reste visible dans le menu
+- Fix du curseur dans la zone de recherche
+
+
+
 2014.09-108
 - Mise à jour des outils de développement
 - Retrait du lien messagerie imposé dans la liste des applications
-- Fix de "Mes recherches" ne renvoyany pas les bons résultats
+- Fix de "Mes recherches" ne renvoyant pas les bons résultats
 
 
 2014.07-107

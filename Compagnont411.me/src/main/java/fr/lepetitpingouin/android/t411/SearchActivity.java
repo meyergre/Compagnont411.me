@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -88,9 +87,9 @@ public class SearchActivity extends ActionBarActivity {
         });
         keywords.requestFocus();
 
-        tx_fichier = (EditText)findViewById(R.id.et_fichier);
-        tx_description = (EditText)findViewById(R.id.et_description);
-        tx_uploader = (EditText)findViewById(R.id.et_uploader);
+        tx_fichier = (EditText) findViewById(R.id.et_fichier);
+        tx_description = (EditText) findViewById(R.id.et_description);
+        tx_uploader = (EditText) findViewById(R.id.et_uploader);
 
         loading = (ProgressBar) findViewById(R.id.subcat_progressbar);
 
@@ -307,16 +306,15 @@ public class SearchActivity extends ActionBarActivity {
 
                 favorites_dialog.dismiss();
 
-                String url = Default.URL_SEARCH
-                        + map.get("code");
+                //String url = Default.URL_SEARCH + map.get("code");
 
                 keywords.setText(map.get("code"));
                 tx_description.setText("");
                 tx_fichier.setText("");
                 tx_uploader.setText("");
 
-                fF = null;
-                scF = null;
+                //fF = null;
+                //scF = null;
 
                 onSearch();
 
@@ -383,15 +381,22 @@ public class SearchActivity extends ActionBarActivity {
                 subcat_dialog.dismiss();
             }
         });
-    }
 
-    @Override
-    public void onResume() {
         fF = new favoritesFetcher();
         try {
             fF.execute();
         } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onResume() {
+        /*fF = new favoritesFetcher();
+        try {
+            fF.execute();
+        } catch (Exception e) {
+        }*/
 
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connManager.getActiveNetworkInfo();
@@ -406,6 +411,68 @@ public class SearchActivity extends ActionBarActivity {
         }
 
         super.onResume();
+    }
+
+    public void onSearch() {
+
+        String searchTerms = (keywords.getText().toString()
+                + "&file=" + tx_fichier.getText().toString()
+                + "&description=" + tx_description.getText().toString()
+                + "&uploader=" + tx_uploader.getText().toString()
+                + "&search="
+                + (!keywords.getText().toString().equals("") ? "%40name+" + keywords.getText().toString() : "")
+                + (!tx_description.getText().toString().equals("") ? "+%40description+" + tx_description.getText().toString() : "")
+                + (!tx_fichier.getText().toString().equals("") ? "+%40file+" + tx_fichier.getText().toString() : "")
+                + (!tx_uploader.getText().toString().equals("") ? "+%40user+" + tx_uploader.getText().toString() : ""))
+                .replaceAll(" ", "%20");
+        searchTerms = searchTerms.replaceAll("[/\\|]", "");
+        searchTerms = searchTerms.replaceAll("[éÉ]", "%E9");
+        searchTerms = searchTerms.replaceAll("[èÈ]", "%E8");
+        searchTerms = searchTerms.replaceAll("[êÊ]", "%EA");
+        searchTerms = searchTerms.replaceAll("[ëË]", "%EB");
+        searchTerms = searchTerms.replaceAll("[àÀ]", "%E0");
+        searchTerms = searchTerms.replaceAll("[âÂ]", "%E2");
+        searchTerms = searchTerms.replaceAll("[ùÙ]", "%F9");
+        searchTerms = searchTerms.replaceAll("[ûÛ]", "%FB");
+        searchTerms = searchTerms.replaceAll("[ïÏ]", "%EF");
+
+        String url = Default.URL_SEARCH
+                + searchTerms
+                + "&cat=" + catCode + "&submit=Recherche&subcat=" + subCatCode;
+
+        //if (prefs.getBoolean("useHTTPS", false))
+        //url = url.replace("http://", "https://");
+
+        Intent i;
+        i = new Intent();
+        i.setClass(getApplicationContext(), torrentsActivity.class);
+        i.putExtra("url", url);
+        i.putExtra("keywords", keywords.getText().toString());
+        i.putExtra("order", sort);
+        i.putExtra("sender", "search");
+        i.putExtra("type", sortMode.isChecked() ? "DESC" : "ASC");
+        i.putExtra("tx_order", ((TextView) findViewById(R.id.lst_sort)).getText());
+        i.putExtra("icon_category", icon_category);
+        i.putExtra("icon_sort", icon_sort);
+        startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                onSearch();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private class favoritesFetcher extends AsyncTask<Void, String[], Void> {
@@ -443,7 +510,7 @@ public class SearchActivity extends ActionBarActivity {
                         .executeInAsyncTask());
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
+
             }
             return null;
         }
@@ -541,69 +608,6 @@ public class SearchActivity extends ActionBarActivity {
             maListViewPersoSubcat.setAdapter(mScheduleSubcat);
 
             loading.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    public void onSearch() {
-
-        String searchTerms = (keywords.getText().toString()
-                + "&file=" +tx_fichier.getText().toString()
-                + "&description=" + tx_description.getText().toString()
-                + "&uploader=" + tx_uploader.getText().toString()
-                + "&search="
-                + (!keywords.getText().toString().equals("") ?"%40name+"+keywords.getText().toString():"")
-                + (!tx_description.getText().toString().equals("") ?"+%40description+"+tx_description.getText().toString():"")
-                + (!tx_fichier.getText().toString().equals("") ?"+%40file+"+tx_fichier.getText().toString():"")
-                + (!tx_uploader.getText().toString().equals("") ?"+%40user+"+tx_uploader.getText().toString():""))
-                .replaceAll(" ", "%20");
-        searchTerms = searchTerms.replaceAll("[/\\|]", "");
-        searchTerms = searchTerms.replaceAll("[éÉ]", "%E9");
-        searchTerms = searchTerms.replaceAll("[èÈ]", "%E8");
-        searchTerms = searchTerms.replaceAll("[êÊ]", "%EA");
-        searchTerms = searchTerms.replaceAll("[ëË]", "%EB");
-        searchTerms = searchTerms.replaceAll("[àÀ]", "%E0");
-        searchTerms = searchTerms.replaceAll("[âÂ]", "%E2");
-        searchTerms = searchTerms.replaceAll("[ùÙ]", "%F9");
-        searchTerms = searchTerms.replaceAll("[ûÛ]", "%FB");
-        searchTerms = searchTerms.replaceAll("[ïÏ]", "%EF");
-
-        String url = Default.URL_SEARCH
-                + searchTerms
-                + "&cat=" + catCode + "&submit=Recherche&subcat=" + subCatCode;
-
-        //if (prefs.getBoolean("useHTTPS", false))
-        //url = url.replace("http://", "https://");
-
-        Intent i;
-        i = new Intent();
-        i.setClass(getApplicationContext(), torrentsActivity.class);
-        i.putExtra("url", url);
-        Log.e("uuurl", url);
-        i.putExtra("keywords", keywords.getText().toString());
-        i.putExtra("order", sort);
-        i.putExtra("sender", "search");
-        i.putExtra("type", sortMode.isChecked() ? "DESC" : "ASC");
-        i.putExtra("tx_order", ((TextView) findViewById(R.id.lst_sort)).getText());
-        i.putExtra("icon_category", icon_category);
-        i.putExtra("icon_sort", icon_sort);
-        startActivity(i);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                onSearch();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 

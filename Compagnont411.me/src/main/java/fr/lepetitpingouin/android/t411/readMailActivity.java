@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -165,7 +164,7 @@ public class readMailActivity extends ActionBarActivity {
 
                 t411message = browser.getFadeMessage();
             } catch (Exception ex) {
-                Log.e("Archivage message", ex.toString());
+
             }
             return null;
         }
@@ -218,7 +217,7 @@ public class readMailActivity extends ActionBarActivity {
 
                 t411message = doc.select("#messages").first().text();
             } catch (Exception ex) {
-                Log.e("Archivage message", ex.toString());
+
             }
             return null;
         }
@@ -287,7 +286,7 @@ public class readMailActivity extends ActionBarActivity {
                 message = message + messageBody;
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
+
             }
 
             return null;

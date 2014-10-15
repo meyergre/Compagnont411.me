@@ -133,10 +133,10 @@
             android:icon="@drawable/ic_launcher_messages"
             android:finishOnTaskLaunch="true"
             android:label="@string/launcher_messages">
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter-->
         </activity>
         <activity
             android:name=".statsActivity"

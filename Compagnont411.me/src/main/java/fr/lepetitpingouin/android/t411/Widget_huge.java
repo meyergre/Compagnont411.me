@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.text.DateFormat;
@@ -30,7 +29,7 @@ public class Widget_huge extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
-        Log.v("widget t411", "onUpdate");
+
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         AlarmManager alarmManager;
@@ -60,7 +59,7 @@ public class Widget_huge extends AppWidgetProvider {
             date = new Date();
 
             try {
-                Log.v("widget t411", "D�finition de l'Intent");
+
 
                 ratio = (ratio == null) ? prefs.getString("lastRatio", "0.00")
                         : ratio;
@@ -101,7 +100,7 @@ public class Widget_huge extends AppWidgetProvider {
 
                 views.setOnClickPendingIntent(R.id.topLogo, pIntent);
             } catch (Exception ex) {
-                Log.e("widget t411 - lancement de l'Intent", ex.toString());
+
             }
 
             try {
@@ -135,10 +134,10 @@ public class Widget_huge extends AppWidgetProvider {
                         ComponentName cn = new ComponentName(packageName, className);
                         //ActivityInfo aInfo = packageManager.getActivityInfo(cn,PackageManager.GET_META_DATA);
                         alarmClockIntent.setComponent(cn);
-                        Log.d("", "Found " + vendor + " --> " + packageName + "/" + className);
+
                         foundClockImpl = true;
                     } catch (Exception e) {
-                        Log.d("", vendor + " does not exists");
+
                     }
                 }
 
@@ -150,14 +149,14 @@ public class Widget_huge extends AppWidgetProvider {
                             clockFoundPIntent);
                 }
             } catch (Exception ex) {
-                Log.e("Clock exception :", ex.toString());
+
             }
 
             views.setOnClickPendingIntent(R.id.wHour, PendingIntent
                     .getBroadcast(context, 0, new Intent(
                             Default.Appwidget_clock_update), 0));
 
-            Log.v("widget t411", "mise � jour des valeurs");
+
             views.setTextViewText(R.id.updatedTime,
                     prefs.getString("lastDate", "?????"));
             views.setTextViewText(R.id.wUpload, upload);
@@ -183,11 +182,10 @@ public class Widget_huge extends AppWidgetProvider {
 
             views.setTextViewText(R.id.wDate, sDate.toUpperCase());
 
-            Log.v("widget t411", "mise à jour du smiley");
 
             views.setImageViewResource(R.id.wSmiley, new Ratio(context).getSmiley());
 
-            Log.v("widget t411", "refresh du widget");
+
             // update the widget
             appWidgetManager.updateAppWidget(widgetId, views);
         }
@@ -195,9 +193,6 @@ public class Widget_huge extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        Log.v("widget t411",
-                "onReceive a re�u le Broadcast Intent : " + intent.getAction());
 
         try {
             username = context.getString(R.string.waiting_for_update);
@@ -217,9 +212,9 @@ public class Widget_huge extends AppWidgetProvider {
             _username = intent.getStringExtra("username");
             username = (_username != null) ? _username : username;
         } catch (Exception ex) {
-            Log.e("mise � jour des donn�es dapuis le service", ex.toString());
+
         }
-        Log.v("widget t411", "mise � jour forc�e...");
+
         AppWidgetManager appWidgetManager = AppWidgetManager
                 .getInstance(context);
         ComponentName thisAppWidget = new ComponentName(

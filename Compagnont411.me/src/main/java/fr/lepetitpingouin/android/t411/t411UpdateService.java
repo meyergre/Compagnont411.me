@@ -17,7 +17,6 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
@@ -29,26 +28,19 @@ import java.util.Calendar;
 
 public class t411UpdateService extends Service {
 
+    static final String CONNECTURL = Default.URL_USERPROFILE;
     public Integer mails, oldmails;
     public double ratio;
     public String upload, download, username, conError = "", usernumber;
     public String pagecontent;
-
     public Handler handler;
-
     AsyncUpdate upd;
     SuperT411HttpBrowser browser;
-
     AlarmManager alarmManager;
-
     SharedPreferences prefs;
-
     boolean timeout = true;
     Connection.Response res = null;
     Document doc = null;
-
-    // La page de login t411 :
-    static final String CONNECTURL = Default.URL_USERPROFILE;
 
     public boolean isConnectedToWifi() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -68,17 +60,13 @@ public class t411UpdateService extends Service {
     public void onCreate() {
         handler = new Handler();
 
-        //Log.e("IAMTHELOG", "START");
-        //new SuperT411HttpBrowser("meyerglive", "bocom32sin", Default.URL_BOOKMARK).execute();
-        //String mBrowser = browser.connect(Default.URL_LOGIN).login("meyerlive", "bocom32sin").execute();
-        //Log.e("IAMTHELOG", "STOP");
+
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        // on charge les pr?f?rences de l'application
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         if (prefs.getBoolean("autoUpdate", false)) {
@@ -87,10 +75,9 @@ public class t411UpdateService extends Service {
 
         refreshWidget();
 
-        Log.d("Wifi check...", prefs.getBoolean("wifiOnly", false) + "");
 
         if (!prefs.getBoolean("wifiOnly", false) || (prefs.getBoolean("wifiOnly", false) && isConnectedToWifi())) {
-            Log.d("", "LANCEMENT DES ASYNCTASKS");
+
 
             upd = new AsyncUpdate();
             upd.execute();
@@ -102,7 +89,7 @@ public class t411UpdateService extends Service {
     }
 
     public void planRefresh() {
-        Log.d("service", "autoRefresh ON");
+
         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
 
         Intent myIntent = new Intent(getBaseContext(), t411UpdateService.class);
@@ -115,25 +102,19 @@ public class t411UpdateService extends Service {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.MINUTE, freq);
 
-        // RTC = 1 (AlarmManager.RTC)
-        // RTC_WAKEUP = 0 (AlarmManager.RTC_WAKEUP)
+
         int RTC_mode = (prefs.getBoolean("rtcMode", false) ? 1 : 0);
         alarmManager.set(RTC_mode, calendar.getTimeInMillis(), pendingIntent);
     }
 
     public void update(String login, String password) throws IOException, ClassCastException {
 
-        Log.v("Service t411", "Update()...");
+
         sendBroadcast(new Intent(Default.Appwidget_flag_updating));
         timeout = false;
-        // on ex?cute la requ?te HTTP, en passant le login et le password en
-        // POST.
-        Log.d("update()", "Connecting...");
 
-        // is HTPPS ?
+
         String url = CONNECTURL;
-        //if (prefs.getBoolean("useHTTPS", false)) // Géré par le navigateur interne
-        //    url = CONNECTURL.replace("http://", "https://");
 
 
         browser = new SuperT411HttpBrowser(getApplicationContext());
@@ -151,16 +132,15 @@ public class t411UpdateService extends Service {
                     Toast.makeText(t411UpdateService.this, browser.getErrorMessage(), Toast.LENGTH_LONG).show();
                 }
             });
-            Log.e("conError :", conError);
+
         }
         try {
             ratio = Math.round(Float.valueOf(doc.select(".rate").first().text().replace(',', '.')) * 100.0) / 100.0;
-            Log.d("Ratio :", String.valueOf(ratio));
+
             username = doc.select(".avatar-big").attr("alt");
-            Log.v("username :", username);
-            // r?cup?ration de l'avatar
+
             String avatarPath = doc.select(".avatar-big").attr("src");
-            Log.d("avatarPath", Default.URL_INDEX + avatarPath);
+
             Connection.Response avatarRes = Jsoup
                     .connect(Default.URL_INDEX + avatarPath)
                     .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -168,39 +148,29 @@ public class t411UpdateService extends Service {
                     .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                     .ignoreContentType(true).execute();
             String avatar = Base64.encodeBytes(avatarRes.bodyAsBytes());
-            Log.d("avatar", avatar);
-            // fin
-            // on r?cup?re la chaine de l'upload sans la traiter, avec la fl?che
-            // et l'unit?
+
+
             upload = doc.select(".up").first().text();
-            Log.v("upload :", upload);
 
-            // idem pour le download
             download = doc.select(".down").first().text();
-            Log.v("download :", download);
 
-            // et enfin le nombre de mails, sous forme d'entier
             oldmails = (mails != null) ? mails : prefs.getInt("lastMails", 0);
-            Log.v("mails (avant check) :", oldmails.toString());
+
 
             String rawMail = null;
             try {
                 rawMail = doc.select(".mail  > strong").first().text();
-                Log.d("MAILS .newpm", rawMail);
+
             } catch (Exception ex) {
                 rawMail = doc.select(".newpm > strong").first().text();
-                Log.d("MAILS .mail", rawMail);
+
             }
 
             mails = Integer.valueOf(rawMail);
 
-            Log.v("mails (apr?s check) :", mails.toString());
-
-            // On r?cup?re aussi le N? utilisateur pour les statistiques
             String[] tmp = doc.select(".ajax").attr("href").split("=");
             usernumber = tmp[1];
 
-            // t?l?chargements (24h)
 
             String classe = "";
             String up24 = "";
@@ -228,54 +198,46 @@ public class t411UpdateService extends Service {
                 if (val.contains("Seedbox"))
                     seedbox = doc.select(".block > div > dl > dd").get(iterator).text();
             }
-            Log.d("Classe", classe);
-            Log.d("Titre", titre);
-            Log.d("DT", up24);
-            Log.d("DD", dl24);
-            Log.d("Seedbox", seedbox);
 
-            // Calcul du restant possible t?l?chargeable avant d'atteindre la
-            // limite de ratio fix?e
+
             double beforeLimit = 0;
             try {
-                //double upData = getGigaOctetData(prefs.getString("lastUpload", "U 0 GB"));
+
                 double upData = new BSize(upload).getInGB();
-                //double dlData = getGigaOctetData(prefs.getString( "lastDownload", "D 0 GB"));
+
                 double dlData = new BSize(download).getInGB();
 
                 double lowRatio = Double.valueOf(prefs.getString("ratioMinimum", "1"));
-                Log.d("Current Ratio :", String.valueOf(lowRatio));
+
 
                 beforeLimit = (upData - dlData * lowRatio) / lowRatio;
-                Log.d("beforeLimit :", String.valueOf(beforeLimit));
+
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Log.e("RATIORATIO", ex.toString());
+
             }
             String GoLeft = null;
 
-            // Calcul de l'upload e faire avant d'atteindre la limite de ratio
             double toLimit = 0;
             try {
-                //double upData = getGigaOctetData(prefs.getString("lastUpload", "U 0 GB"));
-                //double dlData = getGigaOctetData(prefs.getString("lastDownload", "D 0 GB"));
+
+
                 double upData = new BSize(upload).getInGB();
                 double dlData = new BSize(download).getInGB();
 
                 double curRatio = upData / dlData;
-                Log.d("Current Ratio :", String.valueOf(curRatio));
+
 
                 double targetRatio = Double.valueOf(prefs.getString("ratioCible", "1"));
-                Log.d("Target Ratio :", String.valueOf(targetRatio));
+
 
                 toLimit = (targetRatio * upData / curRatio) - upData;
-                Log.d("toRatio :", String.valueOf(toLimit));
+
             } catch (Exception ex) {
             }
 
             String UpLeft = null;
 
-            // Prise en compte des quantit?s restantes en Tera-octets
             GoLeft = (beforeLimit > 500) ?
                     String.format("%.2f", beforeLimit / 1024) + " TB" :
                     String.format("%.2f", beforeLimit) + " GB";
@@ -284,8 +246,6 @@ public class t411UpdateService extends Service {
                     String.format("%.2f", toLimit / 1024) + " TB" :
                     String.format("%.2f", toLimit) + " GB";
 
-            Log.d("left2DL : ", UpLeft);
-            // on stocke tout ce petit monde (si non nul) dans les pr?f?rences
             Editor editor = prefs.edit();
 
             editor.putString("avatar", avatar);
@@ -313,7 +273,6 @@ public class t411UpdateService extends Service {
             if (mails < prefs.getInt("lastMails", 0))
                 editor.putBoolean("mailsNeedRefresh", false);
 
-            // Notifications
             if (prefs.getBoolean("ratioAlert", false)) {
                 if (ratio < Double.valueOf(prefs.getString("ratioMinimum", "0"))) {
                     Intent ratioIntent = new Intent(getApplicationContext(), UserPrefsActivity.class);
@@ -346,15 +305,11 @@ public class t411UpdateService extends Service {
 
             editor.commit();
 
-            //updateMails();
-
-            Log.v("t411 Error :", conError);
-            Log.v("INFOS T411 :", "Mails (" + String.valueOf(mails) + ") " + upload + " " + download + " " + String.valueOf(ratio));
 
             new NotificationWidget(getApplicationContext()).updateNotificationWidget();
         } catch (Exception ex) {
         }
-        Log.v("t411 Intent :", "REFRESH WIDGET");
+
         refreshWidget();
     }
 
@@ -362,10 +317,10 @@ public class t411UpdateService extends Service {
     public void refreshWidget() {
         try {
             Intent i = new Intent(Default.Appwidget_update);
-            Log.v("t411UpdateService", "Envoi du Broadcast Intent");
+
             sendBroadcast(i);
         } catch (Exception ex) {
-            Log.v("Broadcast Sender", ex.toString());
+
         }
     }
 
@@ -407,7 +362,7 @@ public class t411UpdateService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.v("Binder", intent.toString());
+
         return null;
     }
 
@@ -428,9 +383,7 @@ public class t411UpdateService extends Service {
                     }
                 });
             } catch (Exception ex) {
-                Log.v("Credentials :", prefs.getString("login", "") + ":"
-                        + prefs.getString("password", ""));
-                Log.e("update", ex.toString());
+
 
                 Intent i = new Intent(Default.Appwidget_update);
                 sendBroadcast(i);
@@ -440,8 +393,7 @@ public class t411UpdateService extends Service {
 
         @Override
         protected void onPostExecute(Void result) {
-            Log.d("PostExecute", "");
-            //stopSelf();
+
             super.onPostExecute(result);
         }
     }
@@ -460,8 +412,7 @@ public class t411UpdateService extends Service {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 url = Default.URL_INDEX;
 
-                //if (prefs.getBoolean("useHTTPS", false))
-                //    url = url.replace("http://", "https://");
+
 
                 /* res = Jsoup.connect(url)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -477,22 +428,22 @@ public class t411UpdateService extends Service {
                     edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
                     edit.putString("readMore1", url + doc.select(".newsWrapper .readmore").get(0).attr("href"));
                     edit.commit();
-                    Log.d("news", "OK");
+
                     edit = prefs.edit();
                     edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
                     edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
                     edit.putString("readMore2", url + doc.select(".newsWrapper  .readmore").get(1).attr("href"));
                     edit.commit();
-                    Log.d("news", "OK");
+
                     edit = prefs.edit();
                     edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
                     edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
                     edit.putString("readMore3", url + doc.select(".newsWrapper  .readmore").get(2).attr("href"));
                     edit.commit();
-                    Log.d("news", "OK");
+
                 }
             } catch (Exception ex) {
-                Log.e("news ERREUR :", ex.toString());
+
             }
             return null;
         }
@@ -511,7 +462,7 @@ public class t411UpdateService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pagecontent = "Aucune donn&eacute;e graphique.";
+            pagecontent = "";
         }
 
         @Override
@@ -519,15 +470,13 @@ public class t411UpdateService extends Service {
 
             String username = prefs.getString("login", ""), password = prefs
                     .getString("password", "");
-            Log.v("Credentials :", username + "/" + password);
+
 
             Connection.Response res = null;
             Document doc = null;
 
             String url = Default.URL_STATS;
-            //if (prefs.getBoolean("useHTTPS", false)) {
-            //    url = url.replace("http://", "https://");
-            //}
+
 
             try {
                 /* res = Jsoup
@@ -550,13 +499,13 @@ public class t411UpdateService extends Service {
                             + "</head><body><div id=\"chart\" style=\"height: 100%;\"></div><script>"
                             + doc.select("div.content > script").get(2).html()
                             + "</script></body></html>";
-                    //Log.d("page content :", pagecontent);
+
                 } catch (Exception ex) {
-                    Log.e("Erreur get tabledata", ex.toString());
+
                 }
 
             } catch (Exception e) {
-                Log.e("erreur", e.toString());
+
             }
 
             return pagecontent;
@@ -564,7 +513,8 @@ public class t411UpdateService extends Service {
 
         @Override
         public void onPostExecute(String value) {
-            prefs.edit().putString("lastGraph", pagecontent).commit();
+            if (!pagecontent.equals(""))
+                prefs.edit().putString("lastGraph", pagecontent).commit();
         }
     }
 }

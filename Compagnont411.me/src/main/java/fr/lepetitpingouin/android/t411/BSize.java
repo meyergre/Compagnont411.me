@@ -1,7 +1,5 @@
 package fr.lepetitpingouin.android.t411;
 
-import android.util.Log;
-
 /**
  * Created by meyergre on 31/05/13.
  */
@@ -36,7 +34,7 @@ public class BSize {
     }
 
     public double getInBaseUnit() {
-        Log.d("getInBaseUnit()", String.valueOf(tmp[tmp.length - 2]));
+
         return Double.valueOf(tmp[tmp.length - 2]);
     }
 
