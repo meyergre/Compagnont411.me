@@ -1,5 +1,10 @@
 CHANGELOG
 
+2014.10-111
+- Fix des recherches enregistrées, en tenant compte des champs avancés
+
+
+
 2014.10-110
 - Fix de l'affichage des descriptions sur tablettes / format paysage
 - Nettoyage des logs dans le logcat

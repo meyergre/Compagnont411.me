@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class DonateActivity extends Activity {
 
     TextView amount;
+    static String version = "????";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class DonateActivity extends Activity {
         setContentView(R.layout.donate);
 
         amount = (TextView) findViewById(R.id.donate_amount);
+        version = getIntent().getStringExtra("version");
     }
 
     public void onBitcoinClick(View v) {
@@ -44,7 +46,9 @@ public class DonateActivity extends Activity {
         String amountValue = amount.getText().toString() + "%2e00";
         Intent i = new Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=meyergre%40gmail%2ecom&lc=FR&item_name=t411%2dcompanion&amount="
+                Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=meyergre%40gmail%2ecom&lc=FR&item_name=t411%2dcompanion%2d"
+                        + version
+                        + "&amount="
                         + amountValue
                         + "&currency_code=EUR&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"));
         startActivity(i);

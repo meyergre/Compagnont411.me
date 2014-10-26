@@ -32,6 +32,7 @@ import org.jsoup.Jsoup;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.KeyStore;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -196,6 +197,13 @@ public class SuperT411HttpBrowser {
         SSLSocketFactory sslsf = SSLSocketFactory.getSocketFactory();
         sslsf.setHostnameVerifier(hostnameVerifier);
 
+        try {
+            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            trustStore.load(null, null);
+            sslsf = new MySSLSocketFactory(trustStore);
+            sslsf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        } catch (Exception e) {}
+
         AndroidHttpClient httpclient = AndroidHttpClient.newInstance(prefs.getString("User-Agent", Default.USER_AGENT));
 
         httpclient.getConnectionManager().getSchemeRegistry().register(new Scheme("https", sslsf, 443));
@@ -325,6 +333,5 @@ public class SuperT411HttpBrowser {
             super.onPostExecute(result);
         }
     }
-
 
 }

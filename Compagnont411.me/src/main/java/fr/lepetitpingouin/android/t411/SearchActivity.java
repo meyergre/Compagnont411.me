@@ -306,12 +306,18 @@ public class SearchActivity extends ActionBarActivity {
 
                 favorites_dialog.dismiss();
 
-                //String url = Default.URL_SEARCH + map.get("code");
+                /*
+                codeName
+                codeDesc
+                codeFile
+                codeUplo
+                 */
+                //String url = Default.URL_SEARCH + map.get("search");
 
-                keywords.setText(map.get("code"));
-                tx_description.setText("");
-                tx_fichier.setText("");
-                tx_uploader.setText("");
+                keywords.setText(map.get("codeName"));
+                tx_description.setText(map.get("codeDesc"));
+                tx_fichier.setText(map.get("codeFile"));
+                tx_uploader.setText(map.get("codeUplo"));
 
                 //fF = null;
                 //scF = null;
@@ -321,7 +327,7 @@ public class SearchActivity extends ActionBarActivity {
                 //if (prefs.getBoolean("useHTTPS", false))
                 //url = url.replace("http://", "https://");
 
-                /*
+/*
                 Intent i;
                 i = new Intent();
                 i.setClass(getApplicationContext(), torrentsActivity.class);
@@ -337,7 +343,7 @@ public class SearchActivity extends ActionBarActivity {
                 //i.putExtra("icon_category", icon_category);
                 //i.putExtra("icon_sort", icon_sort);
                 startActivity(i);
-                */
+*/
 
             }
         });
@@ -526,7 +532,13 @@ public class SearchActivity extends ActionBarActivity {
                         mapFav.put("icon", String.valueOf(R.drawable.ic_favoritesearch_new));
                         mapFav.put("name", tds.get(2).text());
                         mapFav.put("id", tds.get(0).select("input").attr("value"));
-                        mapFav.put("code", tds.get(5).select("a").first().attr("href").substring(tds.get(5).select("a").first().attr("href").indexOf("=") + 1));
+                        //mapFav.put("search", tds.get(5).select("a").first().attr("href").substring(tds.get(5).select("a").first().attr("href").indexOf("=") + 1));
+                        String code = tds.get(3).text();
+                        mapFav.put("code", code);
+                        mapFav.put("codeName", code.replaceAll("^.*@name\\s([\\w\\s]*).*$", "$1").trim().replace(code, ""));
+                        mapFav.put("codeDesc", code.replaceAll("^.*@description\\s([\\w\\s]*).*$", "$1").trim().replace(code, ""));
+                        mapFav.put("codeFile", code.replaceAll("^.*@file\\s([\\w\\s]*).*$", "$1").trim().replace(code, ""));
+                        mapFav.put("codeUplo", code.replaceAll("^.*@uploader\\s([\\w\\s]*).*$", "$1").trim().replace(code, ""));
                         listItemFav.add(mapFav);
                     }
                 }

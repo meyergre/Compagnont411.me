@@ -18,12 +18,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class aboutActivity extends ActionBarActivity {
+    static String version;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_activity);
-        String version = "????";
+        version = "????";
         PackageInfo pInfo;
 
         getSupportActionBar().setIcon(R.drawable.ic_about);
@@ -43,7 +44,7 @@ public class aboutActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DonateActivity.class));
+                startActivity(new Intent(getApplicationContext(), DonateActivity.class).putExtra("version", version));
             }
         });
 
