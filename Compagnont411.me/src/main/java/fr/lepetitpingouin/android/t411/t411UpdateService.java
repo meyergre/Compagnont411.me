@@ -17,6 +17,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.jsoup.Connection;
@@ -129,7 +130,10 @@ public class t411UpdateService extends Service {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(t411UpdateService.this, browser.getErrorMessage(), Toast.LENGTH_LONG).show();
+                    if(browser.getErrorMessage().contains("aptcha"))
+                        Log.e("Update error", browser.getErrorMessage());
+                    else
+                        Toast.makeText(t411UpdateService.this, browser.getErrorMessage(), Toast.LENGTH_LONG).show();
                 }
             });
 

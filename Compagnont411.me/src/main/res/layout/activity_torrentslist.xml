@@ -20,7 +20,7 @@
         android:smoothScrollbar="true"
         android:fastScrollEnabled="true"
         android:listSelector="@drawable/androidt411_btn"
-        android:columnWidth="450dp"
+        android:columnWidth="240dp"
         android:numColumns="auto_fit" />
 
     <LinearLayout

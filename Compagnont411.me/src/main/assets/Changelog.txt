@@ -1,8 +1,13 @@
 CHANGELOG
 
+2014.11-112
+- Fix des titres de torrents dans les résultats de recherche
+- Masquage de l'erreur de Captcha
+- Densification de l'interface des résultats de recherche en mode paysage pour les grands écrans
+
+
 2014.10-111
 - Fix des recherches enregistrées, en tenant compte des champs avancés
-
 
 
 2014.10-110
@@ -15,7 +20,6 @@ CHANGELOG
 - Fix des erreurs de mots-clé dans les recherches
 - Fix de la messagerie qui reste visible dans le menu
 - Fix du curseur dans la zone de recherche
-
 
 
 2014.09-108

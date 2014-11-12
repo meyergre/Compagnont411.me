@@ -517,7 +517,8 @@ public class torrentsActivity extends ActionBarActivity {
 
                             publishProgress(++count + " " + getString(R.string.torrents_found));
                             map = new HashMap<String, String>();
-                            map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
+                            //map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
+                            map.put("nomComplet", tds.get(base + 1).select("a").first().text().toString());
                             map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
                             map.put("age", tds.get(base + 4).text());
                             map.put("taille", new BSize(tds.get(base + 5).text()).convert());
