@@ -1,5 +1,18 @@
 CHANGELOG
 
+2014.12-115
+- Correction des plantages sur Wiko et Samsung en 4.2
+
+
+2014.12-114
+- Correction des plantages sur tablette
+
+
+2014.12-113
+- Recompilation avec le dernier SDK
+- Correction de l'affichage tablette
+
+
 2014.11-112
 - Fix des titres de torrents dans les résultats de recherche
 - Masquage de l'erreur de Captcha

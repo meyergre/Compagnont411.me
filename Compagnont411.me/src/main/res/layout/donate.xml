@@ -120,7 +120,7 @@
         android:layout_alignBottom="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/abc_ab_bottom_solid_light_holo">
+        android:background="#eee">
 
         <Button
             android:layout_width="0dp"

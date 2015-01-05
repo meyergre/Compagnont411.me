@@ -209,7 +209,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/abc_ab_bottom_solid_light_holo"
+        android:background="@color/t411_grey"
         android:gravity="center">
 
         <Button

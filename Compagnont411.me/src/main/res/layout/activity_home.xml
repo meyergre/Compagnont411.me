@@ -312,7 +312,7 @@
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
             android:padding="3dp"
-            android:background="@drawable/abc_ab_bottom_solid_light_holo"
+            android:background="#eee"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:id="@+id/linearLayout2">
@@ -415,25 +415,86 @@
 
     <ScrollView
         android:layout_width="300dp"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/left_drawer"
         android:layout_gravity="start"
-        android:background="@drawable/abc_ab_solid_light_holo">
+        android:scrollbars="none"
+        android:background="#eee">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingRight="6dp">
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView12"
+                    android:src="@drawable/bg_drawer"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginStart="29dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="username"
+                        android:id="@+id/drawer_username"
+                        android:textColor="#ccFFFFFF"
+                        android:textSize="20sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="class"
+                        android:id="@+id/drawer_class"
+                        android:textColor="#77FFFFFF"
+                        android:textSize="14sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignLeft="@+id/drawer_username"
+                        android:layout_alignStart="@+id/drawer_username" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/t411_action_lightgrey"
+                android:clickable="false"
+                android:layout_weight="0" />
 
             <LinearLayout
                 android:id="@+id/btnMails"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:minWidth="280dp"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/ImageView02"
@@ -441,7 +502,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_readmail"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/TextView02"
@@ -461,34 +523,26 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="center"
-                    android:layout_margin="6dip"
-                    android:text="-"
+                    android:layout_margin="9dip"
+                    android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#555"
                     android:textSize="14dp"
-                    android:gravity="center_vertical|right" />
+                    android:gravity="center|center_vertical" />
 
             </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout10" />
 
             <LinearLayout
                 android:id="@+id/btnTop100"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:visibility="visible"
                 android:minWidth="280dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -496,7 +550,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_top100"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -513,25 +568,17 @@
 
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout9" />
-
             <LinearLayout
                 android:id="@+id/btnBookmarks"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:visibility="visible"
                 android:minWidth="280dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -539,7 +586,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_menu_dllater"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -556,23 +604,15 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout8" />
-
             <LinearLayout
                 android:id="@+id/btnFriends"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView11"
@@ -580,7 +620,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_friends"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -595,23 +636,15 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout7" />
-
             <LinearLayout
                 android:id="@+id/btnUploads"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView112"
@@ -619,7 +652,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_uploads"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView72"
@@ -634,23 +668,15 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout6" />
-
             <LinearLayout
                 android:id="@+id/btnStats"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/ImageView05"
@@ -658,7 +684,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_stats"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/TextView05"
@@ -673,23 +700,15 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout5" />
-
             <LinearLayout
                 android:id="@+id/btnCalculator"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/btn_mailUpdate"
@@ -697,7 +716,8 @@
                     android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:src="@drawable/ic_calculator"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/TextView03"
@@ -712,23 +732,15 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout4" />
-
             <LinearLayout
                 android:id="@+id/btn_news"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -736,7 +748,8 @@
                     android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:src="@drawable/ic_news"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -752,52 +765,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btn_chati"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/androidt411_btn"
-                android:focusable="true"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                android:minWidth="280dp">
-
-                <ImageView
-                    android:id="@+id/imageView99"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/ic_newlauncher"
-                    android:layout_gravity="center" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Chati"
-                    android:textColor="@color/t411_action_blue"
-                    android:layout_gravity="center"
-                    android:padding="10dp"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout3" />
-
-            <LinearLayout
                 android:id="@+id/btnForum"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -805,7 +780,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_thread"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -822,20 +798,21 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:background="@color/t411_action_lightgrey"
-                android:layout_margin="2dp"
-                android:clickable="false"></FrameLayout>
+                android:clickable="false"
+                android:layout_weight="0"></FrameLayout>
 
             <LinearLayout
                 android:id="@+id/btnService"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView1"
@@ -843,7 +820,8 @@
                     android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:src="@drawable/ic_useraccount"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -858,23 +836,15 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:background="#15000000"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout" />
-
             <LinearLayout
                 android:id="@+id/LinearLayout01"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:background="@drawable/androidt411_btn"
                 android:focusable="true"
                 android:layout_gravity="center"
-                android:minWidth="280dp">
+                android:minWidth="280dp"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/ImageView04"
@@ -882,7 +852,8 @@
                     android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:src="@drawable/ic_about"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/TextView04"
@@ -899,24 +870,21 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/t411_action_lightgrey"
-                android:layout_margin="2dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
                 android:clickable="false"
-                android:id="@+id/frameLayout11" >
-
-            </FrameLayout>
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/androidt411_btn"
+                android:layout_height="54dp"
+                android:background="#dd0000"
                 android:focusable="true"
                 android:layout_gravity="center"
                 android:minWidth="280dp"
-                android:onClick="onDisconnectPressed">
+                android:onClick="onDisconnectPressed"
+                android:layout_weight="0">
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -924,29 +892,21 @@
                     android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:src="@drawable/ic_disconnect"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:gravity="center|center_vertical"
                     android:text="@string/button_disconnect"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/t411_action_grey"
+                    android:textColor="#FFF"
                     android:layout_gravity="center"
                     android:padding="10dp"
                     android:textSize="18sp" />
             </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/t411_action_lightgrey"
-                android:layout_margin="2dp"
-                android:clickable="false"
-                android:id="@+id/frameLayout12" />
 
         </LinearLayout>
     </ScrollView>

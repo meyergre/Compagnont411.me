@@ -18,7 +18,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -38,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
 
     LinearLayout connectButton, mailButton,
             aboutButton, btnStats, hWidget, btnCalculator, btnThread, btnNews, btnTop100, btnDlLater, btnFriends, btnUploads;
-    TextView hLogin, hMails, hUP, hDOWN, hRatio, hGoLeft, hUpLeft,
+    TextView hLogin, dLogin, dClass, hMails, hUP, hDOWN, hRatio, hGoLeft, hUpLeft,
             hUP24, hDL24;
     Context context;
     ImageView hSmiley, hAvatar;
@@ -145,7 +144,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         super.onCreate(savedInstanceState);
 
@@ -437,6 +436,12 @@ public class MainActivity extends ActionBarActivity {
 
         hLogin = (TextView) findViewById(R.id.hLogin);
         hLogin.setText(prefs.getString("lastUsername", "???"));
+
+
+        dLogin = (TextView) findViewById(R.id.drawer_username);
+        dLogin.setText(prefs.getString("lastUsername", "???"));
+        dClass = (TextView) findViewById(R.id.drawer_class);
+        dClass.setText(prefs.getString("classe", "???"));
 
         hMails = (TextView) findViewById(R.id.hMails);
         hMails.setText(String.valueOf(prefs.getInt("lastMails", 0)));

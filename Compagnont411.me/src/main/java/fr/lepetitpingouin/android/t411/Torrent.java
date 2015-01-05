@@ -238,22 +238,25 @@ public class Torrent {
             String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
             try {
+
+                Connection.Response res = Jsoup
+                        .connect(Default.URL_LOGIN)
+                        .data("login", username, "password", password)
+                        .method(Connection.Method.POST)
+                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                        .execute();
+
+                Map<String, String> Cookies = res.cookies();
+
                 resTorrent = Jsoup.connect(Default.URL_GET_TORRENT + id)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                                 //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
-                        .cookies(Jsoup
-                                .connect(Default.URL_LOGIN)
-                                .data("login", username, "password", password)
-                                .method(Connection.Method.POST)
-                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                        //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
-                                .maxBodySize(0)
-                                .followRedirects(true)
-                                .ignoreContentType(true)
-                                .execute().cookies())
+                        .cookies(Cookies)
                         .execute();
 
                 torrentFileContent = resTorrent.bodyAsBytes();

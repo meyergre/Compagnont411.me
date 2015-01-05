@@ -20,8 +20,13 @@
         android:smoothScrollbar="true"
         android:fastScrollEnabled="true"
         android:listSelector="@drawable/androidt411_btn"
-        android:columnWidth="240dp"
+        android:columnWidth="420dp"
         android:numColumns="auto_fit" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"></FrameLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -65,7 +70,7 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:id="@+id/navbar"
-        android:background="@drawable/abc_ab_bottom_solid_light_holo">
+        android:background="#eee">
 
         <ImageButton
             android:layout_width="42dp"

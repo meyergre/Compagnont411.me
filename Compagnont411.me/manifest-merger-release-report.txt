@@ -1,0 +1,369 @@
+-- Merging decision tree log ---
+manifest
+ADDED from AndroidManifest.xml:1:1
+	xmlns:android
+		ADDED from AndroidManifest.xml:4:5
+	package
+		ADDED from AndroidManifest.xml:2:5
+	android:versionName
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionCode
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:installLocation
+		ADDED from AndroidManifest.xml:3:5
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:6:5
+	android:name
+		ADDED from AndroidManifest.xml:6:22
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:7:5
+	android:name
+		ADDED from AndroidManifest.xml:7:22
+uses-permission#android.permission.VIBRATE
+ADDED from AndroidManifest.xml:8:5
+	android:name
+		ADDED from AndroidManifest.xml:8:22
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from AndroidManifest.xml:9:5
+	android:name
+		ADDED from AndroidManifest.xml:9:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:10:5
+	android:name
+		ADDED from AndroidManifest.xml:10:22
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:11:5
+	android:name
+		ADDED from AndroidManifest.xml:11:22
+application
+ADDED from AndroidManifest.xml:14:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:appcompat-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+	android:label
+		ADDED from AndroidManifest.xml:18:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:19:9
+	android:icon
+		ADDED from AndroidManifest.xml:15:9
+	android:theme
+		ADDED from AndroidManifest.xml:20:9
+	android:largeHeap
+		ADDED from AndroidManifest.xml:16:9
+	android:vmSafeMode
+		ADDED from AndroidManifest.xml:17:9
+activity#fr.lepetitpingouin.android.t411.MainActivity
+ADDED from AndroidManifest.xml:21:9
+	android:label
+		ADDED from AndroidManifest.xml:23:13
+	android:name
+		ADDED from AndroidManifest.xml:22:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:24:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:25:17
+	android:name
+		ADDED from AndroidManifest.xml:25:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:26:17
+	android:name
+		ADDED from AndroidManifest.xml:26:27
+receiver#fr.lepetitpingouin.android.t411.Widget_search
+ADDED from AndroidManifest.xml:31:9
+	android:label
+		ADDED from AndroidManifest.xml:33:13
+	android:name
+		ADDED from AndroidManifest.xml:32:13
+intent-filter#android.appwidget.action.APPWIDGET_UPDATE
+ADDED from AndroidManifest.xml:34:13
+	android:priority
+		ADDED from AndroidManifest.xml:34:28
+action#android.appwidget.action.APPWIDGET_UPDATE
+ADDED from AndroidManifest.xml:35:17
+	android:name
+		ADDED from AndroidManifest.xml:35:25
+meta-data#android.appwidget.provider
+ADDED from AndroidManifest.xml:37:13
+	android:resource
+		ADDED from AndroidManifest.xml:39:17
+	android:name
+		ADDED from AndroidManifest.xml:38:17
+receiver#fr.lepetitpingouin.android.t411.Widget_Full
+ADDED from AndroidManifest.xml:41:9
+	android:label
+		ADDED from AndroidManifest.xml:43:13
+	android:name
+		ADDED from AndroidManifest.xml:42:13
+intent-filter#android.appwidget.action.APPWIDGET_UPDATE+android.appwidget.action.APPWIDGET_UPDATE_t411+intent.WIDGET_FLAG_UPDATING
+ADDED from AndroidManifest.xml:44:13
+	android:priority
+		ADDED from AndroidManifest.xml:44:28
+action#android.appwidget.action.APPWIDGET_UPDATE_t411
+ADDED from AndroidManifest.xml:46:17
+	android:name
+		ADDED from AndroidManifest.xml:46:25
+action#intent.WIDGET_FLAG_UPDATING
+ADDED from AndroidManifest.xml:47:17
+	android:name
+		ADDED from AndroidManifest.xml:47:25
+receiver#fr.lepetitpingouin.android.t411.Widget_half
+ADDED from AndroidManifest.xml:53:9
+	android:label
+		ADDED from AndroidManifest.xml:55:13
+	android:name
+		ADDED from AndroidManifest.xml:54:13
+intent-filter#android.appwidget.action.APPWIDGET_UPDATE+android.appwidget.action.APPWIDGET_UPDATE_t411
+ADDED from AndroidManifest.xml:56:13
+	android:priority
+		ADDED from AndroidManifest.xml:56:28
+receiver#fr.lepetitpingouin.android.t411.Widget_nano
+ADDED from AndroidManifest.xml:64:9
+	android:label
+		ADDED from AndroidManifest.xml:66:13
+	android:name
+		ADDED from AndroidManifest.xml:65:13
+receiver#fr.lepetitpingouin.android.t411.Widget_Plus
+ADDED from AndroidManifest.xml:76:9
+	android:label
+		ADDED from AndroidManifest.xml:78:13
+	android:name
+		ADDED from AndroidManifest.xml:77:13
+receiver#fr.lepetitpingouin.android.t411.Widget_huge
+ADDED from AndroidManifest.xml:89:9
+	android:label
+		ADDED from AndroidManifest.xml:91:13
+	android:name
+		ADDED from AndroidManifest.xml:90:13
+intent-filter#android.appwidget.action.APPWIDGET_UPDATE+android.appwidget.action.APPWIDGET_UPDATE_t411+intent.WIDGET_FLAG_UPDATING+intent.t411_CLOCK_UPDATE
+ADDED from AndroidManifest.xml:92:13
+	android:priority
+		ADDED from AndroidManifest.xml:92:28
+action#intent.t411_CLOCK_UPDATE
+ADDED from AndroidManifest.xml:95:17
+	android:name
+		ADDED from AndroidManifest.xml:95:25
+receiver#fr.lepetitpingouin.android.t411.Widget_news
+ADDED from AndroidManifest.xml:103:9
+	android:label
+		ADDED from AndroidManifest.xml:105:13
+	android:name
+		ADDED from AndroidManifest.xml:104:13
+intent-filter#android.appwidget.action.APPWIDGET_UPDATE+android.appwidget.action.APPWIDGET_UPDATE_t411+android.appwidget.action.REFRESH_NEWSPAPER+android.appwidget.action.UPDATE_NEWS
+ADDED from AndroidManifest.xml:106:13
+	android:priority
+		ADDED from AndroidManifest.xml:106:28
+action#android.appwidget.action.UPDATE_NEWS
+ADDED from AndroidManifest.xml:109:17
+	android:name
+		ADDED from AndroidManifest.xml:109:25
+action#android.appwidget.action.REFRESH_NEWSPAPER
+ADDED from AndroidManifest.xml:110:17
+	android:name
+		ADDED from AndroidManifest.xml:110:25
+receiver#fr.lepetitpingouin.android.t411.Receiver
+ADDED from AndroidManifest.xml:117:9
+	android:name
+		ADDED from AndroidManifest.xml:117:19
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:118:13
+action#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:119:17
+	android:name
+		ADDED from AndroidManifest.xml:119:25
+service#fr.lepetitpingouin.android.t411.t411UpdateService
+ADDED from AndroidManifest.xml:123:9
+	android:enabled
+		ADDED from AndroidManifest.xml:125:13
+	android:name
+		ADDED from AndroidManifest.xml:124:13
+activity#fr.lepetitpingouin.android.t411.messagesActivity
+ADDED from AndroidManifest.xml:127:9
+	android:label
+		ADDED from AndroidManifest.xml:135:13
+	android:icon
+		ADDED from AndroidManifest.xml:133:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:129:13
+	android:process
+		ADDED from AndroidManifest.xml:131:13
+	android:taskAffinity
+		ADDED from AndroidManifest.xml:132:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:130:13
+	android:name
+		ADDED from AndroidManifest.xml:128:13
+	android:finishOnTaskLaunch
+		ADDED from AndroidManifest.xml:134:13
+activity#fr.lepetitpingouin.android.t411.statsActivity
+ADDED from AndroidManifest.xml:141:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:144:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:143:13
+	android:name
+		ADDED from AndroidManifest.xml:142:13
+activity#fr.lepetitpingouin.android.t411.aboutActivity
+ADDED from AndroidManifest.xml:145:9
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:147:13
+	android:name
+		ADDED from AndroidManifest.xml:146:13
+activity#fr.lepetitpingouin.android.t411.readMailActivity
+ADDED from AndroidManifest.xml:148:9
+	android:icon
+		ADDED from AndroidManifest.xml:151:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:152:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:150:13
+	android:name
+		ADDED from AndroidManifest.xml:149:13
+activity#fr.lepetitpingouin.android.t411.actionSelector
+ADDED from AndroidManifest.xml:153:9
+	android:label
+		ADDED from AndroidManifest.xml:157:13
+	android:theme
+		ADDED from AndroidManifest.xml:156:13
+	android:process
+		ADDED from AndroidManifest.xml:158:13
+	android:taskAffinity
+		ADDED from AndroidManifest.xml:155:13
+	android:name
+		ADDED from AndroidManifest.xml:154:13
+activity#fr.lepetitpingouin.android.t411.SearchActivity
+ADDED from AndroidManifest.xml:159:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:162:13
+	android:exported
+		ADDED from AndroidManifest.xml:164:13
+	android:taskAffinity
+		ADDED from AndroidManifest.xml:161:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:163:13
+	android:name
+		ADDED from AndroidManifest.xml:160:13
+activity#fr.lepetitpingouin.android.t411.ComposeMessageActivity
+ADDED from AndroidManifest.xml:165:9
+	android:icon
+		ADDED from AndroidManifest.xml:167:13
+	android:name
+		ADDED from AndroidManifest.xml:166:13
+intent-filter#android.intent.action.SEND
+ADDED from AndroidManifest.xml:168:13
+	android:label
+		ADDED from AndroidManifest.xml:168:28
+action#android.intent.action.SEND
+ADDED from AndroidManifest.xml:169:17
+	android:name
+		ADDED from AndroidManifest.xml:169:25
+data
+ADDED from AndroidManifest.xml:171:17
+	android:mimeType
+		ADDED from AndroidManifest.xml:171:23
+activity#fr.lepetitpingouin.android.t411.CalculatorActivity
+ADDED from AndroidManifest.xml:174:9
+	android:name
+		ADDED from AndroidManifest.xml:174:19
+activity#fr.lepetitpingouin.android.t411.torrentDetailsActivity
+ADDED from AndroidManifest.xml:175:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:177:13
+	android:name
+		ADDED from AndroidManifest.xml:176:13
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:178:13
+	android:priority
+		ADDED from AndroidManifest.xml:178:28
+action#android.intent.action.VIEW
+ADDED from AndroidManifest.xml:179:17
+	android:name
+		ADDED from AndroidManifest.xml:179:25
+category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:181:17
+	android:name
+		ADDED from AndroidManifest.xml:181:27
+category#android.intent.category.BROWSABLE
+ADDED from AndroidManifest.xml:182:17
+	android:name
+		ADDED from AndroidManifest.xml:182:27
+activity#fr.lepetitpingouin.android.t411.torrentsActivity
+ADDED from AndroidManifest.xml:202:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:204:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:205:13
+	android:name
+		ADDED from AndroidManifest.xml:203:13
+activity#fr.lepetitpingouin.android.t411.friendsActivity
+ADDED from AndroidManifest.xml:206:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:208:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:209:13
+	android:name
+		ADDED from AndroidManifest.xml:207:13
+activity#fr.lepetitpingouin.android.t411.newsActivity
+ADDED from AndroidManifest.xml:210:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:212:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:213:13
+	android:name
+		ADDED from AndroidManifest.xml:211:13
+activity#fr.lepetitpingouin.android.t411.FirstLoginActivity
+ADDED from AndroidManifest.xml:214:9
+	android:name
+		ADDED from AndroidManifest.xml:214:19
+activity#fr.lepetitpingouin.android.t411.FileDialog
+ADDED from AndroidManifest.xml:215:9
+	android:label
+		ADDED from AndroidManifest.xml:217:13
+	android:theme
+		ADDED from AndroidManifest.xml:220:13
+	android:allowTaskReparenting
+		ADDED from AndroidManifest.xml:218:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:219:13
+	android:name
+		ADDED from AndroidManifest.xml:216:13
+activity#fr.lepetitpingouin.android.t411.NfoActivity
+ADDED from AndroidManifest.xml:222:9
+	android:name
+		ADDED from AndroidManifest.xml:222:19
+activity#fr.lepetitpingouin.android.t411.UserPrefsActivity
+ADDED from AndroidManifest.xml:223:9
+	android:label
+		ADDED from AndroidManifest.xml:226:13
+	android:theme
+		ADDED from AndroidManifest.xml:227:13
+	android:allowTaskReparenting
+		ADDED from AndroidManifest.xml:225:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:228:13
+	android:name
+		ADDED from AndroidManifest.xml:224:13
+activity#fr.lepetitpingouin.android.t411.FilesListActivity
+ADDED from AndroidManifest.xml:229:9
+	android:name
+		ADDED from AndroidManifest.xml:229:19
+activity#fr.lepetitpingouin.android.t411.DonateActivity
+ADDED from AndroidManifest.xml:230:9
+	android:label
+		ADDED from AndroidManifest.xml:233:13
+	android:theme
+		ADDED from AndroidManifest.xml:232:13
+	android:name
+		ADDED from AndroidManifest.xml:231:13
+uses-sdk
+INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:appcompat-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+	android:targetSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
