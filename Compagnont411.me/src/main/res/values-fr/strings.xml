@@ -16,7 +16,6 @@
     <string name="chk_ratioAlert">Alerte ratio</string>
     <string name="chk_lowLimit">Limite basse</string>
     <string name="chk_msgAlert">Alerte messagerie</string>
-    <string name="test_notif">Test notification</string>
     <string name="msgAlertEnabled">Notification activér</string>
     <string name="msgAlertDisabled">Notification désactivée</string>
     <string name="active">Activer</string>
@@ -99,13 +98,6 @@
     <string name="messages_compose_subject">Objet :</string>
     <string name="messages_compose_message">Message :</string>
     <string name="messages_compose_send">Envoyer</string>
-
-    <string name="settings_removeAd">Supprimer les pubs</string>
-    <string name="settings_removeAd_details">L\'application est fournie gratuitement, et développée
-        sur mon temps libre. Le bandeau de publicité et les dons des utilisateurs sont les seuls
-        revenus que je puisse en tirer. Toutefois, en cochant cette case, ce bandeau disparaîta sans
-        condition après fermeture complète et réouverture de l\'application.
-    </string>
 
     <string name="settings_caption_service">Options du service</string>
     <string name="settings_caption_general">Options générales</string>
@@ -288,6 +280,8 @@
     <string name="disconnectConfirmMessage">Une fois vos identifiants de connexion effacés, l\'application ne pourra plus être ouverte sans se connecter à nouveau. En outre, l\'actualisation automatique des données sera désactivée, et devra être réactivée manuellement dans les réglages. Voulez-vous continuer ?</string>
     <string name="NO">Non</string>
     <string name="YES">Oui</string>
+    <string name="t411_site_ip">IP du site</string>
+    <string name="t411_site_ip_summary">Choisir quelle adresse utiliser pour joindre t411</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

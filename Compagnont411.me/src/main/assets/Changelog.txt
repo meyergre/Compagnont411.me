@@ -1,7 +1,15 @@
 CHANGELOG
 
-2014.12-115
-- Correction des plantages sur Wiko et Samsung en 4.2
+2015.01-117
+- Correction du numéro de version (passé a 2011.xx-xxx a cause d'une erreur de frappe...)
+
+
+2015.01-116
+- Correction des mises à jour des données
+
+
+2015.01-115
+- Correction des plantages sur Wiko
 
 
 2014.12-114

@@ -281,7 +281,8 @@
     <string name="disconnectConfirmMessage">Are you sure you want to disconnect ? you won\'t be able to open the app unless you arre logged back in, and the app will no more be able to sync itself without your login information. Continue ?</string>
     <string name="NO">No</string>
     <string name="YES">Yes</string>
-
+    <string name="t411_site_ip">website\'s IP</string>
+    <string name="t411_site_ip_summary">Choose the IP to use to reach t411</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>
@@ -289,5 +290,11 @@
         <item>@string/read_mails</item>
         <item>@string/goto_t411</item>
         <item>@string/askWhatToDo</item>
+    </string-array>
+
+    <string-array name="t411_ip_list" translatable="false">
+        <item>www.t411.me</item>
+        <item>104.20.31.29 </item>
+        <item>104.20.30.29</item>
     </string-array>
 </resources>

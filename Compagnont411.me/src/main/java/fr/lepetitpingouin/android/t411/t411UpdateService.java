@@ -115,11 +115,12 @@ public class t411UpdateService extends Service {
         timeout = false;
 
 
-        String url = CONNECTURL;
+        String mUrl = CONNECTURL;
+        Log.e("t411UPDATER-URL", mUrl);
 
 
         browser = new SuperT411HttpBrowser(getApplicationContext());
-        doc = Jsoup.parse(browser.login(login, password).connect(url).executeInAsyncTask());
+        doc = Jsoup.parse(browser.login(login, password).connect(mUrl).executeInAsyncTask());
 
         if (doc.select("title").contains("503"))
             doNotify(R.drawable.ic_maintenance, "Maintenance", "t411 est actuellement indisponible.", 411, null);
@@ -134,6 +135,7 @@ public class t411UpdateService extends Service {
                         Log.e("Update error", browser.getErrorMessage());
                     else
                         Toast.makeText(t411UpdateService.this, browser.getErrorMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("t411BROWSER", browser.getErrorMessage());
                 }
             });
 

@@ -628,7 +628,8 @@ public class torrentsActivity extends ActionBarActivity {
                 }
 
                 Handler handler = new Handler();
-                if (maListViewPerso.getCount() < 1) {
+                //if (maListViewPerso.getCount() < 1) {
+                if (count < 1) {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_result), Toast.LENGTH_LONG).show();
                     handler.postDelayed(new Runnable() {
                         public void run() {

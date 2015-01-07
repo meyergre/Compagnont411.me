@@ -59,6 +59,15 @@
             android:title="@string/settings_caption_connection_advanced"
             android:summary="@string/settings_caption_connection_advanced_summary">
 
+            <ListPreference android:key="SiteIP"
+                android:title="@string/t411_site_ip"
+                android:summary="@string/t411_site_ip_summary"
+                android:entries="@array/t411_ip_list"
+                android:entryValues="@array/t411_ip_list"
+                android:defaultValue="t411.me">
+
+            </ListPreference>
+
             <EditTextPreference
                 android:key="User-Agent"
                 android:title="User-Agent"

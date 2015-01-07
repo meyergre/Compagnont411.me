@@ -1,6 +1,9 @@
 package fr.lepetitpingouin.android.t411;
 
 public class Default {
+    public static final String IP_T411 = "www.t411.me";
+
+
     public static final String URL_FRIENDS = "http://www.t411.me/my/friends/";
     public static final String URL_CHATI = "http://www.t411.me/chati/index.php?room=support";
     public static final String URL_MESSAGE_DEL = "http://www.t411.me/mailbox/delete/?id=";//+ID
@@ -16,7 +19,7 @@ public class Default {
     public static String URL_INDEX = "http://www.t411.me";
     public static String URL_USERPROFILE = "http://www.t411.me/users/profile/";
     public static String URL_MAILS = "http://www.t411.me/mailbox/";
-    public static String URL_LOGIN = "http://www.t411.me/users/login/?returnto=/users/login/";
+    public static String URL_LOGIN = "http://www.t411.me/users/login/?returnto=%2Fusers%2Flogin%2F";
     public static String URL_LOGOUT = "http://www.t411.me/users/logout/";
     public static String URL_SEARCH = "http://www.t411.me/torrents/search/?name="; // + terms
     public static String URL_SAY_THANKS = "http://www.t411.me/torrents/thanks/?id="; //+ ID

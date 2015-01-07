@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -67,7 +68,8 @@ public class SuperT411HttpBrowser {
 
     public SuperT411HttpBrowser connect(String mUrl) {
 
-        this.url = mUrl;
+        this.url = mUrl.replace("www.t411.me", prefs.getString("SiteIP", Default.IP_T411));
+        Log.e("t411BROWSER-URLTOFETCH", this.url);
 
         if (prefs.getBoolean("useHTTPS", false)) {
             this.url = this.url.replace("http://", "https://");
@@ -153,7 +155,7 @@ public class SuperT411HttpBrowser {
         HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
-        HttpPost httppost = new HttpPost(Default.URL_LOGIN);
+        HttpPost httppost = new HttpPost(Default.URL_LOGIN.replace("www.t411.me", prefs.getString("SiteIP", Default.IP_T411)));
 
         HttpResponse response;
         String responseString = null;
@@ -215,13 +217,14 @@ public class SuperT411HttpBrowser {
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
 
-        HttpPost httppost = new HttpPost(Default.URL_LOGIN);
+        Log.e("t411BROWSER-URL", Default.URL_LOGIN.replace("www.t411.me", prefs.getString("SiteIP", Default.IP_T411)));
+        HttpPost httppost = new HttpPost(Default.URL_LOGIN.replace("www.t411.me", prefs.getString("SiteIP", Default.IP_T411)));
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
         HttpResponse response;
         String responseString = null;
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
-        nameValuePairs.add(new BasicNameValuePair("remember", "0"));
+        nameValuePairs.add(new BasicNameValuePair("remember", "1"));
         nameValuePairs.add(new BasicNameValuePair("login", username));
         nameValuePairs.add(new BasicNameValuePair("password", password));
 
@@ -247,6 +250,7 @@ public class SuperT411HttpBrowser {
             }
 
             try {
+                Log.d("t411BROWSER", responseString);
                 String conError = Jsoup.parse(responseString).select("div.fade").first().text();
                 if (!conError.equals("") && !conError.contains("identifié")) {
                     errorMessage = conError;
