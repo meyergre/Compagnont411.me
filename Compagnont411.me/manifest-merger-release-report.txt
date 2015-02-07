@@ -264,98 +264,100 @@ ADDED from AndroidManifest.xml:171:17
 		ADDED from AndroidManifest.xml:171:23
 activity#fr.lepetitpingouin.android.t411.CalculatorActivity
 ADDED from AndroidManifest.xml:174:9
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:175:13
 	android:name
 		ADDED from AndroidManifest.xml:174:19
 activity#fr.lepetitpingouin.android.t411.torrentDetailsActivity
-ADDED from AndroidManifest.xml:175:9
+ADDED from AndroidManifest.xml:176:9
 	android:configChanges
+		ADDED from AndroidManifest.xml:178:13
+	android:name
 		ADDED from AndroidManifest.xml:177:13
-	android:name
-		ADDED from AndroidManifest.xml:176:13
 intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:178:13
+ADDED from AndroidManifest.xml:179:13
 	android:priority
-		ADDED from AndroidManifest.xml:178:28
+		ADDED from AndroidManifest.xml:179:28
 action#android.intent.action.VIEW
-ADDED from AndroidManifest.xml:179:17
+ADDED from AndroidManifest.xml:180:17
 	android:name
-		ADDED from AndroidManifest.xml:179:25
+		ADDED from AndroidManifest.xml:180:25
 category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:181:17
-	android:name
-		ADDED from AndroidManifest.xml:181:27
-category#android.intent.category.BROWSABLE
 ADDED from AndroidManifest.xml:182:17
 	android:name
 		ADDED from AndroidManifest.xml:182:27
+category#android.intent.category.BROWSABLE
+ADDED from AndroidManifest.xml:183:17
+	android:name
+		ADDED from AndroidManifest.xml:183:27
 activity#fr.lepetitpingouin.android.t411.torrentsActivity
-ADDED from AndroidManifest.xml:202:9
+ADDED from AndroidManifest.xml:203:9
 	android:configChanges
-		ADDED from AndroidManifest.xml:204:13
-	android:parentActivityName
 		ADDED from AndroidManifest.xml:205:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:206:13
 	android:name
-		ADDED from AndroidManifest.xml:203:13
+		ADDED from AndroidManifest.xml:204:13
 activity#fr.lepetitpingouin.android.t411.friendsActivity
-ADDED from AndroidManifest.xml:206:9
+ADDED from AndroidManifest.xml:207:9
 	android:configChanges
-		ADDED from AndroidManifest.xml:208:13
-	android:parentActivityName
 		ADDED from AndroidManifest.xml:209:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:210:13
 	android:name
-		ADDED from AndroidManifest.xml:207:13
+		ADDED from AndroidManifest.xml:208:13
 activity#fr.lepetitpingouin.android.t411.newsActivity
-ADDED from AndroidManifest.xml:210:9
+ADDED from AndroidManifest.xml:211:9
 	android:configChanges
-		ADDED from AndroidManifest.xml:212:13
-	android:parentActivityName
 		ADDED from AndroidManifest.xml:213:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:214:13
 	android:name
-		ADDED from AndroidManifest.xml:211:13
+		ADDED from AndroidManifest.xml:212:13
 activity#fr.lepetitpingouin.android.t411.FirstLoginActivity
-ADDED from AndroidManifest.xml:214:9
-	android:name
-		ADDED from AndroidManifest.xml:214:19
-activity#fr.lepetitpingouin.android.t411.FileDialog
 ADDED from AndroidManifest.xml:215:9
+	android:name
+		ADDED from AndroidManifest.xml:215:19
+activity#fr.lepetitpingouin.android.t411.FileDialog
+ADDED from AndroidManifest.xml:216:9
 	android:label
-		ADDED from AndroidManifest.xml:217:13
-	android:theme
-		ADDED from AndroidManifest.xml:220:13
-	android:allowTaskReparenting
 		ADDED from AndroidManifest.xml:218:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:219:13
-	android:name
-		ADDED from AndroidManifest.xml:216:13
-activity#fr.lepetitpingouin.android.t411.NfoActivity
-ADDED from AndroidManifest.xml:222:9
-	android:name
-		ADDED from AndroidManifest.xml:222:19
-activity#fr.lepetitpingouin.android.t411.UserPrefsActivity
-ADDED from AndroidManifest.xml:223:9
-	android:label
-		ADDED from AndroidManifest.xml:226:13
 	android:theme
-		ADDED from AndroidManifest.xml:227:13
+		ADDED from AndroidManifest.xml:221:13
 	android:allowTaskReparenting
-		ADDED from AndroidManifest.xml:225:13
+		ADDED from AndroidManifest.xml:219:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:228:13
+		ADDED from AndroidManifest.xml:220:13
 	android:name
-		ADDED from AndroidManifest.xml:224:13
-activity#fr.lepetitpingouin.android.t411.FilesListActivity
-ADDED from AndroidManifest.xml:229:9
+		ADDED from AndroidManifest.xml:217:13
+activity#fr.lepetitpingouin.android.t411.NfoActivity
+ADDED from AndroidManifest.xml:223:9
 	android:name
-		ADDED from AndroidManifest.xml:229:19
-activity#fr.lepetitpingouin.android.t411.DonateActivity
-ADDED from AndroidManifest.xml:230:9
+		ADDED from AndroidManifest.xml:223:19
+activity#fr.lepetitpingouin.android.t411.UserPrefsActivity
+ADDED from AndroidManifest.xml:224:9
 	android:label
-		ADDED from AndroidManifest.xml:233:13
+		ADDED from AndroidManifest.xml:227:13
 	android:theme
-		ADDED from AndroidManifest.xml:232:13
+		ADDED from AndroidManifest.xml:228:13
+	android:allowTaskReparenting
+		ADDED from AndroidManifest.xml:226:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:229:13
 	android:name
-		ADDED from AndroidManifest.xml:231:13
+		ADDED from AndroidManifest.xml:225:13
+activity#fr.lepetitpingouin.android.t411.FilesListActivity
+ADDED from AndroidManifest.xml:230:9
+	android:name
+		ADDED from AndroidManifest.xml:230:19
+activity#fr.lepetitpingouin.android.t411.DonateActivity
+ADDED from AndroidManifest.xml:231:9
+	android:label
+		ADDED from AndroidManifest.xml:234:13
+	android:theme
+		ADDED from AndroidManifest.xml:233:13
+	android:name
+		ADDED from AndroidManifest.xml:232:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:support-v4:21.0.3:15:5

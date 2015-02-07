@@ -171,7 +171,8 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
         </activity>
-        <activity android:name="CalculatorActivity" />
+        <activity android:name="CalculatorActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".torrentDetailsActivity"
             android:configChanges="orientation|screenSize">

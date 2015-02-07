@@ -282,6 +282,7 @@
     <string name="YES">Oui</string>
     <string name="t411_site_ip">IP du site</string>
     <string name="t411_site_ip_summary">Choisir quelle adresse utiliser pour joindre t411</string>
+    <string name="errorGraph">Désolé, impossible d\'afficher le graphique... peut-être que le site a modifié la page des stats ?</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

@@ -28,6 +28,6 @@ public class statsActivity extends ActionBarActivity {
         www.setWebViewClient(new WebViewClient());
         www.setWebChromeClient(new WebChromeClient());
 
-        www.loadDataWithBaseURL(null, prefs.getString("lastGraph", "?"), "text/html", "utf-8", null);
+        www.loadDataWithBaseURL(null, prefs.getString("lastGraph", getString(R.string.errorGraph)), "text/html", "utf-8", null);
     }
 }

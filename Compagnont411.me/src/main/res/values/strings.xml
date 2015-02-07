@@ -283,6 +283,7 @@
     <string name="YES">Yes</string>
     <string name="t411_site_ip">website\'s IP</string>
     <string name="t411_site_ip_summary">Choose the IP to use to reach t411</string>
+    <string name="errorGraph">Unable to get graph data. Sorry... Maybe the website did change the page ?</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

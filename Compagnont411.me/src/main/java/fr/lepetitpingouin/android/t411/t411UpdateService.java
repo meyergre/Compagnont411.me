@@ -502,13 +502,15 @@ public class t411UpdateService extends Service {
                 try {
                     pagecontent = "<html><head>"
                             + scripts
-                            + "</head><body><div id=\"chart\" style=\"height: 100%;\"></div><script>"
-                            + doc.select("div.content > script").get(2).html()
+                            + "</head><body><div id=\"chart\" style=\"display: block; height: 100%;\"></div><script>"
+                            + doc.select("div#chart").first().nextElementSibling().html()
                             + "</script></body></html>";
 
                 } catch (Exception ex) {
-
+                    ex.printStackTrace();
                 }
+
+                Log.e("erreur graphique", pagecontent);
 
             } catch (Exception e) {
 

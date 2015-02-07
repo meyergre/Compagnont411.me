@@ -18,6 +18,7 @@ public class CalculatorActivity extends ActionBarActivity {
         getSupportActionBar().setIcon(R.drawable.ic_calculator);
         getSupportActionBar().setTitle(getResources().getString(R.string.calculator));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
         final SeekBar upSeek = (SeekBar) findViewById(R.id.seekBar_uploadSimu);
         final SeekBar dlSeek = (SeekBar) findViewById(R.id.seekBar_downloadSimu);
