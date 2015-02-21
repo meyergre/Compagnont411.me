@@ -1,5 +1,9 @@
 CHANGELOG
 
+2015.02-118
+- Corrections suite au passage du site au .io
+
+
 2015.01-117
 - Correction du numéro de version (passé a 2011.xx-xxx a cause d'une erreur de frappe...)
 - Rétablissement du graphique

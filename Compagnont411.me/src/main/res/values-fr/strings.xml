@@ -6,7 +6,7 @@
     <string name="main_login">Pseudonyme</string>
     <string name="main_password">Mot de passe</string>
     <string name="main_connect">Enregistrer</string>
-    <string name="description_logo">Logo t411.me</string>
+    <string name="description_logo">Logo t411.io</string>
     <string name="service_settings">Configuration</string>
     <string name="button_mail">Boite de réception</string>
     <string name="button_service">Configuration</string>
@@ -38,7 +38,7 @@
     <string name="open_app">Ouvrir l\'application</string>
     <string name="update_now">Mettre à jour</string>
     <string name="read_mails">Boîte de réception</string>
-    <string name="goto_t411">Aller sur t411.me</string>
+    <string name="goto_t411">Aller sur t411.io</string>
     <string name="widget_action">Action du widget…</string>
     <string name="answer">Répondre</string>
     <string name="delete">Supprimer</string>
@@ -84,7 +84,7 @@
 
     <string name="launcher_messages">MP t411</string>
 
-    <string name="appwidget_search">Rechercher sur t411.me</string>
+    <string name="appwidget_search">Rechercher sur t411.io</string>
     <string name="placeholder_search">Rechercher…</string>
     <string name="search_cat_all">Toutes categories</string>
     <string name="search_cat_audio">Audio</string>
@@ -133,8 +133,8 @@
     <string name="UP_left">UP restant</string>
     <string name="btn_forum">Fil de discussion</string>
     <string name="btn_news">Nouvelles du site</string>
-    <string name="contribute_on_t411">Contribuer à t411.me !</string>
-    <string name="support_t411_text">Faites d\'une pierre deux coups ! en faisant un don à t411.me,
+    <string name="contribute_on_t411">Contribuer à t411.io !</string>
+    <string name="support_t411_text">Faites d\'une pierre deux coups ! en faisant un don à t411.io,
         vous participez aux frais de fonctionnement et de maintenance du site, et en plus vous
         gagnez des Go bonus !
     </string>
@@ -231,7 +231,7 @@
     <string name="main_login_summary">Nom d\'utilisateur t411</string>
     <string name="main_password_summary">Mot de passe t411</string>
     <string name="settings_caption_connection">Paramètres de connexion</string>
-    <string name="settings_caption_connection_summary">Définir les paramètres des connexions au serveur t411.me</string>
+    <string name="settings_caption_connection_summary">Définir les paramètres des connexions au serveur t411.io</string>
     <string name="settings_use_https_summary_on">Chiffrer les données lors des transferts</string>
     <string name="settings_use_https_summary_off">Ne pas chiffrer les données lors des transferts</string>
     <string name="settings_caption_connection_advanced_summary">Définir les réglages avancés</string>
@@ -283,6 +283,7 @@
     <string name="t411_site_ip">IP du site</string>
     <string name="t411_site_ip_summary">Choisir quelle adresse utiliser pour joindre t411</string>
     <string name="errorGraph">Désolé, impossible d\'afficher le graphique... peut-être que le site a modifié la page des stats ?</string>
+    <string name="gettingFriend">Récupération des données de</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

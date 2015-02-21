@@ -17,7 +17,7 @@
     <string name="main_login">Username</string>
     <string name="main_password">Password</string>
     <string name="main_connect">Save</string>
-    <string name="description_logo">t411.me logo</string>
+    <string name="description_logo">t411.io logo</string>
     <string name="service_settings">Settings</string>
     <string name="button_mail">Inbox</string>
     <string name="button_service">Settings</string>
@@ -46,7 +46,7 @@
     <string name="open_app">Open app</string>
     <string name="update_now">Update now</string>
     <string name="read_mails">Inbox</string>
-    <string name="goto_t411">Browse t411.me</string>
+    <string name="goto_t411">Browse t411.io</string>
     <string name="widget_action">Widget action…</string>
     <string name="answer">Answer</string>
     <string name="delete">Delete</string>
@@ -135,7 +135,7 @@
     <string name="download_simulation">Download Simulation</string>
     <string name="DL_left">Download left</string>
     <string name="UP_left">Upload left</string>
-    <string name="support_t411_text">Making a donation to t411.me, you\'re twice a winner : on the
+    <string name="support_t411_text">Making a donation to t411.io, you\'re twice a winner : on the
         first hand you participate to the websites costs, and on the other hand you got an extra GB
         bonus !
     </string>
@@ -144,7 +144,7 @@
     <string name="calc_simulation" translatable="false">Simulation</string>
     <string name="btn_forum">Discussion thread</string>
     <string name="btn_news">t411 News</string>
-    <string name="contribute_on_t411">Support t411.me !</string>
+    <string name="contribute_on_t411">Support t411.io !</string>
     <string name="learn_more">Learn more…</string>
     <string name="shareSignature">Sent from the t411 companion app for Android</string>
     <string name="top_100">Top torrents…</string>
@@ -173,7 +173,7 @@
     <string name="settings_menu_notes">Choose which links to hide on the main menu.</string>
     <string name="connect">Connect</string>
     <string name="welcome">Welcome !</string>
-    <string name="please_login">First of all, you should login using your t411.me credentials…
+    <string name="please_login">First of all, you should login using your t411.io credentials…
     </string>
     <string name="need_an_account">Need an account ?</string>
     <string name="longclick_share">Share on long press</string>
@@ -217,7 +217,7 @@
         limit)
     </string>
     <string name="useNotificationWidget">Notification widget</string>
-    <string name="useNotificationWidget_description">Display the current status of your t411.me
+    <string name="useNotificationWidget_description">Display the current status of your t411.io
         account in the notification area.
     </string>
     <string name="settings_caption_network">Network settings</string>
@@ -228,11 +228,11 @@
     <string name="no_data_from_server">Can\'t get data fromserver. Please check your connection
         settings.
     </string>
-    <string name="settings_caption_useraccount_summary">t411.me account credentials</string>
+    <string name="settings_caption_useraccount_summary">t411.io account credentials</string>
     <string name="main_login_summary">t411 login</string>
     <string name="main_password_summary">t411 password</string>
     <string name="settings_caption_connection">Connection settings</string>
-    <string name="settings_caption_connection_summary">Set connection settings to t411.me server</string>
+    <string name="settings_caption_connection_summary">Set connection settings to t411.io server</string>
     <string name="settings_use_https_summary_on">Encrypt data</string>
     <string name="settings_use_https_summary_off">Do not encrypt data</string>
     <string name="settings_caption_connection_advanced_summary">Set advanced settings</string>
@@ -284,6 +284,7 @@
     <string name="t411_site_ip">website\'s IP</string>
     <string name="t411_site_ip_summary">Choose the IP to use to reach t411</string>
     <string name="errorGraph">Unable to get graph data. Sorry... Maybe the website did change the page ?</string>
+    <string name="gettingFriend">Getting info for friend :</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>
@@ -294,7 +295,7 @@
     </string-array>
 
     <string-array name="t411_ip_list" translatable="false">
-        <item>www.t411.me</item>
+        <item>www.t411.io</item>
         <item>104.20.31.29 </item>
         <item>104.20.30.29</item>
     </string-array>

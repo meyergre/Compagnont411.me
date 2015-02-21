@@ -93,7 +93,7 @@ public class friendsActivity extends ActionBarActivity {
         }
     }
 
-    private class friendsFetcher extends AsyncTask<Void, String[], Void> {
+    private class friendsFetcher extends AsyncTask<Void, String, Void> {
 
         Connection.Response res = null;
         Document doc = null;
@@ -109,6 +109,17 @@ public class friendsActivity extends ActionBarActivity {
         protected void onCancelled() {
             this.cancel(true);
             super.onCancelled();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... value) {
+            try {
+                dialog.setMessage(value[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            super.onProgressUpdate();
         }
 
         @Override
@@ -137,6 +148,9 @@ public class friendsActivity extends ActionBarActivity {
             try {
                 int unread = 0;
                 for (Element friend : doc.select(".profile .block")) {
+
+                    publishProgress(getString(R.string.gettingFriend) + " " + friend.select(".avatar").first().attr("alt"));
+
                     map = new HashMap<String, String>();
                     map.put("username", friend.select(".avatar").first().attr("alt"));
                     map.put("status", (friend.select("h2 > div").first().attr("class").equals("online") ? String.valueOf(R.drawable.led_green) : String.valueOf(R.drawable.led_red)));

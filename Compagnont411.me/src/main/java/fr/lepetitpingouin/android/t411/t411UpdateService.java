@@ -510,7 +510,6 @@ public class t411UpdateService extends Service {
                     ex.printStackTrace();
                 }
 
-                Log.e("erreur graphique", pagecontent);
 
             } catch (Exception e) {
 
