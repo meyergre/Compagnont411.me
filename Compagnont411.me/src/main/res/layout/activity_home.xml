@@ -868,6 +868,37 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/btn_report"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/androidt411_btn"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:minWidth="280dp"
+                android:layout_weight="0" >
+
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/ic_about"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/create_report"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/t411_action_grey"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"

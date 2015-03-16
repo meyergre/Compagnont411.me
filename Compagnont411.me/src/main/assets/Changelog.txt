@@ -1,6 +1,10 @@
 CHANGELOG
 
-2015.02-118
+2015.03-120
+- Ajout du formulaire de contact
+
+
+2015.02-118/119
 - Corrections suite au passage du site au .io
 
 

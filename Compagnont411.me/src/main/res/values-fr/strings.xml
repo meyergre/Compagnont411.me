@@ -284,6 +284,9 @@
     <string name="t411_site_ip_summary">Choisir quelle adresse utiliser pour joindre t411</string>
     <string name="errorGraph">Désolé, impossible d\'afficher le graphique... peut-être que le site a modifié la page des stats ?</string>
     <string name="gettingFriend">Récupération des données de</string>
+    <string name="report_explain">Ecrivez ici votre message. Des données additionnelles seront envoyées au développeur, vous pouvez les consulter ci-dessous.</string>
+    <string name="report_yourmessage">Votre message ici...</string>
+    <string name="create_report">Signaler un problème</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>

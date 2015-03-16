@@ -36,7 +36,7 @@ import java.util.HashMap;
 public class MainActivity extends ActionBarActivity {
 
     LinearLayout connectButton, mailButton,
-            aboutButton, btnStats, hWidget, btnCalculator, btnThread, btnNews, btnTop100, btnDlLater, btnFriends, btnUploads;
+            aboutButton, btnStats, hWidget, btnCalculator, btnThread, btnNews, btnTop100, btnDlLater, btnFriends, btnUploads, btnReport;
     TextView hLogin, dLogin, dClass, hMails, hUP, hDOWN, hRatio, hGoLeft, hUpLeft,
             hUP24, hDL24;
     Context context;
@@ -403,6 +403,17 @@ public class MainActivity extends ActionBarActivity {
                 Intent i;
                 i = new Intent();
                 i.setClass(getApplicationContext(), friendsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnReport = (LinearLayout) findViewById(R.id.btn_report);
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i;
+                i = new Intent();
+                i.setClass(getApplicationContext(), ReportActivity.class);
                 startActivity(i);
             }
         });
