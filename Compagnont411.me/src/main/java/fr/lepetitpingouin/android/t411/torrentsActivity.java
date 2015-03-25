@@ -307,7 +307,7 @@ public class torrentsActivity extends ActionBarActivity {
 
     public void update() {
         try {
-            dialog = show(torrentsActivity.this, "t411.me", this.getString(R.string.pleasewait), true, true);
+            dialog = show(torrentsActivity.this, "t411.io", this.getString(R.string.pleasewait), true, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

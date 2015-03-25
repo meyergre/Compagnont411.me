@@ -78,7 +78,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
         details_www.getSettings().setJavaScriptEnabled(true);
 
         dialog = ProgressDialog.show(this,
-                "t411.me",
+                "t411.io",
                 this.getString(R.string.pleasewait), true, true);
         dialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
             @Override
@@ -363,7 +363,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                         }
 
                         String comm_username = "<b style='color: " + colorPseudo + ";'>" + cusername + "</b>";
-                        String comm_avatar = "<img width=50 src=\"http://www.t411.me/" + object.select("th").first().select("img.avatar").first().attr("src") + "\" />";
+                        String comm_avatar = "<img width=50 src=\"http://www.t411.io/" + object.select("th").first().select("img.avatar").first().attr("src") + "\" />";
                         String comm_up = object.select("th").first().select("span").get(1).outerHtml();
                         String comm_down = object.select("th").first().select("span").get(2).outerHtml();
                         String comm_ratio = object.select("th").first().select("span").get(3).outerHtml();
@@ -396,7 +396,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 prez = prez.replaceAll("_____", "");
 
                 if (comments.select("tr").size() > 0)
-                    prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411.me...<br/><br/></center></a>";
+                    prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411.io...<br/><br/></center></a>";
 
                 try {
                     //vidéos youtube
@@ -455,7 +455,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 }
                 */
 
-                prez = prez.replaceAll("src=\"/", "src=\"http://www.t411.me/");
+                prez = prez.replaceAll("src=\"/", "src=\"http://www.t411.io/");
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());

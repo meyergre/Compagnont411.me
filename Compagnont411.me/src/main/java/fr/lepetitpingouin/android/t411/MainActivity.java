@@ -411,10 +411,12 @@ public class MainActivity extends ActionBarActivity {
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i;
                 i = new Intent();
                 i.setClass(getApplicationContext(), ReportActivity.class);
-                startActivity(i);
+                //startActivity(i);
+                Toast.makeText(getApplicationContext(), "Bientôt disponible...", Toast.LENGTH_SHORT).show();
             }
         });
 
