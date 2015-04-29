@@ -116,7 +116,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        try {
+            mDrawerToggle.syncState();
+        } catch(Exception ex) {}
     }
 
     public void onDisconnectPressed(View v) {
@@ -153,6 +155,7 @@ public class MainActivity extends ActionBarActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         mDrawerLayout = (android.support.v4.widget.DrawerLayout) findViewById(R.id.drawer_layout);
+        try {
         mDrawerToggle = new ActionBarDrawerToggle(
                 MainActivity.this,
                 mDrawerLayout,
@@ -167,7 +170,10 @@ public class MainActivity extends ActionBarActivity {
                 ActivityCompat.invalidateOptionsMenu(MainActivity.this); // creates call to onPrepareOptionsMenu()
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        } catch(Exception ex) {}
+
+        if(null != mDrawerLayout)
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -231,28 +237,28 @@ public class MainActivity extends ActionBarActivity {
         map = new HashMap<String, String>();
         map.put("icon", String.valueOf(R.drawable.ic_chrono));
         map.put("name", getString(R.string.fast_torrents));
-        map.put("code", "http://www.t411.me/top/100/");
+        map.put("code", Default.T411_TOP_100);
         map.put("sender", "100");
         listItemSort.add(map);
 
         map = new HashMap<String, String>();
         map.put("icon", String.valueOf(R.drawable.ic_calendar));
         map.put("name", getString(R.string.daily_torrents));
-        map.put("code", "http://www.t411.me/top/today/");
+        map.put("code", Default.T411_TOP_TODAY);
         map.put("sender", "top");
         listItemSort.add(map);
 
         map = new HashMap<String, String>();
         map.put("icon", String.valueOf(R.drawable.ic_calendar));
         map.put("name", getString(R.string.weekly_torrents));
-        map.put("code", "http://www.t411.me/top/week/");
+        map.put("code", Default.T411_TOP_WEEK);
         map.put("sender", "top");
         listItemSort.add(map);
 
         map = new HashMap<String, String>();
         map.put("icon", String.valueOf(R.drawable.ic_calendar));
         map.put("name", getString(R.string.monthly_torrents));
-        map.put("code", "http://www.t411.me/top/month/");
+        map.put("code", Default.T411_TOP_MONTH);
         map.put("sender", "top");
         listItemSort.add(map);
 
@@ -521,9 +527,11 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        try {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        } catch(Exception ex) {}
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:

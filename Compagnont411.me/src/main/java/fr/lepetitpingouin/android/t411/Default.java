@@ -3,6 +3,10 @@ package fr.lepetitpingouin.android.t411;
 public class Default {
     public static final String IP_T411 = "www.t411.io";
 
+    public static final String T411_TOP_100 = "http://www.t411.io/top/100/";
+    public static final String T411_TOP_TODAY = "http://www.t411.io/top/today/";
+    public static final String T411_TOP_WEEK = "http://www.t411.io/top/week/";
+    public static final String T411_TOP_MONTH = "http://www.t411.io/top/month/";
 
     public static final String URL_FRIENDS = "http://www.t411.io/my/friends/";
     public static final String URL_CHATI = "http://www.t411.io/chati/index.php?room=support";
