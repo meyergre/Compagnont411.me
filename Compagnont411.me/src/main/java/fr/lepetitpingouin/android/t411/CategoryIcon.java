@@ -14,7 +14,7 @@ public class CategoryIcon {
     public int getIcon() {
 
         //Musique
-        if ("395, 623,400, 403".contains(catCode))
+        if ("395, 623,400, 403, 642".contains(catCode))
             return R.drawable.ic_new_music;
 
         //Ebooks
@@ -46,7 +46,7 @@ public class CategoryIcon {
             return R.drawable.ic_new_gps;
 
         //XXX
-        if ("456, 632, 461, 462".contains(catCode))
+        if ("456, 632, 461, 462, 641".contains(catCode))
             return R.drawable.ic_new_xxx;
 
         return R.drawable.ic_new_t411;

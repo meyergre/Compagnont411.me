@@ -338,6 +338,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
                 String customCSS = "<meta name=\"viewport\" content=\"width=" + viewport + "; user-scalable=no\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')}</style>";
                 prez = customCSS + "<body>" + hadopi + "<br/>" + qualite + doc.select(".description").first().html() + "<br/><table width=100%>";// + comments+"</body></html>";
+                prez = prez.replaceAll("<noscript>", "");
+                prez = prez.replaceAll("</noscript>", "");
                 torrent_NFO = doc.select("pre").first().text();
 
                 prez += "<img src=\"file:///android_asset/picts/top.png\" onclick=\"scroll(0,0);\" style='z-index: 99999; position: fixed; top: 2px; right: 2px;' />";
@@ -347,6 +349,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 try {
                     //commentaires
                     objects = comments.select("tr");
+
+                    Log.e("comments", objects.html());
 
                     for (Element object : objects) {
                         String cusername = object.select("th").first().select("a").first().text();
@@ -363,7 +367,10 @@ public class torrentDetailsActivity extends ActionBarActivity {
                         }
 
                         String comm_username = "<b style='color: " + colorPseudo + ";'>" + cusername + "</b>";
-                        String comm_avatar = "<img width=50 src=\"http://www.t411.io/" + object.select("th").first().select("img.avatar").first().attr("src") + "\" />";
+
+                        String avatarpathtmp = object.select("noscript img.avatar").first().attr("src");
+                        String comm_avatar = "<img width=50 src=\"https://www.t411.io/" + avatarpathtmp + "\" />";
+
                         String comm_up = object.select("th").first().select("span").get(1).outerHtml();
                         String comm_down = object.select("th").first().select("span").get(2).outerHtml();
                         String comm_ratio = object.select("th").first().select("span").get(3).outerHtml();
@@ -455,7 +462,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 }
                 */
 
-                prez = prez.replaceAll("src=\"/", "src=\"http://www.t411.io/");
+                prez = prez.replaceAll("src=\"/", "src=\"https://www.t411.io/");
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());

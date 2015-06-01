@@ -450,12 +450,14 @@ public class torrentsActivity extends ActionBarActivity {
                 count = 0;
 
                 for (Element hCat : doc.select("h3")) {
-                    map = new HashMap<String, String>();
-                    map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]).getIcon()));
-                    map.put("name", hCat.text());
-                    map.put("code", hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]);
-                    catListItem.add(map);
-                    publishProgress(++count + " " + getString(R.string.catFetched));
+                    try {
+                        map = new HashMap<String, String>();
+                        map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]).getIcon()));
+                        map.put("name", hCat.text());
+                        map.put("code", hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]);
+                        catListItem.add(map);
+                        publishProgress(++count + " " + getString(R.string.catFetched));
+                    } catch(Exception ex) {}
                 }
 
                 publishProgress(getString(R.string.fetchingPages));

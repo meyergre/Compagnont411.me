@@ -295,4 +295,5 @@
         <item>@string/goto_t411</item>
         <item>@string/askWhatToDo</item>
     </string-array>
+    <string name="action_settings">Paramètres</string>
 </resources>

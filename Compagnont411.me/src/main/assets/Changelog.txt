@@ -1,7 +1,15 @@
 CHANGELOG
 
+2015.05-122
+- Affichage des images suite à une modification du site
+- Ajout des sous catégories Audio/Podcast et XXX/Animation
 
-2015.02-118/2015.03-119
+
+2015.05-121
+- Correction de l'affichage des catégories vides dans les tops
+
+
+2015.02-118/2015.03-119/2015.04-120
 - Corrections suite au passage du site au .io
 
 

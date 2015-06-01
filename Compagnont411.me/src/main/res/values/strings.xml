@@ -299,7 +299,7 @@
         <item>104.20.31.29 </item>
         <item>104.20.30.29</item>
     </string-array>
-    <string name="title_activity_report">ReportActivity</string>
+    <string name="title_activity_report" translatable="false">ReportActivity</string>
     <string name="action_settings">Settings</string>
     <string name="report_explain">Write here your message. Some additional informations about your system will be transferred to the developer, you can revew them below.</string>
     <string name="report_yourmessage">Write your message here...</string>
