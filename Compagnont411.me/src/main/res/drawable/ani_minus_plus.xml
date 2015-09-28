@@ -1,0 +1,22 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/ic_ani_plus_12" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_11" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_10" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_9" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_8" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_7" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_6" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_5" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_4" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_3" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_2" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_1" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus_0" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus__1" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus__2" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus__3" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus__4" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus__5" android:duration="25" />
+    <item android:drawable="@drawable/ic_ani_plus__6" android:duration="25" />
+</animation-list>

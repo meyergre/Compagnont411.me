@@ -155,7 +155,7 @@ public class Torrent {
                 msg = doc.select("div#messages").first().text();
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
             return null;
         }
@@ -210,7 +210,7 @@ public class Torrent {
                 msg = doc.select("div.fade").first().text();
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
             return null;
         }
@@ -230,6 +230,7 @@ public class Torrent {
         @Override
         protected void onPreExecute() {
             doNotify(R.drawable.ic_notif_torrent_downloading, name, "Téléchargement...", Integer.valueOf(id), null);
+            new T411Logger(context).writeLine("Initialisation du téléchargement");
         }
 
         @Override
@@ -239,8 +240,12 @@ public class Torrent {
 
             try {
 
+                boolean proxy = prefs.getBoolean("usePaidProxy", false);
+                new T411Logger(context).writeLine(proxy?"Proxy dédié actif":"Proxy dédié inactif");
+
+                new T411Logger(context).writeLine("Connexion par login/password pour " + username);
                 Connection.Response res = Jsoup
-                        .connect(Default.URL_LOGIN)
+                        .connect((proxy?Private.URL_PROXY:"") + Default.URL_LOGIN)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -250,7 +255,9 @@ public class Torrent {
 
                 Map<String, String> Cookies = res.cookies();
 
-                resTorrent = Jsoup.connect(Default.URL_GET_TORRENT + id)
+                new T411Logger(context).writeLine("Lecture du fichier torrent...");
+
+                resTorrent = Jsoup.connect((proxy?Private.URL_PROXY:"") + Default.URL_GET_TORRENT + id)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
@@ -272,7 +279,7 @@ public class Torrent {
         @Override
         protected void onPostExecute(Void result) {
 
-
+            new T411Logger(context).writeLine("Ecriture du fichier torrent...");
             String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
 
             File file = new File(path, name.replaceAll("/", "_") + ".torrent");
@@ -318,6 +325,7 @@ public class Torrent {
                 PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
                 doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
                 e.printStackTrace();
+                new T411Logger(context).writeLine("Accès au répertoire choisi impossible : " + prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
             } catch (Exception e) {
                 Intent i = new Intent();
                 i.setClass(context, UserPrefsActivity.class);
@@ -325,6 +333,7 @@ public class Torrent {
                 if (file.exists() && file.length() == 0) {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
                     e.printStackTrace();
+                    new T411Logger(context).writeLine("Impossible de lire le contenu du fichier", T411Logger.ERROR);
                 } else if (!file.exists()) {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nImpossible de créer le fichier.", Integer.valueOf(id), pI);
                 } else {

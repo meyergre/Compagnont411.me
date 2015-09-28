@@ -2,11 +2,165 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="statTop"
+        android:id="@+id/statTop">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/stat_avatar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/avatar_default" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Non connecté"
+            android:id="@+id/stat_username"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/stat_avatar"
+            android:layout_toEndOf="@+id/stat_avatar"
+            android:layout_margin="4dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-"
+            android:id="@+id/stat_class"
+            android:layout_below="@+id/stat_username"
+            android:layout_alignLeft="@+id/stat_username"
+            android:layout_alignStart="@+id/stat_username"
+            android:textColor="#777" />
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:id="@+id/seedbox"
+            android:src="@drawable/ic_seedbox"
+            android:onClick="onSeedboxClick"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
     <WebView
         android:id="@+id/webView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView23"
+                android:src="@drawable/up24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 B"
+                android:id="@+id/tv_up24"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 B"
+                android:id="@+id/tv_dl24"
+                android:textColor="#000"
+                android:layout_gravity="center_vertical" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView24"
+                android:src="@drawable/dl24" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/DownloadLeft"
+            android:id="@+id/tv_dlleft"
+            android:textColor="#000"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/UploadLeft"
+            android:id="@+id/tv_upleft"
+            android:textColor="#000"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/widget_avatar"
+        android:gravity="center_vertical"
+        android:transitionName="statBtm"
+        android:id="@+id/statBtm" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="▲ 3.60 TB"
+            android:id="@+id/stat_upload"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="#777" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="▼ 571.44 GB"
+            android:id="@+id/stat_download"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="#777" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="R : 6.44"
+            android:id="@+id/stat_ratio"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textColor="#777" />
+    </LinearLayout>
 
 </LinearLayout>

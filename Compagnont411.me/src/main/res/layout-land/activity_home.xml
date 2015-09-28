@@ -649,7 +649,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/torrent_card"
                 android:id="@+id/linearLayout3"
-                android:layout_below="@+id/linearLayout"
+                android:layout_below="@+id/statBtm"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="4dp"
                 android:layout_marginLeft="4dp">

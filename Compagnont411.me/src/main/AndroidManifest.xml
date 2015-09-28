@@ -9,18 +9,20 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
 
     <application
-        android:icon="@drawable/ic_newlauncher"
+        android:icon="@mipmap/ic_launcher"
         android:largeHeap="true"
         android:vmSafeMode="true"
         android:label="@string/app_name"
         android:allowBackup="true"
         android:theme="@style/CustomActionBarTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main">
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main"
+            android:theme="@style/toolbarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -160,7 +162,8 @@
             android:name=".SearchActivity"
             android:taskAffinity="fr.lepetitpingouin.android.t411.SearchActivity"
             android:configChanges="orientation|keyboard|keyboardHidden"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".MainActivity2"
+            android:theme="@style/toolbarTheme"
             android:exported="true" />
         <activity
             android:name="ComposeMessageActivity"
@@ -183,19 +186,19 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="t411.io"
+                    android:host="t411.in"
                     android:scheme="http"
                     android:pathPrefix="/torrents/" />
                 <data
-                    android:host="www.t411.io"
+                    android:host="www.t411.in"
                     android:scheme="http"
                     android:pathPrefix="/torrents/" />
                 <data
-                    android:host="t411.io"
+                    android:host="t411.in"
                     android:scheme="https"
                     android:pathPrefix="/torrents/" />
                 <data
-                    android:host="www.t411.io"
+                    android:host="www.t411.in"
                     android:scheme="https"
                     android:pathPrefix="/torrents/" />
             </intent-filter>
@@ -211,14 +214,16 @@
         <activity
             android:name=".newsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name="FirstLoginActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/toolbarTheme"/>
+        <activity android:name="FirstLoginActivity"
+            android:theme="@style/toolbarLoginTheme"/>
         <activity
             android:name=".FileDialog"
             android:label="@string/title_savePath"
             android:allowTaskReparenting="true"
             android:parentActivityName=".UserPrefsActivity"
-            android:theme="@style/CustomActionBarLightTheme" />
+            android:theme="@style/toolbarTheme" />
 
         <activity android:name=".NfoActivity" />
         <activity
@@ -232,6 +237,12 @@
             android:name=".DonateActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
             android:label="Offrez-moi une bière :)" />
+
+        <activity android:name=".ProxyActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:label="411 Facturation Test">
+        </activity>
+
     </application>
 
 </manifest>

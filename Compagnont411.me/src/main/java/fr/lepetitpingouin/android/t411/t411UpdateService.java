@@ -26,13 +26,14 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 public class t411UpdateService extends Service {
 
     static final String CONNECTURL = Default.URL_USERPROFILE;
     public Integer mails, oldmails;
     public double ratio;
-    public String upload, download, username, conError = "", usernumber;
+    public String upload, download, username, usernumber;
     public String pagecontent;
     public Handler handler;
     AsyncUpdate upd;
@@ -42,6 +43,8 @@ public class t411UpdateService extends Service {
     boolean timeout = true;
     Connection.Response res = null;
     Document doc = null;
+
+    int retry = 0;
 
     public boolean isConnectedToWifi() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -60,7 +63,8 @@ public class t411UpdateService extends Service {
     @Override
     public void onCreate() {
         handler = new Handler();
-
+        this.retry = 0;
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         super.onCreate();
     }
@@ -68,7 +72,7 @@ public class t411UpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        new T411Logger(getApplicationContext()).writeLine("Lancement du service de mise à jour");
 
         if (prefs.getBoolean("autoUpdate", false)) {
             planRefresh();
@@ -82,7 +86,9 @@ public class t411UpdateService extends Service {
 
             upd = new AsyncUpdate();
             upd.execute();
-            new newsFetcher().execute();
+            try {
+                new newsFetcher().execute();
+            } catch(Exception ex) {ex.printStackTrace();}
         }
 
         stopSelf();
@@ -108,15 +114,18 @@ public class t411UpdateService extends Service {
         alarmManager.set(RTC_mode, calendar.getTimeInMillis(), pendingIntent);
     }
 
-    public void update(String login, String password) throws IOException, ClassCastException {
+    public void update(final String login, final String password) throws IOException, ClassCastException {
 
 
+        new T411Logger(getApplicationContext()).writeLine("Début de la mise à jour");
         sendBroadcast(new Intent(Default.Appwidget_flag_updating));
         timeout = false;
 
 
         String mUrl = CONNECTURL;
         Log.e("t411UPDATER-URL", mUrl);
+
+        new T411Logger(getApplicationContext()).writeLine("Connexion à l'adresse " + mUrl);
 
 
         browser = new SuperT411HttpBrowser(getApplicationContext());
@@ -131,37 +140,51 @@ public class t411UpdateService extends Service {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(browser.getErrorMessage().contains("aptcha"))
-                        Log.e("Update error", browser.getErrorMessage());
-                    else
-                        Toast.makeText(t411UpdateService.this, browser.getErrorMessage(), Toast.LENGTH_LONG).show();
-                    Log.e("t411BROWSER", browser.getErrorMessage());
+                    sendBroadcast(new Intent(MainActivity2.INTENT_ERROR).putExtra("message", browser.getErrorMessage()));
+                    new T411Logger(getApplicationContext()).writeLine(browser.getErrorMessage(), T411Logger.ERROR);
                 }
             });
 
         }
+
+
         try {
             ratio = Math.round(Float.valueOf(doc.select(".rate").first().text().replace(',', '.')) * 100.0) / 100.0;
+            new T411Logger(getApplicationContext()).writeLine("Récupération du ratio : "+ ratio);
 
             username = doc.select(".avatar-big").attr("alt");
+            new T411Logger(getApplicationContext()).writeLine("Récupération du nom d'utilisateur : "+username);
 
             String avatarPath = doc.select(".avatar-big").attr("src");
+            new T411Logger(getApplicationContext()).writeLine("Récupération de l'avatar...");
 
-            Connection.Response avatarRes = Jsoup
-                    .connect(Default.URL_INDEX + avatarPath)
-                    .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                    .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                    .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                    .ignoreContentType(true).execute();
-            String avatar = Base64.encodeBytes(avatarRes.bodyAsBytes());
+            String tturl = avatarPath;
+            if(!tturl.startsWith("http"))
+                tturl = Default.URL_INDEX + tturl;
 
+                        String avatar = "";
+
+            try {
+
+                Connection.Response avatarRes = Jsoup
+                        .connect(tturl)
+                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
+                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
+                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
+                        .ignoreContentType(true).execute();
+                avatar = Base64.encodeBytes(avatarRes.bodyAsBytes());
+                Log.e("avatar", avatar);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
 
             upload = doc.select(".up").first().text();
+            new T411Logger(getApplicationContext()).writeLine("Récupération de l'upload : " + upload);
 
             download = doc.select(".down").first().text();
+            new T411Logger(getApplicationContext()).writeLine("Récupération du download : " + download);
 
             oldmails = (mails != null) ? mails : prefs.getInt("lastMails", 0);
-
 
             String rawMail = null;
             try {
@@ -173,9 +196,11 @@ public class t411UpdateService extends Service {
             }
 
             mails = Integer.valueOf(rawMail);
+            new T411Logger(getApplicationContext()).writeLine("Récupération des MP : " + mails);
 
             String[] tmp = doc.select(".ajax").attr("href").split("=");
             usernumber = tmp[1];
+            new T411Logger(getApplicationContext()).writeLine("Récupération de l'ID utilisateur : " + usernumber);
 
 
             String classe = "";
@@ -189,20 +214,27 @@ public class t411UpdateService extends Service {
 
             for (int iterator = 0; iterator < doc.select(".block > div > dl > dt").size(); iterator++) {
                 val = doc.select(".block > div > dl > dt").get(iterator).text();
-                if (val.contains("Classe:"))
+                if (val.contains("Classe:")) {
                     classe = doc.select(".block > div > dl > dd").get(iterator).text();
-                if (val.contains("Titre personnalis"))
-                    titre = doc.select(".block > div > dl > dd").get(iterator)
-                            .text();
-                if (val.contains("Total") && val.contains("(24h")
-                        && val.contains("charg"))
-                    dl24 = doc.select(".block > div > dl > dd").get(iterator)
-                            .text();
-                if (val.contains("Total") && val.contains("(24h") && val.contains("Upload"))
+                    new T411Logger(getApplicationContext()).writeLine("Récupération de la classe : " + classe);
+                }
+                if (val.contains("Titre personnalis")) {
+                    titre = doc.select(".block > div > dl > dd").get(iterator).text();
+                    new T411Logger(getApplicationContext()).writeLine("Récupération du titre personnalisé : " + titre);
+                }
+                if (val.contains("Total") && val.contains("(24h") && val.contains("charg")) {
+                    dl24 = doc.select(".block > div > dl > dd").get(iterator).text();
+                    new T411Logger(getApplicationContext()).writeLine("Récupération du dl.24h : " + dl24);
+                }
+                if (val.contains("Total") && val.contains("(24h") && val.contains("Upload")) {
                     up24 = doc.select(".block > div > dl > dd").get(iterator).text();
+                    new T411Logger(getApplicationContext()).writeLine("Récupération de l'up.24h : " + up24);
+                }
 
-                if (val.contains("Seedbox"))
+                if (val.contains("Seedbox")) {
                     seedbox = doc.select(".block > div > dl > dd").get(iterator).text();
+                    new T411Logger(getApplicationContext()).writeLine("Récupération de l'état seedbox : " + seedbox);
+                }
             }
 
 
@@ -240,6 +272,7 @@ public class t411UpdateService extends Service {
                 toLimit = (targetRatio * upData / curRatio) - upData;
 
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
 
             String UpLeft = null;
@@ -284,6 +317,8 @@ public class t411UpdateService extends Service {
                     Intent ratioIntent = new Intent(getApplicationContext(), UserPrefsActivity.class);
                     PendingIntent pI = PendingIntent.getActivity(getApplicationContext(), 0, ratioIntent, 0);
 
+                    new T411Logger(getApplicationContext()).writeLine("Le ratio est faible, envoi d'une notification");
+
                     doNotify(R.drawable.ic_stat_ratio, getString(R.string.notif_ratio_title), getString(R.string.notif_ratio_content), 1990, pI);
                 }
             }
@@ -292,6 +327,9 @@ public class t411UpdateService extends Service {
                 if (mails > prefs.getInt("lastMails", 0)) {
                     Intent msgIntent = new Intent(getApplicationContext(), messagesActivity.class);
                     PendingIntent pI = PendingIntent.getActivity(getApplicationContext(), 0, msgIntent, 0);
+
+                    new T411Logger(getApplicationContext()).writeLine("Nouveau MP reçu, envoi d'une notification");
+
                     doNotify(R.drawable.ic_launcher_messages, getString(R.string.notif_msg_title), getString(R.string.notif_msg_content), 2907, pI);
                 }
             }
@@ -306,6 +344,7 @@ public class t411UpdateService extends Service {
                 grapher grfx = new grapher();
                 grfx.execute();
             } catch (Exception ex) {
+                ex.printStackTrace();
             }
 
 
@@ -314,8 +353,10 @@ public class t411UpdateService extends Service {
 
             new NotificationWidget(getApplicationContext()).updateNotificationWidget();
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
+        new T411Logger(getApplicationContext()).writeLine("Fin de la mise à jour des données");
         refreshWidget();
     }
 
@@ -385,12 +426,12 @@ public class t411UpdateService extends Service {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(t411UpdateService.this, "Mise à jour impossible. Veuillez désinstaller/réinstaller l'application pour corriger le problème.", Toast.LENGTH_LONG).show();
+                        sendBroadcast(new Intent(MainActivity2.INTENT_ERROR).putExtra("message", "Mise à jour impossible. Veuillez désinstaller/réinstaller l'application pour corriger le problème."));
                     }
                 });
             } catch (Exception ex) {
 
-
+                new T411Logger(getApplicationContext()).writeLine("Impossible d'atteindre le serveur", T411Logger.ERROR);
                 Intent i = new Intent(Default.Appwidget_update);
                 sendBroadcast(i);
             }
@@ -432,19 +473,28 @@ public class t411UpdateService extends Service {
                     edit = prefs.edit();
                     edit.putString("title1", doc.select(".newsWrapper .title").get(0).text());
                     edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
-                    edit.putString("readMore1", url + doc.select(".newsWrapper .readmore").get(0).attr("href"));
+                    if(prefs.getBoolean("usePaidProxy", false))
+                        edit.putString("readMore1", doc.select(".newsWrapper .readmore").get(0).attr("href"));
+                    else
+                        edit.putString("readMore1", url + doc.select(".newsWrapper .readmore").get(0).attr("href"));
                     edit.commit();
 
                     edit = prefs.edit();
                     edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
                     edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
-                    edit.putString("readMore2", url + doc.select(".newsWrapper  .readmore").get(1).attr("href"));
+                    if(prefs.getBoolean("usePaidProxy", false))
+                        edit.putString("readMore2", doc.select(".newsWrapper  .readmore").get(1).attr("href"));
+                    else
+                        edit.putString("readMore2", url + doc.select(".newsWrapper  .readmore").get(1).attr("href"));
                     edit.commit();
 
                     edit = prefs.edit();
                     edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
                     edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
-                    edit.putString("readMore3", url + doc.select(".newsWrapper  .readmore").get(2).attr("href"));
+                    if(prefs.getBoolean("usePaidProxy", false))
+                        edit.putString("readMore3", doc.select(".newsWrapper  .readmore").get(2).attr("href"));
+                    else
+                        edit.putString("readMore3", url + doc.select(".newsWrapper  .readmore").get(2).attr("href"));
                     edit.commit();
 
                 }

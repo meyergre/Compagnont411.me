@@ -6,12 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class newsActivity extends ActionBarActivity {
+public class newsActivity extends AppCompatActivity {
 
     SharedPreferences prefs;
 
@@ -19,10 +20,6 @@ public class newsActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newspaper);
-
-        getSupportActionBar().setIcon(R.drawable.ic_news);
-        getSupportActionBar().setTitle(getResources().getString(R.string.btn_news));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         prefs = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
@@ -55,7 +52,7 @@ public class newsActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Intent i;
                 i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(prefs.getString("readMore1", "http://www.t411.me")));
+                i.setData(Uri.parse(prefs.getString("readMore1", "")));
                 startActivity(i);
             }
         });

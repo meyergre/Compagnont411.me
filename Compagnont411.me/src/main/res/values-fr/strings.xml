@@ -6,7 +6,7 @@
     <string name="main_login">Pseudonyme</string>
     <string name="main_password">Mot de passe</string>
     <string name="main_connect">Enregistrer</string>
-    <string name="description_logo">Logo t411.io</string>
+    <string name="description_logo">Logo t411</string>
     <string name="service_settings">Configuration</string>
     <string name="button_mail">Boite de réception</string>
     <string name="button_service">Configuration</string>
@@ -38,7 +38,7 @@
     <string name="open_app">Ouvrir l\'application</string>
     <string name="update_now">Mettre à jour</string>
     <string name="read_mails">Boîte de réception</string>
-    <string name="goto_t411">Aller sur t411.io</string>
+    <string name="goto_t411">Aller sur t411</string>
     <string name="widget_action">Action du widget…</string>
     <string name="answer">Répondre</string>
     <string name="delete">Supprimer</string>
@@ -84,7 +84,7 @@
 
     <string name="launcher_messages">MP t411</string>
 
-    <string name="appwidget_search">Rechercher sur t411.io</string>
+    <string name="appwidget_search">Rechercher sur t411</string>
     <string name="placeholder_search">Rechercher…</string>
     <string name="search_cat_all">Toutes categories</string>
     <string name="search_cat_audio">Audio</string>
@@ -133,8 +133,8 @@
     <string name="UP_left">UP restant</string>
     <string name="btn_forum">Fil de discussion</string>
     <string name="btn_news">Nouvelles du site</string>
-    <string name="contribute_on_t411">Contribuer à t411.io !</string>
-    <string name="support_t411_text">Faites d\'une pierre deux coups ! en faisant un don à t411.io,
+    <string name="contribute_on_t411">Contribuer à t411 !</string>
+    <string name="support_t411_text">Faites d\'une pierre deux coups ! en faisant un don à t411,
         vous participez aux frais de fonctionnement et de maintenance du site, et en plus vous
         gagnez des Go bonus !
     </string>
@@ -193,7 +193,7 @@
     <string name="file_name">Nom :</string>
     <string name="cancel">ANNULER</string>
     <string name="create">Enregistrer</string>
-    <string name="no_data">No Data</string>
+    <string name="no_data">Aucune donnée</string>
     <color name="gray">#ffff0000</color>
     <string name="err">Erreur</string>
     <string name="save_path">Dossier de téléchargement</string>
@@ -231,7 +231,7 @@
     <string name="main_login_summary">Nom d\'utilisateur t411</string>
     <string name="main_password_summary">Mot de passe t411</string>
     <string name="settings_caption_connection">Paramètres de connexion</string>
-    <string name="settings_caption_connection_summary">Définir les paramètres des connexions au serveur t411.io</string>
+    <string name="settings_caption_connection_summary">Définir les paramètres des connexions au serveur t411</string>
     <string name="settings_use_https_summary_on">Chiffrer les données lors des transferts</string>
     <string name="settings_use_https_summary_off">Ne pas chiffrer les données lors des transferts</string>
     <string name="settings_caption_connection_advanced_summary">Définir les réglages avancés</string>
@@ -241,7 +241,7 @@
     <string name="auto_update_summary">Configurer la mise à jour automatique des données</string>
     <string name="frequency">Fréquence de mise à jour</string>
     <string name="search_and_download">Recherche et téléchargement</string>
-    <string name="lowRatio_summary">Définir la limite de ratio faible (0.75 sur le site)</string>
+    <string name="lowRatio_summary">Définir la limite de ratio faible (1.00 sur le site)</string>
     <string name="targetRatio_summary">Définir le ratio visé dans l\'idéal</string>
     <string name="title_settings">CONFIGURATION</string>
     <string name="title_savePath">DOSSIER DE TELECHARGEMENT</string>
@@ -296,4 +296,22 @@
         <item>@string/askWhatToDo</item>
     </string-array>
     <string name="action_settings">Paramètres</string>
+    <string name="settings_use_proxy">Utiliser le service</string>
+    <string name="proxypart1">Dans certains pays, les gouvernements ont ordonné la censure de t411 par les fournisseurs d\'accès. C\'est notamment le cas en France et en Belgique.\nDe ce fait, pour accéder au site, il est nécessaire d\'utiliser une solution de contournement.</string>
+    <string name="option_proxy_name">Utiliser le proxy dédié</string>
+    <string name="option_proxy_detail">Un serveur dédié a été mis en place pour contourner les blocages DNS actuels et à venir, et préserver votre anonymat. Ce serveur ayant un coût mensuel non négligeable, une contribution est demandée pour l\'utiliser, sous la forme d\'un abonnement mensuel.</string>
+    <string name="censorship_alternative_title">Solutions alternatives</string>
+    <string name="censorship_alternative_detail">Si vous n\'avez pas accès au Play Store ou ne souhaitez pas contribuer au financement du serveur, d\'autres solutions s\'offrent à vous. Vous pouvez par exemple utiliser une application de VPN, ou encore modifier vos DNS ou votre fichier hosts (autorisations ROOT nécessaires).</string>
+    <string name="enable_service">Solutions de contournement</string>
+    <string name="enable_service_summary">Activer le proxy dédié ou découvrir d\'autres solutions</string>
+    <string name="anticensorship_summary">Contourner la censure et les blocages des FAI</string>
+    <string name="anticensorship">Anti-censure</string>
+    <string name="future_downloads">Mes futurs téléchargements</string>
+    <string name="swipe_down_update">Glisser vers le bas pour mettre à jour</string>
+    <string name="preference_appLogs">Journaliser</string>
+    <string name="preference_appLogs_summary">Enregistre un journal de l\'application, qui peut être envoyé au développeur en cas de problème</string>
+    <string name="sendLogs">Envoyer le journal</string>
+    <string name="sendLogs_summary">Envoyer le journal du jour par e-mail au développeur</string>
+    <string name="settings_caption_logging">Journalisation</string>
+    <string name="settings_caption_logging_summary">Activer la journalisation pour aider le développeur en cas de problème</string>
 </resources>

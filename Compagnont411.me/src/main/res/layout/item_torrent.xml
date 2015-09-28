@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/torrent_card"
+        android:background="@drawable/bg_card"
         android:layout_gravity="center"
         android:baselineAligned="false"
         android:layout_margin="2dp"
@@ -99,7 +99,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/linearLayout">
+                        android:id="@+id/statBtm">
 
                         <TextView
                             android:id="@+id/textView"

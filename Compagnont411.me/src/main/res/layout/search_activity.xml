@@ -1,52 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchWidget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="3dp">
 
+    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@drawable/bg_card"
+        android:id="@+id/searchtoolbar"
+        android:layout_gravity="center_vertical"
+        android:transitionName="searchWidget"
+        android:layout_marginLeft="7dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="7dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/action_search_keywords"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:hint="Recherche..."
+            android:background="#00000000"
+            android:minHeight="42dp"
+            android:editable="true"
+            android:inputType="text"
+            android:maxLines="1" />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layoutMode="clipBounds">
+        android:layoutMode="clipBounds"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/searchtoolbar"
+        >
+
 
         <LinearLayout
+            android:id="@+id/linearForm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="7dp"
             android:orientation="vertical">
 
-            <EditText
+            <include
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_description"
-                android:hint="Description..."
-                android:background="@drawable/txtedit" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_fichier"
-                android:hint="Fichier..."
+                android:layout_height="0dp"
+                layout="@layout/item_search_extras"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/txtedit" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_uploader"
-                android:hint="Uploader..."
-                android:layout_gravity="right"
-                android:background="@drawable/txtedit" />
+                android:id="@+id/include_advanced"
+                tools:ignore="Suspicious0dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/t411_btn"
+                android:background="@drawable/bg_card_blue"
                 android:clickable="true"
                 android:focusable="true"
+
                 android:id="@+id/ll_category"
                 android:padding="7dp">
 
@@ -56,8 +85,7 @@
                     android:id="@+id/ddl_icon"
                     android:src="@drawable/ic_new_t411"
                     android:padding="1dp"
-                    android:layout_gravity="center"
-                    android:background="#44FFFFFF" />
+                    android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/t411_btn"
+                android:background="@drawable/bg_card_blue"
                 android:clickable="true"
                 android:focusable="true"
                 android:id="@+id/ll_subcat"
@@ -130,7 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/t411_btn"
+                    android:background="@drawable/bg_card_blue"
                     android:clickable="true"
                     android:focusable="true"
                     android:id="@+id/ll_sort"
@@ -171,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/t411_btn"
+                    android:background="@drawable/bg_card_blue"
                     android:clickable="true"
                     android:focusable="true"
                     android:id="@+id/linearLayout2"
@@ -187,58 +215,48 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/linearForm"
+                android:layout_alignLeft="@+id/dropdown_favorites"
+                android:layout_alignStart="@+id/dropdown_favorites"
+                android:layout_alignParentRight="true"
+                android:id="@+id/relativeLst"
+                android:layout_alignParentEnd="true">
+
+                <ListView
+                    android:id="@+id/lv_mysearches"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_card"
+                    android:clipChildren="true">
+                </ListView>
+
+                <ProgressBar
+                    android:id="@+id/pb_loadfav"
+                    android:layout_margin="7dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"/>
+            </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/t411_btn"
-        android:padding="7dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:id="@+id/dropdown_favorites"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="7dp"
+        android:elevation="4dp"
+        app:borderWidth="0dp"
+        android:src="@drawable/ani_plus_minus"
+        android:id="@+id/fab_search">
 
-        <ImageView
-            android:layout_width="43dp"
-            android:layout_height="43dp"
-            android:id="@+id/imageView6"
-            android:src="@drawable/ic_favoritesearch"
-            android:padding="1dp" />
+    </android.support.design.widget.FloatingActionButton>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/my_searches"
-            android:id="@+id/dropdown_favorites_text"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:padding="6dp"
-            android:textColor="#FFF"
-            android:singleLine="true" />
-
-        <ProgressBar
-            android:layout_width="43dp"
-            android:layout_height="43dp"
-            android:id="@+id/dropdown_favorites_loading"
-            android:indeterminate="true"
-            android:visibility="invisible"
-            android:padding="8dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_horizontal|top"
-            android:indeterminateDrawable="@drawable/loading" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView7"
-            android:src="@drawable/ic_dropdown"
-            android:layout_gravity="center"
-            android:padding="6dp" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

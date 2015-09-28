@@ -106,6 +106,9 @@ public class messagesActivity extends ActionBarActivity {
             case R.id.action_update:
                 update();
                 return true;
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

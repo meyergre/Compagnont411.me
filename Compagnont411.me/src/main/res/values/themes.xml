@@ -2,6 +2,27 @@
 <resources>
     <!-- the theme applied to the application or activity -->
 
+    <style name="toolbarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:statusBarColor">@color/t411_action_blue_darker</item>
+        <item name="android:navigationBarColor">@color/t411_action_blue</item>
+        <item name="colorPrimary">@color/t411_action_blue</item>
+        <item name="colorPrimaryDark">@color/t411_action_blue_darker</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorAccent">#2885ba</item>
+    </style>
+
+    <style name="toolbarLoginTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:statusBarColor">@color/t411_black</item>
+        <item name="android:navigationBarColor">@color/t411_black</item>
+        <item name="colorPrimary">@color/t411_action_blue</item>
+        <item name="colorPrimaryDark">@color/t411_action_blue_darker</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorAccent">#2885ba</item>
+    </style>
+
+
     <!-- Start of Light Lollipop theme -->
 
     <style name="CustomActionBarLightTheme" parent="@style/Theme.AppCompat.Light">
@@ -78,6 +99,7 @@
     </style>
 
     <color name="t411_action_blue">#002244</color>
+    <color name="t411_action_blue_darker">#001133</color>
     <color name="t411_action_grey">#555</color>
     <color name="t411_action_lightgrey">#AAA</color>
 </resources>

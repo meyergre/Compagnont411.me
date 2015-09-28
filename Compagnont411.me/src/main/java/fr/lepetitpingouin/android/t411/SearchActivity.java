@@ -3,17 +3,25 @@ package fr.lepetitpingouin.android.t411;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -35,11 +43,12 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SearchActivity extends ActionBarActivity {
+public class SearchActivity extends AppCompatActivity {
     CheckBox sortMode;
     SharedPreferences prefs;
+    Toolbar toolbar;
 
-    LinearLayout dropdown_category, dropdown_sort, dropdown_subcat, dropdown_favorites;
+    LinearLayout dropdown_category, dropdown_sort, dropdown_subcat;
 
     subCatFetcher scF;
     favoritesFetcher fF;
@@ -49,7 +58,7 @@ public class SearchActivity extends ActionBarActivity {
 
     int icon_sort, icon_category = R.drawable.ic_new_t411;
 
-    ProgressBar loading, loadingFav;
+    ProgressBar loading;
 
     String catCode = "";
     String subCatCode = "";
@@ -69,12 +78,15 @@ public class SearchActivity extends ActionBarActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        toolbar = (Toolbar)findViewById(R.id.searchtoolbar);
+        setSupportActionBar(toolbar);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setCustomView(R.layout.action_search);
-        keywords = (EditText) getSupportActionBar().getCustomView().findViewById(R.id.action_search_keywords);
+
+        keywords = (EditText) findViewById(R.id.action_search_keywords);
         keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -91,9 +103,46 @@ public class SearchActivity extends ActionBarActivity {
         tx_description = (EditText) findViewById(R.id.et_description);
         tx_uploader = (EditText) findViewById(R.id.et_uploader);
 
-        loading = (ProgressBar) findViewById(R.id.subcat_progressbar);
 
-        loadingFav = (ProgressBar) findViewById(R.id.dropdown_favorites_loading);
+        final LinearLayout advanced = (LinearLayout)findViewById(R.id.include_advanced);
+
+        final FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab_search);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                        if(advanced.getHeight() < 100) {
+                            int targetSize = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, getResources().getDisplayMetrics()));
+                            MResizeAnimation mra = new MResizeAnimation(advanced, targetSize);
+                            mra.setDuration(400);
+                            advanced.startAnimation(mra);
+                            fab.setImageDrawable(getResources().getDrawable(R.drawable.ani_plus_minus));
+                            ((AnimationDrawable)fab.getDrawable()).start();
+                        }
+                        else {
+                            int targetSize = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics()));
+                            MResizeAnimation mra = new MResizeAnimation(advanced, targetSize);
+                            mra.setDuration(400);
+                            advanced.startAnimation(mra);
+                            fab.setImageDrawable(getResources().getDrawable(R.drawable.ani_minus_plus));
+                            ((AnimationDrawable)fab.getDrawable()).start();
+                        }
+                        advanced.requestLayout();
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+        loading = (ProgressBar) findViewById(R.id.subcat_progressbar);
 
 
         sortMode = (CheckBox) findViewById(R.id.sortOrder);
@@ -282,19 +331,14 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
 
-        dropdown_favorites = (LinearLayout) findViewById(R.id.dropdown_favorites);
-        dropdown_favorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                favorites_dialog.show();
-            }
-        });
 
         favorites_dialog = new Dialog(this, R.style.MyDialogTheme);
         favorites_dialog.setContentView(R.layout.dialog_listview);
         favorites_dialog.setTitle("Recherches personnalisées...");
 
-        getMaListViewPersoFav = (ListView) favorites_dialog.findViewById(R.id.dialoglistview);
+        //getMaListViewPersoFav = (ListView) favorites_dialog.findViewById(R.id.dialoglistview);
+        getMaListViewPersoFav = (ListView) findViewById(R.id.lv_mysearches);
+
         listItemFav = new ArrayList<HashMap<String, String>>();
 
         getMaListViewPersoFav.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -304,49 +348,19 @@ public class SearchActivity extends ActionBarActivity {
                 HashMap<String, String> map = (HashMap<String, String>) getMaListViewPersoFav
                         .getItemAtPosition(position);
 
-                favorites_dialog.dismiss();
-
-                /*
-                codeName
-                codeDesc
-                codeFile
-                codeUplo
-                 */
-                //String url = Default.URL_SEARCH + map.get("search");
-
                 keywords.setText(map.get("codeName"));
                 tx_description.setText(map.get("codeDesc"));
                 tx_fichier.setText(map.get("codeFile"));
                 tx_uploader.setText(map.get("codeUplo"));
 
-                //fF = null;
-                //scF = null;
 
                 onSearch();
 
-                //if (prefs.getBoolean("useHTTPS", false))
-                //url = url.replace("http://", "https://");
-
-/*
-                Intent i;
-                i = new Intent();
-                i.setClass(getApplicationContext(), torrentsActivity.class);
-                i.putExtra("url", url);
-                i.putExtra("keywords", map.get("name"));
-                i.putExtra("showIcons", false);
-                i.putExtra("id", map.get("id"));
-                i.putExtra("order", "added");
-                i.putExtra("sender", "search");
-                i.putExtra("type", "DESC");
-                i.putExtra("tx_order", ((TextView) findViewById(R.id.lst_sort)).getText());
-
-                //i.putExtra("icon_category", icon_category);
-                //i.putExtra("icon_sort", icon_sort);
-                startActivity(i);
-*/
-
             }
         });
+
+
+
 
 
         dropdown_subcat = (LinearLayout) findViewById(R.id.ll_subcat);
@@ -476,6 +490,9 @@ public class SearchActivity extends ActionBarActivity {
             case R.id.action_search:
                 onSearch();
                 return true;
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -483,12 +500,10 @@ public class SearchActivity extends ActionBarActivity {
 
     private class favoritesFetcher extends AsyncTask<Void, String[], Void> {
 
-        Connection.Response res = null;
         Document doc = null;
 
         @Override
         protected void onPreExecute() {
-            loadingFav.setVisibility(View.VISIBLE);
             listItemFav.clear();
         }
 
@@ -499,16 +514,6 @@ public class SearchActivity extends ActionBarActivity {
                     .getString("password", "");
 
             try {
-                /*res = Jsoup
-                        .connect(Default.URL_SEARCH_GET)
-                        .data("login", username, "password", password)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .method(Connection.Method.POST)
-                        .execute();
-
-                doc = res.parse();*/
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
@@ -516,7 +521,7 @@ public class SearchActivity extends ActionBarActivity {
                         .executeInAsyncTask());
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
             return null;
         }
@@ -550,7 +555,24 @@ public class SearchActivity extends ActionBarActivity {
                         R.id.lso_title, R.id.lso_code});
 
                 getMaListViewPersoFav.setAdapter(mScheduleFav);
-                loadingFav.setVisibility(View.INVISIBLE);
+
+                int oneRowInDp = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 58, getResources().getDisplayMetrics()));
+                int targetSize = 0;
+
+                targetSize = listItemFav.size()*oneRowInDp;
+
+                ResizeAnimation ra = new ResizeAnimation(getMaListViewPersoFav, targetSize);
+                ra.setDuration(400);
+                ra.forceStartHeight(56);
+                getMaListViewPersoFav.startAnimation(ra);
+
+                getMaListViewPersoFav.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        findViewById(R.id.pb_loadfav).setVisibility(View.GONE);
+                    }
+                }, 500);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -572,21 +594,6 @@ public class SearchActivity extends ActionBarActivity {
             Document doc;
 
             try {
-
-                /*doc = Jsoup.connect(Default.URL_GET_SUBCAT + catCode)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .cookies(Jsoup
-                                .connect(Default.URL_LOGIN)
-                                .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
-                                .method(Connection.Method.POST)
-                                .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                                .execute().cookies())
-                        .get();*/
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(prefs.getString("login", ""), prefs.getString("password", ""))
@@ -620,6 +627,75 @@ public class SearchActivity extends ActionBarActivity {
             maListViewPersoSubcat.setAdapter(mScheduleSubcat);
 
             loading.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+
+
+    public class ResizeAnimation extends Animation {
+        int startHeight;
+        final int targetHeight;
+        View view;
+
+        public ResizeAnimation(View view, int targetHeight) {
+            this.view = view;
+            this.targetHeight = targetHeight;
+            this.startHeight = view.getHeight();
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            int newHeight = (int) (startHeight + (targetHeight - startHeight) * interpolatedTime);
+            view.getLayoutParams().height = newHeight;
+            view.requestLayout();
+        }
+
+        @Override
+        public void initialize(int width, int height, int parentWidth, int parentHeight) {
+            super.initialize(width, height, parentWidth, parentHeight);
+        }
+
+        @Override
+        public boolean willChangeBounds() {
+            return true;
+        }
+
+        public void forceStartHeight(int i) {
+            this.startHeight = i;
+        }
+    }
+
+    public class MResizeAnimation extends Animation {
+        int startHeight;
+        final int targetHeight;
+        View view;
+
+        public MResizeAnimation(View view, int targetHeight) {
+            this.view = view;
+            this.targetHeight = targetHeight;
+            this.startHeight = view.getHeight();
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            int newHeight = (int) (startHeight + (targetHeight - startHeight) * interpolatedTime);
+            view.getLayoutParams().height = newHeight;
+            view.requestLayout();
+        }
+
+        @Override
+        public void initialize(int width, int height, int parentWidth, int parentHeight) {
+            super.initialize(width, height, parentWidth, parentHeight);
+        }
+
+        @Override
+        public boolean willChangeBounds() {
+            return true;
+        }
+
+        public void forceStartHeight(int i) {
+            this.startHeight = i;
         }
     }
 

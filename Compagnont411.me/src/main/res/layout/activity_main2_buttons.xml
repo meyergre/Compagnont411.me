@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fakesearch"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="0dp"
+                android:drawableLeft="@drawable/ic_btn_fast"
+                android:layout_height="42dp"
+                android:text="rapides"
+                android:id="@+id/button"
+                android:onClick="onFastTorrent"
+                android:elevation="3dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical|left"
+                android:layout_margin="4dp"
+                android:backgroundTint="#3398de"
+                android:textColor="#FFF"
+                android:background="@drawable/bg_card_blue"
+                android:padding="5dp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:onClick="onDailyTorrent"
+                android:layout_height="42dp"
+                android:text="du jour"
+                android:id="@+id/button2"
+                android:drawableLeft="@drawable/ic_btn_day"
+                android:elevation="3dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical|left"
+                android:backgroundTint="#2372a9"
+                android:layout_margin="4dp"
+                android:textColor="#FFF"
+                android:background="@drawable/bg_card_blue"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:layout_width="0dp"
+                android:onClick="onWeeklyTorrent"
+                android:layout_height="42dp"
+                android:text="de la semaine"
+                android:id="@+id/button3"
+                android:drawableLeft="@drawable/ic_btn_week"
+                android:elevation="3dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical|left"
+                android:backgroundTint="#2b6d9a"
+                android:layout_margin="4dp"
+                android:textColor="#FFF"
+                android:background="@drawable/bg_card_blue"
+                android:padding="5dp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:drawableLeft="@drawable/ic_btn_month"
+                android:layout_height="42dp"
+                android:text="du mois"
+                android:id="@+id/button4"
+                android:onClick="onMonthlyTorrent"
+                android:elevation="3dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical|left"
+                android:backgroundTint="#2081c5"
+                android:layout_margin="4dp"
+                android:textColor="#FFF"
+                android:background="@drawable/bg_card_blue"
+                android:padding="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

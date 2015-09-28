@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group1">
+        <item
+            android:id="@+id/action_mailbox"
+            android:title="@string/button_mail"
+            android:icon="@drawable/ic_action_inbox" />
+        <item
+            android:id="@+id/action_future"
+            android:title="@string/future_downloads"
+            android:icon="@drawable/ic_future" />
+        <item
+            android:id="@+id/action_uploads"
+            android:title="@string/my_uploads"
+            android:icon="@drawable/ic_upload" />
+        <item
+            android:id="@+id/action_stats"
+            android:title="@string/statistics"
+            android:icon="@drawable/ic_stats" />
+        <item
+            android:id="@+id/action_friends"
+            android:title="@string/my_friends"
+            android:icon="@drawable/ic_friends" />
+        <item
+            android:id="@+id/action_calculator"
+            android:title="@string/calculator"
+            android:icon="@drawable/ic_calc" />
+    </group>
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/action_settings"
+            android:title="@string/button_service"
+            android:icon="@drawable/ic_settings"/>
+
+        <item
+            android:id="@+id/action_about"
+            android:title="@string/about"
+            android:icon="@drawable/ic_about"/>
+    </group>
+
+</menu>

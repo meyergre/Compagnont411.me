@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceScreen
+        android:title="@string/settings_caption_logging"
+        android:summary="@string/settings_caption_logging_summary"
+        android:persistent="false">
+        <CheckBoxPreference android:key="appLogs"
+            android:title="@string/preference_appLogs"
+            android:summary="@string/preference_appLogs_summary"
+            android:defaultValue="false"/>
+        <Preference android:key="sendLogs"
+            android:dependency="appLogs"
+            android:title="@string/sendLogs"
+            android:summary="@string/sendLogs_summary" />
+    </PreferenceScreen>
 
+    <Preference
+        android:key="option_proxy"
+        android:title="@string/enable_service"
+        android:summary="@string/enable_service_summary"/>
     <!-- Compte utilisateur -->
     <PreferenceScreen
         android:title="@string/settings_caption_useraccount"
-        android:icon="@drawable/ic_settings_useraccount"
         android:summary="@string/settings_caption_useraccount_summary"
         android:persistent="false">
         <PreferenceCategory android:title="@string/connect">
@@ -39,7 +55,6 @@
     <!-- Connexion -->
     <PreferenceScreen
         android:title="@string/settings_caption_connection"
-        android:icon="@drawable/ic_settings_connect"
         android:summary="@string/settings_caption_connection_summary">
 
         <CheckBoxPreference
@@ -47,7 +62,7 @@
             android:title="@string/settings_use_https"
             android:summaryOn="@string/settings_use_https_summary_on"
             android:summaryOff="@string/settings_use_https_summary_off"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
         <CheckBoxPreference
             android:key="wifiOnly"
@@ -56,17 +71,18 @@
             android:defaultValue="false" />
 
         <PreferenceScreen
+            android:enabled="true"
             android:title="@string/settings_caption_connection_advanced"
             android:summary="@string/settings_caption_connection_advanced_summary">
 
-            <ListPreference android:key="SiteIP"
+            <!--ListPreference android:key="SiteIP"
                 android:title="@string/t411_site_ip"
                 android:summary="@string/t411_site_ip_summary"
                 android:entries="@array/t411_ip_list"
                 android:entryValues="@array/t411_ip_list"
-                android:defaultValue="t411.me">
+                android:defaultValue="www.t411.in">
 
-            </ListPreference>
+            </ListPreference-->
 
             <EditTextPreference
                 android:key="User-Agent"
@@ -88,7 +104,6 @@
     <!-- Mise  à jour -->
     <PreferenceScreen
         android:title="@string/auto_update"
-        android:icon="@drawable/ic_settings_autoupdate"
         android:summary="@string/auto_update_summary">
 
         <CheckBoxPreference
@@ -113,7 +128,6 @@
     <!-- Notifications -->
     <PreferenceScreen
         android:title="Notifications"
-        android:icon="@drawable/ic_settings_notif"
         android:summary="@string/notification_settings">
         <CheckBoxPreference
             android:key="ratioAlert"
@@ -135,7 +149,6 @@
     <!-- Widgets -->
     <PreferenceScreen
         android:title="Widgets"
-        android:icon="@drawable/ic_settings_widgets"
         android:summary="@string/widgets_settings">
         <ListPreference
             android:key="widgetAction"
@@ -147,9 +160,7 @@
 
     <!-- Téléchargement -->
     <PreferenceScreen
-        android:title="@string/search_and_download"
-        android:icon="@drawable/ic_settings_searchdl">
-
+        android:title="@string/search_and_download">
         <PreferenceCategory android:title="@string/search_results">
 
             <CheckBoxPreference

@@ -70,7 +70,7 @@
                 android:padding="9dp"
                 android:background="@drawable/torrent_card"
                 android:layout_margin="4dp"
-                android:id="@+id/linearLayout">
+                android:id="@+id/statBtm">
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -82,6 +83,8 @@ public class torrentsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torrentslist);
 
+        new T411Logger(getApplicationContext()).writeLine("Lancement d'une recherche de torrent");
+
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connManager.getActiveNetworkInfo();
         if (!(netInfo != null && netInfo.isConnectedOrConnecting())) {
@@ -99,8 +102,12 @@ public class torrentsActivity extends ActionBarActivity {
         connectUrl = getIntent().getStringExtra("url");
         searchTerms = getIntent().getStringExtra("keywords");
 
+        new T411Logger(getApplicationContext()).writeLine("Recherche lancée : " + searchTerms);
+
         order = getIntent().getStringExtra("order");
+        new T411Logger(getApplicationContext()).writeLine("Ordre de tri : " + order);
         type = getIntent().getStringExtra("type");
+        new T411Logger(getApplicationContext()).writeLine("Type : " + type);
 
         tx_order = getIntent().getStringExtra("tx_order");
 
@@ -307,7 +314,7 @@ public class torrentsActivity extends ActionBarActivity {
 
     public void update() {
         try {
-            dialog = show(torrentsActivity.this, "t411.io", this.getString(R.string.pleasewait), true, true);
+            dialog = show(torrentsActivity.this, "t411.in", this.getString(R.string.pleasewait), true, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -338,6 +345,7 @@ public class torrentsActivity extends ActionBarActivity {
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
+                        .skipLogin()
                         .connect(Default.URL_UNFAVORITE)
                         .addData("submit", "Supprimer")
                         .addData("ids[]", id)
@@ -429,6 +437,8 @@ public class torrentsActivity extends ActionBarActivity {
 
                 url += "&order=" + order + "&type=" + type + "&page=" + paginator;
 
+                new T411Logger(getApplicationContext()).writeLine("Envoi de la requête : " + url);
+
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(prefs.getString("login", ""), prefs.getString("password", ""))
                         .connect(url)
@@ -452,13 +462,17 @@ public class torrentsActivity extends ActionBarActivity {
                 for (Element hCat : doc.select("h3")) {
                     try {
                         map = new HashMap<String, String>();
-                        map.put("icon", String.valueOf(new CategoryIcon(hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]).getIcon()));
+                        String[] t_CatCode = hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=");
+                        map.put("icon", String.valueOf(new CategoryIcon(t_CatCode[t_CatCode.length - 1]).getIcon()));
                         map.put("name", hCat.text());
-                        map.put("code", hCat.nextElementSibling().select("tbody td a").first().attr("href").split("=", 2)[1]);
+                        map.put("code", t_CatCode[t_CatCode.length-1]);
                         catListItem.add(map);
                         publishProgress(++count + " " + getString(R.string.catFetched));
-                    } catch(Exception ex) {}
+                    } catch(Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
+                new T411Logger(getApplicationContext()).writeLine(count + " catégories trouvées");
 
                 publishProgress(getString(R.string.fetchingPages));
                 count = 0;
@@ -472,6 +486,7 @@ public class torrentsActivity extends ActionBarActivity {
                     }
                     publishProgress(++count + " " + getString(R.string.pagesFetched));
                 }
+                new T411Logger(getApplicationContext()).writeLine(count + " pages trouvées");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -513,15 +528,19 @@ public class torrentsActivity extends ActionBarActivity {
                         Elements tds = row.select("td");
 
 
-                        String catCode = tds.get(base + 0).select("a").first().attr("href").split("=", 2)[1];
+                        String[] t_catCode = tds.get(base + 0).select("a").first().attr("href").split("=");
+                        String catCode = t_catCode[t_catCode.length - 1];
 
                         try {
+
+                            //récupération de l'ID
+                            String[] t_ID = tds.get(base + 2).select("a").attr("href").split("=");
 
                             publishProgress(++count + " " + getString(R.string.torrents_found));
                             map = new HashMap<String, String>();
                             //map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
                             map.put("nomComplet", tds.get(base + 1).select("a").first().text().toString());
-                            map.put("ID", tds.get(base + 2).select("a").attr("href").split("=")[1]);
+                            map.put("ID", t_ID[t_ID.length-1]);
                             map.put("age", tds.get(base + 4).text());
                             map.put("taille", new BSize(tds.get(base + 5).text()).convert());
                             map.put("avis", tds.get(base + 3).text());
@@ -541,7 +560,8 @@ public class torrentsActivity extends ActionBarActivity {
                             listItem.add(map);
 
                         } catch (Exception e) {
-
+                            e.printStackTrace();
+                            new T411Logger(getApplicationContext()).writeLine("Erreur interne : " + e.getMessage());
                         }
                     }
                 }
@@ -556,6 +576,7 @@ public class torrentsActivity extends ActionBarActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            new T411Logger(getApplicationContext()).writeLine(count + " torrents sur cette page");
 
             return null;
         }
@@ -627,12 +648,14 @@ public class torrentsActivity extends ActionBarActivity {
 
                 if (doc == null) {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();
+                    new T411Logger(getApplicationContext()).writeLine("Aucune donnée reçue");
                 }
 
                 Handler handler = new Handler();
                 //if (maListViewPerso.getCount() < 1) {
                 if (count < 1) {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_result), Toast.LENGTH_LONG).show();
+                    new T411Logger(getApplicationContext()).writeLine("Aucune entrée dans la liste, fermeture.");
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             finish();
@@ -646,6 +669,7 @@ public class torrentsActivity extends ActionBarActivity {
                 }, 500);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_data_from_server), Toast.LENGTH_LONG).show();
+                new T411Logger(getApplicationContext()).writeLine("Aucune donnée reçue");
                 finish();
             }
         }

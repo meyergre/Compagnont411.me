@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.android.tools.build:gradle:1.2.3'
     }
 }
 apply plugin: 'android'
@@ -17,10 +17,10 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 8
         targetSdkVersion 21
-        versionCode 122
-        versionName "2015.05-122"
+        versionCode 134
+        versionName "2015.09-134"
     }
 
     buildTypes {
@@ -34,5 +34,7 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:design:22.2.0'
     compile 'org.jsoup:jsoup:1.7.3'
+    compile 'com.anjlab.android.iab.v3:library:1.0.+@aar'
 }

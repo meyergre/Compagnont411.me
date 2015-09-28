@@ -31,7 +31,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:background="@drawable/t411_btn"
+        android:background="@drawable/bg_card_blue"
         android:clickable="true"
         android:focusable="true"
         android:id="@+id/category_filter"
@@ -76,16 +76,16 @@
             android:layout_width="42dp"
             android:layout_height="match_parent"
             android:id="@+id/navbtn_prev"
-            android:background="@drawable/t411_btn"
-            android:src="@drawable/ic_prev"
+            android:src="@drawable/ic_arrow_prev"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:background="@drawable/androidt411_btn" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/t411_btn"
+            android:background="@drawable/bg_card_blue"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/navbtn_list"
@@ -128,10 +128,10 @@
             android:layout_width="42dp"
             android:layout_height="match_parent"
             android:id="@+id/navbtn_next"
-            android:background="@drawable/t411_btn"
             android:layout_gravity="center"
-            android:src="@drawable/ic_next"
-            android:padding="5dp" />
+            android:src="@drawable/ic_arrow_next"
+            android:padding="5dp"
+            android:background="@drawable/androidt411_btn" />
 
     </LinearLayout>
 </LinearLayout>

@@ -136,7 +136,7 @@
             android:background="#33FFFFFF"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/linearLayout"
+            android:layout_alignRight="@+id/statBtm"
             android:id="@+id/frameLayout6"
             android:layout_margin="1dp"
             android:orientation="vertical">

@@ -39,7 +39,7 @@
         android:clickable="false"
         android:isScrollContainer="true"
         android:scrollbars="none"
-        android:id="@+id/linearLayout"
+        android:id="@+id/statBtm"
         android:gravity="center"
         android:minHeight="200dp">
 
@@ -117,7 +117,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignBottom="@+id/statBtm"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:background="#eee">

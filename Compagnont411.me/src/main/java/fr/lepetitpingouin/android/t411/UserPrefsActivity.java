@@ -3,12 +3,19 @@ package fr.lepetitpingouin.android.t411;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
+
+import java.util.List;
 
 /**
  * Created by gregory on 23/10/2013.
@@ -21,12 +28,12 @@ public class UserPrefsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.settings);
         try {
-            addPreferencesFromResource(R.xml.settings);
 
             prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-            filePicker = (Preference) findPreference("savePath");
+            filePicker = findPreference("savePath");
             assert filePicker != null;
             filePicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -50,6 +57,31 @@ public class UserPrefsActivity extends PreferenceActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
+        Preference openProxyStatus = findPreference("option_proxy");
+        openProxyStatus.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent i = new Intent(getApplicationContext(), ProxyActivity.class);
+                startActivity(i);
+                return false;
+            }
+        });
+
+        Preference sendLog = findPreference("sendLogs");
+        sendLog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:meyergre@gmail.com"));
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + new T411Logger(getApplicationContext()).logFilePath()));
+                i.putExtra(Intent.EXTRA_SUBJECT, "Compagnon t411 - envoi de logs");
+                startActivity(Intent.createChooser(i, ""));
+                return false;
+            }
+        });
+
     }
 
     @Override

@@ -37,7 +37,7 @@ public class actionSelector extends Activity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(actionSelector.this,
-                        MainActivity.class);
+                        MainActivity2.class);
                 actionSelector.this.startActivity(myIntent);
                 finish();
             }

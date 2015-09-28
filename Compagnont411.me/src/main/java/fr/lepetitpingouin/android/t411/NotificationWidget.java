@@ -56,7 +56,7 @@ public class NotificationWidget {
         builder.setSmallIcon(new Ratio(context).getSmiley());
         builder.setAutoCancel(false);
         builder.setOngoing(true);
-        builder.setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0));
+        builder.setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, MainActivity2.class), 0));
 
         if (!prefs.getBoolean("notificationWidget", false)) {
             mNotificationManager.cancel(1);

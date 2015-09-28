@@ -1,125 +1,53 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#012f54"
-    android:orientation="vertical">
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/bg_girl"
-        android:padding="5dp"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/please_login"
-            android:id="@+id/txtloginplease"
-            android:layout_gravity="center"
-            android:textColor="#FFF" />
-
-        <LinearLayout
-            android:layout_width="200dp"
-            android:orientation="vertical"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center|bottom"
-            android:gravity=""
-            android:layout_marginTop="33dp">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/loginLogin"
-                android:layout_gravity="center"
-                android:background="@drawable/txtedit"
-                android:hint="@string/default_username"
-                android:textColor="#000"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:singleLine="true" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/loginPassword"
-                android:layout_gravity="center"
-                android:background="@drawable/txtedit"
-                android:textColor="#000"
-                android:inputType="textPassword"
-                android:password="true"
-                android:hint="@string/main_password"
-                android:paddingRight="15dp"
-                android:paddingLeft="15dp"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Info"
-                android:id="@+id/txtInfoError"
-                android:textColor="@color/t411_red"
-                android:visibility="visible"
-                android:background="#66FFFFFF"
-                android:padding="8dp"
-                android:layout_gravity="center" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <FrameLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#BBB"></FrameLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/login_iv_city"
+        android:src="@drawable/img_login"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentRight="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:background="#DDD">
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_iv_girl"
+        android:src="@drawable/img_girl"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="right"
-            android:padding="3dp"
-            android:background="#DDD"
-            android:orientation="horizontal"
-            android:id="@+id/loginBar">
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/include_loginform"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/login_inc_loginform"
+        android:layout_marginTop="60dp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="@string/need_an_account"
-                android:id="@+id/btnCreateAccount"
-                android:background="@drawable/androidt411_btn"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#000" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fablogin"
+        app:elevation="6dp"
+        app:borderWidth="0dp"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_done_white_24dp" />
 
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"></FrameLayout>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/t411_btn"
-                android:text="@string/connect"
-                android:id="@+id/loginConnect"
-                android:layout_gravity="center"
-                android:textSize="18sp"
-                android:textColor="#fff"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

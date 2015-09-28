@@ -1,5 +1,43 @@
 CHANGELOG
 
+2015.09-134
+- Accélération des recherches de torrent (jusqu'à x2)
+- Corrections mineures
+- Corrections de manquements lors du passage au .in
+- Rétablissement de la date de dernière mise à jour
+
+
+2015.09-132/133
+- Rectifications cosmétiques
+- Corrections de bugs mineurs
+
+
+2015.09-131
+- Introduction d'éléments de Material Design
+- Passage de l'application sur t411.in
+- Consolidation des mesures anti-censure
+- Rétablissement de l'option HTTPS
+- Correction des problèmes de login
+
+
+2015.09-130
+- Suppression de la compatibilité avec android 2.1 par manque de support des outils de développement
+- Remise en place d'une solution contre la censure
+- Correction de l'affichage de l'avatar lors de l'utilisation du proxy
+
+
+2015.08-126 / 2015.09-129
+- tests non publiés
+
+
+2015.08-125
+- Contournement du captcha (3 essais avant abandon)
+
+
+2015.08-123/4
+- Contournement de la censure en France
+
+
 2015.05-122
 - Affichage des images suite à une modification du site
 - Ajout des sous catégories Audio/Podcast et XXX/Animation
