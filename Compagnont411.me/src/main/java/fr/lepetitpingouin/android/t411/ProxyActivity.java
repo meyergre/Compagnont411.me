@@ -3,13 +3,13 @@ package fr.lepetitpingouin.android.t411;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,6 +24,7 @@ public class ProxyActivity extends ActionBarActivity {
     BillingProcessor bp;
     SharedPreferences prefs;
     SharedPreferences.Editor edit;
+    EditText custom_proxy_address;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class ProxyActivity extends ActionBarActivity {
         new T411Logger(getApplicationContext()).writeLine("Ouverture de la page du proxy");
 
         final LinearLayout subscribed = (LinearLayout)findViewById(R.id.abonned);
+
+        this.custom_proxy_address = (EditText) findViewById(R.id.custom_proxy_address);
 
         final Button abo = (Button)findViewById(R.id.btn_abo_proxy);
         abo.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +122,8 @@ public class ProxyActivity extends ActionBarActivity {
 
     @Override
     public void onDestroy() {
+        new T411Logger(getApplicationContext()).writeLine("Proxy perso : " + custom_proxy_address.getText().toString());
+        edit.putString("customProxy", custom_proxy_address.getText().toString()).apply();
         bp.release();
         super.onDestroy();
 

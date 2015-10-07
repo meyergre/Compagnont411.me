@@ -322,4 +322,7 @@
     <string name="sendLogs_summary">Send today\'s log to the developer, attached to an e-mail</string>
     <string name="settings_caption_logging">Logging</string>
     <string name="settings_caption_logging_summary">Enable debug logging to help developer in troubleshooting</string>
+    <string name="initialLoad">Fetching your data for the 1st time...</string>
+    <string name="custom_proxy_title">Use your *OWN* proxy</string>
+    <string name="custom_proxy_detail">If you have the required knowledge, you can build and use your own proxy server to bypass censorship. For security reason, to avoid you using any free and unsecure proxy on the web, the only allowed port is 411.\nPlease enter your proxy\'s IP below</string>
 </resources>

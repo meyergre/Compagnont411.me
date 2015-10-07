@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="#000"
+    android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/login_iv_city"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_iv_city"
-        android:src="@drawable/img_login"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
         android:layout_alignParentBottom="false"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="false"
-        android:layout_alignParentRight="true" />
-
-    <ImageView
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/login_iv_girl"
-        android:src="@drawable/img_girl"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
+        android:src="@drawable/img_login" />
+
+    <ImageView
+        android:id="@+id/login_iv_girl"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_girl" />
 
     <include
+        android:id="@+id/login_inc_loginform"
+        layout="@layout/include_loginform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/include_loginform"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/login_inc_loginform"
         android:layout_marginTop="60dp" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fablogin"
-        app:elevation="6dp"
-        app:borderWidth="0dp"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_done_white_24dp" />
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_done_white_24dp"
+        app:borderWidth="0dp"
+        app:elevation="6dp" />
 
 </RelativeLayout>

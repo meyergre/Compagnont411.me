@@ -13,6 +13,7 @@ public class Default {
     public static final String URL_MESSAGE_DEL = "http://www.t411.in/mailbox/delete/?id=";//+ID
     public static final String URL_MESSAGE_ARC = "http://www.t411.in/mailbox/archive/?id=";//+ID
     public static final String URL_OTHERAPPS = "http://play.google.com/store/search?q=pub:Gr%C3%A9gory+Meyer";
+    public static final String URL_FRIENDPROFILE = "http://www.t411.in/users/profile/?id=";
     // Fr�quence de mise � jour par d�faut (en minutes)
     public static String UpdateFreq = "60";
     public static String timeout = "25";

@@ -1,7 +1,6 @@
-<manifest
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.lepetitpingouin.android.t411"
-    android:installLocation="auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,12 +12,12 @@
 
 
     <application
-        android:icon="@mipmap/ic_launcher"
-        android:largeHeap="true"
-        android:vmSafeMode="true"
-        android:label="@string/app_name"
         android:allowBackup="true"
-        android:theme="@style/CustomActionBarTheme">
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/CustomActionBarTheme"
+        android:vmSafeMode="true">
         <activity
             android:name=".MainActivity2"
             android:label="@string/title_activity_main"
@@ -129,12 +128,12 @@
         <activity
             android:name=".messagesActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout"
-            android:parentActivityName=".MainActivity"
-            android:process=":messages"
-            android:taskAffinity="fr.lepetitpingouin.android.t411.messagesActivity"
-            android:icon="@drawable/ic_launcher_messages"
             android:finishOnTaskLaunch="true"
-            android:label="@string/launcher_messages">
+            android:icon="@drawable/ic_launcher_messages"
+            android:label="@string/launcher_messages"
+            android:parentActivityName=".MainActivity2"
+            android:process=":messages"
+            android:taskAffinity="fr.lepetitpingouin.android.t411.messagesActivity">
             <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -142,29 +141,29 @@
         </activity>
         <activity
             android:name=".statsActivity"
-            android:parentActivityName=".MainActivity"
-            android:configChanges="orientation" />
+            android:configChanges="orientation"
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".aboutActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".readMailActivity"
-            android:parentActivityName=".messagesActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout"
             android:icon="@drawable/ic_launcher_messages"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout" />
+            android:parentActivityName=".messagesActivity" />
         <activity
             android:name=".actionSelector"
-            android:taskAffinity="fr.lepetitpingouin.android.t411.actionSelector"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
             android:label="@string/WhatToDo"
-            android:process=":t411action" />
+            android:process=":t411action"
+            android:taskAffinity="fr.lepetitpingouin.android.t411.actionSelector"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity
             android:name=".SearchActivity"
-            android:taskAffinity="fr.lepetitpingouin.android.t411.SearchActivity"
             android:configChanges="orientation|keyboard|keyboardHidden"
+            android:exported="true"
             android:parentActivityName=".MainActivity2"
-            android:theme="@style/toolbarTheme"
-            android:exported="true" />
+            android:taskAffinity="fr.lepetitpingouin.android.t411.SearchActivity"
+            android:theme="@style/toolbarTheme" />
         <activity
             android:name="ComposeMessageActivity"
             android:icon="@drawable/ic_launcher_messages">
@@ -175,7 +174,7 @@
             </intent-filter>
         </activity>
         <activity android:name="CalculatorActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".torrentDetailsActivity"
             android:configChanges="orientation|screenSize">
@@ -187,20 +186,20 @@
 
                 <data
                     android:host="t411.in"
-                    android:scheme="http"
-                    android:pathPrefix="/torrents/" />
+                    android:pathPrefix="/torrents/"
+                    android:scheme="http" />
                 <data
                     android:host="www.t411.in"
-                    android:scheme="http"
-                    android:pathPrefix="/torrents/" />
+                    android:pathPrefix="/torrents/"
+                    android:scheme="http" />
                 <data
                     android:host="t411.in"
-                    android:scheme="https"
-                    android:pathPrefix="/torrents/" />
+                    android:pathPrefix="/torrents/"
+                    android:scheme="https" />
                 <data
                     android:host="www.t411.in"
-                    android:scheme="https"
-                    android:pathPrefix="/torrents/" />
+                    android:pathPrefix="/torrents/"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity
@@ -210,18 +209,18 @@
         <activity
             android:name=".friendsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".newsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".MainActivity2"
             android:theme="@style/toolbarTheme"/>
         <activity android:name="FirstLoginActivity"
             android:theme="@style/toolbarLoginTheme"/>
         <activity
             android:name=".FileDialog"
-            android:label="@string/title_savePath"
             android:allowTaskReparenting="true"
+            android:label="@string/title_savePath"
             android:parentActivityName=".UserPrefsActivity"
             android:theme="@style/toolbarTheme" />
 
@@ -230,17 +229,17 @@
             android:name=".UserPrefsActivity"
             android:allowTaskReparenting="true"
             android:label="@string/title_settings"
-            android:theme="@style/CustomActionBarLightTheme"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity2"
+            android:theme="@style/toolbarTheme" />
         <activity android:name=".FilesListActivity" />
         <activity
             android:name=".DonateActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
-            android:label="Offrez-moi une bière :)" />
+            android:label="Offrez-moi une bière :)"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
         <activity android:name=".ProxyActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="411 Facturation Test">
+            android:label="411 Facturation Test"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
     </application>

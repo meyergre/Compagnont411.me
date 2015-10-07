@@ -7,6 +7,7 @@
     <style name="CustomActionBarLightTheme" parent="@style/Theme.AppCompat.Light">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:actionBarStyle">@style/MyLightActionBar</item>
+        <item name="colorAccent">#2885ba</item>
 
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyLightActionBar</item>

@@ -8,18 +8,15 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -37,6 +34,8 @@ public class FirstLoginActivity extends Activity {
 
     AsyncConnector asc;
 
+    View fab;
+
     @Override
     public void onResume() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -47,7 +46,7 @@ public class FirstLoginActivity extends Activity {
             i.putExtra("LED_Net", false);
             sendBroadcast(i);
 
-            Snackbar.make(login, getString(R.string.noConError), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(fab, getString(R.string.noConError), Snackbar.LENGTH_SHORT).show();
             finish();
         }
 
@@ -84,7 +83,7 @@ public class FirstLoginActivity extends Activity {
         ImageView city = (ImageView)findViewById(R.id.login_iv_city);
 
         final View login = findViewById(R.id.login_inc_loginform);
-        View fab = findViewById(R.id.fablogin);
+        fab = findViewById(R.id.fablogin);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             city.animate()
@@ -154,7 +153,7 @@ public class FirstLoginActivity extends Activity {
                     asc = new AsyncConnector();
                     asc.execute();
                 } catch (Exception e) {
-                    Snackbar.make(login, "Une erreur est survenue. Veuillez réessayer.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(fab, "Une erreur est survenue. Veuillez réessayer.", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -169,7 +168,8 @@ public class FirstLoginActivity extends Activity {
             super.onPreExecute();
             this.mLogin = login.getText().toString();
             this.mPassword = passwd.getText().toString();
-            dialog.show();
+            if (mLogin.isEmpty() || mPassword.isEmpty()) this.cancel(true);
+            else dialog.show();
         }
 
         @Override
@@ -191,7 +191,6 @@ public class FirstLoginActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.e("Login Message", message);
             return null;
         }
 
@@ -199,19 +198,19 @@ public class FirstLoginActivity extends Activity {
         protected void onPostExecute(Void result) {
             dialog.dismiss();
             try {
-                if (message.contains("incorrect")) {
+                if (message != null && message.contains("incorrect")) {
                     dialog.dismiss();
                     edit.putBoolean("firstLogin", false);
 
-                    Snackbar snk = Snackbar.make(login, message, Snackbar.LENGTH_SHORT);
+                    Snackbar snk = Snackbar.make(fab, message, Snackbar.LENGTH_SHORT);
                     View snkView = snk.getView();
                     ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
                     snkView.setBackgroundColor(Color.RED);
                     snk.show();
 
                     edit.commit();
-                } else if(message.contains("captcha")) {
-                    Snackbar snk = Snackbar.make(login, message, Snackbar.LENGTH_SHORT);
+                } else if (message != null && message.contains("captcha")) {
+                    Snackbar snk = Snackbar.make(fab, message, Snackbar.LENGTH_SHORT);
                     View snkView = snk.getView();
                     ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
                     snkView.setBackgroundColor(Color.RED);
@@ -221,18 +220,18 @@ public class FirstLoginActivity extends Activity {
                     edit.putString("login", login.getText().toString());
                     edit.putString("password", passwd.getText().toString());
                     edit.putBoolean("firstLogin", true);
-                    edit.commit();
+                    edit.apply();
 
                     try {
                         startService(new Intent(getApplicationContext(), t411UpdateService.class));
-                        startActivity(new Intent(getApplicationContext(), MainActivity2.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity2.class).putExtra("message", getResources().getString(R.string.initialLoad)));
                         finish();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             } catch (Exception e) {
-                Snackbar snk = Snackbar.make(login, "Erreur interne : " + e.getMessage(), Snackbar.LENGTH_SHORT);
+                Snackbar snk = Snackbar.make(fab, "Erreur interne : " + e.getMessage(), Snackbar.LENGTH_SHORT);
                 View snkView = snk.getView();
                 ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
                 snkView.setBackgroundColor(Color.RED);

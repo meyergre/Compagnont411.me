@@ -3,39 +3,39 @@
     <group android:id="@+id/group1">
         <item
             android:id="@+id/action_mailbox"
-            android:title="@string/button_mail"
-            android:icon="@drawable/ic_action_inbox" />
+            android:icon="@drawable/ic_action_inbox"
+            android:title="@string/button_mail" />
         <item
             android:id="@+id/action_future"
-            android:title="@string/future_downloads"
-            android:icon="@drawable/ic_future" />
+            android:icon="@drawable/ic_future"
+            android:title="@string/future_downloads" />
         <item
             android:id="@+id/action_uploads"
-            android:title="@string/my_uploads"
-            android:icon="@drawable/ic_upload" />
+            android:icon="@drawable/ic_upload"
+            android:title="@string/my_uploads" />
         <item
             android:id="@+id/action_stats"
-            android:title="@string/statistics"
-            android:icon="@drawable/ic_stats" />
+            android:icon="@drawable/ic_stats"
+            android:title="@string/statistics" />
         <item
             android:id="@+id/action_friends"
-            android:title="@string/my_friends"
-            android:icon="@drawable/ic_friends" />
+            android:icon="@drawable/ic_friends"
+            android:title="@string/my_friends" />
         <item
             android:id="@+id/action_calculator"
-            android:title="@string/calculator"
-            android:icon="@drawable/ic_calc" />
+            android:icon="@drawable/ic_calc"
+            android:title="@string/calculator" />
     </group>
     <group android:id="@+id/group2">
         <item
             android:id="@+id/action_settings"
-            android:title="@string/button_service"
-            android:icon="@drawable/ic_settings"/>
+            android:icon="@drawable/ic_settings_black"
+            android:title="@string/button_service" />
 
         <item
             android:id="@+id/action_about"
-            android:title="@string/about"
-            android:icon="@drawable/ic_about"/>
+            android:icon="@drawable/ic_about"
+            android:title="@string/about" />
     </group>
 
 </menu>

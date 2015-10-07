@@ -177,7 +177,7 @@ public class friendsActivity extends ActionBarActivity {
                     map.put("smiley", String.valueOf(R.drawable.smiley_unknown));
 
                     //try {
-                    Document profile = Jsoup
+                    /*Document profile = Jsoup
                             .connect("http://www.t411.me/users/profile/?id=" + friend.select(".pm").first().attr("href").substring(friend.select(".pm").first().attr("href").lastIndexOf("=") + 1))
                             .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
                             .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
@@ -190,7 +190,15 @@ public class friendsActivity extends ActionBarActivity {
                                     .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
                                     .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                                     .execute().cookies())
-                            .ignoreContentType(true).get();
+                            .ignoreContentType(true).get();*/
+
+                    Document profile = Jsoup.parse(
+                            new SuperT411HttpBrowser(getApplicationContext())
+                                    .connect(Default.URL_FRIENDPROFILE + friend.select(".pm").first().attr("href").substring(friend.select(".pm").first().attr("href").lastIndexOf("=") + 1))
+                                    .login(prefs.getString("login", ""), prefs.getString("password", ""))
+                                    .skipLogin()
+                                    .executeInAsyncTask()
+                    );
 
                     map.put("up", new BSize(profile.select(".itemWrapperHalf").last().select(".block dd").get(0).text()).convert());
                     map.put("down", new BSize(profile.select(".itemWrapperHalf").last().select(".block dd").get(1).text()).convert());

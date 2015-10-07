@@ -1,10 +1,16 @@
 CHANGELOG
 
+2015.10-135
+- Correction de typos
+- Rétablissement du fonctionnement du widget pour lancer l'application
+
+
 2015.09-134
 - Accélération des recherches de torrent (jusqu'à x2)
 - Corrections mineures
 - Corrections de manquements lors du passage au .in
 - Rétablissement de la date de dernière mise à jour
+- Ajout de logs activables dans les options
 
 
 2015.09-132/133

@@ -11,6 +11,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -46,6 +47,8 @@ public class messagesActivity extends ActionBarActivity {
     ListView maListViewPerso;
     ArrayList<HashMap<String, String>> listItem;
 
+    FloatingActionButton fab;
+
     @Override
     public void onDestroy() {
         mF = null;
@@ -57,12 +60,20 @@ public class messagesActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_msglist);
 
-        prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.button_mail));
+
+        fab = (FloatingActionButton) findViewById(R.id.fabcompose);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(messagesActivity.this, ComposeMessageActivity.class);
+                startActivity(myIntent);
+            }
+        });
 
         maListViewPerso = (ListView) findViewById(R.id.malistviewperso);
         registerForContextMenu(maListViewPerso);
@@ -99,10 +110,6 @@ public class messagesActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_compose:
-                Intent myIntent = new Intent(messagesActivity.this, ComposeMessageActivity.class);
-                startActivity(myIntent);
-                return true;
             case R.id.action_update:
                 update();
                 return true;

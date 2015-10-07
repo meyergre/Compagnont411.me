@@ -314,4 +314,7 @@
     <string name="sendLogs_summary">Envoyer le journal du jour par e-mail au développeur</string>
     <string name="settings_caption_logging">Journalisation</string>
     <string name="settings_caption_logging_summary">Activer la journalisation pour aider le développeur en cas de problème</string>
+    <string name="initialLoad">Première récupération de données...</string>
+    <string name="custom_proxy_title">Utiliser votre propre serveur proxy</string>
+    <string name="custom_proxy_detail">Si vous avez les connaissances nécessaires, vous pouvez monter et utiliser votre propre proxy. Par mesure de sécurité, afin d\'être sûr qu\'il s\'agisse bien de votre propre proxy, seul le port 411 est accepté.\nEntrez l\'adresse du serveur ci-dessous</string>
 </resources>

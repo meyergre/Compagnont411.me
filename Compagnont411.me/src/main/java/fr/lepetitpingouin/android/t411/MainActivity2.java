@@ -31,11 +31,28 @@ import android.widget.Toast;
  */
 public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    public static final String INTENT_ERROR = "fr.lepetitpingouin.android.t411.update.error";
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     SharedPreferences prefs;
     SwipeRefreshLayout swrl;
-    public static final String INTENT_ERROR = "fr.lepetitpingouin.android.t411.update.error";
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Default.Appwidget_flag_updating)) {
+                swrl.setRefreshing(true);
+            } else {
+                swrl.setRefreshing(false);
+                initWidgets();
+            }
+
+            if (intent.getAction().equals(INTENT_ERROR) && getIntent().hasExtra("message")) {
+                Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
+            }
+
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +62,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (getIntent().hasExtra("message"))
+            Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -185,9 +204,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 ((TextView)findViewById(R.id.widget_news2title)).setText(prefs.getString("title2", ""));
                 ((TextView)findViewById(R.id.widget_news3title)).setText(prefs.getString("title3", ""));
 
-                String lastUpdate = getResources().getString(R.string.lastUpdate) + prefs.getString("lastDate", "");
-                if(!lastUpdate.equals(""))
-                    ((TextView)findViewById(R.id.tvUpdateTime)).setText(lastUpdate);
+                if (!prefs.getString("lastDate", "").equals(""))
+                    ((TextView) findViewById(R.id.tvUpdateTime)).setText(getResources().getString(R.string.lastUpdate) + prefs.getString("lastDate", ""));
 
                 findViewById(R.id.widget_news).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -199,6 +217,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 if(!prefs.getBoolean("showProxyAlert", true)) {
                     findViewById(R.id.proxyAlert).setVisibility(View.GONE);
                 } else {
+                    findViewById(R.id.proxyAlert).setVisibility(View.VISIBLE);
                     if(prefs.getBoolean("usePaidProxy", false)) {
                         ((ImageView)findViewById(R.id.iv_shieldBtn)).setImageDrawable(getResources().getDrawable(R.drawable.ic_switch_on));
                         ((ImageView)findViewById(R.id.iv_shield)).setImageDrawable(getResources().getDrawable(R.drawable.img_pxybk_ok));
@@ -224,7 +243,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         super.onResume();
     }
 
-
             public void onSearch(View v) {
 
                 Intent intent = new Intent(this, SearchActivity.class);
@@ -234,7 +252,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                     startActivity(intent, options.toBundle());
                 else startActivity(intent);
             }
-
 
             public void onGraph(View v) {
                 Intent intent = new Intent(this, statsActivity.class);
@@ -257,7 +274,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 startActivity(i);
             }
 
-
             public void onDailyTorrent(View v) {
                 Intent i;
                 i = new Intent();
@@ -269,7 +285,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 startActivity(i);
             }
 
-
             public void onWeeklyTorrent(View v) {
                 Intent i;
                 i = new Intent();
@@ -280,7 +295,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 i.putExtra("sender", "top");
                 startActivity(i);
             }
-
 
             public void onMonthlyTorrent(View v) {
                 Intent i;
@@ -345,24 +359,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         initWidgets();
     }
-
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Default.Appwidget_flag_updating)) {
-                swrl.setRefreshing(true);
-            } else {
-                swrl.setRefreshing(false);
-                initWidgets();
-            }
-
-            if(intent.getAction().equals(INTENT_ERROR) && getIntent().hasExtra("message")) {
-                Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
-            }
-
-        }
-    };
 
     @Override
     public void onDestroy() {

@@ -26,7 +26,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.List;
 
 public class t411UpdateService extends Service {
 
@@ -123,7 +122,6 @@ public class t411UpdateService extends Service {
 
 
         String mUrl = CONNECTURL;
-        Log.e("t411UPDATER-URL", mUrl);
 
         new T411Logger(getApplicationContext()).writeLine("Connexion à l'adresse " + mUrl);
 

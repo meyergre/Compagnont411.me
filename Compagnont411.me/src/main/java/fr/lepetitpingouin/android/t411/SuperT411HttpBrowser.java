@@ -1,16 +1,14 @@
 package fr.lepetitpingouin.android.t411;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
-
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
@@ -21,10 +19,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -69,6 +67,26 @@ public class SuperT411HttpBrowser {
 
     Boolean skipLogin = false;
 
+    HttpHost httpproxy;
+
+    public SuperT411HttpBrowser(Context context) {
+        ctx = context;
+
+        this.retry = 0;
+
+        cookieStore = new BasicCookieStore();
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        this.proxy = prefs.getBoolean("usePaidProxy", false);
+
+        if (proxy) {
+            httpproxy = new HttpHost(prefs.getString("customProxy", Private.URL_PROXY), 411);
+            new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + prefs.getString("customProxy", Private.URL_PROXY));
+        }
+
+        doHackTrustedCerts();
+    }
+
     private void doHackTrustedCerts() {
         try {
             SSLContext ctx = SSLContext.getInstance("TLS");
@@ -103,27 +121,14 @@ public class SuperT411HttpBrowser {
         return this;
     }
 
-    public SuperT411HttpBrowser(Context context) {
-        ctx = context;
-
-        this.retry = 0;
-
-        cookieStore = new BasicCookieStore();
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        this.proxy = prefs.getBoolean("usePaidProxy", false);
-        Log.e("Proxy status", this.proxy+"");
-        doHackTrustedCerts();
-    }
-
     public SuperT411HttpBrowser connect(String mUrl) {
 
-        this.url = mUrl.replace("www.t411.in", prefs.getString("SiteIP", Default.IP_T411));
-        if(proxy){
+        this.url = mUrl;//.replace("www.t411.in", prefs.getString("SiteIP", Default.IP_T411));
+        /*/TEST TRUE PROXY/*if(proxy){
             this.url = Private.URL_PROXY + this.url.replace("http://", "");
-        }
+        }*/
 
-        this.url = this.url.replaceAll("t411.io", "t411.in");
+        //this.url = this.url.replace("t411.io", "t411.in");
 
         if (prefs.getBoolean("useHTTPS", false) && !proxy) {
             new T411Logger(this.ctx).writeLine("Connexion HTTPS activée");
@@ -166,7 +171,7 @@ public class SuperT411HttpBrowser {
     }
 
     public SuperT411HttpBrowser login(String username, String password) {
-
+        Log.e("t411UPDATER-URL", "login");
         this.username = username;
         this.password = password;
         return this;
@@ -209,8 +214,11 @@ public class SuperT411HttpBrowser {
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
-        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        if (proxy)
+            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
+
+        //HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        //HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
         String mUrl = Default.URL_LOGIN;
@@ -252,6 +260,7 @@ public class SuperT411HttpBrowser {
         if (responseString == null)
             responseString = "OK";
 
+
         try {
             String conError = Jsoup.parse(responseString).select("div.fade").first().text();
             if (!conError.equals("OK") && !conError.contains("identifié")) {
@@ -269,9 +278,9 @@ public class SuperT411HttpBrowser {
                     }
                 } else {
                     Log.e("CAPTCHA", "Abandon après 3 essais");
+                    }
                 }
 
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -292,14 +301,15 @@ public class SuperT411HttpBrowser {
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
+        if (proxy)
+            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
+
         //HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         //HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
-
-
         String mUrl = Default.URL_LOGIN;
-        if(proxy) mUrl = Private.URL_PROXY + mUrl;
+        //if(proxy) mUrl = Private.URL_PROXY + mUrl;
 
         new T411Logger(this.ctx).writeLine("Connexion de l'utilisateur " + username);
         new T411Logger(this.ctx).writeLine("Initiation de la connexion HTTP vers " + mUrl);
@@ -309,7 +319,7 @@ public class SuperT411HttpBrowser {
 
         HttpResponse response;
         String responseString = null;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(8);
         nameValuePairs.add(new BasicNameValuePair("remember", "1"));
         nameValuePairs.add(new BasicNameValuePair("login", username));
         nameValuePairs.add(new BasicNameValuePair("password", password));

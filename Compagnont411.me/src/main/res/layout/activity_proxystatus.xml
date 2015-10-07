@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView3"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,73 +24,73 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="7dp">
+                android:layout_margin="7dp"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView15"
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:id="@+id/imageView15"
                     android:layout_gravity="center_horizontal"
                     android:adjustViewBounds="true"
-                    android:transitionName="iv_shield"
-                    android:src="@drawable/img_pxy" />
+                    android:src="@drawable/img_pxy"
+                    android:transitionName="iv_shield" />
 
                 <TextView
+                    android:id="@+id/textView27"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/proxypart1"
-                    android:id="@+id/textView27"
+                    android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:layout_gravity="center_vertical" />
+                    android:text="@string/proxypart1" />
             </LinearLayout>
 
             <CheckBox
+                android:id="@+id/checkBox_proxyAlert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activer l&apos;avertissement en page d&apos;accueil"
-                android:id="@+id/checkBox_proxyAlert"
                 android:layout_gravity="center_horizontal"
                 android:checked="true"
-                android:onClick="onCheckboxClick" />
+                android:onClick="onCheckboxClick"
+                android:text="Activer l&apos;avertissement en page d&apos;accueil" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="7dp"
                 android:background="@drawable/bg_card_blue"
-                android:layout_margin="7dp">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical">
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/imageView16"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:id="@+id/imageView16"
                         android:adjustViewBounds="true"
                         android:src="@drawable/img_pxybk" />
 
                     <TextView
+                        android:id="@+id/textView28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/option_proxy_name"
-                        android:id="@+id/textView28"
                         android:layout_gravity="center_vertical"
+                        android:text="@string/option_proxy_name"
                         android:textColor="#fff" />
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/textView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/option_proxy_detail"
-                    android:id="@+id/textView29"
                     android:layout_margin="4dp"
+                    android:text="@string/option_proxy_detail"
                     android:textColor="#fff"
                     android:textSize="13dp" />
 
@@ -98,34 +99,34 @@
                     android:layout_height="match_parent">
 
                     <Button
+                        android:id="@+id/btn_abo_proxy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="S&apos;abonner"
-                        android:id="@+id/btn_abo_proxy"
-                        android:background="@drawable/androidt411_btn"
-                        android:textColor="#FFF"
-                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/androidt411_btn"
+                        android:text="S&apos;abonner"
+                        android:textColor="#FFF" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:id="@+id/abonned"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:id="@+id/abonned">
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
 
                         <CheckBox
+                            android:id="@+id/cbx_use_proxy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/settings_use_proxy"
-                            android:id="@+id/cbx_use_proxy"
-                            android:textColor="#FFF"
                             android:buttonTint="#FFF"
                             android:checked="false"
-                            android:onClick="onUseProxyClick" />
+                            android:onClick="onUseProxyClick"
+                            android:text="@string/settings_use_proxy"
+                            android:textColor="#FFF" />
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -133,35 +134,72 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="7dp"
                 android:background="@drawable/bg_card"
-                android:layout_margin="7dp" >
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical" >
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/censorship_alternative_title"
-                        android:id="@+id/textView30"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="4dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp" />
+                        android:text="@string/custom_proxy_title" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/censorship_alternative_detail"
-                    android:id="@+id/textView31"
                     android:layout_margin="4dp"
+                    android:text="@string/custom_proxy_detail"
+                    android:textSize="13dp" />
+
+                <EditText
+                    android:id="@+id/custom_proxy_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/censorship_alternative_title" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/censorship_alternative_detail"
                     android:textSize="13dp" />
 
                 <RelativeLayout
@@ -169,24 +207,24 @@
                     android:layout_height="match_parent" >
 
                     <Button
+                        android:id="@+id/btn_dns"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DNS"
-                        android:id="@+id/btn_dns"
-                        android:background="@drawable/androidt411_btn"
-                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/androidt411_btn"
+                        android:text="DNS" />
 
                     <Button
+                        android:id="@+id/btn_vpn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="VPN"
-                        android:id="@+id/btn_vpn"
-                        android:background="@drawable/androidt411_btn"
                         android:layout_alignParentTop="true"
                         android:layout_toLeftOf="@+id/btn_dns"
-                        android:layout_toStartOf="@+id/btn_dns" />
+                        android:layout_toStartOf="@+id/btn_dns"
+                        android:background="@drawable/androidt411_btn"
+                        android:text="VPN" />
                 </RelativeLayout>
             </LinearLayout>
 
