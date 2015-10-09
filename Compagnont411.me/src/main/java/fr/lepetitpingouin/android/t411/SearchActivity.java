@@ -11,10 +11,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -24,6 +22,8 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,7 +34,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -54,7 +53,9 @@ public class SearchActivity extends AppCompatActivity {
     favoritesFetcher fF;
 
     ImageView ivSort, ivCat;
-    EditText keywords, tx_description, tx_uploader, tx_fichier;
+    EditText tx_description, tx_uploader, tx_fichier;
+    AutoCompleteTextView keywords;
+    SearchHistory sh;
 
     int icon_sort, icon_category = R.drawable.ic_new_t411;
 
@@ -86,7 +87,11 @@ public class SearchActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
 
-        keywords = (EditText) findViewById(R.id.action_search_keywords);
+        sh = new SearchHistory(getApplicationContext());
+
+        keywords = (AutoCompleteTextView) findViewById(R.id.action_search_keywords);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sh.getValues());
+        keywords.setAdapter(adapter);
         keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -435,6 +440,8 @@ public class SearchActivity extends AppCompatActivity {
 
     public void onSearch() {
 
+        sh.save(keywords.getText().toString());
+
         String searchTerms = (keywords.getText().toString()
                 + "&file=" + tx_fichier.getText().toString()
                 + "&description=" + tx_description.getText().toString()
@@ -634,8 +641,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
     public class ResizeAnimation extends Animation {
-        int startHeight;
         final int targetHeight;
+        int startHeight;
         View view;
 
         public ResizeAnimation(View view, int targetHeight) {
@@ -667,8 +674,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public class MResizeAnimation extends Animation {
-        int startHeight;
         final int targetHeight;
+        int startHeight;
         View view;
 
         public MResizeAnimation(View view, int targetHeight) {

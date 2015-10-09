@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -493,30 +492,7 @@ public class torrentsActivity extends ActionBarActivity {
 
             publishProgress(getString(R.string.connecting));
 
-            try {
-                Element elmtPrev = doc.select(".pagebar a").first();
-                strPrev = null;
-                if (elmtPrev.hasAttr("rel")) {
-                    strPrev = elmtPrev.attr("href").substring(elmtPrev.attr("href").lastIndexOf("=") + 1);
-                    prev = (ImageButton) findViewById(R.id.navbtn_prev);
-                    prev.setVisibility(View.VISIBLE);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-            try {
-                Element elmtNext = doc.select(".pagebar a").last();
-                strNext = null;
-                if (elmtNext.hasAttr("rel")) {
-                    strNext = elmtNext.attr("href").substring(elmtNext.attr("href").lastIndexOf("=") + 1);
-                    next = (ImageButton) findViewById(R.id.navbtn_next);
-                    next.setVisibility(View.VISIBLE);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
             int base = connectUrl.equals(Default.URL_BOOKMARKS) ? 1 : 0;
 
@@ -594,6 +570,31 @@ public class torrentsActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+
+            try {
+                Element elmtPrev = doc.select(".pagebar a").first();
+                strPrev = null;
+                if (elmtPrev.hasAttr("rel")) {
+                    strPrev = elmtPrev.attr("href").substring(elmtPrev.attr("href").lastIndexOf("=") + 1);
+                    prev = (ImageButton) findViewById(R.id.navbtn_prev);
+                    prev.setVisibility(View.VISIBLE);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Element elmtNext = doc.select(".pagebar a").last();
+                strNext = null;
+                if (elmtNext.hasAttr("rel")) {
+                    strNext = elmtNext.attr("href").substring(elmtNext.attr("href").lastIndexOf("=") + 1);
+                    next = (ImageButton) findViewById(R.id.navbtn_next);
+                    next.setVisibility(View.VISIBLE);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             try {
                 mSchedule = new SimpleAdapter(

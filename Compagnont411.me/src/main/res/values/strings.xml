@@ -325,4 +325,16 @@
     <string name="initialLoad">Fetching your data for the 1st time...</string>
     <string name="custom_proxy_title">Use your *OWN* proxy</string>
     <string name="custom_proxy_detail">If you have the required knowledge, you can build and use your own proxy server to bypass censorship. For security reason, to avoid you using any free and unsecure proxy on the web, the only allowed port is 411.\nPlease enter your proxy\'s IP below</string>
+    <string name="settings_proxy_screen">Proxy settings</string>
+    <string name="settings_proxy_screen_summary">Set your proxy settings</string>
+    <string name="settings_proxy_host_title">Proxy Host</string>
+    <string name="settings_proxy_host_summary">Set hostname or IP address</string>
+    <string name="settings_proxy_port_title">Proxy Port</string>
+    <string name="settings_proxy_port_summary">For security reasons, to avoid users use any free and unsecure proxy, the only allowed port is the 411</string>
+    <string name="settings_proxy_login_title">Proxy login</string>
+    <string name="settings_proxy_password_title">Proxy Password</string>
+    <string name="settings_proxy_user_title">Use proxy</string>
+    <string name="settings_proxy_user_summary">Enable use of your own proxy</string>
+    <string name="preference_category_general">General</string>
+    <string name="preference_category_advanced">Advanced settings</string>
 </resources>

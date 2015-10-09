@@ -1,159 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceScreen
-        android:title="@string/settings_caption_logging"
-        android:summary="@string/settings_caption_logging_summary"
-        android:persistent="false">
-        <CheckBoxPreference android:key="appLogs"
-            android:title="@string/preference_appLogs"
-            android:summary="@string/preference_appLogs_summary"
-            android:defaultValue="false"/>
-        <Preference android:key="sendLogs"
-            android:dependency="appLogs"
-            android:title="@string/sendLogs"
-            android:summary="@string/sendLogs_summary" />
-    </PreferenceScreen>
 
-    <Preference
-        android:key="option_proxy"
-        android:title="@string/enable_service"
-        android:summary="@string/enable_service_summary"/>
-    <!-- Compte utilisateur -->
+    <PreferenceCategory android:title="@string/preference_category_general">
+
+        <!-- Compte utilisateur -->
     <PreferenceScreen
-        android:title="@string/settings_caption_useraccount"
+        android:persistent="false"
         android:summary="@string/settings_caption_useraccount_summary"
-        android:persistent="false">
+        android:title="@string/settings_caption_useraccount">
         <PreferenceCategory android:title="@string/connect">
             <EditTextPreference
                 android:key="login"
-                android:title="@string/main_login"
-                android:summary="@string/main_login_summary" />
+                android:summary="@string/main_login_summary"
+                android:title="@string/main_login" />
             <EditTextPreference
                 android:key="password"
-                android:title="@string/main_password"
+                android:password="true"
                 android:summary="@string/main_password_summary"
-                android:password="true" />
+                android:title="@string/main_password" />
         </PreferenceCategory>
         <PreferenceCategory android:title="Ratio">
             <EditTextPreference
-                android:key="ratioMinimum"
-                android:title="Ratio Min."
-                android:summary="@string/lowRatio_summary"
                 android:defaultValue="0.75"
-                android:numeric="decimal" />
-            <EditTextPreference
-                android:key="ratioCible"
-                android:title="@string/target_ratio"
-                android:summary="@string/targetRatio_summary"
+                android:key="ratioMinimum"
                 android:numeric="decimal"
-                android:defaultValue="1" />
+                android:summary="@string/lowRatio_summary"
+                android:title="Ratio Min." />
+            <EditTextPreference
+                android:defaultValue="1"
+                android:key="ratioCible"
+                android:numeric="decimal"
+                android:summary="@string/targetRatio_summary"
+                android:title="@string/target_ratio" />
         </PreferenceCategory>
 
     </PreferenceScreen>
 
-    <!-- Connexion -->
-    <PreferenceScreen
-        android:title="@string/settings_caption_connection"
-        android:summary="@string/settings_caption_connection_summary">
-
-        <CheckBoxPreference
-            android:key="useHTTPS"
-            android:title="@string/settings_use_https"
-            android:summaryOn="@string/settings_use_https_summary_on"
-            android:summaryOff="@string/settings_use_https_summary_off"
-            android:defaultValue="true" />
-
-        <CheckBoxPreference
-            android:key="wifiOnly"
-            android:title="@string/settings_only_wifi"
-            android:summary="@string/settings_wifi_only_details"
-            android:defaultValue="false" />
-
-        <PreferenceScreen
-            android:enabled="true"
-            android:title="@string/settings_caption_connection_advanced"
-            android:summary="@string/settings_caption_connection_advanced_summary">
-
-            <!--ListPreference android:key="SiteIP"
-                android:title="@string/t411_site_ip"
-                android:summary="@string/t411_site_ip_summary"
-                android:entries="@array/t411_ip_list"
-                android:entryValues="@array/t411_ip_list"
-                android:defaultValue="www.t411.in">
-
-            </ListPreference-->
-
-            <EditTextPreference
-                android:key="User-Agent"
-                android:title="User-Agent"
-                android:summary="Définir le User-Agent utilisé par le navigateur interne"
-                android:defaultValue="Android (Compagnon t411 internal browser)" />
-
-            <EditTextPreference
-                android:key="timeoutValue"
-                android:title="Timeout"
-                android:summary="Définir le délai avant l'abandon de le connexion"
-                android:defaultValue="10"
-                android:numeric="integer" />
-
-        </PreferenceScreen>
-
-    </PreferenceScreen>
+    </PreferenceCategory>
 
     <!-- Mise  à jour -->
     <PreferenceScreen
-        android:title="@string/auto_update"
-        android:summary="@string/auto_update_summary">
+        android:summary="@string/auto_update_summary"
+        android:title="@string/auto_update">
 
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="autoUpdate"
-            android:title="@string/auto_update"
             android:summary="@string/auto_update_summary"
-            android:defaultValue="true" />
+            android:title="@string/auto_update" />
         <EditTextPreference
-            android:key="updateFreq"
-            android:title="@string/frequency"
-            android:summary="@string/description_frequency"
             android:defaultValue="60"
-            android:numeric="integer" />
+            android:key="updateFreq"
+            android:numeric="integer"
+            android:summary="@string/description_frequency"
+            android:title="@string/frequency" />
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="rtcMode"
-            android:title="@string/settings_RTC"
             android:summary="@string/settings_RTC_details"
-            android:defaultValue="false" />
+            android:title="@string/settings_RTC" />
 
     </PreferenceScreen>
 
     <!-- Notifications -->
     <PreferenceScreen
-        android:title="Notifications"
-        android:summary="@string/notification_settings">
+        android:summary="@string/notification_settings"
+        android:title="Notifications">
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="ratioAlert"
-            android:title="@string/chk_ratioAlert"
             android:summary="@string/description_ratioAlert"
-            android:defaultValue="true" />
+            android:title="@string/chk_ratioAlert" />
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="mailAlert"
-            android:title="@string/chk_msgAlert"
             android:summary="@string/description_mailAlert"
-            android:defaultValue="true" />
+            android:title="@string/chk_msgAlert" />
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="notificationWidget"
-            android:title="@string/useNotificationWidget"
             android:summary="@string/useNotificationWidget_description"
-            android:defaultValue="false" />
+            android:title="@string/useNotificationWidget" />
     </PreferenceScreen>
 
     <!-- Widgets -->
     <PreferenceScreen
-        android:title="Widgets"
-        android:summary="@string/widgets_settings">
+        android:summary="@string/widgets_settings"
+        android:title="Widgets">
         <ListPreference
-            android:key="widgetAction"
             android:entries="@array/widget_actions"
             android:entryValues="@array/widget_actions"
+            android:key="widgetAction"
             android:summary="@string/widgets_settings_summary"
             android:title="@string/widget_action" />
     </PreferenceScreen>
@@ -164,16 +102,16 @@
         <PreferenceCategory android:title="@string/search_results">
 
             <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="hadopi"
-                android:title="Avertissement hadopi"
                 android:summary="Afficher un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
-                android:defaultValue="false" />
+                android:title="Avertissement hadopi" />
 
             <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="shareDirectLink"
-                android:title="@string/share_direct_link"
                 android:summary="@string/description_share_direct_link"
-                android:defaultValue="false" />
+                android:title="@string/share_direct_link" />
 
         </PreferenceCategory>
 
@@ -181,41 +119,151 @@
 
             <Preference
                 android:key="savePath"
-                android:title="@string/save_path"
-                android:summary="Définir le chemin de téléchargement" />
+                android:summary="Définir le chemin de téléchargement"
+                android:title="@string/save_path" />
 
             <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="openAfterDl"
-                android:title="@string/open_after_dl"
                 android:summary="@string/description_open_after_dl"
-                android:defaultValue="false" />
+                android:title="@string/open_after_dl" />
 
             <CheckBoxPreference
-                android:key="openAfterDlCancelNotify"
-                android:title="@string/open_after_dl_cancelNotify"
-                android:summary="@string/description_open_after_dl_cancelNotify"
+                android:defaultValue="false"
                 android:dependency="openAfterDl"
-                android:defaultValue="false" />
+                android:key="openAfterDlCancelNotify"
+                android:summary="@string/description_open_after_dl_cancelNotify"
+                android:title="@string/open_after_dl_cancelNotify" />
 
             <CheckBoxPreference
+                android:defaultValue="true"
                 android:key="addMimeType"
-                android:title="@string/settings_addMime"
                 android:summary="@string/description_settings_addMime"
-                android:defaultValue="true" />
+                android:title="@string/settings_addMime" />
 
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/misc">
 
             <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="dlModeRedirect"
-                android:title="@string/download_redirect"
                 android:summary="@string/description_downloadredirect"
-                android:defaultValue="false" />
+                android:title="@string/download_redirect" />
 
         </PreferenceCategory>
 
 
     </PreferenceScreen>
+
+
+    <PreferenceCategory android:title="@string/preference_category_advanced">
+
+        <!-- Connexion -->
+        <PreferenceScreen
+            android:summary="@string/settings_caption_connection_summary"
+            android:title="@string/settings_caption_connection">
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="useHTTPS"
+                android:summaryOff="@string/settings_use_https_summary_off"
+                android:summaryOn="@string/settings_use_https_summary_on"
+                android:title="@string/settings_use_https" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="wifiOnly"
+                android:summary="@string/settings_wifi_only_details"
+                android:title="@string/settings_only_wifi" />
+
+            <PreferenceScreen
+                android:enabled="true"
+                android:summary="@string/settings_proxy_screen_summary"
+                android:title="@string/settings_proxy_screen">
+
+                <Preference
+                    android:key="option_proxy"
+                    android:summary="@string/enable_service_summary"
+                    android:title="@string/enable_service" />
+
+                <CheckBoxPreference
+                    android:key="userProxy"
+                    android:summary="@string/settings_proxy_user_summary"
+                    android:title="@string/settings_proxy_user_title" />
+
+                <EditTextPreference
+                    android:dependency="userProxy"
+                    android:key="customProxy"
+                    android:summary="@string/settings_proxy_host_summary"
+                    android:title="@string/settings_proxy_host_title" />
+
+                <Preference
+                    android:enabled="false"
+                    android:summary="@string/settings_proxy_port_summary"
+                    android:title="@string/settings_proxy_port_title" />
+
+                <EditTextPreference
+                    android:dependency="userProxy"
+                    android:key="proxy_login"
+                    android:title="@string/settings_proxy_login_title" />
+
+                <EditTextPreference
+                    android:dependency="userProxy"
+                    android:key="proxy_pasword"
+                    android:password="true"
+                    android:title="@string/settings_proxy_password_title" />
+
+
+            </PreferenceScreen>
+
+            <PreferenceScreen
+                android:enabled="true"
+                android:summary="@string/settings_caption_connection_advanced_summary"
+                android:title="@string/settings_caption_connection_advanced">
+
+                <!--ListPreference android:key="SiteIP"
+                    android:title="@string/t411_site_ip"
+                    android:summary="@string/t411_site_ip_summary"
+                    android:entries="@array/t411_ip_list"
+                    android:entryValues="@array/t411_ip_list"
+                    android:defaultValue="www.t411.in">
+
+                </ListPreference-->
+
+                <EditTextPreference
+                    android:defaultValue="Android (Compagnon t411 internal browser)"
+                    android:key="User-Agent"
+                    android:summary="Définir le User-Agent utilisé par le navigateur interne"
+                    android:title="User-Agent" />
+
+                <EditTextPreference
+                    android:defaultValue="10"
+                    android:key="timeoutValue"
+                    android:numeric="integer"
+                    android:summary="Définir le délai avant l'abandon de le connexion"
+                    android:title="Timeout" />
+
+            </PreferenceScreen>
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:persistent="false"
+            android:summary="@string/settings_caption_logging_summary"
+            android:title="@string/settings_caption_logging">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="appLogs"
+                android:summary="@string/preference_appLogs_summary"
+                android:title="@string/preference_appLogs" />
+            <Preference
+                android:dependency="appLogs"
+                android:key="sendLogs"
+                android:summary="@string/sendLogs_summary"
+                android:title="@string/sendLogs" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -11,6 +11,10 @@ public class CategoryIcon {
         this.catCode = category;
     }
 
+    public static boolean isPr0n(int icon) {
+        return (icon == R.drawable.ic_new_xxx) ? true : false;
+    }
+
     public int getIcon() {
 
         //Musique

@@ -286,11 +286,16 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
                 doc = res.parse();*/
 
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
+                SuperT411HttpBrowser browser = new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
-                        .connect(torrent_URL)
-                        .skipLogin()
-                        .executeInAsyncTask());
+                        .connect(torrent_URL);
+
+                if (!CategoryIcon.isPr0n(getIntent().getIntExtra("icon", R.drawable.ic_new_t411))) {
+                    browser.skipLogin();
+                    new T411Logger(getApplicationContext()).writeLine("Torrent XXX, connexion nécessaire");
+                }
+
+                doc = Jsoup.parse(browser.executeInAsyncTask());
 
                 try {
                     html_filelist = doc.select(".accordion div").get(1).outerHtml();

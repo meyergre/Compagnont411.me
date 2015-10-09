@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,18 +23,19 @@ public class ProxyActivity extends ActionBarActivity {
     BillingProcessor bp;
     SharedPreferences prefs;
     SharedPreferences.Editor edit;
-    EditText custom_proxy_address;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proxystatus);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        edit = prefs.edit();
+
+
         new T411Logger(getApplicationContext()).writeLine("Ouverture de la page du proxy");
 
         final LinearLayout subscribed = (LinearLayout)findViewById(R.id.abonned);
-
-        this.custom_proxy_address = (EditText) findViewById(R.id.custom_proxy_address);
 
         final Button abo = (Button)findViewById(R.id.btn_abo_proxy);
         abo.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +64,6 @@ public class ProxyActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        edit = prefs.edit();
 
         bp = new BillingProcessor(this, Private.API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
@@ -122,8 +119,6 @@ public class ProxyActivity extends ActionBarActivity {
 
     @Override
     public void onDestroy() {
-        new T411Logger(getApplicationContext()).writeLine("Proxy perso : " + custom_proxy_address.getText().toString());
-        edit.putString("customProxy", custom_proxy_address.getText().toString()).apply();
         bp.release();
         super.onDestroy();
 

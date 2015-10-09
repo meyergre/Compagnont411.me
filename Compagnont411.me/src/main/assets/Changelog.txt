@@ -1,8 +1,20 @@
 CHANGELOG
 
+2015.10-137
+- Optimisations du navigateur interne
+- Réorganisation des paramètres
+- Ajout d'une option de proxy sécurisé par mot de passe (test)
+
+
+2015.10-136
+- Correction du téléchargement des torrents par proxy
+
+
 2015.10-135
 - Correction de typos
 - Rétablissement du fonctionnement du widget pour lancer l'application
+- Ajout d'une option de proxy personnel en cas de futur blocage (port 411 imposé)
+- Autocomplétion des termes de recherches basée sur l'historique local
 
 
 2015.09-134

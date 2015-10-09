@@ -316,5 +316,17 @@
     <string name="settings_caption_logging_summary">Activer la journalisation pour aider le développeur en cas de problème</string>
     <string name="initialLoad">Première récupération de données...</string>
     <string name="custom_proxy_title">Utiliser votre propre serveur proxy</string>
-    <string name="custom_proxy_detail">Si vous avez les connaissances nécessaires, vous pouvez monter et utiliser votre propre proxy. Par mesure de sécurité, afin d\'être sûr qu\'il s\'agisse bien de votre propre proxy, seul le port 411 est accepté.\nEntrez l\'adresse du serveur ci-dessous</string>
+    <string name="custom_proxy_detail">Si vous avez les connaissances nécessaires, vous pouvez monter et utiliser votre propre proxy. Vous trouverez l\'option dans les paramètres de connexion de l\'application. Par mesure de sécurité, seul le port 411 est accepté.\n</string>
+    <string name="settings_proxy_screen">Paramètres de proxy</string>
+    <string name="settings_proxy_screen_summary">Paramétrer l\'utilisation d\'un proxy</string>
+    <string name="settings_proxy_host_title">Hôte</string>
+    <string name="settings_proxy_host_summary">Indiquer le nom d\'hôte ou l\'adresse IP</string>
+    <string name="settings_proxy_port_title">Port</string>
+    <string name="settings_proxy_port_summary">Pour des raisons de sécurité, afin d\'éviter l\'utilisation de proxys gratuits et peu sûrs, seul le port 411 est permis</string>
+    <string name="settings_proxy_login_title">Login</string>
+    <string name="settings_proxy_password_title">Mot de passe</string>
+    <string name="settings_proxy_user_title">Utiliser un proxy</string>
+    <string name="settings_proxy_user_summary">Entrez les informations de votre propre serveur</string>
+    <string name="preference_category_general">Général</string>
+    <string name="preference_category_advanced">Paramètres avancés</string>
 </resources>

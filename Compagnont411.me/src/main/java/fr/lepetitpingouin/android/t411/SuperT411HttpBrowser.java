@@ -2,7 +2,6 @@ package fr.lepetitpingouin.android.t411;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -14,6 +13,8 @@ import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -21,8 +22,10 @@ import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -32,6 +35,8 @@ import org.jsoup.nodes.Element;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +52,7 @@ import javax.net.ssl.X509TrustManager;
 public class SuperT411HttpBrowser {
 
 
+    private final boolean customProxy;
     CookieStore cookieStore;
 
     SharedPreferences prefs;
@@ -63,11 +69,15 @@ public class SuperT411HttpBrowser {
 
     String qpA, qpT, qpQ;
 
-    Boolean proxy = true;
+    Boolean proxy = false;
+    Boolean userProxy = false;
 
     Boolean skipLogin = false;
 
     HttpHost httpproxy;
+    //Proxy httpproxy;
+
+    byte[] mresponseStream;
 
     public SuperT411HttpBrowser(Context context) {
         ctx = context;
@@ -78,10 +88,32 @@ public class SuperT411HttpBrowser {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         this.proxy = prefs.getBoolean("usePaidProxy", false);
+        this.customProxy = prefs.getBoolean("userProxy", false);
 
         if (proxy) {
-            httpproxy = new HttpHost(prefs.getString("customProxy", Private.URL_PROXY), 411);
-            new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + prefs.getString("customProxy", Private.URL_PROXY));
+            httpproxy = new HttpHost(Private.URL_PROXY, 411);
+            //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(Private.URL_PROXY, 411));
+            new T411Logger(this.ctx).writeLine("Utilisation du proxy dédié");
+        } else if (!customProxy) {
+            httpproxy = new HttpHost(prefs.getString("customProxy", ""), 411);
+            //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(prefs.getString("customProxy", ""), 411));
+
+            final String pLogin = prefs.getString("proxy_login", "");
+            final String pPassword = prefs.getString("proxy_password", "");
+
+            new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + customProxy);
+
+            if (!prefs.getString("proxy_login", "").equals("")) {
+
+                new T411Logger(this.ctx).writeLine("Le proxy nécessite une authentification");
+
+                Authenticator authenticator = new Authenticator() {
+                    public PasswordAuthentication getPasswordAuthentication() {
+                        return (new PasswordAuthentication(pLogin, pPassword.toCharArray()));
+                    }
+                };
+                Authenticator.setDefault(authenticator);
+            }
         }
 
         doHackTrustedCerts();
@@ -119,6 +151,10 @@ public class SuperT411HttpBrowser {
         this.skipLogin = true;
         new T411Logger(this.ctx).writeLine("Cette connexion ne nécessite pas de se connecter au profil t411");
         return this;
+    }
+
+    public byte[] getByteResponse() {
+        return this.mresponseStream;
     }
 
     public SuperT411HttpBrowser connect(String mUrl) {
@@ -207,18 +243,26 @@ public class SuperT411HttpBrowser {
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
 
-        AndroidHttpClient httpclient = AndroidHttpClient.newInstance(prefs.getString("User-Agent", Default.USER_AGENT));
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+
 
         //httpclient.getConnectionManager().getSchemeRegistry().register(new Scheme("https", sslsf, 443));
 
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        if (proxy)
+        if (proxy || userProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
+            if (userProxy && !prefs.getString("proxy_login", "").equals("")) {
+                httpclient.getCredentialsProvider().setCredentials(
+                        new AuthScope(prefs.getString("customProxy", ""), 411),
+                        new UsernamePasswordCredentials(
+                                prefs.getString("proxy_login", ""), prefs.getString("proxy_password", "")));
+            }
+        }
 
-        //HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
-        //HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
+        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
         String mUrl = Default.URL_LOGIN;
@@ -256,7 +300,7 @@ public class SuperT411HttpBrowser {
         } catch (Exception ex) {
             //TODO Handle problems..
         }
-        httpclient.close();
+        //httpclient.close();
         if (responseString == null)
             responseString = "OK";
 
@@ -297,12 +341,20 @@ public class SuperT411HttpBrowser {
         clientcontext = new BasicHttpContext();
         clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
 
-        AndroidHttpClient httpclient = AndroidHttpClient.newInstance(prefs.getString("User-Agent", Default.USER_AGENT));
+        //AndroidHttpClient httpclient = AndroidHttpClient.newInstance(prefs.getString("User-Agent", Default.USER_AGENT));
+        DefaultHttpClient httpclient = new DefaultHttpClient();
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        if (proxy)
+        if (proxy || userProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
+            if (userProxy && !prefs.getString("proxy_login", "").equals("")) {
+                httpclient.getCredentialsProvider().setCredentials(
+                        new AuthScope(prefs.getString("customProxy", ""), 411),
+                        new UsernamePasswordCredentials(
+                                prefs.getString("proxy_login", ""), prefs.getString("proxy_password", "")));
+            }
+        }
 
         //HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         //HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
@@ -345,6 +397,7 @@ public class SuperT411HttpBrowser {
                 response.getEntity().writeTo(out);
                 out.close();
                 responseString = out.toString();
+                this.mresponseStream = out.toByteArray();
                 new T411Logger(this.ctx).writeLine("La connexion a répondu : " + "200 OK");
             } else {
                 //Closes the connection.
@@ -401,7 +454,18 @@ public class SuperT411HttpBrowser {
             StatusLine statusLine = response.getStatusLine();
             if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 //responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-                responseString = EntityUtils.toString(response.getEntity(), encoding);
+                /*ByteArrayOutputStream out = new ByteArrayOutputStream();
+                response.getEntity().writeTo(out);
+                out.close();
+                this.mresponseStream = out.toByteArray();*/
+
+                HttpEntity entity = response.getEntity();
+
+                this.mresponseStream = EntityUtils.toByteArray(entity);
+
+                //responseString = EntityUtils.toString(entity, encoding);
+                responseString = new String(this.mresponseStream, encoding);
+
                 new T411Logger(this.ctx).writeLine("La connexion a répondu : 200 OK ");
             } else {
                 //Closes the connection.
@@ -425,7 +489,7 @@ public class SuperT411HttpBrowser {
             ex.printStackTrace();
         }
 
-        httpclient.close();
+        //httpclient.close();
         String retValue = "";
 
         try {

@@ -35,8 +35,13 @@
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
                     android:adjustViewBounds="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:src="@drawable/img_pxy"
-                    android:transitionName="iv_shield" />
+                    android:transitionName="iv_shield">
+
+                    <requestFocus />
+                </ImageView>
 
                 <TextView
                     android:id="@+id/textView27"
@@ -133,42 +138,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="7dp"
-                android:background="@drawable/bg_card"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/custom_proxy_title" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/custom_proxy_detail"
-                    android:textSize="13dp" />
-
-                <EditText
-                    android:id="@+id/custom_proxy_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -204,7 +173,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <Button
                         android:id="@+id/btn_dns"
@@ -226,6 +195,40 @@
                         android:background="@drawable/androidt411_btn"
                         android:text="VPN" />
                 </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/custom_proxy_title" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/custom_proxy_detail"
+                    android:textSize="13dp" />
+
             </LinearLayout>
 
         </LinearLayout>

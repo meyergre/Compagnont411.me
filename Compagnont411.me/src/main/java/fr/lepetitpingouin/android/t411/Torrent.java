@@ -226,6 +226,7 @@ public class Torrent {
 
         Connection.Response resTorrent;
         byte[] torrentFileContent;
+        String torrentContent;
 
         @Override
         protected void onPreExecute() {
@@ -243,9 +244,11 @@ public class Torrent {
                 boolean proxy = prefs.getBoolean("usePaidProxy", false);
                 new T411Logger(context).writeLine(proxy?"Proxy dédié actif":"Proxy dédié inactif");
 
+                /*
+
                 new T411Logger(context).writeLine("Connexion par login/password pour " + username);
                 Connection.Response res = Jsoup
-                        .connect((proxy?Private.URL_PROXY:"") + Default.URL_LOGIN)
+                        .connect(Default.URL_LOGIN)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
@@ -257,7 +260,8 @@ public class Torrent {
 
                 new T411Logger(context).writeLine("Lecture du fichier torrent...");
 
-                resTorrent = Jsoup.connect((proxy?Private.URL_PROXY:"") + Default.URL_GET_TORRENT + id)
+
+                resTorrent = Jsoup.connect(Default.URL_GET_TORRENT + id)
                         .data("login", username, "password", password)
                         .method(Connection.Method.POST)
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
@@ -265,9 +269,14 @@ public class Torrent {
                                 //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
                         .cookies(Cookies)
                         .execute();
+                        torrentFileContent = resTorrent.bodyAsBytes();
+                        */
+                SuperT411HttpBrowser browser = new SuperT411HttpBrowser(context)
+                        .connect(Default.URL_GET_TORRENT + id)
+                        .login(username, password);
+                torrentContent = browser.executeInAsyncTask();
 
-                torrentFileContent = resTorrent.bodyAsBytes();
-
+                torrentFileContent = browser.getByteResponse();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -296,6 +305,10 @@ public class Torrent {
                 FileOutputStream fo = new FileOutputStream(file);
                 fo.write(torrentFileContent);
                 fo.close();
+
+                /*OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file));
+                osw.write(torrentContent);
+                osw.close();*/
 
                 Intent i = new Intent();
                 i.setAction(android.content.Intent.ACTION_VIEW);
