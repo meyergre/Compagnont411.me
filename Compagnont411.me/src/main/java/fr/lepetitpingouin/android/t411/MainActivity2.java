@@ -26,6 +26,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
+
 /**
  * Created by gregory on 13/09/15.
  */
@@ -78,6 +82,19 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         }
 
         final NavigationView drw = (NavigationView) findViewById(R.id.navview);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // Any emulator device
+                .addTestDevice("627C6387FAB1F61B192C82F3207FAD1D") // Real device : Oneplus One Greg
+                .build();
+        mAdView.loadAd(adRequest);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            mAdView.animate()
+                    .alpha(0.25f)
+                    .setDuration(5000)
+                    .setStartDelay(5000)
+                    .start();
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         drw.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

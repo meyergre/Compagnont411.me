@@ -70,7 +70,6 @@ public class SuperT411HttpBrowser {
     String qpA, qpT, qpQ;
 
     Boolean proxy = false;
-    Boolean userProxy = false;
 
     Boolean skipLogin = false;
 
@@ -251,9 +250,9 @@ public class SuperT411HttpBrowser {
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        if (proxy || userProxy) {
+        if (proxy || customProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
-            if (userProxy && !prefs.getString("proxy_login", "").equals("")) {
+            if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
                 httpclient.getCredentialsProvider().setCredentials(
                         new AuthScope(prefs.getString("customProxy", ""), 411),
                         new UsernamePasswordCredentials(
@@ -346,9 +345,9 @@ public class SuperT411HttpBrowser {
 
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
-        if (proxy || userProxy) {
+        if (proxy || customProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
-            if (userProxy && !prefs.getString("proxy_login", "").equals("")) {
+            if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
                 httpclient.getCredentialsProvider().setCredentials(
                         new AuthScope(prefs.getString("customProxy", ""), 411),
                         new UsernamePasswordCredentials(

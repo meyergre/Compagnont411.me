@@ -1,9 +1,15 @@
 CHANGELOG
 
+2015.10-138
+- Modifications de l'usage de proxy perso
+- Correction de l'option d'envoi de logs
+
+
 2015.10-137
 - Optimisations du navigateur interne
 - Réorganisation des paramètres
 - Ajout d'une option de proxy sécurisé par mot de passe (test)
+- Retour du descriptif des torrents XXX
 
 
 2015.10-136

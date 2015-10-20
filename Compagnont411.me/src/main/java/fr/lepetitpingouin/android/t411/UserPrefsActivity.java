@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.File;
+
 /**
  * Created by gregory on 23/10/2013.
  */
@@ -82,11 +84,16 @@ public class UserPrefsActivity extends PreferenceActivity {
         });
 
         Preference sendLog = findPreference("sendLogs");
+        final String logFile = new T411Logger(getApplicationContext()).logFilePath();
+
+        File log = new File(logFile);
+        sendLog.setEnabled(!log.exists());
+
         sendLog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:meyergre@gmail.com"));
-                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + new T411Logger(getApplicationContext()).logFilePath()));
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + logFile));
                 i.putExtra(Intent.EXTRA_SUBJECT, "Compagnon t411 - envoi de logs");
                 startActivity(Intent.createChooser(i, ""));
                 return false;

@@ -3,3 +3,5 @@
 -dontoptimize
 
 -keep class !android.support.v7.internal.view.menu.**, ** { *; }
+
+-dontwarn com.google.android.gms.internal.zzhu

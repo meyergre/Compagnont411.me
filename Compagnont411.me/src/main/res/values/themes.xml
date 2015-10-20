@@ -4,7 +4,7 @@
 
     <style name="toolbarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <item name="android:statusBarColor">@color/t411_action_blue_darker</item>
+        <item name="android:statusBarColor">#00000000</item>
         <item name="android:navigationBarColor">@color/t411_action_blue</item>
         <item name="colorPrimary">@color/t411_action_blue</item>
         <item name="colorPrimaryDark">@color/t411_action_blue_darker</item>
