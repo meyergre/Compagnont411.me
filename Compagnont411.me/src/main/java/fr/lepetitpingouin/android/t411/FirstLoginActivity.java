@@ -14,10 +14,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -66,9 +70,18 @@ public class FirstLoginActivity extends Activity {
 
 
         dialog = new ProgressDialog(this);
-        dialog.setTitle("Connexion...");
-        dialog.setMessage("Veuillez patienter.");
+        dialog.setMessage("Connexion...");
         dialog.setCancelable(true);
+
+        AdView mAdView;
+        AdRequest adRequest;
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.adtitlebar, null);
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+        dialog.setCustomTitle(view);
+        mAdView.loadAd(adRequest);
+        //dialog.show();
 
         dialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
             @Override

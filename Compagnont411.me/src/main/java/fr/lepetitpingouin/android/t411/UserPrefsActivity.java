@@ -87,7 +87,7 @@ public class UserPrefsActivity extends PreferenceActivity {
         final String logFile = new T411Logger(getApplicationContext()).logFilePath();
 
         File log = new File(logFile);
-        sendLog.setEnabled(!log.exists());
+        sendLog.setEnabled(log.exists());
 
         sendLog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override

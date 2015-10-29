@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,8 +40,6 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.app.ProgressDialog.show;
 
 public class torrentsActivity extends ActionBarActivity {
     String connectUrl, searchTerms;
@@ -313,7 +315,18 @@ public class torrentsActivity extends ActionBarActivity {
 
     public void update() {
         try {
-            dialog = show(torrentsActivity.this, "t411.in", this.getString(R.string.pleasewait), true, true);
+            //dialog = show(torrentsActivity.this, "t411.in", this.getString(R.string.pleasewait), true, true);
+            dialog = new ProgressDialog(this);
+            dialog.setMessage(this.getString(R.string.pleasewait));
+            AdView mAdView;
+            AdRequest adRequest;
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.adtitlebar, null);
+            mAdView = (AdView) view.findViewById(R.id.adView);
+            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+            dialog.setCustomTitle(view);
+            mAdView.loadAd(adRequest);
+            dialog.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -40,6 +40,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     Toolbar toolbar;
     SharedPreferences prefs;
     SwipeRefreshLayout swrl;
+    AdView mAdView;
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
@@ -83,18 +84,23 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         final NavigationView drw = (NavigationView) findViewById(R.id.navview);
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+        mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // Any emulator device
-                .addTestDevice("627C6387FAB1F61B192C82F3207FAD1D") // Real device : Oneplus One Greg
+                .addTestDevice(Private.REAL_DEVICE) // Real device : Oneplus One Greg
                 .build();
+
         mAdView.loadAd(adRequest);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+
+        /*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             mAdView.animate()
-                    .alpha(0.25f)
+                    .alpha(0.3f)
                     .setDuration(5000)
-                    .setStartDelay(5000)
+                    .setStartDelay(15000)
                     .start();
+        }
+        */
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         drw.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -235,7 +241,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                     findViewById(R.id.proxyAlert).setVisibility(View.GONE);
                 } else {
                     findViewById(R.id.proxyAlert).setVisibility(View.VISIBLE);
-                    if(prefs.getBoolean("usePaidProxy", false)) {
+                    if (prefs.getBoolean("usePaidProxy", false) || prefs.getBoolean("userProxy", false)) {
                         ((ImageView)findViewById(R.id.iv_shieldBtn)).setImageDrawable(getResources().getDrawable(R.drawable.ic_switch_on));
                         ((ImageView)findViewById(R.id.iv_shield)).setImageDrawable(getResources().getDrawable(R.drawable.img_pxybk_ok));
                         ((TextView) findViewById(R.id.tv_shield)).setText("Option anti-censure activée.");
@@ -246,6 +252,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                         ((TextView) findViewById(R.id.tv_shield)).setText("L'option de contournement de la censure est désactivée. Appuyez ici pour en savoir plus.");
                     }
                 }
+
+                if (prefs.getBoolean("usePaidProxy", false)) mAdView.setVisibility(View.GONE);
 
                 findViewById(R.id.seedbox).setVisibility(prefs.getBoolean("seedbox", false) ? View.VISIBLE : View.GONE);
 

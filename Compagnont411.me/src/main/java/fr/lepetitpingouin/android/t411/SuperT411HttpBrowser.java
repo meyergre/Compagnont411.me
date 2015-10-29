@@ -93,14 +93,14 @@ public class SuperT411HttpBrowser {
             httpproxy = new HttpHost(Private.URL_PROXY, 411);
             //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(Private.URL_PROXY, 411));
             new T411Logger(this.ctx).writeLine("Utilisation du proxy dédié");
-        } else if (!customProxy) {
+        } else if (customProxy) {
             httpproxy = new HttpHost(prefs.getString("customProxy", ""), 411);
             //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(prefs.getString("customProxy", ""), 411));
 
             final String pLogin = prefs.getString("proxy_login", "");
             final String pPassword = prefs.getString("proxy_password", "");
 
-            new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + customProxy);
+            new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + prefs.getString("customProxy", "non spécifié"));
 
             if (!prefs.getString("proxy_login", "").equals("")) {
 
@@ -348,6 +348,7 @@ public class SuperT411HttpBrowser {
         if (proxy || customProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
             if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
+                new T411Logger(this.ctx).writeLine("Utilisation du proxy avec le login " + prefs.getString("proxy_login", ""));
                 httpclient.getCredentialsProvider().setCredentials(
                         new AuthScope(prefs.getString("customProxy", ""), 411),
                         new UsernamePasswordCredentials(

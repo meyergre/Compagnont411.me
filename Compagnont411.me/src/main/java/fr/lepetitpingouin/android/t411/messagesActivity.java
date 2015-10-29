@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -91,7 +95,18 @@ public class messagesActivity extends ActionBarActivity {
 
     public void update() {
         mF = new mailFetcher();
-        dialog = ProgressDialog.show(messagesActivity.this, this.getString(R.string.getMesages), this.getString(R.string.pleasewait), true, true);
+        //dialog = ProgressDialog.show(messagesActivity.this, this.getString(R.string.getMesages), this.getString(R.string.pleasewait), true, true);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage(this.getString(R.string.pleasewait));
+        AdView mAdView;
+        AdRequest adRequest;
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.adtitlebar, null);
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+        dialog.setCustomTitle(view);
+        mAdView.loadAd(adRequest);
+        dialog.show();
         try {
             mF.execute();
         } catch (Exception e) {

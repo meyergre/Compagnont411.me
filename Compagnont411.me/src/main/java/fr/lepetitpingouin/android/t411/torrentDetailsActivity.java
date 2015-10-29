@@ -12,12 +12,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -77,9 +81,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
 
         details_www.getSettings().setJavaScriptEnabled(true);
 
-        dialog = ProgressDialog.show(this,
-                "t411.in",
-                this.getString(R.string.pleasewait), true, true);
+        //dialog = ProgressDialog.show(this, "t411.in", this.getString(R.string.pleasewait), true, true);
+        dialog = new ProgressDialog(this);
         dialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
@@ -87,9 +90,20 @@ public class torrentDetailsActivity extends ActionBarActivity {
             }
         });
 
+
+        dialog.setMessage(this.getString(R.string.pleasewait));
+        AdView mAdView;
+        AdRequest adRequest;
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.adtitlebar, null);
+        mAdView = (AdView) view.findViewById(R.id.adView);
+        adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+        dialog.setCustomTitle(view);
+        mAdView.loadAd(adRequest);
+        dialog.show();
+
         getSupportActionBar().setIcon(getIntent().getIntExtra("icon", R.drawable.ic_new_t411));
 
-        dialog.show();
 
         torrent_URL = getIntent().getStringExtra("url");
         torrent_Name = getIntent().getStringExtra("nom");

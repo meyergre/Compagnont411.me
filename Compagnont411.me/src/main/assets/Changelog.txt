@@ -1,8 +1,21 @@
 CHANGELOG
 
+2015.10-141
+- Correction de l'utilisation d'un proxy personnel
+
+
+2015.10-140
+- Correction de l(ouverture des fiches torrent
+
+
+2015.10-139
+- Bugfix
+
+
 2015.10-138
 - Modifications de l'usage de proxy perso
-- Correction de l'option d'envoi de logs
+- Modifications de l'option d'envoi de logs
+- Ajout de publicités sur les pages de chargement
 
 
 2015.10-137
