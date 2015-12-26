@@ -338,4 +338,5 @@
     <string name="preference_category_general">General</string>
     <string name="preference_category_advanced">Advanced settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-6826466905234092/6720062161</string>
+    <string name="confirmDonationString">By checking this box, I agree that the payment is sent to the app developer as a donation to support his work, and not to claim any feature development or ratio buying</string>
 </resources>

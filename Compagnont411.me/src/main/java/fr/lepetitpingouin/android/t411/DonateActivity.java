@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,10 @@ public class DonateActivity extends Activity {
         clipboard.setText(Default.BITCOIN_ADDRESS);
         Toast.makeText(getApplicationContext(), getString(R.string.bitcoinCopied) + "\n" + Default.BITCOIN_ADDRESS, Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void showHideButton(View v) {
+        findViewById(R.id.donateButton).setVisibility(((CheckBox)v).isChecked()?View.VISIBLE:View.INVISIBLE);
     }
 
     public void onIncreaseClick(View v) {

@@ -114,34 +114,52 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/statBtm"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="#eee">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="0dp"
+        <CheckBox
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Faire un don"
-            android:id="@+id/button"
-            android:layout_weight="1"
-            android:background="@drawable/t411_btn"
-            android:textColor="#fff"
-            android:layout_margin="3dp"
-            android:onClick="onDonateClick" />
+            android:text="@string/confirmDonationString"
+            android:id="@+id/confirmDonationCheckBox"
+            android:checked="false"
+            android:onClick="showHideButton"
+            android:textSize="11dp"
+            android:textColor="#ff0000" />
 
-        <Button
-            android:layout_width="0dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Annuler"
-            android:id="@+id/button2"
-            android:layout_weight="1"
-            android:background="@drawable/t411_btn"
-            android:textColor="#fff"
-            android:layout_margin="3dp"
-            android:onClick="onCancelClick" />
+            android:layout_alignBottom="@+id/statBtm"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:background="#eee">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Faire un don"
+                android:id="@+id/donateButton"
+                android:layout_weight="1"
+                android:background="@drawable/t411_btn"
+                android:textColor="#fff"
+                android:layout_margin="3dp"
+                android:onClick="onDonateClick"
+                android:visibility="invisible" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Annuler"
+                android:id="@+id/button2"
+                android:layout_weight="1"
+                android:background="@drawable/t411_btn"
+                android:textColor="#fff"
+                android:layout_margin="3dp"
+                android:onClick="onCancelClick" />
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

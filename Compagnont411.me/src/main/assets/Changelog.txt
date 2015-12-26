@@ -1,11 +1,16 @@
 CHANGELOG
 
+
+2015.12-142
+- Correction d'une erreur provoquant des résultats de recherche vide
+
+
 2015.10-141
 - Correction de l'utilisation d'un proxy personnel
 
 
 2015.10-140
-- Correction de l(ouverture des fiches torrent
+- Correction de l'ouverture des fiches torrent
 
 
 2015.10-139

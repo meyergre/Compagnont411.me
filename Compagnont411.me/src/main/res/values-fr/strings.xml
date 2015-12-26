@@ -330,4 +330,6 @@
     <string name="preference_category_general">Général</string>
     <string name="preference_category_advanced">Paramètres avancés</string>
     <string name="banner_ad_unit_id">ca-app-pub-6826466905234092/6720062161</string>
+    <string name="confirmDonationString">
+        En cochant cette case, j\'accepte que ce paiement soit envoyé au développeur de l\'application pour soutenir son travail, et non pour obtenir un développement ou du ratio</string>
 </resources>

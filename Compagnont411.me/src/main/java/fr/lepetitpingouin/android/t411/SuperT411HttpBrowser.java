@@ -52,7 +52,7 @@ import javax.net.ssl.X509TrustManager;
 public class SuperT411HttpBrowser {
 
 
-    private final boolean customProxy;
+    boolean customProxy;
     CookieStore cookieStore;
 
     SharedPreferences prefs;
@@ -89,12 +89,12 @@ public class SuperT411HttpBrowser {
         this.proxy = prefs.getBoolean("usePaidProxy", false);
         this.customProxy = prefs.getBoolean("userProxy", false);
 
-        if (proxy) {
-            httpproxy = new HttpHost(Private.URL_PROXY, 411);
+        if (this.proxy) {
+            this.httpproxy = new HttpHost(Private.URL_PROXY, 411);
             //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(Private.URL_PROXY, 411));
             new T411Logger(this.ctx).writeLine("Utilisation du proxy dédié");
-        } else if (customProxy) {
-            httpproxy = new HttpHost(prefs.getString("customProxy", ""), 411);
+        } else if (this.customProxy) {
+            this.httpproxy = new HttpHost(prefs.getString("customProxy", ""), 411);
             //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(prefs.getString("customProxy", ""), 411));
 
             final String pLogin = prefs.getString("proxy_login", "");
@@ -102,7 +102,7 @@ public class SuperT411HttpBrowser {
 
             new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + prefs.getString("customProxy", "non spécifié"));
 
-            if (!prefs.getString("proxy_login", "").equals("")) {
+            if (!pLogin.equals("")) {
 
                 new T411Logger(this.ctx).writeLine("Le proxy nécessite une authentification");
 
@@ -248,8 +248,6 @@ public class SuperT411HttpBrowser {
         //httpclient.getConnectionManager().getSchemeRegistry().register(new Scheme("https", sslsf, 443));
 
 
-        httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-
         if (proxy || customProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
             if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
@@ -259,6 +257,7 @@ public class SuperT411HttpBrowser {
                                 prefs.getString("proxy_login", ""), prefs.getString("proxy_password", "")));
             }
         }
+        httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
         HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);

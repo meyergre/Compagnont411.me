@@ -545,7 +545,7 @@ public class torrentsActivity extends ActionBarActivity {
 
                             map.put("ratio", estimatedRatio);
                             map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
-                            map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", ""))));
+                            map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "0"))));
                             listItem.add(map);
 
                         } catch (Exception e) {

@@ -24,6 +24,7 @@ import java.util.Map;
 public class Torrent {
 
     public String name, id, url;
+    public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
     private Context context;
     private SharedPreferences prefs;
     private torrentFileGetter tDL;

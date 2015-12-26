@@ -41,6 +41,9 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     SharedPreferences prefs;
     SwipeRefreshLayout swrl;
     AdView mAdView;
+    NavigationView drw;
+    View navHeader;
+
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
@@ -82,9 +85,11 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             e.printStackTrace();
         }
 
-        final NavigationView drw = (NavigationView) findViewById(R.id.navview);
+        drw = (NavigationView) findViewById(R.id.navview);
+        navHeader = drw.getHeaderView(0);
+        //navHeader = drw.inflateHeaderView(R.layout.drawer_header);
 
-        mAdView = (AdView) findViewById(R.id.adView);
+        mAdView = (AdView)navHeader.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // Any emulator device
                 .addTestDevice(Private.REAL_DEVICE) // Real device : Oneplus One Greg
@@ -257,8 +262,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
                 findViewById(R.id.seedbox).setVisibility(prefs.getBoolean("seedbox", false) ? View.VISIBLE : View.GONE);
 
-                ((TextView)findViewById(R.id.drw_username)).setText(prefs.getString("lastUsername", "Non connecté"));
-                ((TextView)findViewById(R.id.drw_class)).setText(status);
+                ((TextView)navHeader.findViewById(R.id.drw_username)).setText(prefs.getString("lastUsername", "Non connecté"));
+                ((TextView)navHeader.findViewById(R.id.drw_class)).setText(status);
 
             }
 
