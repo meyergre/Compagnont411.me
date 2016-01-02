@@ -1,5 +1,13 @@
 CHANGELOG
 
+2015.12-145
+- Recompilation avec les derniers outils de développement (API 23)
+
+
+
+2015.12-143/4
+- Bugfix
+
 
 2015.12-142
 - Correction d'une erreur provoquant des résultats de recherche vide

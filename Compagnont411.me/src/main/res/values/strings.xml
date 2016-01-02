@@ -339,4 +339,6 @@
     <string name="preference_category_advanced">Advanced settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-6826466905234092/6720062161</string>
     <string name="confirmDonationString">By checking this box, I agree that the payment is sent to the app developer as a donation to support his work, and not to claim any feature development or ratio buying</string>
+    <string name="about_inapp_subscription">About in-app subscription</string>
+    <string formatted="false" name="about_inapp_subscription_details">Subscription costs 0.50 €/month\n - VAT represents 20% (+ 0.10 €)\n - Google represents 30% of the amount.\n - Taxes represents 25% of the rest.</string>
 </resources>

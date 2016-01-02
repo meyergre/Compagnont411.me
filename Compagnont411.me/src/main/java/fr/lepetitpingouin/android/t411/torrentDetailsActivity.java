@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class torrentDetailsActivity extends ActionBarActivity {
+public class torrentDetailsActivity extends AppCompatActivity {
 
     public String html_filelist = "";
     SharedPreferences prefs;
@@ -204,6 +205,19 @@ public class torrentDetailsActivity extends ActionBarActivity {
             tG.execute();
         } catch (Exception e) {
         }
+
+        ImageView btn_NFO = (ImageView) findViewById(R.id.btn_nfo);
+        btn_NFO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivity(new Intent(getApplicationContext(), NfoActivity.class).putExtra("nfo", torrent_NFO));
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void onDownloadClick(View v) {
@@ -314,6 +328,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 try {
                     html_filelist = doc.select(".accordion div").get(1).outerHtml();
                 } catch (Exception e) {
+                    e.printStackTrace();
 
                 }
 
@@ -326,8 +341,8 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 Element comments = null;
                 Element commentsA = null;
                 try {
-                    comments = doc.select(".comment").last();
-                    commentsA = comments;
+                    comments = doc.select("table.comment").last();
+                    commentsA = doc.select("table.comment").last();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -389,9 +404,13 @@ public class torrentDetailsActivity extends ActionBarActivity {
                         }
 
                         String comm_username = "<b style='color: " + colorPseudo + ";'>" + cusername + "</b>";
-
-                        String avatarpathtmp = object.select("noscript img.avatar").first().attr("src");
-                        String comm_avatar = "<img width=50 src=\"https://www.t411.in/" + avatarpathtmp + "\" />";
+                        String comm_avatar= "";
+                        try {
+                            String avatarpathtmp = object.select("img.avatar").first().attr("src");
+                            comm_avatar = "<img width=50 src=\"https://www.t411.in/" + avatarpathtmp + "\" />";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         String comm_up = object.select("th").first().select("span").get(1).outerHtml();
                         String comm_down = object.select("th").first().select("span").get(2).outerHtml();
@@ -491,23 +510,7 @@ public class torrentDetailsActivity extends ActionBarActivity {
                 e.printStackTrace();
             } finally {
 
-                ImageView btn_NFO = (ImageView) findViewById(R.id.btn_nfo);
-                btn_NFO.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        try {
-                            //AlertDialog nfoDialog = new AlertDialog.Builder(torrentDetailsActivity.this).setTitle("NFO").setMessage(torrent_NFO).setCancelable(true).setIcon(R.drawable.ic_torrent).show();
-                            //TextView textView = (TextView) nfoDialog.findViewById(android.R.id.message);
-                            //textView.setTextSize(9);
-                            //textView.setTypeface(Typeface.MONOSPACE);
 
-                            startActivity(new Intent(getApplicationContext(), NfoActivity.class).putExtra("nfo", torrent_NFO));
-
-                        } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
             }
 
             return null;

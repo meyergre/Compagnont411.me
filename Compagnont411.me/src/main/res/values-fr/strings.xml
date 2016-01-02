@@ -332,4 +332,6 @@
     <string name="banner_ad_unit_id">ca-app-pub-6826466905234092/6720062161</string>
     <string name="confirmDonationString">
         En cochant cette case, j\'accepte que ce paiement soit envoyé au développeur de l\'application pour soutenir son travail, et non pour obtenir un développement ou du ratio</string>
+    <string name="about_inapp_subscription">A propos de l\'abonnement</string>
+    <string formatted="false" name="about_inapp_subscription_details">L\'application contient un abonnement a un serveur dédié, pour éviter la censure DNS pratiquée par certains pays ou établissements. Ce dernier est proposé pour couvrir les frais d\'hébergement et de gestion d\'un serveur dédié à l\'application.\n\nAfin d\'y souscrire, il est nécessaire de disposer de la dernière version des services Google, ainsi que du Google Play Store.\n\nL\'abonnement est proposé pour 0.50 €/mois\n - La TVA représente 20% (+ 0.10 €)\n - La commission Google représente 30% du montant total.\n - Les impôts et cotisations représentent 25% du montant restant.\n\nIMPORTANT\nLa désinstallation de l\'application n\'entraine pas la résiliation automatique de votre abonnement. Vous pouvez vous désabonner manuellement à tout moment depuis la page de l\'application sur le Google Play Store.</string>
 </resources>
