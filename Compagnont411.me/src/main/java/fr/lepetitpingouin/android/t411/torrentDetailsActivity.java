@@ -5,17 +5,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,7 +44,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
     WebView details_www;
 
-    ImageView btnShare, btnDownload, btnThx, btnDlLater, rmDlLater, btnList;
+    ImageView btnShare, btnDownload, btnThx, btnDlLater, rmDlLater;
+    Button btnList;
 
     String torrent_URL, torrent_NFO, torrent_ID, torrent_Name;
 
@@ -170,14 +175,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
             btnDlLater.setVisibility(View.VISIBLE);
         }
 
-        btnDownload = (ImageView) findViewById(R.id.btnTorrentDownload);
-        btnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID);
-                torrent.download();
-            }
-        });
 
         btnThx = (ImageView) findViewById(R.id.btnThx);
         btnThx.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +189,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
             }
         });
 
-        btnList = (ImageView) findViewById(R.id.btn_listfiles);
+        btnList = (Button) findViewById(R.id.btn_listfiles);
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,7 +203,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
 
-        ImageView btn_NFO = (ImageView) findViewById(R.id.btn_nfo);
+        Button btn_NFO = (Button) findViewById(R.id.btn_nfo);
         btn_NFO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -226,8 +223,26 @@ public class torrentDetailsActivity extends AppCompatActivity {
     }
 
     public void onFakemenuClick(View v) {
-        LinearLayout fakemenu = (LinearLayout) findViewById(R.id.fakemenu);
-        fakemenu.setVisibility(fakemenu.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+        final LinearLayout fakemenu = (LinearLayout) findViewById(R.id.fakemenu);
+
+        final FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fabfakemenu);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (fakemenu.getVisibility()!=View.GONE) {
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ani_minus_plus));
+                    ((AnimationDrawable) fab.getDrawable()).start();
+                    fakemenu.setVisibility(View.GONE);
+                } else {
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ani_plus_minus));
+                    ((AnimationDrawable) fab.getDrawable()).start();
+                    fakemenu.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
     }
 
     private class AsyncThx extends AsyncTask<Void, String[], Void> {
@@ -379,8 +394,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez = prez.replaceAll("</noscript>", "");
                 torrent_NFO = doc.select("pre").first().text();
 
-                prez += "<img src=\"file:///android_asset/picts/top.png\" onclick=\"scroll(0,0);\" style='z-index: 99999; position: fixed; top: 2px; right: 2px;' />";
-                prez += "<img src=\"file:///android_asset/picts/bottom.png\" onclick=\"scroll(0,document.body.scrollHeight);\" style='z-index: 99999; position: fixed; bottom: 2px; right: 2px;' />";
+                //prez += "<img src=\"file:///android_asset/picts/top.png\" onclick=\"scroll(0,0);\" style='z-index: 99999; position: fixed; top: 2px; right: 2px;' />";
+                //prez += "<img src=\"file:///android_asset/picts/bottom.png\" onclick=\"scroll(0,document.body.scrollHeight);\" style='z-index: 99999; position: fixed; bottom: 2px; right: 2px;' />";
 
                 Elements objects;
                 try {
@@ -519,7 +534,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
 
-            details_www.loadDataWithBaseURL(null, prez, mimeType, encoding, "");
+            details_www.loadDataWithBaseURL(null, "<style></style>"+prez, mimeType, encoding, "");
 
             try {
                 getSupportActionBar().setTitle("Prez " + (tduploader.toString().length() > 0 ? "(" + tduploader.toString() + ")" : ""));
@@ -534,7 +549,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 tdt_taille = doc.select("div.accordion table tr").get(3).select("td").first().text();
 
                 TextView tdtSeeders, tdtLeechers, tdtNote, tdtVotes, tdtComplets, tdtTaille;
-                ImageView star1, star2, star3, star4, star5;
+                ImageView star1, star2, star3, star4, star5, star;
 
                 tdtSeeders = (TextView) findViewById(R.id.tdt_seeders);
                 tdtSeeders.setText(tdt_seeders + " Seeders");
@@ -543,7 +558,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 tdtLeechers.setText(tdt_leechers + " Leechers");
 
                 tdtNote = (TextView) findViewById(R.id.tdt_note);
-                tdtNote.setText(tdt_note);
+                tdtNote.setText(tdt_note.split("/")[0]);
 
                 tdtVotes = (TextView) findViewById(R.id.tdt_votes);
                 tdtVotes.setText(tdt_votes);
@@ -554,32 +569,29 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 tdtTaille = (TextView) findViewById(R.id.tdt_taille);
                 tdtTaille.setText(tdt_taille);
 
-                star1 = (ImageView) findViewById(R.id.star1);
-                star2 = (ImageView) findViewById(R.id.star2);
-                star3 = (ImageView) findViewById(R.id.star3);
-                star4 = (ImageView) findViewById(R.id.star4);
-                star5 = (ImageView) findViewById(R.id.star5);
+
+                tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_00));
 
                 if (note > 0)
-                    star1.setImageResource(R.drawable.ic_star_mid);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_05));
                 if (note > 0.7)
-                    star1.setImageResource(R.drawable.ic_star_on);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_10));
                 if (note > 1)
-                    star2.setImageResource(R.drawable.ic_star_mid);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_15));
                 if (note > 1.7)
-                    star2.setImageResource(R.drawable.ic_star_on);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_20));
                 if (note > 2)
-                    star3.setImageResource(R.drawable.ic_star_mid);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_25));
                 if (note > 2.7)
-                    star3.setImageResource(R.drawable.ic_star_on);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_30));
                 if (note > 3)
-                    star4.setImageResource(R.drawable.ic_star_mid);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_35));
                 if (note > 3.7)
-                    star4.setImageResource(R.drawable.ic_star_on);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_40));
                 if (note > 4)
-                    star5.setImageResource(R.drawable.ic_star_mid);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_45));
                 if (note > 4.7)
-                    star5.setImageResource(R.drawable.ic_star_on);
+                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_50));
             } catch (Exception e) {
                 //details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + doc.select(".block").first().text(), mimeType, encoding, "");
                 details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + e.getMessage(), mimeType, encoding, "");

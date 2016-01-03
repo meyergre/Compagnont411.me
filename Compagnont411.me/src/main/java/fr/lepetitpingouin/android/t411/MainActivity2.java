@@ -20,14 +20,20 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 /**
@@ -43,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     AdView mAdView;
     NavigationView drw;
     View navHeader;
+    BillingProcessor bp;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -232,8 +239,22 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 ((TextView)findViewById(R.id.widget_news2title)).setText(prefs.getString("title2", ""));
                 ((TextView)findViewById(R.id.widget_news3title)).setText(prefs.getString("title3", ""));
 
-                if (!prefs.getString("lastDate", "").equals(""))
-                    ((TextView) findViewById(R.id.tvUpdateTime)).setText(getResources().getString(R.string.lastUpdate) + prefs.getString("lastDate", ""));
+                String displayedDate = "";
+                if (!prefs.getString("lastDate", "").equals("")) {
+                    String lastDate = prefs.getString("lastDate", "");
+
+                    try {
+                        Long shortLastDate = new SimpleDateFormat("dd/MM/yyyy h:m:s", Locale.FRENCH).parse(lastDate).getTime();
+                        lastDate = DateUtils.getRelativeDateTimeString(getApplicationContext(), shortLastDate, DateUtils.MINUTE_IN_MILLIS, DateUtils.MINUTE_IN_MILLIS, 0).toString();
+
+                    } catch(Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                    displayedDate = getResources().getString(R.string.lastUpdate) + lastDate;
+
+                    ((TextView) findViewById(R.id.tvUpdateTime)).setText(displayedDate);
+                }
 
                 findViewById(R.id.widget_news).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -265,15 +286,56 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 ((TextView)navHeader.findViewById(R.id.drw_username)).setText(prefs.getString("lastUsername", "Non connecté"));
                 ((TextView)navHeader.findViewById(R.id.drw_class)).setText(status);
 
+                findViewById(R.id.helpButtonPopup).setVisibility(prefs.getBoolean("hideHelpButton", false)?View.GONE:View.VISIBLE);
+
             }
+
+    public void removeHelpButton(View v) {
+        prefs.edit().putBoolean("hideHelpButton", true).apply();
+        findViewById(R.id.helpButtonPopup).setVisibility(View.GONE);
+    }
 
     @Override
     public void onResume() {
+        initBP();
         initWidgets();
         super.onResume();
     }
 
-            public void onSearch(View v) {
+    private void initBP() {
+        bp = new BillingProcessor(this, Private.API_KEY, new BillingProcessor.IBillingHandler() {
+            @Override
+            public void onProductPurchased(String s, TransactionDetails transactionDetails) {
+            }
+
+            @Override
+            public void onPurchaseHistoryRestored() {
+            }
+
+            @Override
+            public void onBillingError(int i, Throwable throwable) {
+            }
+
+            @Override
+            public void onBillingInitialized() {
+            }
+        });
+        try {
+            bp.loadOwnedPurchasesFromGoogle();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+        new T411Logger(getApplicationContext()).writeLine("Vérification des achats in-app :", T411Logger.INFO);
+        if(bp.isSubscribed(Private.PROXY_ITEM_ID)) {
+            new T411Logger(getApplicationContext()).writeLine("Proxy souscrit", T411Logger.INFO);
+        } else {
+            new T411Logger(getApplicationContext()).writeLine("Proxy non souscrit", T411Logger.INFO);
+
+        }
+    }
+
+    public void onSearch(View v) {
 
                 Intent intent = new Intent(this, SearchActivity.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
@@ -394,6 +456,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     public void onDestroy() {
         super.onDestroy();
         try {
+            bp.release();
             unregisterReceiver(receiver);
         } catch (Exception e) {
             e.printStackTrace();

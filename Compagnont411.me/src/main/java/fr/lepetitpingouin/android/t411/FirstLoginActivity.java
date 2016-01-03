@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -124,10 +125,12 @@ public class FirstLoginActivity extends Activity {
                     .translationYBy((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 320, getResources().getDisplayMetrics()))
                     .start();
             girl.animate()
-                    .setDuration(1500)
-                    .setStartDelay(1500)
+                    .setDuration(1000)
+                    .setStartDelay(500)
                     .translationYBy(-(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 320, getResources().getDisplayMetrics()))
                     .start();
+
+            ((AnimationDrawable)girl.getDrawable()).start();
 
 
             login.animate()
@@ -137,8 +140,8 @@ public class FirstLoginActivity extends Activity {
                     .alpha(0)
                     .start();
             login.animate()
-                    .setDuration(1200)
-                    .setStartDelay(1500)
+                    .setDuration(900)
+                    .setStartDelay(500)
                     .alpha(1)
                     .y((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()))
                     .start();

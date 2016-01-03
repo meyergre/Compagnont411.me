@@ -341,4 +341,6 @@
     <string name="confirmDonationString">By checking this box, I agree that the payment is sent to the app developer as a donation to support his work, and not to claim any feature development or ratio buying</string>
     <string name="about_inapp_subscription">About in-app subscription</string>
     <string formatted="false" name="about_inapp_subscription_details">Subscription costs 0.50 €/month\n - VAT represents 20% (+ 0.10 €)\n - Google represents 30% of the amount.\n - Taxes represents 25% of the rest.</string>
+    <string name="helpbutton_text">Any issue ?\nFeel free to ask on t411.in forum topic!\nYou can also enable the logging feature in the app settings, and then share your log with others, or the developper.</string>
+    <string name="open_with_app">Open with…</string>
 </resources>

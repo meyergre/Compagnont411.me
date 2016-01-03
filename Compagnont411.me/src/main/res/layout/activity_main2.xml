@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
                 <ImageView
@@ -130,6 +131,47 @@
                     </LinearLayout>
 
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_card"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="7dp"
+                    android:padding="5dp"
+                    android:id="@+id/helpButtonPopup">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/imageView14"
+                        android:src="@drawable/ic_home_helpbutton" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/helpbutton_text"
+                        android:id="@+id/textView35"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="12dp" />
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:text="OK"
+                        android:id="@+id/button7"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="#fff"
+                        android:backgroundTint="@color/t411_action_lightgrey"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="2dp"
+                        android:textSize="14dp"
+                        android:onClick="removeHelpButton" />
+                </LinearLayout>
 
                 <include
                     android:id="@+id/linearLayout2"

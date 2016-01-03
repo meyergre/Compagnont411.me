@@ -24,6 +24,9 @@ public class ProxyActivity extends ActionBarActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor edit;
 
+    Button abo;
+    LinearLayout subscribed;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +38,9 @@ public class ProxyActivity extends ActionBarActivity {
 
         new T411Logger(getApplicationContext()).writeLine("Ouverture de la page du proxy");
 
-        final LinearLayout subscribed = (LinearLayout)findViewById(R.id.abonned);
+        subscribed = (LinearLayout)findViewById(R.id.abonned);
 
-        final Button abo = (Button)findViewById(R.id.btn_abo_proxy);
+        abo = (Button)findViewById(R.id.btn_abo_proxy);
         abo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +68,19 @@ public class ProxyActivity extends ActionBarActivity {
             }
         });
 
+
+
+    }
+
+    @Override
+    public void onPause() {
+        //onDestroy();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         bp = new BillingProcessor(this, Private.API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
@@ -105,6 +121,8 @@ public class ProxyActivity extends ActionBarActivity {
             subscribed.setVisibility(View.GONE);
             abo.setVisibility(View.VISIBLE);
             new T411Logger(getApplicationContext()).writeLine("La souscription n'est pas effective");
+            ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(false);
+            edit.putBoolean("usePaidProxy", false).commit();
         }
 
         ((CheckBox)findViewById(R.id.checkBox_proxyAlert)).setChecked(prefs.getBoolean("showProxyAlert", true));
@@ -114,7 +132,6 @@ public class ProxyActivity extends ActionBarActivity {
             subscribed.setVisibility(View.VISIBLE);
             abo.setVisibility(View.GONE);
         }
-
     }
 
     @Override
