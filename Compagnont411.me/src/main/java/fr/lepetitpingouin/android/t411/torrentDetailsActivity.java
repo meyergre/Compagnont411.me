@@ -225,24 +225,17 @@ public class torrentDetailsActivity extends AppCompatActivity {
     public void onFakemenuClick(View v) {
         final LinearLayout fakemenu = (LinearLayout) findViewById(R.id.fakemenu);
 
-        final FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fabfakemenu);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                if (fakemenu.getVisibility()!=View.GONE) {
-                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ani_minus_plus));
-                    ((AnimationDrawable) fab.getDrawable()).start();
-                    fakemenu.setVisibility(View.GONE);
-                } else {
-                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ani_plus_minus));
-                    ((AnimationDrawable) fab.getDrawable()).start();
-                    fakemenu.setVisibility(View.VISIBLE);
-                }
-
+            if (fakemenu.getVisibility()==View.GONE) {
+                ((FloatingActionButton)v).setImageDrawable(getResources().getDrawable(R.drawable.ani_plus_minus));
+                ((AnimationDrawable)((FloatingActionButton)v).getDrawable()).start();
+                fakemenu.setVisibility(View.VISIBLE);
+            } else {
+                ((FloatingActionButton)v).setImageDrawable(getResources().getDrawable(R.drawable.ani_minus_plus));
+                ((AnimationDrawable)((FloatingActionButton)v).getDrawable()).start();
+                fakemenu.setVisibility(View.GONE);
             }
-        });
+
     }
 
     private class AsyncThx extends AsyncTask<Void, String[], Void> {
