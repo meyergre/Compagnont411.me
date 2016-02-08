@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -70,7 +71,8 @@ public class FileDialog extends ListActivity {
     private TextView myPath;
     private EditText mFileName;
     private ArrayList<HashMap<String, Object>> mList;
-    private Button selectButton, cancelButton;
+    private FloatingActionButton selectButton;
+    private Button cancelButton;
     private LinearLayout layoutSelect;
     private LinearLayout layoutCreate;
     private InputMethodManager inputManager;
@@ -110,7 +112,7 @@ public class FileDialog extends ListActivity {
             }
         });
 
-        selectButton = (Button) findViewById(R.id.fdButtonSelect);
+        selectButton = (FloatingActionButton) findViewById(R.id.fdButtonSelect);
         selectButton.setEnabled(false);
         selectButton.setOnClickListener(new OnClickListener() {
 

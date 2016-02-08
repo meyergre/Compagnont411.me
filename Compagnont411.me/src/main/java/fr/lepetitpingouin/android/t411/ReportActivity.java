@@ -7,12 +7,13 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 
-public class ReportActivity extends ActionBarActivity {
+public class ReportActivity extends AppCompatActivity {
 
     TextView brand, model, osVersion, osCodename, packageName, appVersion, username, https, ipT411, dossierDl, frequence, lastupdate;
 

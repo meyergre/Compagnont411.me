@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ import com.google.android.gms.ads.AdView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class FirstLoginActivity extends Activity {
+public class FirstLoginActivity extends AppCompatActivity {
 
     SharedPreferences prefs;
     SharedPreferences.Editor edit;

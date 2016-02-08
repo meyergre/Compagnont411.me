@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ import org.jsoup.nodes.Element;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class friendsActivity extends ActionBarActivity {
+public class friendsActivity extends AppCompatActivity {
     static final String CONNECTURL = Default.URL_FRIENDS;
     public ProgressDialog dialog;
 

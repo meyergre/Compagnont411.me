@@ -504,8 +504,7 @@ public class t411UpdateService extends Service {
 
         @Override
         protected void onPostExecute(Void arg) {
-            getApplicationContext().sendBroadcast(
-                    new Intent(Default.Intent_Refresh_Newspaper));
+            getApplicationContext().sendBroadcast(new Intent(Default.Intent_Refresh_Newspaper));
         }
     }
 

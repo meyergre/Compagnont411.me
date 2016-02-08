@@ -1,8 +1,17 @@
 CHANGELOG
 
+2016.01-148
+- Correction des demandes de permissions pour android 6
+
+
+2016.01-146/7
+- Refonte visuelle de la page de login
+- Refonte visuelle de la page de détails du torrent
+- Amélioration de l'ouverture des fichiers torrent
+
+
 2015.12-145
 - Recompilation avec les derniers outils de développement (API 23)
-
 
 
 2015.12-143/4

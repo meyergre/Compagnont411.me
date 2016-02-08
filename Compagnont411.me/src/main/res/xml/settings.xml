@@ -22,7 +22,7 @@
         </PreferenceCategory>
         <PreferenceCategory android:title="Ratio">
             <EditTextPreference
-                android:defaultValue="0.75"
+                android:defaultValue="1.00"
                 android:key="ratioMinimum"
                 android:numeric="decimal"
                 android:summary="@string/lowRatio_summary"

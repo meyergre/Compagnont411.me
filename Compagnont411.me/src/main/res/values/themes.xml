@@ -33,7 +33,6 @@
     </style>
 
     <style name="MyLightActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
-        <item name="android:background">@android:color/transparent</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:icon">@drawable/ic_empty</item>
         <item name="android:titleTextStyle">@style/MyLightActionBarTitleText</item>

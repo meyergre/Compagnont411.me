@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class ComposeMessageActivity extends ActionBarActivity {
+public class ComposeMessageActivity extends AppCompatActivity {
 
     Button Bold, Italic, Underline;
     ImageView list, spoil, quote, link, img, send;

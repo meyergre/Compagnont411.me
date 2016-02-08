@@ -2,17 +2,17 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="9dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:layout_alignParentLeft="true"
         android:id="@+id/fdrowimage"
-        android:layout_height="35dp"
-        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_width="56dp"
         android:paddingRight="5dp"
         android:paddingLeft="3dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:src="@drawable/ic_newfolder" />
 
     <TextView
         android:text="@+id/fdrowtext"

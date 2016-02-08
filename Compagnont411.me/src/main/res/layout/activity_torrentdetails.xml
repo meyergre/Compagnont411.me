@@ -45,7 +45,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="..."
                             android:id="@+id/tdt_note"
-                            android:layout_gravity="center_vertical"
+                            android:layout_gravity="center"
                             android:gravity="center"
                             android:background="@drawable/ic_note_00"
                             android:paddingTop="10dp"

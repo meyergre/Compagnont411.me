@@ -3,7 +3,9 @@ package fr.lepetitpingouin.android.t411;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.Preference;
@@ -16,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.jar.Manifest;
 
 /**
  * Created by gregory on 23/10/2013.
@@ -51,14 +54,24 @@ public class UserPrefsActivity extends PreferenceActivity {
             filePicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(getBaseContext(), FileDialog.class);
-                    intent.putExtra(FileDialog.START_PATH, prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
 
-                    intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
-                    intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
-                    intent.putExtra(FileDialog.FORMAT_FILTER, new String[]{"@file_not_allowed"});
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        if(shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
-                    startActivityForResult(intent, SelectionMode.MODE_OPEN);
+                        }
+                        requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    }
+                    else{
+
+                        Intent intent = new Intent(getBaseContext(), FileDialog.class);
+                        intent.putExtra(FileDialog.START_PATH, prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
+
+                        intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
+                        intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
+                        intent.putExtra(FileDialog.FORMAT_FILTER, new String[]{"@file_not_allowed"});
+
+                        startActivityForResult(intent, SelectionMode.MODE_OPEN);
+                    }
                     return true;
                 }
             });

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -50,6 +51,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     NavigationView drw;
     View navHeader;
     BillingProcessor bp;
+    IntentFilter filter;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -82,15 +84,10 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        IntentFilter filter = new IntentFilter();
+        filter = new IntentFilter();
         filter.addAction(Default.Appwidget_update);
         filter.addAction(Default.Appwidget_flag_updating);
         filter.addAction(INTENT_ERROR);
-        try {
-            registerReceiver(receiver, filter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         drw = (NavigationView) findViewById(R.id.navview);
         navHeader = drw.getHeaderView(0);
@@ -103,6 +100,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 .build();
 
         mAdView.loadAd(adRequest);
+
+
 
         /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -199,7 +198,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         if (!prefs.getBoolean("firstLogin", false)) {
-            Intent myIntent = new Intent(MainActivity2.this, FirstLoginActivity.class);
+            Intent myIntent = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(myIntent);
             finish();
         }
@@ -297,9 +296,39 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
     @Override
     public void onResume() {
+
         initBP();
         initWidgets();
+
+        registerReceiver(receiver, filter);
+
+        View permissionStorage = (View)findViewById(R.id.storage_permission);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionStorage.setVisibility(View.VISIBLE);
+            permissionStorage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                }
+            });
+        }
+        else {
+            permissionStorage.setVisibility(View.GONE);
+        }
+
         super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+
+        try {
+            unregisterReceiver(receiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onPause();
     }
 
     private void initBP() {
@@ -456,10 +485,15 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     public void onDestroy() {
         super.onDestroy();
         try {
-            bp.release();
             unregisterReceiver(receiver);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            bp.release();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

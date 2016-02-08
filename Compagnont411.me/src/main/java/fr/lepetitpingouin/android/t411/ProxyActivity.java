@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,7 +19,7 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 /**
  * Created by gregory on 01/09/15.
  */
-public class ProxyActivity extends ActionBarActivity {
+public class ProxyActivity extends AppCompatActivity {
 
     BillingProcessor bp;
     SharedPreferences prefs;

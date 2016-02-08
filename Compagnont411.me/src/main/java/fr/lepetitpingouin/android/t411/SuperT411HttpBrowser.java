@@ -57,7 +57,7 @@ public class SuperT411HttpBrowser {
 
     SharedPreferences prefs;
 
-    String encoding = "windows-1252";
+    String encoding = "utf-8";
 
     int retry = 0;
 

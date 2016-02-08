@@ -11,7 +11,8 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/fdLinearLayoutSelect"
@@ -37,7 +38,7 @@
                     android:textSize="18sp"></Button>
 
                 <Button
-                    android:id="@+id/fdButtonSelect"
+                    android:id="@+id/fdButtonSelectOld"
                     android:layout_height="wrap_content"
                     android:layout_width="0dip"
                     android:layout_weight="1"
@@ -122,13 +123,14 @@
         <TextView
             android:id="@+id/path"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:singleLine="true"
             android:padding="5dp"
             android:ellipsize="start"
-            android:textColor="#AAA"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:textColor="@color/t411_action_blue"
+            android:text="/"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" />
 
         <ListView
             android:id="@android:id/list"
@@ -144,6 +146,15 @@
             android:layout_height="fill_parent"
             android:text="@string/no_data" />
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_valid"
+        android:layout_margin="16dp"
+        android:id="@+id/fdButtonSelect" />
 
 
 </RelativeLayout>
