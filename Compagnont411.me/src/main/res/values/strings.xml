@@ -17,7 +17,7 @@
     <string name="main_login">Username</string>
     <string name="main_password">Password</string>
     <string name="main_connect">Save</string>
-    <string name="description_logo">t411.in logo</string>
+    <string name="description_logo">t411.ch logo</string>
     <string name="service_settings">Settings</string>
     <string name="button_mail">Inbox</string>
     <string name="button_service">Settings</string>
@@ -46,7 +46,7 @@
     <string name="open_app">Open app</string>
     <string name="update_now">Update now</string>
     <string name="read_mails">Inbox</string>
-    <string name="goto_t411">Browse t411.in</string>
+    <string name="goto_t411">Browse t411.ch</string>
     <string name="widget_action">Widget action…</string>
     <string name="answer">Answer</string>
     <string name="delete">Delete</string>
@@ -135,7 +135,7 @@
     <string name="download_simulation">Download Simulation</string>
     <string name="DL_left">Download left</string>
     <string name="UP_left">Upload left</string>
-    <string name="support_t411_text">Making a donation to t411.in, you\'re twice a winner : on the
+    <string name="support_t411_text">Making a donation to t411.ch, you\'re twice a winner : on the
         first hand you participate to the websites costs, and on the other hand you got an extra GB
         bonus !
     </string>
@@ -144,7 +144,7 @@
     <string name="calc_simulation" translatable="false">Simulation</string>
     <string name="btn_forum">Discussion thread</string>
     <string name="btn_news">t411 News</string>
-    <string name="contribute_on_t411">Support t411.in !</string>
+    <string name="contribute_on_t411">Support t411.ch !</string>
     <string name="learn_more">Learn more…</string>
     <string name="shareSignature">Sent from the t411 companion app for Android</string>
     <string name="top_100">Top torrents…</string>
@@ -173,7 +173,7 @@
     <string name="settings_menu_notes">Choose which links to hide on the main menu.</string>
     <string name="connect">Connect</string>
     <string name="welcome">Welcome !</string>
-    <string name="please_login">First of all, you should login using your t411.in credentials…
+    <string name="please_login">First of all, you should login using your t411.ch credentials…
     </string>
     <string name="need_an_account">Need an account ?</string>
     <string name="longclick_share">Share on long press</string>
@@ -295,7 +295,7 @@
     </string-array>
 
     <string-array name="t411_ip_list" translatable="false">
-        <item>www.t411.in</item>
+        <item>www.t411.ch</item>
         <item>104.20.31.29 </item>
         <item>104.20.30.29</item>
     </string-array>
@@ -341,7 +341,7 @@
     <string name="confirmDonationString">By checking this box, I agree that the payment is sent to the app developer as a donation to support his work, and not to claim any feature development or ratio buying</string>
     <string name="about_inapp_subscription">About in-app subscription</string>
     <string formatted="false" name="about_inapp_subscription_details">Subscription costs 0.50 €/month\n - VAT represents 20% (+ 0.10 €)\n - Google represents 30% of the amount.\n - Taxes represents 25% of the rest.</string>
-    <string name="helpbutton_text">Any issue ?\nFeel free to ask on t411.in forum topic!\nYou can also enable the logging feature in the app settings, and then share your log with others, or the developper.</string>
+    <string name="helpbutton_text">Any issue ?\nFeel free to ask on t411.ch forum topic!\nYou can also enable the logging feature in the app settings, and then share your log with others, or the developper.</string>
     <string name="open_with_app">Open with…</string>
     <string name="permissions_needed">Storage access is needed. Please allow the app tu access your storage by clicking this message</string>
 </resources>

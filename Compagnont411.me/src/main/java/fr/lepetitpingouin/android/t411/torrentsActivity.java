@@ -326,7 +326,7 @@ public class torrentsActivity extends AppCompatActivity {
 
     public void update() {
         try {
-            //dialog = show(torrentsActivity.this, "t411.in", this.getString(R.string.pleasewait), true, true);
+            //dialog = show(torrentsActivity.this, "t411.ch", this.getString(R.string.pleasewait), true, true);
             dialog = new ProgressDialog(this);
             dialog.setMessage(this.getString(R.string.pleasewait));
             AdView mAdView;

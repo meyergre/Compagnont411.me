@@ -227,7 +227,7 @@
                     android:summary="@string/t411_site_ip_summary"
                     android:entries="@array/t411_ip_list"
                     android:entryValues="@array/t411_ip_list"
-                    android:defaultValue="www.t411.in">
+                    android:defaultValue="www.t411.ch">
 
                 </ListPreference-->
 

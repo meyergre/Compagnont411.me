@@ -158,12 +158,12 @@ public class SuperT411HttpBrowser {
 
     public SuperT411HttpBrowser connect(String mUrl) {
 
-        this.url = mUrl;//.replace("www.t411.in", prefs.getString("SiteIP", Default.IP_T411));
+        this.url = mUrl;//.replace("www.t411.ch", prefs.getString("SiteIP", Default.IP_T411));
         /*/TEST TRUE PROXY/*if(proxy){
             this.url = Private.URL_PROXY + this.url.replace("http://", "");
         }*/
 
-        //this.url = this.url.replace("t411.io", "t411.in");
+        //this.url = this.url.replace("t411.io", "t411.ch");
 
         if (prefs.getBoolean("useHTTPS", false) && !proxy) {
             new T411Logger(this.ctx).writeLine("Connexion HTTPS activée");
@@ -269,8 +269,8 @@ public class SuperT411HttpBrowser {
 
         HttpResponse response;
         String responseString = null;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
-        nameValuePairs.add(new BasicNameValuePair("remember", "0"));
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(7);
+        nameValuePairs.add(new BasicNameValuePair("remember", "1"));
         nameValuePairs.add(new BasicNameValuePair("login", username));
         nameValuePairs.add(new BasicNameValuePair("password", password));
         // captcha
@@ -311,7 +311,7 @@ public class SuperT411HttpBrowser {
                     retry++;
 
                     try {
-                        Element doc = Jsoup.parse(responseString).select(".loginForm").first();
+                        Element doc = Jsoup.parse(responseString).select("#loginForm").first();
                         resolveCaptcha(doc.select("input[name=captchaToken]").first().val(), doc.select("input[name=captchaQuery]").first().val());
 
                         executeLoginForMessage();
@@ -324,6 +324,7 @@ public class SuperT411HttpBrowser {
                 }
 
         } catch (Exception ex) {
+            new T411Logger(ctx).writeLine(ex.getMessage(), T411Logger.INFO);
             ex.printStackTrace();
         }
 
@@ -367,6 +368,10 @@ public class SuperT411HttpBrowser {
 
         HttpPost httppost = new HttpPost(mUrl);
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        httppost.setHeader("X-Requested-With", "XMLHttpRequest");
+        httppost.setHeader("Origin", "http://"+Default.IP_T411);
+        httppost.setHeader("Referer", "http://"+Default.IP_T411);
+        httppost.setHeader("Accept", "application/json, text/javascript, */*; q=0.01\n");
 
         HttpResponse response;
         String responseString = null;
@@ -374,6 +379,7 @@ public class SuperT411HttpBrowser {
         nameValuePairs.add(new BasicNameValuePair("remember", "1"));
         nameValuePairs.add(new BasicNameValuePair("login", username));
         nameValuePairs.add(new BasicNameValuePair("password", password));
+        nameValuePairs.add(new BasicNameValuePair("url", "/"));
         // captcha
         nameValuePairs.add(new BasicNameValuePair("captchaToken", qpT));
         nameValuePairs.add(new BasicNameValuePair("captchaQuery", qpQ));
@@ -480,6 +486,7 @@ public class SuperT411HttpBrowser {
                     new T411Logger(this.ctx).writeLine("Le site a répondu : " + mUrl, T411Logger.WARN);
                 }
             } catch (Exception ex) {
+                new T411Logger(ctx).writeLine(ex.getMessage(), T411Logger.INFO);
                 ex.printStackTrace();
             }
 

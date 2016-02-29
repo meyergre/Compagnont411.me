@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:maxHeight="180dp"
-                    android:src="@drawable/t411_head_valentine"
+                    android:src="@drawable/t411_head_switzerland"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
@@ -390,7 +390,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:background="#33000000"
+            android:background="#11000000"
             app:popupTheme="@style/Theme.AppCompat.NoActionBar"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

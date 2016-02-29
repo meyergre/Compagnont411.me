@@ -145,6 +145,8 @@ public class t411UpdateService extends Service {
 
         }
 
+        Log.e("ERROR", doc.body().toString());
+        Log.e("ERROR", doc.title().toString());
 
         try {
             ratio = Math.round(Float.valueOf(doc.select(".rate").first().text().replace(',', '.')) * 100.0) / 100.0;
@@ -351,6 +353,7 @@ public class t411UpdateService extends Service {
 
             new NotificationWidget(getApplicationContext()).updateNotificationWidget();
         } catch (Exception ex) {
+            new T411Logger(getApplicationContext()).writeLine(ex.getMessage(), T411Logger.ERROR);
             ex.printStackTrace();
         }
 

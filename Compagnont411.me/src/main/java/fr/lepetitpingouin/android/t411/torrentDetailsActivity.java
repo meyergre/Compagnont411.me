@@ -89,7 +89,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
         details_www.getSettings().setJavaScriptEnabled(true);
 
-        //dialog = ProgressDialog.show(this, "t411.in", this.getString(R.string.pleasewait), true, true);
+        //dialog = ProgressDialog.show(this, "t411.ch", this.getString(R.string.pleasewait), true, true);
         dialog = new ProgressDialog(this);
         dialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
             @Override
@@ -425,7 +425,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                         String comm_avatar= "";
                         try {
                             String avatarpathtmp = object.select("img.avatar").first().attr("src");
-                            comm_avatar = "<img width=50 src=\"https://www.t411.in/" + avatarpathtmp + "\" />";
+                            comm_avatar = "<img width=50 src=\"https://"+Default.IP_T411+"/" + avatarpathtmp + "\" />";
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -462,7 +462,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez = prez.replaceAll("_____", "");
 
                 if (comments.select("tr").size() > 0)
-                    prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411.in...<br/><br/></center></a>";
+                    prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411...<br/><br/></center></a>";
 
                 try {
                     //vidéos youtube
@@ -521,7 +521,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 }
                 */
 
-                prez = prez.replaceAll("src=\"/", "src=\"https://www.t411.in/");
+                prez = prez.replaceAll("src=\"/", "src=\"https://"+Default.IP_T411+"/");
 
             } catch (Exception e) {
                 Log.e("Erreur connect :", e.toString());
