@@ -1,6 +1,10 @@
 CHANGELOG
 
-2016.02-151
+2016.03-153
+- Correction de l'utilisation d'un proxy perso avec auth
+
+
+2016.02-151/2
 - Passage à t411.ch
 
 

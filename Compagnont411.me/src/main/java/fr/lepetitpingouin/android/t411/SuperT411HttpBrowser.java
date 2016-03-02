@@ -98,7 +98,7 @@ public class SuperT411HttpBrowser {
             //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(prefs.getString("customProxy", ""), 411));
 
             final String pLogin = prefs.getString("proxy_login", "");
-            final String pPassword = prefs.getString("proxy_password", "");
+            final String pPassword = prefs.getString("proxy_pasword", "");
 
             new T411Logger(this.ctx).writeLine("Utilisation du proxy : " + prefs.getString("customProxy", "non spécifié"));
 
@@ -254,7 +254,7 @@ public class SuperT411HttpBrowser {
                 httpclient.getCredentialsProvider().setCredentials(
                         new AuthScope(prefs.getString("customProxy", ""), 411),
                         new UsernamePasswordCredentials(
-                                prefs.getString("proxy_login", ""), prefs.getString("proxy_password", "")));
+                                prefs.getString("proxy_login", ""), prefs.getString("proxy_pasword", "")));
             }
         }
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
@@ -352,7 +352,7 @@ public class SuperT411HttpBrowser {
                 httpclient.getCredentialsProvider().setCredentials(
                         new AuthScope(prefs.getString("customProxy", ""), 411),
                         new UsernamePasswordCredentials(
-                                prefs.getString("proxy_login", ""), prefs.getString("proxy_password", "")));
+                                prefs.getString("proxy_login", ""), prefs.getString("proxy_pasword", "")));
             }
         }
 
@@ -368,10 +368,6 @@ public class SuperT411HttpBrowser {
 
         HttpPost httppost = new HttpPost(mUrl);
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-        httppost.setHeader("X-Requested-With", "XMLHttpRequest");
-        httppost.setHeader("Origin", "http://"+Default.IP_T411);
-        httppost.setHeader("Referer", "http://"+Default.IP_T411);
-        httppost.setHeader("Accept", "application/json, text/javascript, */*; q=0.01\n");
 
         HttpResponse response;
         String responseString = null;

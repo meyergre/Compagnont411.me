@@ -24,8 +24,8 @@ public class Default {
     public static String URL_INDEX = "http://"+IP_T411+"";
     public static String URL_USERPROFILE = "http://"+IP_T411+"/users/profile/";
     public static String URL_MAILS = "http://"+IP_T411+"/mailbox/";
-    //public static String URL_LOGIN = "http://"+IP_T411+"/users/login/?returnto=%2Fusers%2Flogin%2F";
-    public static String URL_LOGIN = "http://"+IP_T411+"/users/auth/";//?returnto=%2Fusers%2Fprofile%2F";
+    public static String URL_LOGIN = "http://"+IP_T411+"/users/login/?returnto=%2Fusers%2Flogin%2F";
+    //public static String URL_LOGIN = "http://"+IP_T411+"/users/auth/";//?returnto=%2Fusers%2Fprofile%2F";
     public static String URL_LOGOUT = "http://"+IP_T411+"/users/logout/";
     public static String URL_SEARCH = "http://"+IP_T411+"/torrents/search/?name="; // + terms
     public static String URL_SAY_THANKS = "http://"+IP_T411+"/torrents/thanks/?id="; //+ ID
