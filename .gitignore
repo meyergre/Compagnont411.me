@@ -1,3 +1,4 @@
+/.idea/workspace.xml
 #built application files
 *.apk
 *.ap_
@@ -27,7 +28,7 @@ Thumbs.db
 
 # Android Studio
 *.iml
-.idea/*
+.idea/
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
@@ -37,5 +38,3 @@ obj/
 
 *Private.java
 cache.xml
-*.old
-*.iml
