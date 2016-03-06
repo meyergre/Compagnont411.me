@@ -368,6 +368,10 @@ public class SuperT411HttpBrowser {
 
         HttpPost httppost = new HttpPost(mUrl);
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        httppost.setHeader("X-Requested-With", "XMLHttpRequest");
+        httppost.setHeader("Origin", "http://"+Default.IP_T411);
+        httppost.setHeader("Referer", "http://"+Default.IP_T411);
+        httppost.setHeader("Accept", "application/json, text/javascript, */*; q=0.01\n");
 
         HttpResponse response;
         String responseString = null;
