@@ -102,7 +102,7 @@
         <PreferenceCategory android:title="@string/search_results">
 
             <CheckBoxPreference
-                android:defaultValue="false"
+                android:defaultValue="true"
                 android:key="hadopi"
                 android:summary="Afficher un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
                 android:title="Avertissement hadopi" />
@@ -112,6 +112,12 @@
                 android:key="shareDirectLink"
                 android:summary="@string/description_share_direct_link"
                 android:title="@string/share_direct_link" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="sortByDate"
+                android:summary="@string/description_sort_by_date"
+                android:title="@string/sort_by_date" />
 
         </PreferenceCategory>
 

@@ -5,7 +5,7 @@ package fr.lepetitpingouin.android.t411;
  */
 public class Private {
 
-    public static final String REAL_DEVICE = "627C6387FAB1F61B192C82F3207FAD1D";
+    public static final String REAL_DEVICE = "3846693B4A71EB89FF9B6EFB2EB8FBBD";
     public static String URL_PROXY = "proxy.lepetitpingouin.fr";
 
     public static String PROXY_ITEM_ID = "testing_proxy";
