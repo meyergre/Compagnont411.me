@@ -15,20 +15,20 @@ repositories {
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-    useLibrary  'org.apache.http.legacy'
-
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 12
         targetSdkVersion 23
         versionCode 153
         versionName "2016.03-153"
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -36,7 +36,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
-    compile 'org.jsoup:jsoup:1.7.3'
+    compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.anjlab.android.iab.v3:library:1.0.+'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
 }
