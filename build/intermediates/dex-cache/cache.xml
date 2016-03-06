@@ -2,39 +2,74 @@
 <items version="2" >
 
     <item
-        jar="/Users/gregory/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-1069c41821f6848c6da7cc2256994fc55a47bc25.jar" />
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_de244eea342feac0681b683b7462a8a5b34f7168.jar" />
     </item>
     <item
-        jar="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/pre-dexed/debug/classes-6dd5f2b578bc364297c3bedee99972d4c54aabaa.jar" />
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_ed98fc5e4a4f08f9916bd7778a383d1e7ec2f958.jar" />
     </item>
     <item
-        jar="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.4.0/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/pre-dexed/debug/classes-a7dc9495043167d58f4c5201e7ee46539434efae.jar" />
+        revision="23.0.2"
+        sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-8.4.0_09d222b9c65e175f6d9db00ced067e2cc459d673.jar" />
     </item>
     <item
-        jar="/Users/gregory/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.3/92568d7167ce1bf9eb1fd815b022d5a2c113547a/jsoup-1.7.3.jar"
+        jar="/home/utilisateur/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
         jumboMode="false"
-        revision="21.1.2"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_828bacd30487da22e51f5d69362ea4dd6a1a162a.jar" />
+    </item>
+    <item
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_17cb73f4c38e893d8062d04d144456ce4612cc84.jar" />
+    </item>
+    <item
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.4.0_9e89f4609ff18e9a40f806d9e986888be65edb5a.jar" />
+    </item>
+    <item
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.1.1_823d9aa43f70ecbacc1353aa31a8472a747e25fb.jar" />
+    </item>
+    <item
+        jar="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/com.android.support-design-23.1.1_ee9a0c1e7570646c4ab263c1a23e5b3c54984f36.jar" />
+    </item>
+    <item
+        jar="/home/utilisateur/.gradle/caches/modules-2/files-2.1/com.anjlab.android.iab.v3/library/1.0.31/98383e8ba5c9392c8c3a331310c1fabeb47a82d0/library-1.0.31.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98383e8ba5c9392c8c3a331310c1fabeb47a82d0">
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/library-1.0.31_31c26d83d3d2eeb29ef1b9c29d2f52a1cf3c328d.jar" />
+    </item>
+    <item
+        jar="/home/utilisateur/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.3/92568d7167ce1bf9eb1fd815b022d5a2c113547a/jsoup-1.7.3.jar"
+        jumboMode="false"
+        revision="23.0.2"
         sha1="92568d7167ce1bf9eb1fd815b022d5a2c113547a">
-        <dex dex="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/pre-dexed/debug/jsoup-1.7.3-0eb139b145d0486c47be617943239a1e69506edb.jar" />
-    </item>
-    <item
-        jar="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/gregory/Devel/Android/Compagnont411.meProject/Compagnont411.me/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-f1ff16b49592600f42c3cdfaabb8f0f479ba9adf.jar" />
+        <dex dex="/media/utilisateur/DATA/Fork_Android/git_jm_compagnon_t411/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/debug/jsoup-1.7.3_b3e6af2eaea736c1945d1c900fedef453e9a6898.jar" />
     </item>
 
 </items>
