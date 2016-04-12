@@ -268,6 +268,8 @@
     <string name="description_settings_addMime">Force torrent MIME type when opening a torrent file through the app</string>
     <string name="share_direct_link">Share torrent link</string>
     <string name="description_share_direct_link">Share the direct link to a torrent instead of its presentation page (needs your recipient to be logged in to t411).</string>
+    <string name="sort_by_date">Sort torrents by date</string>
+    <string name="description_sort_by_date">If checked, torrents list in search, today, ... will be sorted by date instead by name.</string>
     <string name="torrents_found">Torrents found</string>
     <string name="connecting">Getting page\'s content...</string>
     <string name="sendPM">Send a PM</string>

@@ -12,7 +12,7 @@ public class CategoryIcon {
     }
 
     public static boolean isPr0n(int icon) {
-        return (icon == R.drawable.ic_new_xxx) ? true : false;
+        return (icon == R.drawable.ic_new_xxx || icon == R.drawable.ic_new_t411) ? true : false;
     }
 
     public int getIcon() {

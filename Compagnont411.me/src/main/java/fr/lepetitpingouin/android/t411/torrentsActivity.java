@@ -41,6 +41,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -536,12 +539,31 @@ public class torrentsActivity extends AppCompatActivity {
                             //récupération de l'ID
                             String[] t_ID = tds.get(base + 2).select("a").attr("href").split("=");
 
+                            Long tTime = Long.parseLong(tds.get(base + 4).text().split(" ")[0]);
+                            String temp = tds.get(base + 4).text().split(" ")[1];
+
+                            switch (temp){
+                                case "minutes":tTime = 0+tTime ;break;
+                                case "minute":tTime = 0+tTime ;break;
+                                case "heures":tTime = tTime*60;break;
+                                case "heure":tTime = tTime*60;break;
+                                case "jours":tTime = tTime * 1440;break;
+                                case "jour":tTime = tTime * 1440;break;
+                                case "semaines":tTime = tTime * 10080;break;
+                                case "semaine":tTime = tTime * 10080;break;
+                                case "mois":tTime = tTime * 43646;break;
+                                case "moi":tTime = tTime * 43646;break;
+                                case "ans":tTime = tTime * 523756;break;
+                                case "an":tTime = tTime * 523756;break;
+                            }
+
                             publishProgress(++count + " " + getString(R.string.torrents_found));
                             map = new HashMap<String, String>();
                             //map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
                             map.put("nomComplet", tds.get(base + 1).select("a").first().text().toString());
                             map.put("ID", t_ID[t_ID.length-1]);
                             map.put("age", tds.get(base + 4).text());
+                            map.put("added", tTime.toString());
                             map.put("taille", new BSize(tds.get(base + 5).text()).convert());
                             map.put("avis", tds.get(base + 3).text());
                             map.put("seeders", tds.get(base + 7).text());
@@ -564,6 +586,19 @@ public class torrentsActivity extends AppCompatActivity {
                             new T411Logger(getApplicationContext()).writeLine("Erreur interne : " + e.getMessage());
                         }
                     }
+                }
+                if (prefs.getBoolean("sortByDate", false)) {
+                    Comparator<HashMap<String, String>> comparator = new Comparator<HashMap<String, String>>() {
+                        @Override
+                        public int compare(HashMap<String, String> object1, HashMap<String, String> object2)
+                        {
+                            Integer test1 = Integer.parseInt(object1.get("added"));
+                            Integer test2 = Integer.parseInt(object2.get("added"));
+                            int test = test1.compareTo(test2);
+                            return test;
+                        }
+                    };
+                    Collections.sort(listItem, comparator);
                 }
             } catch (RuntimeException rte) {
 

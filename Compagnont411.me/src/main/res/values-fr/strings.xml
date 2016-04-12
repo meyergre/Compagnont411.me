@@ -337,4 +337,6 @@
     <string name="helpbutton_text">Un problème ?\nN\'hésitez pas a en discuter sur le topic du forum t411!\nVous pouvez également activer l\'option de journalisation dans les paramètres de l\'appli, et partager le journal avec le développeur.</string>
     <string name="open_with_app">Ouvrir avec…</string>
     <string name="permissions_needed">L\'accès au stockage est requis.\nCliquez ici pour autoriser l\'application à accéder au stockage de votre appareil.</string>
+    <string name="description_sort_by_date">Si coché la liste des torrents dans les résultats de recherche, torrents du jour, etc.. sera triée par date d\'ajout.</string>
+    <string name="sort_by_date">Trier par date</string>
 </resources>

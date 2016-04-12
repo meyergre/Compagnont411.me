@@ -3,6 +3,7 @@ package fr.lepetitpingouin.android.t411;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 
 import java.util.Calendar;
 
@@ -22,19 +23,19 @@ public class Ratio {
     public int getTitleColor() {
 
         if (prefs.getString("classe", "???").contains("Power Seeder"))
-            return context.getResources().getColor(R.color.t411_purple);
+            return ContextCompat.getColor(this.context,R.color.t411_purple);
         if (prefs.getString("classe", "???").contains("Uploader"))
-            return context.getResources().getColor(R.color.t411_gold);
+            return ContextCompat.getColor(this.context, R.color.t411_gold);
         if (prefs.getString("classe", "???").contains("Team Pending"))
-            return context.getResources().getColor(R.color.t411_grey);
+            return ContextCompat.getColor(this.context, R.color.t411_grey);
         if (prefs.getString("classe", "???").contains("Modérateur"))
-            return context.getResources().getColor(R.color.t411_black);
+            return ContextCompat.getColor(this.context, R.color.t411_black);
         if (prefs.getString("classe", "???").contains("Super Modérateur"))
-            return context.getResources().getColor(R.color.t411_darkred);
+            return ContextCompat.getColor(this.context, R.color.t411_darkred);
         if (prefs.getString("classe", "???").contains("Administrateur"))
-            return context.getResources().getColor(R.color.t411_salmon);
+            return ContextCompat.getColor(this.context, R.color.t411_salmon);
         else
-            return context.getResources().getColor(R.color.t411_blue);
+            return ContextCompat.getColor(this.context, R.color.t411_blue);
     }
 
 
