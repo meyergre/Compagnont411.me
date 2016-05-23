@@ -28,6 +28,11 @@ public class Torrent {
 
     public String name, id, url;
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
+    public static String STATUS_PENDING = "(P)";
+    public static String STATUS_BANNED = "(B)";
+    public static String STATUS_VOTE = "(V)";
+    public static String STATUS_NEW = "(N)";
+    public static String STATUS_VALID = "(A)";
     private Context context;
     private SharedPreferences prefs;
     private torrentFileGetter tDL;
@@ -64,6 +69,16 @@ public class Torrent {
         try {
             dllNot.execute();
         } catch (Exception e) {
+        }
+    }
+
+    public void delete() {
+        try {
+            new T411Logger(context).writeLine("Suppression du torrent "+getTorrentName());
+            File file = new File(getTorrentPath(), getTorrentName());
+            file.delete();
+        } catch(Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -298,9 +313,9 @@ public class Torrent {
         protected void onPostExecute(Void result) {
 
             new T411Logger(context).writeLine("Ecriture du fichier torrent...");
-            String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
+            //String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
 
-            File file = new File(path, name.replaceAll("/", "_") + ".torrent");
+            File file = new File(getTorrentPath(), getTorrentName());
             file.setWritable(true, false);
 
 
@@ -363,5 +378,13 @@ public class Torrent {
                 }
             }
         }
+    }
+
+    private String getTorrentPath() {
+        return prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
+    }
+
+    private String getTorrentName() {
+        return name.replaceAll("/", "_") + ".torrent";
     }
 }

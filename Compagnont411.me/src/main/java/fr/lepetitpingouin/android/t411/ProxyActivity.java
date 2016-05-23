@@ -94,14 +94,29 @@ public class ProxyActivity extends AppCompatActivity {
 
             @Override
             public void onPurchaseHistoryRestored() {
+                new T411Logger(getApplicationContext()).writeLine("BP : HistoryRestored");
+                if(bp.isSubscribed(Private.PROXY_ITEM_ID)==true) {
+                    subscribed.setVisibility(View.VISIBLE);
+                    abo.setVisibility(View.GONE);
+                    new T411Logger(getApplicationContext()).writeLine("Souscription effective, affichage de l'option");
+
+                } else {
+                    subscribed.setVisibility(View.GONE);
+                    abo.setVisibility(View.VISIBLE);
+                    new T411Logger(getApplicationContext()).writeLine("La souscription n'est pas effective");
+                    ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(false);
+                    edit.putBoolean("usePaidProxy", false).commit();
+                }
             }
 
             @Override
             public void onBillingError(int i, Throwable throwable) {
+                new T411Logger(getApplicationContext()).writeLine("BP : BillingError");
             }
 
             @Override
             public void onBillingInitialized() {
+                new T411Logger(getApplicationContext()).writeLine("BP : BillingInitialized");
             }
         });
         if (!BillingProcessor.isIabServiceAvailable(getApplicationContext())) {

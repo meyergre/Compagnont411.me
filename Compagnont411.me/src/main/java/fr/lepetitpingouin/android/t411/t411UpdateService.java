@@ -18,7 +18,12 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -42,7 +47,7 @@ public class t411UpdateService extends Service {
     boolean timeout = true;
     Connection.Response res = null;
     Document doc = null;
-
+    BillingProcessor bp;
     int retry = 0;
 
     public boolean isConnectedToWifi() {
@@ -64,12 +69,31 @@ public class t411UpdateService extends Service {
         handler = new Handler();
         this.retry = 0;
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        bp = new BillingProcessor(getApplicationContext(), Private.API_KEY, new BillingProcessor.IBillingHandler() {
+            @Override
+            public void onProductPurchased(String s, TransactionDetails transactionDetails) {
+            }
+
+            @Override
+            public void onPurchaseHistoryRestored() {
+            }
+
+            @Override
+            public void onBillingError(int i, Throwable throwable) {
+            }
+
+            @Override
+            public void onBillingInitialized() {
+            }
+        });
 
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        bp.loadOwnedPurchasesFromGoogle();
 
         new T411Logger(getApplicationContext()).writeLine("Lancement du service de mise à jour");
 
@@ -359,6 +383,7 @@ public class t411UpdateService extends Service {
 
         new T411Logger(getApplicationContext()).writeLine("Fin de la mise à jour des données");
         refreshWidget();
+        bp.release();
     }
 
 

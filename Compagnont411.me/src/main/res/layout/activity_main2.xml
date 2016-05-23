@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:maxHeight="180dp"
-                    android:src="@drawable/t411_head_switzerland"
+                    android:src="@drawable/t411_head_music"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
