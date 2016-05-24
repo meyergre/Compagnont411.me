@@ -13,8 +13,8 @@ public class TorrentsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torrents_list);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         ListView list = (ListView)findViewById(R.id.listView);
         TorrentsListAdapter adapter = new TorrentsListAdapter(getApplicationContext());

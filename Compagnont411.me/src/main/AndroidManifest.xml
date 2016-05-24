@@ -248,7 +248,9 @@
             android:name=".ProxyActivity"
             android:label="411 Facturation Test"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".TorrentsListActivity"></activity>
+
+        <activity android:name=".TorrentsListActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
