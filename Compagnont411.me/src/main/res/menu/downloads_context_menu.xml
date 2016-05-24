@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/downloads_context_menu_open"
+        android:title="@string/downloads_open" />
+
+    <item
+        android:id="@+id/downloads_context_menu_delete"
+        android:title="@string/downloads_delete" />
+
+    <item
+        android:id="@+id/downloads_context_menu_prez"
+        android:title="@string/downloads_prez" />
+
+    <separator/>
+
+    <!--item
+        android:id="@+id/downloads_context_menu_passkey"
+        android:title="@string/downloads_change_passkey" /-->
+</menu>

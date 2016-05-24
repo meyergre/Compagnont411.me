@@ -14,9 +14,11 @@ import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -25,6 +27,7 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Map;
 
 public class Torrent {
@@ -94,12 +97,24 @@ public class Torrent {
     }
 
     public void delete() {
-        try {
-            new T411Logger(context).writeLine("Suppression du torrent "+getTorrentName());
-            File file = new File(getTorrentPath(), getTorrentName());
+        new T411Logger(context).writeLine("Suppression du torrent "+getTorrentName());
+        File file = new File(getTorrentPath(), getTorrentName());
+        if(file.exists()) {
             file.delete();
-        } catch(Exception ex) {
-            ex.printStackTrace();
+        }
+        JSONArray newJson = new JSONArray();
+        for(int i = 0; i < json.length(); i++) {
+
+            try {
+                Log.e("json ", json.get(i).toString());
+                if(((JSONObject)json.get(i)).get("id") != this.id) {
+                    newJson.put(json.get(i));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            prefs.edit().putString("jsonTorrentList",newJson.toString()).apply();
         }
     }
 
@@ -129,6 +144,12 @@ public class Torrent {
                             .setContentTitle(title)
                             .setContentText(subtitle);
 
+            if(icon == R.drawable.ic_notif_torrent_done) {
+                Intent dlIntent = new Intent(context.getApplicationContext(), TorrentsListActivity.class);
+                PendingIntent dlpI = PendingIntent.getActivity(context.getApplicationContext(), 0, dlIntent, 0);
+                mBuilder.addAction(R.drawable.ic_downloads, "Téléchargements", dlpI);
+            }
+
             mBuilder.setContentIntent(pendingIntent);
             mBuilder.setAutoCancel(true);
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -145,6 +166,28 @@ public class Torrent {
     public void cancelNotify(int id) {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancel(id);
+    }
+
+    public void launchUrl() {
+        Intent i = new Intent();
+        i.setAction(android.content.Intent.ACTION_VIEW);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setData(Uri.parse(Default.URL_GET_PREZ+this.id));
+        context.startActivity(i);
+    }
+
+    public void open() {
+        Intent i = new Intent();
+        i.setAction(android.content.Intent.ACTION_VIEW);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        File file = new File(this.getTorrentPath(), this.getTorrentName());
+        if (prefs.getBoolean("addMimeType", false))
+            i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+        else //auto-detect
+            i.setData(Uri.fromFile(file));
+
+        context.startActivity(i);
     }
 
     private class AsyncDlLaterNot extends AsyncTask<Void, String[], Void> {
@@ -325,14 +368,12 @@ public class Torrent {
         protected void onPostExecute(Void result) {
 
             new T411Logger(context).writeLine("Ecriture du fichier torrent...");
-            //String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
-
 
             File file = new File(getTorrentPath(), getTorrentName());
             file.setWritable(true, false);
 
             try {
-                json.put(new JSONObject("{'title':'"+name+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"'}"));
+                json.put(new JSONObject("{'title':'"+name+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"', 'category':'"+category+"'}"));
                 prefs.edit().putString("jsonTorrentList",json.toString()).apply();
             } catch(Exception ex) {
                 ex.printStackTrace();

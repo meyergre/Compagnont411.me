@@ -42,7 +42,7 @@
                             android:layout_height="100dp"
                             android:id="@+id/imageView"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/newlogo" />
+                            android:src="@mipmap/ic_launcher_new" />
 
                         <LinearLayout
                             android:orientation="vertical"

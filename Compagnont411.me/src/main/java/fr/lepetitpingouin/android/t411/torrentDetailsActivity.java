@@ -348,7 +348,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
                     html_filelist = doc.select(".accordion div").get(1).outerHtml();
                 } catch (Exception e) {
                     e.printStackTrace();
-
                 }
 
                 try {

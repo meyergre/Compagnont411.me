@@ -27,7 +27,7 @@
             android:title="@string/calculator" />
         <item
             android:id="@+id/action_torrentslist"
-            android:icon="@drawable/ic_list_files"
+            android:icon="@drawable/ic_downloads"
             android:title="@string/torrentslist" />
     </group>
     <group android:id="@+id/group2">

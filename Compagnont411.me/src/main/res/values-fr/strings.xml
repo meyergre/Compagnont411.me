@@ -340,4 +340,8 @@
     <string name="description_sort_by_date">Si coché la liste des torrents dans les résultats de recherche, torrents du jour, etc.. sera triée par date d\'ajout.</string>
     <string name="sort_by_date">Trier par date</string>
     <string name="torrentslist">Téléchargements</string>
+    <string name="downloads_open">Ouvrir avec...</string>
+    <string name="downloads_delete">Supprimer le torrent</string>
+    <string name="downloads_prez">Accéder à la prez</string>
+    <string name="downloads_change_passkey">Change passkey</string>
 </resources>

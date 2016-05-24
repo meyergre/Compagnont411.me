@@ -284,7 +284,7 @@ public class torrentsActivity extends AppCompatActivity {
                     requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 }
                 else {
-                    new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID"), "te", "st", itemMmap.get("cat")).download();
+                    new Torrent(getApplicationContext(), itemMmap.get("nomComplet"), itemMmap.get("ID"), itemMmap.get("taille"), itemMmap.get("uploader"), itemMmap.get("cat")).download();
                 }
                 return true;
             case R.id.torrent_context_menu_download_later:

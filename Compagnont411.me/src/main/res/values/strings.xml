@@ -347,4 +347,8 @@
     <string name="open_with_app">Open with…</string>
     <string name="permissions_needed">Storage access is needed. Please allow the app tu access your storage by clicking this message</string>
     <string name="torrentslist">Téléchargements</string>
+    <string name="downloads_open">Open file...</string>
+    <string name="downloads_delete">Delete torrent</string>
+    <string name="downloads_prez">Show description</string>
+    <string name="downloads_change_passkey">Change passkey</string>
 </resources>
