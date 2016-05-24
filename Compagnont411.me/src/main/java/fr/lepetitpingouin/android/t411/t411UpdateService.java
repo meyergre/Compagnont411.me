@@ -17,6 +17,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -198,7 +199,7 @@ public class t411UpdateService extends Service {
                         .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .ignoreContentType(true).execute();
-                avatar = Base64.encodeBytes(avatarRes.bodyAsBytes());
+                avatar = Base64.encodeToString(avatarRes.bodyAsBytes(), 0);
                 Log.e("avatar", avatar);
             } catch(Exception e) {
                 e.printStackTrace();

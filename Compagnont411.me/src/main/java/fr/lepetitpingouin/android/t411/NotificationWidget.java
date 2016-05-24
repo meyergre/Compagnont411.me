@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Base64;
 import android.widget.RemoteViews;
 
 import java.io.IOException;
@@ -42,10 +43,10 @@ class NotificationWidget {
         String encodedImage = prefs.getString("avatar", "");
         if (!encodedImage.equalsIgnoreCase("")) {
             try {
-                byte[] b = Base64.decode(encodedImage);
+                byte[] b = Base64.decode(encodedImage.getBytes(), 0);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
                 contentView.setImageViewBitmap(R.id.nw_avatar, bitmap);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

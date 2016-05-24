@@ -3,6 +3,7 @@ package fr.lepetitpingouin.android.t411;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import java.io.IOException;
 
@@ -36,12 +37,12 @@ class AvatarFactory {
         String encodedImage = prefs.getString("avatar", "");
         if (!encodedImage.equalsIgnoreCase("")) {
             try {
-                byte[] b = Base64.decode(encodedImage);
+                byte[] b = Base64.decode(encodedImage.getBytes(), 0);
                 bitmap = BitmapFactory.decodeByteArray(b, 0,
                         b.length);
                 //bitmap = eraseBG(bitmap, -1);         // use for white background
                 //bitmap = eraseBG(bitmap, -16777216);  // use for black background
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -22,10 +22,20 @@ android {
         versionCode 155
         versionName "2016.05-155"
         applicationId "fr.lepetitpingouin.android.t411"
+
+        resConfigs "en", "fr"
+        splits {
+            density {
+                enable true
+                exclude "ldpi", "tvdpi", "xxxhdpi"
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
