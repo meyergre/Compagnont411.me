@@ -182,10 +182,7 @@ public class Torrent {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
-        if (prefs.getBoolean("addMimeType", false))
-            i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
-        else //auto-detect
-            i.setData(Uri.fromFile(file));
+        i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
 
         context.startActivity(i);
     }

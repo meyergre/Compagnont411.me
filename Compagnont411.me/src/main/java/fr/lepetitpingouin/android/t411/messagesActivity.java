@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -39,7 +40,6 @@ import java.util.HashMap;
 
 public class messagesActivity extends AppCompatActivity {
     static final String CONNECTURL = Default.URL_MAILS;
-    public ProgressDialog dialog;
 
     SharedPreferences prefs;
     Editor edit;
@@ -53,6 +53,8 @@ public class messagesActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> listItem;
 
     FloatingActionButton fab;
+
+    SwipeRefreshLayout srl;
 
     @Override
     public void onDestroy() {
@@ -80,6 +82,15 @@ public class messagesActivity extends AppCompatActivity {
             }
         });
 
+        srl = (SwipeRefreshLayout)findViewById(R.id.srl);
+        srl.measure(50, 50);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                update();
+            }
+        });
+
         maListViewPerso = (ListView) findViewById(R.id.malistviewperso);
         registerForContextMenu(maListViewPerso);
 
@@ -96,18 +107,6 @@ public class messagesActivity extends AppCompatActivity {
 
     public void update() {
         mF = new mailFetcher();
-        //dialog = ProgressDialog.show(messagesActivity.this, this.getString(R.string.getMesages), this.getString(R.string.pleasewait), true, true);
-        dialog = new ProgressDialog(this);
-        dialog.setMessage(this.getString(R.string.pleasewait));
-        AdView mAdView;
-        AdRequest adRequest;
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.adtitlebar, null);
-        mAdView = (AdView) view.findViewById(R.id.adView);
-        adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
-        dialog.setCustomTitle(view);
-        mAdView.loadAd(adRequest);
-        dialog.show();
         try {
             mF.execute();
         } catch (Exception e) {
@@ -126,9 +125,9 @@ public class messagesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_update:
+            /*case R.id.action_update:
                 update();
-                return true;
+                return true;*/
             case android.R.id.home:
                 supportFinishAfterTransition();
                 return true;
@@ -213,6 +212,7 @@ public class messagesActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            srl.setRefreshing(true);
         }
 
         @Override
@@ -228,29 +228,16 @@ public class messagesActivity extends AppCompatActivity {
             String username = prefs.getString("login", ""), password = prefs
                     .getString("password", "");
 
-
             String url = CONNECTURL;
-            //if (prefs.getBoolean("useHTTPS", false))
-            //    url = CONNECTURL.replace("http://", "https://");
 
-            try {/*
-                res = Jsoup
-                        .connect(url)
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                        .ignoreContentType(true).execute();
-                doc = res.parse();*/
+            try {
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
                         .connect(url)
                         .executeInAsyncTask());
 
             } catch (Exception e) {
-
-                //Toast.makeText(getApplicationContext(), "Erreur lors de la récupération des messages...", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
 
             return null;
@@ -258,6 +245,8 @@ public class messagesActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+
+            srl.setRefreshing(false);
 
             try {
                 int unread = 0;
@@ -317,7 +306,6 @@ public class messagesActivity extends AppCompatActivity {
                 }
             });
 
-            dialog.cancel();
         }
     }
 }

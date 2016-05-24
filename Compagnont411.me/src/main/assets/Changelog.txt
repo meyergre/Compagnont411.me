@@ -2,6 +2,10 @@ CHANGELOG
 
 2016.05-156
 - Mise à jour de JSOUP
+- Messagerie basculée en swipte-to-refresh
+- Optimisations de code
+- Ajout du listing de téléchargements
+
 
 
 2016.03-153
