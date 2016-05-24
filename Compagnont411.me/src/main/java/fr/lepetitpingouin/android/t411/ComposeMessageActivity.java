@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
@@ -22,14 +21,23 @@ import org.jsoup.nodes.Document;
 
 public class ComposeMessageActivity extends AppCompatActivity {
 
-    Button Bold, Italic, Underline;
-    ImageView list, spoil, quote, link, img, send;
-    EditText destinataire, objet, _message;
-    SharedPreferences prefs;
-    mailSender mS;
-    ProgressDialog dialog;
+    private Button Bold;
+    private Button Italic;
+    private Button Underline;
+    private ImageView list;
+    private ImageView spoil;
+    private ImageView quote;
+    private ImageView link;
+    private ImageView img;
+    private ImageView send;
+    private EditText destinataire;
+    private EditText objet;
+    private EditText _message;
+    private SharedPreferences prefs;
+    private mailSender mS;
+    private ProgressDialog dialog;
 
-    SuperT411HttpBrowser browser;
+    private SuperT411HttpBrowser browser;
 
 
     @Override
@@ -212,7 +220,7 @@ public class ComposeMessageActivity extends AppCompatActivity {
         return value;
     }
 
-    protected class mailSender extends AsyncTask<Void, Void, Void> {
+    class mailSender extends AsyncTask<Void, Void, Void> {
 
         String to, subject, message, value;
 

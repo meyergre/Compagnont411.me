@@ -18,15 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.jar.Manifest;
 
 /**
  * Created by gregory on 23/10/2013.
  */
 public class UserPrefsActivity extends PreferenceActivity {
 
-    Preference filePicker;
-    SharedPreferences prefs;
+    private Preference filePicker;
+    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -9,7 +9,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="2dip"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -155,7 +155,7 @@
 
                 <TextView
                     android:id="@+id/updatedTime"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="---"

@@ -15,12 +15,13 @@ import java.util.Date;
 
 public class Widget_Plus extends AppWidgetProvider {
 
-    Date date = new Date();
-    Intent myIntent = new Intent();
-    PendingIntent pIntent;
-    SharedPreferences prefs;
+    private Date date = new Date();
+    private Intent myIntent = new Intent();
+    private PendingIntent pIntent;
+    private SharedPreferences prefs;
 
-    int LED_T411 = R.drawable.led_off, LED_Net = R.drawable.led_off;
+    private int LED_T411 = R.drawable.led_off;
+    private int LED_Net = R.drawable.led_off;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

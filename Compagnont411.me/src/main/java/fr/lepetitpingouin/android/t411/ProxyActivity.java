@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +20,12 @@ import com.anjlab.android.iab.v3.TransactionDetails;
  */
 public class ProxyActivity extends AppCompatActivity {
 
-    BillingProcessor bp;
-    SharedPreferences prefs;
-    SharedPreferences.Editor edit;
+    private BillingProcessor bp;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor edit;
 
-    Button abo;
-    LinearLayout subscribed;
+    private Button abo;
+    private LinearLayout subscribed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +94,7 @@ public class ProxyActivity extends AppCompatActivity {
             @Override
             public void onPurchaseHistoryRestored() {
                 new T411Logger(getApplicationContext()).writeLine("BP : HistoryRestored");
-                if(bp.isSubscribed(Private.PROXY_ITEM_ID)==true) {
+                if(bp.isSubscribed(Private.PROXY_ITEM_ID)) {
                     subscribed.setVisibility(View.VISIBLE);
                     abo.setVisibility(View.GONE);
                     new T411Logger(getApplicationContext()).writeLine("Souscription effective, affichage de l'option");
@@ -128,7 +127,7 @@ public class ProxyActivity extends AppCompatActivity {
 
         bp.loadOwnedPurchasesFromGoogle();
 
-        if(bp.isSubscribed(Private.PROXY_ITEM_ID)==true) {
+        if(bp.isSubscribed(Private.PROXY_ITEM_ID)) {
             subscribed.setVisibility(View.VISIBLE);
             abo.setVisibility(View.GONE);
             new T411Logger(getApplicationContext()).writeLine("Souscription effective, affichage de l'option");

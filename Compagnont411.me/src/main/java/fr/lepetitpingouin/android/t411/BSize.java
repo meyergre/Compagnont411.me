@@ -3,7 +3,7 @@ package fr.lepetitpingouin.android.t411;
 /**
  * Created by meyergre on 31/05/13.
  */
-public class BSize {
+class BSize {
 
     private String rawData;
     private String unit;
@@ -29,7 +29,7 @@ public class BSize {
 
     }
 
-    public String convert(String unit) {
+    private String convert(String unit) {
         return unit.contains("KB") ? String.format("%.2f", getInKB()) + " KB" : unit.contains("MB") ? String.format("%.2f", getInMB()) + " MB" : unit.contains("GB") ? String.format("%.2f", getInGB()) + " GB" : unit.contains("TB") ? String.format("%.2f", getInTB()) + " TB" : String.format("%.2f", getInBytes()) + " B";
     }
 
@@ -58,7 +58,7 @@ public class BSize {
         return koctets / (1024 * 1024);
     }
 
-    public double getInTB() {
+    private double getInTB() {
         return koctets / (1024 * 1024 * 1024);
     }
 }

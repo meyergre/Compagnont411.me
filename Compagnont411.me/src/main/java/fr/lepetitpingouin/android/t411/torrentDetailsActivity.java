@@ -14,10 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -38,19 +36,28 @@ import org.jsoup.select.Elements;
 
 public class torrentDetailsActivity extends AppCompatActivity {
 
-    public String html_filelist = "";
-    SharedPreferences prefs;
-    torrentDetailsGetter tG;
-    AsyncThx thx;
-    ProgressDialog dialog;
+    private String html_filelist = "";
+    private SharedPreferences prefs;
+    private torrentDetailsGetter tG;
+    private AsyncThx thx;
+    private ProgressDialog dialog;
 
-    WebView details_www;
+    private WebView details_www;
 
-    ImageView btnShare, btnDownload, btnThx, btnDlLater, rmDlLater;
-    Button btnList;
+    private ImageView btnShare;
+    ImageView btnDownload;
+    private ImageView btnThx;
+    private ImageView btnDlLater;
+    private ImageView rmDlLater;
+    private Button btnList;
 
-    String torrent_URL, torrent_NFO, torrent_ID, torrent_Name;
-    String t_taille, t_uploader, t_cat;
+    private String torrent_URL;
+    private String torrent_NFO;
+    private String torrent_ID;
+    private String torrent_Name;
+    private String t_taille;
+    String t_uploader;
+    String t_cat;
 
     @Override
     public void onDestroy() {

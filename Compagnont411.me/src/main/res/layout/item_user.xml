@@ -9,14 +9,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="left|center_vertical"
         android:layout_weight="1"
         android:background="@drawable/bg_card"
         android:gravity="center_vertical">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
@@ -47,7 +47,7 @@
                 android:layout_height="1dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="4dp"
-                android:background="#ddd"></FrameLayout>
+                android:background="#ddd"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -63,7 +63,7 @@
 
                     <TextView
                         android:id="@+id/friend_class"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:text="class"
@@ -143,7 +143,7 @@
                     <FrameLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1"></FrameLayout>
+                        android:layout_weight="1"/>
 
                     <TextView
                         android:id="@+id/textView32"

@@ -9,11 +9,11 @@ import android.util.Log;
 /**
  * Created by gregory on 22/11/2013.
  */
-public class Message {
+class Message {
 
-    public String id;
-    String t411message = "";
-    SuperT411HttpBrowser browser;
+    private String id;
+    private String t411message = "";
+    private SuperT411HttpBrowser browser;
     private Context context;
     private SharedPreferences prefs;
 

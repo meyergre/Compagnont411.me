@@ -1,6 +1,6 @@
 package fr.lepetitpingouin.android.t411;
 
-public class Default {
+class Default {
     public static final String IP_T411 = "www.t411.ch";
 
     public static final String T411_TOP_100 = "http://"+IP_T411+"/top/100/";
@@ -56,7 +56,6 @@ public class Default {
 
     //public static String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.95 Safari/537.36";
     public static String USER_AGENT = "Android (Custom browser) WebKit/Based Compagnon/t411";
-    ;
 
     public static String BITCOIN_ADDRESS = "1Mp5oQy5BR4gvDkdZW5RUtpP3HTUcaZcBC";
 }

@@ -19,12 +19,21 @@ import java.util.Date;
 
 public class Widget_huge extends AppWidgetProvider {
 
-    String ratio, upload, download, mails, username, origusername;
-    String _ratio, _upload, _download, _mails, _username;
-    Date date = new Date();
-    Intent myIntent = new Intent();
-    PendingIntent pIntent;
-    SharedPreferences prefs;
+    private String ratio;
+    private String upload;
+    private String download;
+    private String mails;
+    private String username;
+    private String origusername;
+    private String _ratio;
+    private String _upload;
+    private String _download;
+    private String _mails;
+    private String _username;
+    private Date date = new Date();
+    private Intent myIntent = new Intent();
+    private PendingIntent pIntent;
+    private SharedPreferences prefs;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,

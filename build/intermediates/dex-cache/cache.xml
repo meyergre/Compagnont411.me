@@ -2,74 +2,130 @@
 <items version="2" >
 
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.4.0\jars\classes.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-ads-8.4.0_a780fab3215c42edd20136f7c79370e35df1391d.jar" />
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_fbbadeed78a52d381e0d980f0197fb059d9cd8cc/classes.dex" />
     </item>
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.0.0/jars/classes.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-23.1.1_ccf01c5654a34a45f88c75613bc18dd36f94778c.jar" />
+        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.0.0_7ef44bf411c04d2bf3d62027039230d5c1b6e3ed/classes.dex" />
     </item>
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-23.1.1_de3b143bedef47e8e89375822776aa46b76a7f6d.jar" />
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_b6bec47afc7989f7a728a34f3abe12708673e2b7/classes.dex" />
     </item>
     <item
-        jar="C:\Users\gregory.meyer\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.9.2\5e3bda828a80c7a21dfbe2308d1755759c2fd7b4\jsoup-1.9.2.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.0/jars/classes.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="5e3bda828a80c7a21dfbe2308d1755759c2fd7b4">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\jsoup-1.9.2_5f476e8c0241e1ffd88bb37807c9d41fcc13eb24.jar" />
+        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.0.0_7a8d1509af1920ef301ca2b93f0d46b901dd98a0/classes.dex" />
     </item>
     <item
-        jar="C:\Users\gregory.meyer\.gradle\caches\modules-2\files-2.1\com.anjlab.android.iab.v3\library\1.0.31\98383e8ba5c9392c8c3a331310c1fabeb47a82d0\library-1.0.31.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="d5e08b46ebd6d8a8f29badb42dc072afbe76b7bc">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_c496030e452bbd090ca709fd4d8ec3c724dabc4e/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_204867e88a5124e0ec8448c7ec73a3fff4b74c29/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.0.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="79e4b41db41d4dbbf364c7bd6aaeee5b876c9d8b">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-9.0.0_2deeb6c4d2fd1d5d32f66706bfc1a42c73eda238/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_f6f032187d4517a9763a2737572ea9fda2aa9053/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_d3be2d5bc19cde124dc1caaca95189c309175943/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="6f65c144283b31b4b9a70e6e7aa4c4a1c897d4b8">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.0.0_775a3415c584597ddf622f8748da121cbe2897b2/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.0.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="2cb29455028e92e024bbad0d41c6ec772f2433d1">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-9.0.0_efd3cb9dddc4b01d11d959426f6a15735a5cdffc/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/.gradle/caches/modules-2/files-2.1/com.anjlab.android.iab.v3/library/1.0.31/98383e8ba5c9392c8c3a331310c1fabeb47a82d0/library-1.0.31.jar"
+        jumboMode="true"
         revision="23.0.2"
         sha1="98383e8ba5c9392c8c3a331310c1fabeb47a82d0">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\library-1.0.31_e2394968790eb98df9896dfda8df28e1b8f51b00.jar" />
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.31_7229b3b7480d7071fabf7ed7b5cb063d79681e1b/classes.dex" />
     </item>
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
-        jumboMode="false"
+        jar="/Users/gregory/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.9.2/5e3bda828a80c7a21dfbe2308d1755759c2fd7b4/jsoup-1.9.2.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-design-23.1.1_99fe6c82bf7d51274699c4ceebac2a12dfc68eda.jar" />
+        sha1="5e3bda828a80c7a21dfbe2308d1755759c2fd7b4">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/jsoup-1.9.2_b93db4a63ed09cd6712fe5b28d8eb3ae1590a89d/classes.dex" />
     </item>
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-support-v4-23.1.1_a65e0a69990fd3468882d9b41819b3e3f7c77df3.jar" />
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_962e80646f6704d3e0b77f1a1f07990c4c6a2507/classes.dex" />
     </item>
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="false"
+        jar="/Users/gregory/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-basement-8.4.0_41703b24c7778012dce5b5bbb9788e5fa774fcde.jar" />
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_29dd97e73ccd0cef10f879523ef2b9cd9a17e367/classes.dex" />
     </item>
     <item
-        jar="C:\Users\gregory.meyer\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\support-annotations-23.1.1_f57b6bad42c863e634c177f7e6378788ea568962.jar" />
+        sha1="5ced921341326e79b010f6eee5c8c9ed250a698d">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a8de76aee272fdea47d29ba48c665d77f01e0622/classes.dex" />
     </item>
     <item
-        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
-        jumboMode="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.0.0/jars/classes.jar"
+        jumboMode="true"
         revision="23.0.2"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\internal_impl-23.1.1_c9a76676751ca574c802fcf9cbf7a840b7947d82.jar" />
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.0.0_551656223c52e35c3c0427018d19d248da87fa8d/classes.dex" />
+    </item>
+    <item
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_005bc91eba95a0effc131a7a0c56850de21a0ace/classes.dex" />
     </item>
 
 </items>

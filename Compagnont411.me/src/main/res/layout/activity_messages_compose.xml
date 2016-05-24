@@ -38,7 +38,7 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="#33000000"></FrameLayout>
+        android:background="#33000000"/>
 
     <EditText
         android:id="@+id/composeSubject"
@@ -153,7 +153,7 @@
                             android:layout_width="1dp"
                             android:layout_height="fill_parent"
                             android:background="#44ffffff"
-                            android:layout_margin="3dp"></FrameLayout>
+                            android:layout_margin="3dp"/>
 
                         <ImageView
                             android:layout_width="36dp"
@@ -194,7 +194,7 @@
         <EditText
             android:id="@+id/editTextMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:ems="10"
             android:gravity="top"

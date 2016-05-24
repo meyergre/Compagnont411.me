@@ -1,7 +1,6 @@
 package fr.lepetitpingouin.android.t411;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -9,7 +8,7 @@ import android.webkit.WebViewClient;
 
 public class FilesListActivity extends AppCompatActivity {
 
-    WebView www;
+    private WebView www;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

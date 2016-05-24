@@ -43,34 +43,55 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SearchActivity extends AppCompatActivity {
-    CheckBox sortMode;
-    SharedPreferences prefs;
-    Toolbar toolbar;
+    private CheckBox sortMode;
+    private SharedPreferences prefs;
+    private Toolbar toolbar;
 
-    LinearLayout dropdown_category, dropdown_sort, dropdown_subcat;
+    private LinearLayout dropdown_category;
+    private LinearLayout dropdown_sort;
+    private LinearLayout dropdown_subcat;
 
-    subCatFetcher scF;
-    favoritesFetcher fF;
+    private subCatFetcher scF;
+    private favoritesFetcher fF;
 
-    ImageView ivSort, ivCat;
-    EditText tx_description, tx_uploader, tx_fichier;
-    AutoCompleteTextView keywords;
-    SearchHistory sh;
+    private ImageView ivSort;
+    private ImageView ivCat;
+    private EditText tx_description;
+    private EditText tx_uploader;
+    private EditText tx_fichier;
+    private AutoCompleteTextView keywords;
+    private SearchHistory sh;
 
-    int icon_sort, icon_category = R.drawable.ic_new_t411;
+    private int icon_sort;
+    private int icon_category = R.drawable.ic_new_t411;
 
-    ProgressBar loading;
+    private ProgressBar loading;
 
-    String catCode = "";
-    String subCatCode = "";
-    String sort = "";
+    private String catCode = "";
+    private String subCatCode = "";
+    private String sort = "";
 
-    HashMap<String, String> mapCat, mapSort, mapSubcat, mapFav;
-    SimpleAdapter mScheduleCat, mScheduleSort, mScheduleSubcat, mScheduleFav;
+    private HashMap<String, String> mapCat;
+    private HashMap<String, String> mapSort;
+    private HashMap<String, String> mapSubcat;
+    private HashMap<String, String> mapFav;
+    private SimpleAdapter mScheduleCat;
+    private SimpleAdapter mScheduleSort;
+    private SimpleAdapter mScheduleSubcat;
+    private SimpleAdapter mScheduleFav;
 
-    ListView maListViewPersoCat, maListViewPersoSort, maListViewPersoSubcat, getMaListViewPersoFav;
-    ArrayList<HashMap<String, String>> listItemCat, listItemSort, listItemSubcat, listItemFav;
-    Dialog cat_dialog, sort_dialog, subcat_dialog, favorites_dialog;
+    private ListView maListViewPersoCat;
+    private ListView maListViewPersoSort;
+    private ListView maListViewPersoSubcat;
+    private ListView getMaListViewPersoFav;
+    private ArrayList<HashMap<String, String>> listItemCat;
+    private ArrayList<HashMap<String, String>> listItemSort;
+    private ArrayList<HashMap<String, String>> listItemSubcat;
+    private ArrayList<HashMap<String, String>> listItemFav;
+    private Dialog cat_dialog;
+    private Dialog sort_dialog;
+    private Dialog subcat_dialog;
+    private Dialog favorites_dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -438,7 +459,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void onSearch() {
+    private void onSearch() {
 
         sh.save(keywords.getText().toString());
 

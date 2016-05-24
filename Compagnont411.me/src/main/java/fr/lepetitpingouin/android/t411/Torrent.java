@@ -1,6 +1,5 @@
 package fr.lepetitpingouin.android.t411;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -27,12 +26,14 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Map;
 
 public class Torrent {
 
-    public String name, id, url, category="";
+    public String name;
+    private String id;
+    private String url;
+    public String category="";
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
     public static String STATUS_PENDING = "(P)";
     public static String STATUS_BANNED = "(B)";
@@ -132,7 +133,7 @@ public class Torrent {
         context.startActivity(Intent.createChooser(share, context.getString(R.string.Share)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-    public void doNotify(int icon, String title, String subtitle, int id, PendingIntent pendingIntent) {
+    private void doNotify(int icon, String title, String subtitle, int id, PendingIntent pendingIntent) {
         try {
             if (pendingIntent == null)
                 pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
@@ -163,7 +164,7 @@ public class Torrent {
         }
     }
 
-    public void cancelNotify(int id) {
+    private void cancelNotify(int id) {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancel(id);
     }

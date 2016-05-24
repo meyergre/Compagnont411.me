@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -44,15 +43,15 @@ import java.util.Locale;
 public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     public static final String INTENT_ERROR = "fr.lepetitpingouin.android.t411.update.error";
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
-    SharedPreferences prefs;
-    SwipeRefreshLayout swrl;
-    AdView mAdView;
-    NavigationView drw;
-    View navHeader;
-    BillingProcessor bp;
-    IntentFilter filter;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private SharedPreferences prefs;
+    private SwipeRefreshLayout swrl;
+    private AdView mAdView;
+    private NavigationView drw;
+    private View navHeader;
+    private BillingProcessor bp;
+    private IntentFilter filter;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -225,7 +224,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 return super.onOptionsItemSelected(item);
             }
 
-            public void initWidgets() {
+            private void initWidgets() {
 
                 ((TextView)findViewById(R.id.widget_username)).setText(prefs.getString("lastUsername", "..."));
                 ((TextView)findViewById(R.id.widget_username)).setTextColor(new Ratio(this).getTitleColor());
@@ -308,7 +307,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         registerReceiver(receiver, filter);
 
-        View permissionStorage = (View)findViewById(R.id.storage_permission);
+        View permissionStorage = findViewById(R.id.storage_permission);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionStorage.setVisibility(View.VISIBLE);
@@ -382,8 +381,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
             public void onGraph(View v) {
                 Intent intent = new Intent(this, statsActivity.class);
-                Pair<View, String> p1 = Pair.create((View) findViewById(R.id.statTop), "statTop");
-                Pair<View, String> p2 = Pair.create((View) findViewById(R.id.statBtm), "statBtm");
+                Pair<View, String> p1 = Pair.create(findViewById(R.id.statTop), "statTop");
+                Pair<View, String> p2 = Pair.create(findViewById(R.id.statBtm), "statBtm");
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2);
                 if(Build.VERSION.SDK_INT >= 16)
                     startActivity(intent, options.toBundle());
@@ -476,7 +475,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         update();
     }
 
-    public void update() {
+    private void update() {
         try {
             stopService(new Intent(MainActivity2.this, t411UpdateService.class));
         } catch (Exception ex) {

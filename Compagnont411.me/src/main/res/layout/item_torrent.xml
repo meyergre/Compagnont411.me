@@ -37,7 +37,7 @@
 
                 <TextView
                     android:id="@+id/tNom"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="none"
                     android:singleLine="false"
@@ -60,7 +60,7 @@
                 android:layout_height="1dp"
                 android:layout_gravity="left|center_vertical"
                 android:background="#33000000"
-                android:layout_marginBottom="6dp"></FrameLayout>
+                android:layout_marginBottom="6dp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -197,7 +197,7 @@
 
                         <TextView
                             android:id="@+id/tSeeders"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="fill_parent"
                             android:text="73"
                             android:textColor="@color/t411_green"
@@ -225,7 +225,7 @@
 
                         <TextView
                             android:id="@+id/tLeechers"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="fill_parent"
                             android:text="4"
                             android:textColor="@color/t411_red"

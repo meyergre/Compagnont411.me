@@ -12,8 +12,6 @@
         android:id="@+id/downloads_context_menu_prez"
         android:title="@string/downloads_prez" />
 
-    <separator/>
-
     <!--item
         android:id="@+id/downloads_context_menu_passkey"
         android:title="@string/downloads_change_passkey" /-->

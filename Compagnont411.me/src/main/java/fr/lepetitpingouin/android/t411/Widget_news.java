@@ -15,8 +15,8 @@ import org.jsoup.Jsoup;
 
 public class Widget_news extends AppWidgetProvider {
 
-    SharedPreferences prefs;
-    RemoteViews views;
+    private SharedPreferences prefs;
+    private RemoteViews views;
 
     @Override
     public void onEnabled(Context context) {

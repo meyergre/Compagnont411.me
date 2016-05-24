@@ -18,8 +18,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
 import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -34,23 +32,27 @@ import java.util.Calendar;
 
 public class t411UpdateService extends Service {
 
-    static final String CONNECTURL = Default.URL_USERPROFILE;
-    public Integer mails, oldmails;
-    public double ratio;
-    public String upload, download, username, usernumber;
-    public String pagecontent;
-    public Handler handler;
-    AsyncUpdate upd;
-    SuperT411HttpBrowser browser;
-    AlarmManager alarmManager;
-    SharedPreferences prefs;
-    boolean timeout = true;
+    private static final String CONNECTURL = Default.URL_USERPROFILE;
+    private Integer mails;
+    private Integer oldmails;
+    private double ratio;
+    private String upload;
+    private String download;
+    private String username;
+    private String usernumber;
+    private String pagecontent;
+    private Handler handler;
+    private AsyncUpdate upd;
+    private SuperT411HttpBrowser browser;
+    private AlarmManager alarmManager;
+    private SharedPreferences prefs;
+    private boolean timeout = true;
     Connection.Response res = null;
-    Document doc = null;
-    BillingProcessor bp;
-    int retry = 0;
+    private Document doc = null;
+    private BillingProcessor bp;
+    private int retry = 0;
 
-    public boolean isConnectedToWifi() {
+    private boolean isConnectedToWifi() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -118,7 +120,7 @@ public class t411UpdateService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public void planRefresh() {
+    private void planRefresh() {
 
         alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
 
@@ -137,7 +139,7 @@ public class t411UpdateService extends Service {
         alarmManager.set(RTC_mode, calendar.getTimeInMillis(), pendingIntent);
     }
 
-    public void update(final String login, final String password) throws IOException, ClassCastException {
+    private void update(final String login, final String password) throws IOException, ClassCastException {
 
 
         new T411Logger(getApplicationContext()).writeLine("Début de la mise à jour");
@@ -321,7 +323,7 @@ public class t411UpdateService extends Service {
             editor.putString("UpLeft", (toLimit > 0) ? UpLeft : "0.00 GB");
 
             if (seedbox != null)
-                editor.putBoolean("seedbox", seedbox.contains("ui") ? true : false);
+                editor.putBoolean("seedbox", seedbox.contains("ui"));
 
             if (mails != null)
                 editor.putInt("lastMails", mails);
@@ -387,7 +389,7 @@ public class t411UpdateService extends Service {
     }
 
 
-    public void refreshWidget() {
+    private void refreshWidget() {
         try {
             Intent i = new Intent(Default.Appwidget_update);
 
@@ -397,7 +399,7 @@ public class t411UpdateService extends Service {
         }
     }
 
-    public void doNotify(int icon, String title, String subtitle, int id, PendingIntent pendingIntent) {
+    private void doNotify(int icon, String title, String subtitle, int id, PendingIntent pendingIntent) {
         try {
             if (pendingIntent == null)
                 pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0);
@@ -425,7 +427,7 @@ public class t411UpdateService extends Service {
         }
     }
 
-    public void cancelNotify(int id) {
+    private void cancelNotify(int id) {
         try {
             NotificationManager mNotificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(id);

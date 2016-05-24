@@ -9,7 +9,11 @@ import android.widget.LinearLayout;
 
 public class actionSelector extends Activity {
 
-    LinearLayout btnOpen, btnUpdate, btnInbox, btnWeb, back;
+    private LinearLayout btnOpen;
+    private LinearLayout btnUpdate;
+    private LinearLayout btnInbox;
+    private LinearLayout btnWeb;
+    private LinearLayout back;
 
     @Override
     public void onPause() {

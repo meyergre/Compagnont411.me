@@ -1,6 +1,5 @@
 package fr.lepetitpingouin.android.t411;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 
 public class DonateActivity extends AppCompatActivity {
 
-    TextView amount;
-    static String version = "????";
+    private TextView amount;
+    private static String version = "????";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,7 +2,6 @@ package fr.lepetitpingouin.android.t411;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,10 +12,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,9 +22,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -39,22 +33,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class messagesActivity extends AppCompatActivity {
-    static final String CONNECTURL = Default.URL_MAILS;
+    private static final String CONNECTURL = Default.URL_MAILS;
 
-    SharedPreferences prefs;
-    Editor edit;
+    private SharedPreferences prefs;
+    private Editor edit;
 
-    mailFetcher mF;
+    private mailFetcher mF;
 
-    HashMap<String, String> map;
-    HashMap<String, String> itemMap;
+    private HashMap<String, String> map;
+    private HashMap<String, String> itemMap;
 
-    ListView maListViewPerso;
-    ArrayList<HashMap<String, String>> listItem;
+    private ListView maListViewPerso;
+    private ArrayList<HashMap<String, String>> listItem;
 
-    FloatingActionButton fab;
+    private FloatingActionButton fab;
 
-    SwipeRefreshLayout srl;
+    private SwipeRefreshLayout srl;
 
     @Override
     public void onDestroy() {
@@ -105,7 +99,7 @@ public class messagesActivity extends AppCompatActivity {
         update();
     }
 
-    public void update() {
+    private void update() {
         mF = new mailFetcher();
         try {
             mF.execute();

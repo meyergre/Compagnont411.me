@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,23 +28,24 @@ import java.io.InputStreamReader;
 
 public class readMailActivity extends AppCompatActivity {
 
-    SuperT411HttpBrowser browser;
+    private SuperT411HttpBrowser browser;
 
-    SharedPreferences prefs;
+    private SharedPreferences prefs;
 
-    mailDeleter mD;
-    mailArchiver mA;
-    mailGetter mG;
+    private mailDeleter mD;
+    private mailArchiver mA;
+    private mailGetter mG;
 
-    TextView tvobj; //objet du mail
+    private TextView tvobj; //objet du mail
 
-    ProgressDialog dialog;
+    private ProgressDialog dialog;
 
-    String id, message;
+    private String id;
+    private String message;
 
-    WebView tvmsg;
+    private WebView tvmsg;
 
-    String t411message;
+    private String t411message;
 
     @Override
     public void onDestroy() {

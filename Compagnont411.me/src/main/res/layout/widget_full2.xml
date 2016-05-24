@@ -38,7 +38,7 @@
                     <FrameLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1"></FrameLayout>
+                        android:layout_weight="1"/>
 
                     <ImageView
                         android:layout_width="16dp"
@@ -65,7 +65,7 @@
                         android:layout_width="1dip"
                         android:layout_height="fill_parent"
                         android:layout_margin="4dip"
-                        android:background="#33000000"></FrameLayout>
+                        android:background="#33000000"/>
 
                     <FrameLayout
                         android:layout_width="fill_parent"
@@ -99,7 +99,7 @@
                         android:layout_width="1dip"
                         android:layout_height="fill_parent"
                         android:layout_margin="4dp"
-                        android:background="#33000000"></FrameLayout>
+                        android:background="#33000000"/>
 
                     <FrameLayout
                         android:layout_width="fill_parent"
@@ -182,7 +182,7 @@
 
                     <TextView
                         android:id="@+id/updatedTime"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dip"
                         android:lines="1"
@@ -308,7 +308,7 @@
                         android:gravity="center_vertical">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
@@ -335,9 +335,9 @@
                             </LinearLayout>
 
                             <FrameLayout
-                                android:layout_width="fill_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="1"></FrameLayout>
+                                android:layout_weight="1"/>
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

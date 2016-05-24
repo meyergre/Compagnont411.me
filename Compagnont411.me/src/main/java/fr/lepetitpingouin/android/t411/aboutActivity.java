@@ -7,7 +7,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class aboutActivity extends AppCompatActivity {
-    static String version;
+    private static String version;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +91,7 @@ public class aboutActivity extends AppCompatActivity {
                 }
 
 
-                AlertDialog alertDialog = alertDialog = new AlertDialog.Builder(aboutActivity.this).setTitle("Changelog").setMessage(chlog).setIcon(R.drawable.file).show();
+                AlertDialog alertDialog = new AlertDialog.Builder(aboutActivity.this).setTitle("Changelog").setMessage(chlog).setIcon(R.drawable.file).show();
                 TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
                 textView.setTextSize(10);
                 textView.setTypeface(Typeface.MONOSPACE);

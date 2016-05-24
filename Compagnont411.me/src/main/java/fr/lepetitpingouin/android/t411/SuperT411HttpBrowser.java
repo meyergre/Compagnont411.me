@@ -52,31 +52,37 @@ import javax.net.ssl.X509TrustManager;
 public class SuperT411HttpBrowser {
 
 
-    boolean customProxy;
-    CookieStore cookieStore;
+    private boolean customProxy;
+    private CookieStore cookieStore;
 
-    SharedPreferences prefs;
+    private SharedPreferences prefs;
 
-    String encoding = "utf-8";
+    private String encoding = "utf-8";
 
-    int retry = 0;
+    private int retry = 0;
 
-    String username, password, url, errorMessage = "", fadeMessage = "";
+    private String username;
+    private String password;
+    private String url;
+    private String errorMessage = "";
+    private String fadeMessage = "";
 
-    List<NameValuePair> data = new ArrayList<NameValuePair>(9);
+    private List<NameValuePair> data = new ArrayList<NameValuePair>(9);
 
-    Context ctx;
+    private Context ctx;
 
-    String qpA, qpT, qpQ;
+    private String qpA;
+    private String qpT;
+    private String qpQ;
 
-    Boolean proxy = false;
+    private Boolean proxy = false;
 
-    Boolean skipLogin = false;
+    private Boolean skipLogin = false;
 
-    HttpHost httpproxy;
+    private HttpHost httpproxy;
     //Proxy httpproxy;
 
-    byte[] mresponseStream;
+    private byte[] mresponseStream;
 
     public SuperT411HttpBrowser(Context context) {
         ctx = context;
@@ -176,7 +182,7 @@ public class SuperT411HttpBrowser {
         return this;
     }
 
-    public SuperT411HttpBrowser resolveCaptcha(String token, String captcha) {
+    private SuperT411HttpBrowser resolveCaptcha(String token, String captcha) {
 
         String[] elements = captcha.split("\\s");
         String operator = elements[1];

@@ -16,10 +16,10 @@ import java.io.IOException;
 /**
  * Created by gregory on 16/08/13.
  */
-public class NotificationWidget {
+class NotificationWidget {
 
-    Context context;
-    SharedPreferences prefs;
+    private Context context;
+    private SharedPreferences prefs;
 
     public NotificationWidget(Context context) {
         this.context = context;

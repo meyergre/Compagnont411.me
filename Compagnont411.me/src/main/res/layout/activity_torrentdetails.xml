@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#22000000"
-                    android:layout_margin="4dp"></FrameLayout>
+                    android:layout_margin="4dp"/>
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -190,7 +190,7 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1"></FrameLayout>
+            android:layout_weight="1"/>
 
         <Button
             android:layout_width="wrap_content"

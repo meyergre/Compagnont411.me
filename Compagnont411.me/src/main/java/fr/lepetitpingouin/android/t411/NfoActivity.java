@@ -1,14 +1,13 @@
 package fr.lepetitpingouin.android.t411;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class NfoActivity extends AppCompatActivity {
 
-    TextView tv;
+    private TextView tv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

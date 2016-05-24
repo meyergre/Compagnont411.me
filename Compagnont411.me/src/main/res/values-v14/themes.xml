@@ -43,7 +43,7 @@
     </style>
     <!-- End of Light KitKat theme -->
 
-    <style name="MyDialogTheme" parent="@android:style/Theme.Holo.Light.Dialog"></style>
+    <style name="MyDialogTheme" parent="@android:style/Theme.Holo.Light.Dialog"/>
 
 
     <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">

@@ -247,7 +247,7 @@
         <activity
             android:name=".ProxyActivity"
             android:label="411 Facturation Test"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <activity android:name=".TorrentsListActivity"
             android:icon="@mipmap/ic_launcher_downloads"

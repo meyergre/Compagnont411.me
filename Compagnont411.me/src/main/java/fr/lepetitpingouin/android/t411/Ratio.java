@@ -10,10 +10,10 @@ import java.util.Calendar;
 /**
  * Created by meyergre on 17/06/13.
  */
-public class Ratio {
+class Ratio {
     String ratio;
-    SharedPreferences prefs;
-    Context context;
+    private SharedPreferences prefs;
+    private Context context;
 
     public Ratio(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);

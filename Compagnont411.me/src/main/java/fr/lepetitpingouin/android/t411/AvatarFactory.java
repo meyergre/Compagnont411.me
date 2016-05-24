@@ -9,8 +9,8 @@ import java.io.IOException;
 /**
  * Created by gregory on 22/11/2013.
  */
-public class AvatarFactory {
-    Bitmap bitmap;
+class AvatarFactory {
+    private Bitmap bitmap;
 
     private static Bitmap eraseBG(Bitmap src, int color) {
         int width = src.getWidth();

@@ -10,17 +10,15 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.OutputStreamWriter;
 
 /**
  * Created by gregory on 26/09/15.
  */
-public class T411Logger {
-    Context context;
-    SharedPreferences prefs;
-    FileWriter fw;
+class T411Logger {
+    private Context context;
+    private SharedPreferences prefs;
+    private FileWriter fw;
 
     public static String ERROR = "ERR";
     public static String WARN = "WRN";
@@ -87,17 +85,17 @@ public class T411Logger {
         logPreferences();
     }
 
-    public void logDeviceInfos() {
+    private void logDeviceInfos() {
         writeLine("-- DEVICE INFOS --");
         writeLine("Constructeur : " + Build.MANUFACTURER);
         writeLine("Modèle : " + Build.MODEL + "(" + Build.PRODUCT + ")");
         writeLine("Version : " + Build.VERSION.CODENAME + " " + Build.VERSION.RELEASE);
     }
 
-    public void logConnectivity() {
+    private void logConnectivity() {
         writeLine("-- NETWORK --");
 
-        ConnectivityManager manager = (ConnectivityManager)context.getSystemService(context.CONNECTIVITY_SERVICE);
+        ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
         writeLine("Etat de la connexion cellulaire : " + (is3g?"ON":"OFF"));
@@ -106,7 +104,7 @@ public class T411Logger {
         writeLine("Etat de la connexion Wi-Fi : " + (isWifi?"ON":"OFF"));
     }
 
-    public void logAppVersion() {
+    private void logAppVersion() {
         writeLine("-- APP VERSION --");
 
         try {
@@ -120,7 +118,7 @@ public class T411Logger {
         }
     }
 
-    public void logPreferences() {
+    private void logPreferences() {
         writeLine("-- APP SETTINGS --");
         writeLine("Connexion HTTPS : " + (prefs.getBoolean("useHTTPS", false)?"ON":"OFF"));
         writeLine("Etat du proxy : " + (prefs.getBoolean("usePaidProxy", false)?"ON":"OFF"));

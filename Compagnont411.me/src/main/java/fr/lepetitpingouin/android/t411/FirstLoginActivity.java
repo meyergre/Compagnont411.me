@@ -1,6 +1,5 @@
 package fr.lepetitpingouin.android.t411;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,17 +29,18 @@ import org.jsoup.nodes.Document;
 
 public class FirstLoginActivity extends AppCompatActivity {
 
-    SharedPreferences prefs;
-    SharedPreferences.Editor edit;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor edit;
 
-    EditText login, passwd;
+    private EditText login;
+    private EditText passwd;
 
     TextView infoError;
-    ProgressDialog dialog;
+    private ProgressDialog dialog;
 
-    AsyncConnector asc;
+    private AsyncConnector asc;
 
-    View fab;
+    private View fab;
 
     @Override
     public void onResume() {

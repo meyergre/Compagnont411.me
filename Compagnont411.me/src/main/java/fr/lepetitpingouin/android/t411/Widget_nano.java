@@ -13,9 +13,9 @@ import android.widget.RemoteViews;
 
 public class Widget_nano extends AppWidgetProvider {
 
-    Intent myIntent = new Intent();
-    PendingIntent pIntent;
-    SharedPreferences prefs;
+    private Intent myIntent = new Intent();
+    private PendingIntent pIntent;
+    private SharedPreferences prefs;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

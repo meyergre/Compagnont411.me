@@ -16,7 +16,7 @@
 
     <TextView
         android:text="@+id/fdrowtext"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:id="@+id/fdrowtext"
         android:layout_toRightOf="@+id/fdrowimage"
         android:layout_alignTop="@+id/fdrowimage"

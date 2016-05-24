@@ -131,7 +131,7 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/scrollView">
 
@@ -241,7 +241,7 @@
                     android:layout_gravity="left|center_vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -273,7 +273,7 @@
                     android:layout_height="1dp"
                     android:layout_gravity="center"
                     android:background="#33000000"
-                    android:layout_margin="3dp"></FrameLayout>
+                    android:layout_margin="3dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -366,7 +366,7 @@
                     <FrameLayout
                         android:layout_width="1dp"
                         android:layout_height="fill_parent"
-                        android:background="#33000000"></FrameLayout>
+                        android:background="#33000000"/>
 
                     <TextView
                         android:id="@+id/calc_ratio2"
@@ -402,7 +402,7 @@
                     android:layout_gravity="left|center_vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -483,7 +483,7 @@
 
                     <TextView
                         android:id="@+id/upSpeedResult"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="left"

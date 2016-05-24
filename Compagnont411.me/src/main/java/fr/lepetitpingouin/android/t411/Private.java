@@ -3,7 +3,7 @@ package fr.lepetitpingouin.android.t411;
 /**
  * Created by gregory on 28/09/15.
  */
-public class Private {
+class Private {
 
     public static final String REAL_DEVICE = "3846693B4A71EB89FF9B6EFB2EB8FBBD";
     public static String URL_PROXY = "proxy.lepetitpingouin.fr";

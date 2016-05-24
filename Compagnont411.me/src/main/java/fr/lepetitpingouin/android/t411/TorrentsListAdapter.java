@@ -3,7 +3,6 @@ package fr.lepetitpingouin.android.t411;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by gregory on 23/05/2016.
  */
-public class TorrentsListAdapter extends BaseAdapter {
+class TorrentsListAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
     private Context context;

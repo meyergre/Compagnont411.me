@@ -10,7 +10,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,18 +32,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class friendsActivity extends AppCompatActivity {
-    static final String CONNECTURL = Default.URL_FRIENDS;
-    public ProgressDialog dialog;
+    private static final String CONNECTURL = Default.URL_FRIENDS;
+    private ProgressDialog dialog;
 
-    SharedPreferences prefs;
-    Editor edit;
+    private SharedPreferences prefs;
+    private Editor edit;
 
-    friendsFetcher mF;
+    private friendsFetcher mF;
 
-    HashMap<String, String> map;
+    private HashMap<String, String> map;
 
-    GridView maListViewPerso;
-    ArrayList<HashMap<String, String>> listItem;
+    private GridView maListViewPerso;
+    private ArrayList<HashMap<String, String>> listItem;
 
     @Override
     public void onDestroy() {
@@ -93,7 +92,7 @@ public class friendsActivity extends AppCompatActivity {
         }
     }
 
-    public void update() {
+    private void update() {
         //dialog = ProgressDialog.show(friendsActivity.this, this.getString(R.string.my_friends), this.getString(R.string.pleasewait), true, true);
 
         dialog = new ProgressDialog(this);

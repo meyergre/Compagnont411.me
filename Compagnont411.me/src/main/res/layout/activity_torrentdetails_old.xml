@@ -162,7 +162,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_weight="1"></FrameLayout>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -268,7 +268,7 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1"></FrameLayout>
+            android:layout_weight="1"/>
 
         <Button
             android:layout_width="wrap_content"

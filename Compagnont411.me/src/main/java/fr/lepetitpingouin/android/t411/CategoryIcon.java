@@ -3,16 +3,16 @@ package fr.lepetitpingouin.android.t411;
 /**
  * Created by meyergre on 08/06/13.
  */
-public class CategoryIcon {
+class CategoryIcon {
 
-    String catCode;
+    private String catCode;
 
     public CategoryIcon(String category) {
         this.catCode = category;
     }
 
     public static boolean isPr0n(int icon) {
-        return (icon == R.drawable.ic_new_xxx || icon == R.drawable.ic_new_t411) ? true : false;
+        return (icon == R.drawable.ic_new_xxx || icon == R.drawable.ic_new_t411);
     }
 
     public int getIcon() {

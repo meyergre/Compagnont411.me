@@ -11,13 +11,13 @@ import java.util.ArrayList;
 /**
  * Created by gregory on 07/10/2015.
  */
-public class SearchHistory {
+class SearchHistory {
 
-    Context context;
-    SharedPreferences prefs;
-    SharedPreferences.Editor edit;
+    private Context context;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor edit;
 
-    ArrayList<String> values;
+    private ArrayList<String> values;
 
     public SearchHistory(Context context) {
         this.context = context;
@@ -43,7 +43,7 @@ public class SearchHistory {
 
     public ArrayList<String> getValues() {
 
-        return (ArrayList<String>) this.values;
+        return this.values;
     }
 
     public void save(String newValue) {

@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:maxHeight="180dp"
-                    android:src="@drawable/t411_head_music"
+                    android:src="@drawable/robot"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
@@ -60,7 +60,7 @@
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:enabled="false"
@@ -107,7 +107,7 @@
                         android:padding="6dp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/permissions_needed"
                         android:id="@+id/textView36"
@@ -145,7 +145,7 @@
 
                         <TextView
                             android:id="@+id/tv_shield"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
@@ -182,7 +182,7 @@
                         android:src="@drawable/ic_home_helpbutton" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/helpbutton_text"
                         android:id="@+id/textView35"
@@ -286,7 +286,7 @@
                 android:layout_above="@+id/statBtm"
                 android:layout_centerHorizontal="true"
                 android:background="#22000000"
-                android:transitionName="statBtm"></FrameLayout>
+                android:transitionName="statBtm"/>
 
             <LinearLayout
                 android:id="@+id/statBtm"

@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 /**
  * Created by gregory on 30/10/2015.
  */
-public class TorrentAdapter extends BaseAdapter {
+class TorrentAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return 0;

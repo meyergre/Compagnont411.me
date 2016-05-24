@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/fromuser"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
@@ -51,7 +51,7 @@
             android:id="@+id/mailsubject"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
+            android:layout_marginLeft="5dp"
             android:gravity="left"
             android:text="Subject"
             android:textColor="#0c335c"

@@ -91,7 +91,7 @@
                         android:layout_width="1dip"
                         android:layout_height="fill_parent"
                         android:layout_margin="4dip"
-                        android:background="#33000000"></FrameLayout>
+                        android:background="#33000000"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
                         android:layout_width="1dip"
                         android:layout_height="fill_parent"
                         android:layout_margin="4dp"
-                        android:background="#33000000"></FrameLayout>
+                        android:background="#33000000"/>
 
                     <TextView
                         android:id="@+id/wRatio"

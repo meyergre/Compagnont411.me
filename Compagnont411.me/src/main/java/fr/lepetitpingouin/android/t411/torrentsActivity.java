@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -41,43 +40,56 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
 public class torrentsActivity extends AppCompatActivity {
-    String connectUrl, searchTerms;
-    String name = null;
+    private String connectUrl;
+    private String searchTerms;
+    private String name = null;
 
-    String id;
+    private String id;
 
-    HashMap<String, String> itemMmap;
+    private HashMap<String, String> itemMmap;
 
-    ProgressDialog dialog;
+    private ProgressDialog dialog;
 
-    SharedPreferences prefs;
-    Handler handler;
+    private SharedPreferences prefs;
+    private Handler handler;
 
-    String order, type, tx_order;
+    private String order;
+    private String type;
+    private String tx_order;
 
-    torrentFetcher mF;
+    private torrentFetcher mF;
 
-    HashMap<String, String> map;
+    private HashMap<String, String> map;
 
-    ImageButton prev, next;
-    LinearLayout dropdown_pages, navbar, dropdown_categories;
+    private ImageButton prev;
+    private ImageButton next;
+    private LinearLayout dropdown_pages;
+    private LinearLayout navbar;
+    private LinearLayout dropdown_categories;
 
-    String strNext, strPrev, paginator, pageName;
+    private String strNext;
+    private String strPrev;
+    private String paginator;
+    private String pageName;
 
-    Dialog pages_dialog, cat_dialog;
+    private Dialog pages_dialog;
+    private Dialog cat_dialog;
 
-    GridView maListViewPerso;
-    ListView PagesList, catList;
-    ArrayList<HashMap<String, String>> listItem, pageListItem, catListItem;
+    private GridView maListViewPerso;
+    private ListView PagesList;
+    private ListView catList;
+    private ArrayList<HashMap<String, String>> listItem;
+    private ArrayList<HashMap<String, String>> pageListItem;
+    private ArrayList<HashMap<String, String>> catListItem;
 
-    SimpleAdapter mSchedule, mTorrentsAdapter;
+    private SimpleAdapter mSchedule;
+    private SimpleAdapter mTorrentsAdapter;
 
     @Override
     public void onDestroy() {
@@ -303,7 +315,7 @@ public class torrentsActivity extends AppCompatActivity {
         }
     }
 
-    public void switchList(String catCode) {
+    private void switchList(String catCode) {
 
         mSchedule = mTorrentsAdapter;
         ArrayList<HashMap<String, String>> filterListItem = new ArrayList<HashMap<String, String>>();
@@ -327,7 +339,7 @@ public class torrentsActivity extends AppCompatActivity {
 
     }
 
-    public void update() {
+    private void update() {
         try {
             //dialog = show(torrentsActivity.this, "t411.ch", this.getString(R.string.pleasewait), true, true);
             dialog = new ProgressDialog(this);

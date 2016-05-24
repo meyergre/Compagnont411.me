@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 public class newsActivity extends AppCompatActivity {
 
-    SharedPreferences prefs;
+    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
