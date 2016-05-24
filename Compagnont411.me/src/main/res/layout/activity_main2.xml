@@ -390,7 +390,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:background="#11000000"
+            android:background="#00000000"
             app:popupTheme="@style/Theme.AppCompat.NoActionBar"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

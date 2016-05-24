@@ -1,3 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-ads-8.4.0_a780fab3215c42edd20136f7c79370e35df1391d.jar" />
+    </item>
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-23.1.1_ccf01c5654a34a45f88c75613bc18dd36f94778c.jar" />
+    </item>
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-23.1.1_de3b143bedef47e8e89375822776aa46b76a7f6d.jar" />
+    </item>
+    <item
+        jar="C:\Users\gregory.meyer\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.9.2\5e3bda828a80c7a21dfbe2308d1755759c2fd7b4\jsoup-1.9.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5e3bda828a80c7a21dfbe2308d1755759c2fd7b4">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\jsoup-1.9.2_5f476e8c0241e1ffd88bb37807c9d41fcc13eb24.jar" />
+    </item>
+    <item
+        jar="C:\Users\gregory.meyer\.gradle\caches\modules-2\files-2.1\com.anjlab.android.iab.v3\library\1.0.31\98383e8ba5c9392c8c3a331310c1fabeb47a82d0\library-1.0.31.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98383e8ba5c9392c8c3a331310c1fabeb47a82d0">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\library-1.0.31_e2394968790eb98df9896dfda8df28e1b8f51b00.jar" />
+    </item>
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-design-23.1.1_99fe6c82bf7d51274699c4ceebac2a12dfc68eda.jar" />
+    </item>
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.android.support-support-v4-23.1.1_a65e0a69990fd3468882d9b41819b3e3f7c77df3.jar" />
+    </item>
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-basement-8.4.0_41703b24c7778012dce5b5bbb9788e5fa774fcde.jar" />
+    </item>
+    <item
+        jar="C:\Users\gregory.meyer\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\support-annotations-23.1.1_f57b6bad42c863e634c177f7e6378788ea568962.jar" />
+    </item>
+    <item
+        jar="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="E:\Git\ORYM\Compagnont411.me\Compagnont411.me\build\intermediates\pre-dexed\release\internal_impl-23.1.1_c9a76676751ca574c802fcf9cbf7a840b7947d82.jar" />
+    </item>
+
+</items>

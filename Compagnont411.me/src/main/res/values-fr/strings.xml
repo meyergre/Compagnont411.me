@@ -344,4 +344,5 @@
     <string name="downloads_delete">Supprimer le torrent</string>
     <string name="downloads_prez">Accéder à la prez</string>
     <string name="downloads_change_passkey">Change passkey</string>
+    <string name="downloads">Téléchargements</string>
 </resources>

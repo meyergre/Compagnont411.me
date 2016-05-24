@@ -250,7 +250,15 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
 
         <activity android:name=".TorrentsListActivity"
-            android:parentActivityName=".MainActivity2"></activity>
+            android:icon="@mipmap/ic_launcher_downloads"
+            android:label="@string/downloads"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 CHANGELOG
 
-2016.05-156
+2016.05-154
 - Mise à jour de JSOUP
 - Messagerie basculée en swipte-to-refresh
 - Optimisations de code
