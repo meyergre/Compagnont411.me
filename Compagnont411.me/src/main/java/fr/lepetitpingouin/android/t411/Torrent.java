@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -15,6 +16,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,7 +29,7 @@ import java.util.Map;
 
 public class Torrent {
 
-    public String name, id, url;
+    public String name, id, url, category="";
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
     public static String STATUS_PENDING = "(P)";
     public static String STATUS_BANNED = "(B)";
@@ -39,12 +42,30 @@ public class Torrent {
     private AsyncDlLater dll;
     private AsyncDlLaterNot dllNot;
 
+    private JSONArray json;
+
     public Torrent(Context context, String name, String id) {
         this.context = context.getApplicationContext();
         this.name = name;
         this.id = id;
         this.url = Default.URL_GET_TORRENT + id;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public Torrent(Context context, String name, String id, String size, String uploader, String category) {
+        this.context = context.getApplicationContext();
+        this.name = name;
+        this.id = id;
+        this.size = size;
+        this.category = category;
+        this.uploader = uploader;
+        this.url = Default.URL_GET_TORRENT + id;
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        try {
+            this.json = new JSONArray(prefs.getString("jsonTorrentList", "[]"));
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void download() {
@@ -104,24 +125,15 @@ public class Torrent {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(icon)
+                            .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), new CategoryIcon(category).getIcon()))
                             .setContentTitle(title)
                             .setContentText(subtitle);
-            //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            //stackBuilder.addParentStack(Torrent.class);
+
             mBuilder.setContentIntent(pendingIntent);
             mBuilder.setAutoCancel(true);
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(id, mBuilder.build());
 
-            /*
-            final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            final Notification notification = new Notification(icon, title, System.currentTimeMillis());
-            final String notificationTitle = title;
-            final String notificationDesc = subtitle;
-            notification.setLatestEventInfo(context, notificationTitle, notificationDesc, pendingIntent);
-            notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
-            notificationManager.notify(id, notification);*/
         } finally {
             try {
                 Toast.makeText(this.context, subtitle, Toast.LENGTH_SHORT).show();
@@ -315,9 +327,16 @@ public class Torrent {
             new T411Logger(context).writeLine("Ecriture du fichier torrent...");
             //String path = prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
 
+
             File file = new File(getTorrentPath(), getTorrentName());
             file.setWritable(true, false);
 
+            try {
+                json.put(new JSONObject("{'title':'"+name+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"'}"));
+                prefs.edit().putString("jsonTorrentList",json.toString()).apply();
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
 
             try {
                 file.createNewFile();
@@ -344,6 +363,7 @@ public class Torrent {
                     i.setData(Uri.fromFile(file));
 
                 PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
+                //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
                 doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
                 if (prefs.getBoolean("openAfterDl", false)) {
                     //ouvrir le fichier

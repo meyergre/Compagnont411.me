@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.lepetitpingouin.android.t411"
     android:installLocation="auto">
@@ -9,7 +10,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.vending.BILLING" />
-
 
     <application
         android:allowBackup="true"
@@ -24,10 +24,10 @@
             android:theme="@style/toolbarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.appwidget.action.REFRESH_NEWSPAPER" />
             </intent-filter>
-
         </activity>
 
         <receiver
@@ -36,6 +36,7 @@
             <intent-filter android:priority="100">
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_search_provider" />
@@ -48,6 +49,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_t411" />
                 <action android:name="intent.WIDGET_FLAG_UPDATING" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_full_provider" />
@@ -59,6 +61,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_t411" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_half_provider" />
@@ -70,11 +73,11 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_t411" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_nano_provider" />
         </receiver>
-
         <receiver
             android:name=".Widget_Plus"
             android:label="@string/appwidget_plus">
@@ -83,11 +86,11 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_t411" />
                 <action android:name="intent.WIDGET_FLAG_UPDATING" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_plus_provider" />
         </receiver>
-
         <receiver
             android:name=".Widget_huge"
             android:label="@string/appwidget_huge">
@@ -97,11 +100,11 @@
                 <action android:name="intent.t411_CLOCK_UPDATE" />
                 <action android:name="intent.WIDGET_FLAG_UPDATING" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_clock_provider" />
         </receiver>
-
         <receiver
             android:name=".Widget_news"
             android:label="@string/news_widget">
@@ -111,11 +114,11 @@
                 <action android:name="android.appwidget.action.UPDATE_NEWS" />
                 <action android:name="android.appwidget.action.REFRESH_NEWSPAPER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_news_provider" />
         </receiver>
-
         <receiver android:name=".Receiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -135,10 +138,13 @@
             android:parentActivityName=".MainActivity2"
             android:process=":messages"
             android:taskAffinity="fr.lepetitpingouin.android.t411.messagesActivity">
-            <!--intent-filter>
+
+            <!--
+            intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+            </intent-filter
+            -->
         </activity>
         <activity
             android:name=".statsActivity"
@@ -166,15 +172,16 @@
             android:taskAffinity="fr.lepetitpingouin.android.t411.SearchActivity"
             android:theme="@style/toolbarTheme" />
         <activity
-            android:name="ComposeMessageActivity"
+            android:name=".ComposeMessageActivity"
             android:icon="@drawable/ic_launcher_messages">
             <intent-filter android:label="@string/sendPM">
                 <action android:name="android.intent.action.SEND" />
-                <!--category android:name="android.intent.category.DEFAULT" /-->
+                <!-- category android:name="android.intent.category.DEFAULT" / -->
                 <data android:mimeType="text/*" />
             </intent-filter>
         </activity>
-        <activity android:name="CalculatorActivity"
+        <activity
+            android:name=".CalculatorActivity"
             android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".torrentDetailsActivity"
@@ -215,16 +222,16 @@
             android:name=".newsActivity"
             android:configChanges="orientation"
             android:parentActivityName=".MainActivity2"
-            android:theme="@style/toolbarTheme"/>
-        <activity android:name="FirstLoginActivity"
-            android:theme="@style/toolbarLoginTheme"/>
+            android:theme="@style/toolbarTheme" />
+        <activity
+            android:name=".FirstLoginActivity"
+            android:theme="@style/toolbarLoginTheme" />
         <activity
             android:name=".FileDialog"
             android:allowTaskReparenting="true"
             android:label="@string/title_savePath"
             android:parentActivityName=".UserPrefsActivity"
             android:theme="@style/toolbarTheme" />
-
         <activity android:name=".NfoActivity" />
         <activity
             android:name=".UserPrefsActivity"
@@ -237,12 +244,11 @@
             android:name=".DonateActivity"
             android:label="Offrez-moi une bière :)"
             android:theme="@style/toolbarTheme" />
-
-        <activity android:name=".ProxyActivity"
+        <activity
+            android:name=".ProxyActivity"
             android:label="411 Facturation Test"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".TorrentsListActivity"></activity>
     </application>
 
 </manifest>

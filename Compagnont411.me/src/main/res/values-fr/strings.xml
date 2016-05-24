@@ -339,4 +339,5 @@
     <string name="permissions_needed">L\'accès au stockage est requis.\nCliquez ici pour autoriser l\'application à accéder au stockage de votre appareil.</string>
     <string name="description_sort_by_date">Si coché la liste des torrents dans les résultats de recherche, torrents du jour, etc.. sera triée par date d\'ajout.</string>
     <string name="sort_by_date">Trier par date</string>
+    <string name="torrentslist">Téléchargements</string>
 </resources>

@@ -50,6 +50,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
     Button btnList;
 
     String torrent_URL, torrent_NFO, torrent_ID, torrent_Name;
+    String t_taille, t_uploader, t_cat;
 
     @Override
     public void onDestroy() {
@@ -227,7 +228,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
             requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
         else {
-            Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID);
+            Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, "", "???");
             torrent.download();
         }
     }
@@ -550,6 +551,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 tdt_votes = doc.select("div.accordion div table tr").get(8).select("td").first().text().split(" ", 2)[1];
                 tdt_complets = doc.select(".details table tr td.down").first().parent().select("td").last().text();
                 tdt_taille = doc.select("div.accordion table tr").get(3).select("td").first().text();
+
+                t_taille = tdt_taille;
 
                 TextView tdtSeeders, tdtLeechers, tdtNote, tdtVotes, tdtComplets, tdtTaille;
                 ImageView star1, star2, star3, star4, star5, star;

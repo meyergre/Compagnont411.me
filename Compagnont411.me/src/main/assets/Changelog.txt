@@ -1,5 +1,9 @@
 CHANGELOG
 
+2016.05-156
+- Mise à jour de JSOUP
+
+
 2016.03-153
 - Correction de l'utilisation d'un proxy perso avec auth
 

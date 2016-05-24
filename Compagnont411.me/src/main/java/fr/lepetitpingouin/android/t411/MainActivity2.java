@@ -149,6 +149,10 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                         startActivity(new Intent(getApplicationContext(), statsActivity.class));
                         break;
 
+                    case R.id.action_torrentslist:
+                        startActivity(new Intent(getApplicationContext(), TorrentsListActivity.class));
+                        break;
+
                     case R.id.action_uploads:
                         i = new Intent();
                         i.setClass(getApplicationContext(), torrentsActivity.class);
