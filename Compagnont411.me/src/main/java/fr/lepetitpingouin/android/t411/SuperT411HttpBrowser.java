@@ -113,6 +113,7 @@ public class SuperT411HttpBrowser {
                 new T411Logger(this.ctx).writeLine("Le proxy nécessite une authentification");
 
                 Authenticator authenticator = new Authenticator() {
+                    @Override
                     public PasswordAuthentication getPasswordAuthentication() {
                         return (new PasswordAuthentication(pLogin, pPassword.toCharArray()));
                     }
@@ -129,12 +130,15 @@ public class SuperT411HttpBrowser {
             SSLContext ctx = SSLContext.getInstance("TLS");
             ctx.init(null, new TrustManager[]{
                     new X509TrustManager() {
+                        @Override
                         public void checkClientTrusted(X509Certificate[] chain, String authType) {
                         }
 
+                        @Override
                         public void checkServerTrusted(X509Certificate[] chain, String authType) {
                         }
 
+                        @Override
                         public X509Certificate[] getAcceptedIssuers() {
                             return new X509Certificate[]{};
                         }
@@ -143,6 +147,7 @@ public class SuperT411HttpBrowser {
             HttpsURLConnection.setDefaultSSLSocketFactory(ctx.getSocketFactory());
 
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
                 public boolean verify(String hostname, SSLSession session) {
                     return true;
                 }

@@ -1,5 +1,10 @@
 CHANGELOG
 
+2016.05-155
+- Corrections diverses
+- Optimisation de la taille de l'APK
+
+
 2016.05-154
 - Mise à jour de JSOUP
 - Messagerie basculée en swipte-to-refresh

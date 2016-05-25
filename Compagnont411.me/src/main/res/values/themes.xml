@@ -4,7 +4,7 @@
 
     <style name="toolbarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <item name="android:statusBarColor">#00000000</item>
+        <item name="android:statusBarColor">#22000000</item>
         <item name="android:navigationBarColor">@color/t411_action_blue</item>
         <item name="colorPrimary">@color/t411_action_blue</item>
         <item name="colorPrimaryDark">@color/t411_action_blue_darker</item>
@@ -96,6 +96,16 @@
         <item name="android:textColor">#77FFFFFF</item>
         <!-- The textColor property is backward compatible with the Support Library -->
     </style>
+
+
+
+    <style name="AdTitleDialog" parent="@style/android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:layout_width">320dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+    </style>
+
 
     <color name="t411_action_blue">#002244</color>
     <color name="t411_action_blue_darker">#001133</color>

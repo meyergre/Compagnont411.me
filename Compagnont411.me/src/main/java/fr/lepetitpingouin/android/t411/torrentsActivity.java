@@ -342,7 +342,7 @@ public class torrentsActivity extends AppCompatActivity {
     private void update() {
         try {
             //dialog = show(torrentsActivity.this, "t411.ch", this.getString(R.string.pleasewait), true, true);
-            dialog = new ProgressDialog(this);
+            dialog = new ProgressDialog(this, R.style.AdTitleDialog);
             dialog.setMessage(this.getString(R.string.pleasewait));
             AdView mAdView;
             AdRequest adRequest;
@@ -729,12 +729,14 @@ public class torrentsActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_result), Toast.LENGTH_LONG).show();
                     new T411Logger(getApplicationContext()).writeLine("Aucune entrée dans la liste, fermeture.");
                     handler.postDelayed(new Runnable() {
+                        @Override
                         public void run() {
                             finish();
                         }
                     }, 1000);
                 }
                 handler.postDelayed(new Runnable() {
+                    @Override
                     public void run() {
                         dialog.cancel();
                     }

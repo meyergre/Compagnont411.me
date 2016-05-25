@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:id="@+id/scrollView4"
         android:layout_centerHorizontal="true"
-        android:background="#fbfbfb"
+        android:background="#fff"
         android:clipToPadding="false"
         android:paddingBottom="64dp">
 

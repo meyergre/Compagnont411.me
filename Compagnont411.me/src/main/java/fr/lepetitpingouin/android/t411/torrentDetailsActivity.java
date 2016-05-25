@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -15,7 +17,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -45,7 +47,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
     private WebView details_www;
 
     private ImageView btnShare;
-    ImageView btnDownload;
     private ImageView btnThx;
     private ImageView btnDlLater;
     private ImageView rmDlLater;
@@ -56,8 +57,9 @@ public class torrentDetailsActivity extends AppCompatActivity {
     private String torrent_ID;
     private String torrent_Name;
     private String t_taille;
+    private String t_cat;
+
     String t_uploader;
-    String t_cat;
 
     @Override
     public void onDestroy() {
@@ -98,15 +100,13 @@ public class torrentDetailsActivity extends AppCompatActivity {
         details_www.getSettings().setJavaScriptEnabled(true);
 
         //dialog = ProgressDialog.show(this, "t411.ch", this.getString(R.string.pleasewait), true, true);
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this, R.style.AdTitleDialog);
         dialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
                 finish();
             }
         });
-
-
         dialog.setMessage(this.getString(R.string.pleasewait));
         AdView mAdView;
         AdRequest adRequest;
@@ -115,10 +115,13 @@ public class torrentDetailsActivity extends AppCompatActivity {
         mAdView = (AdView) view.findViewById(R.id.adView);
         adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
         dialog.setCustomTitle(view);
-        mAdView.loadAd(adRequest);
         dialog.show();
 
-        getSupportActionBar().setIcon(getIntent().getIntExtra("icon", R.drawable.ic_new_t411));
+
+        mAdView.loadAd(adRequest);
+        getSupportActionBar().setDisplayUseLogoEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
 
 
         torrent_URL = getIntent().getStringExtra("url");
@@ -235,7 +238,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
             requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
         else {
-            Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, "", "???");
+            Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, t_uploader.toString(), t_cat);
             torrent.download();
         }
     }
@@ -287,7 +290,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 msg = doc.select(".content ").first().text();
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
             }
             return null;
         }
@@ -412,7 +414,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
                     //commentaires
                     objects = comments.select("tr");
 
-                    Log.e("comments", objects.html());
 
                     for (Element object : objects) {
                         String cusername = object.select("th").first().select("a").first().text();
@@ -484,21 +485,18 @@ public class torrentDetailsActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("Youtube", "Error");
                 }
 
                 //vidéos youtube 2
 
                 objects = doc.select("iframe[src~=youtube]");
                 for (Element object : objects) {
-                    Log.e("iframe", object.toString());
                     try {
                         String youtube_src = object.attr("src");
 
                         //String[] youtube_array = youtube_src.split("/");
                         //String youtube_id = youtube_array[youtube_array.length-1];
                         String youtube_id = youtube_src.substring(youtube_src.lastIndexOf("/") + 1);
-                        Log.e(youtube_src, youtube_id);
 
                         String youtube_thumb = "http://img.youtube.com/vi/" + youtube_id + "/0.jpg";
                         String youtube_link = "http://www.youtube.com/watch?v=" + youtube_id;
@@ -531,7 +529,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez = prez.replaceAll("src=\"/", "src=\"https://"+Default.IP_T411+"/");
 
             } catch (Exception e) {
-                Log.e("Erreur connect :", e.toString());
                 e.printStackTrace();
             } finally {
 
@@ -550,6 +547,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 getSupportActionBar().setTitle("Prez " + (tduploader.toString().length() > 0 ? "(" + tduploader.toString() + ")" : ""));
                 getSupportActionBar().setSubtitle(torrent_Name);
 
+                t_uploader = tduploader.toString();
+
                 tdt_seeders = doc.select(".details table tr td.up").first().text();
                 tdt_leechers = doc.select(".details table tr td.down").first().text();
                 tdt_note = doc.select("div.accordion div table tr").get(8).select("td").first().text().split(" ", 2)[0];
@@ -558,7 +557,20 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 tdt_complets = doc.select(".details table tr td.down").first().parent().select("td").last().text();
                 tdt_taille = doc.select("div.accordion table tr").get(3).select("td").first().text();
 
+                try {
+                    t_cat = doc.select(".details table tr .terms-list a").first().attr("href").split("subcat=")[1].split("&")[0];
+                } catch(Exception ex) {
+                    t_cat = "???";
+                }
+
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Palette.from(BitmapFactory.decodeResource(getResources(), new CategoryIcon(t_cat).getIcon())).generate().getVibrantColor(getResources().getColor(R.color.t411_action_blue))));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getWindow().setStatusBarColor(Palette.from(BitmapFactory.decodeResource(getResources(), new CategoryIcon(t_cat).getIcon())).generate().getVibrantColor(getResources().getColor(R.color.t411_action_blue_darker)));
+                    getWindow().setNavigationBarColor(Palette.from(BitmapFactory.decodeResource(getResources(), new CategoryIcon(t_cat).getIcon())).generate().getVibrantColor(getResources().getColor(R.color.t411_action_blue)));
+                }
+
                 t_taille = tdt_taille;
+
 
                 TextView tdtSeeders, tdtLeechers, tdtNote, tdtVotes, tdtComplets, tdtTaille;
                 ImageView star1, star2, star3, star4, star5, star;
@@ -584,26 +596,28 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
                 tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_00));
 
-                if (note > 0)
+                if (note > 0) {
                     tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_05));
+                }
                 if (note > 0.7)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_10));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_10)); }
                 if (note > 1)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_15));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_15)); }
                 if (note > 1.7)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_20));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_20)); }
                 if (note > 2)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_25));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_25)); }
                 if (note > 2.7)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_30));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_30)); }
                 if (note > 3)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_35));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_35)); }
                 if (note > 3.7)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_40));
+                {   tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_40)); }
                 if (note > 4)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_45));
+                {tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_45)); }
                 if (note > 4.7)
-                    tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_50));
+                {tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_50)); }
+
             } catch (Exception e) {
                 //details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + doc.select(".block").first().text(), mimeType, encoding, "");
                 details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + e.getMessage(), mimeType, encoding, "");

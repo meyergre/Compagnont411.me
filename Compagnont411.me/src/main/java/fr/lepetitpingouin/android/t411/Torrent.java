@@ -107,16 +107,15 @@ public class Torrent {
         for(int i = 0; i < json.length(); i++) {
 
             try {
-                Log.e("json ", json.get(i).toString());
-                if(((JSONObject)json.get(i)).get("id") != this.id) {
+                Log.e("json ", json.get(i).toString() + "/ID+ "+this.id);
+                if(!((JSONObject)json.get(i)).get("id").equals(this.id)) {
                     newJson.put(json.get(i));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            prefs.edit().putString("jsonTorrentList",newJson.toString()).apply();
         }
+        prefs.edit().putString("jsonTorrentList",newJson.toString()).commit();
     }
 
     public void share() {
