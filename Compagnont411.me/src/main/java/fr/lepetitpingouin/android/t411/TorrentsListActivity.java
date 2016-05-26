@@ -1,29 +1,42 @@
 package fr.lepetitpingouin.android.t411;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class TorrentsListActivity extends AppCompatActivity {
 
     private ListView list;
     private TorrentsListAdapter adapter;
+    PackageManager pkgMgr;
+    ComponentName cn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torrents_list);
 
-        getSupportActionBar().setTitle("Liste des téléchargements");
+        getSupportActionBar().setTitle("Téléchargements");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         list = (ListView)findViewById(R.id.listView);
@@ -46,7 +59,13 @@ public class TorrentsListActivity extends AppCompatActivity {
                 emptyList();
             }
         });
+
+        pkgMgr = getPackageManager();
+        cn = new ComponentName(getPackageName(), getPackageName()+".launcherDownloads");
+
     }
+
+
 
     private void emptyList() {
 
@@ -67,6 +86,27 @@ public class TorrentsListActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(R.string.NO, null)
                 .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_downloads, menu);
+        menu.findItem(R.id.dl_showHome).setChecked(pkgMgr.getComponentEnabledSetting(cn)!=PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.dl_showHome:
+                pkgMgr.setComponentEnabledSetting(cn, item.isChecked()?PackageManager.COMPONENT_ENABLED_STATE_DISABLED:PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+                item.setChecked(!item.isChecked());
+                Toast.makeText(getApplicationContext(), "L'icône va "+(item.isChecked()?"apparaître":"disparaître")+" dans quelques instants...", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

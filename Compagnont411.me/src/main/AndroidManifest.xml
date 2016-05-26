@@ -133,7 +133,7 @@
             android:name=".messagesActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout"
             android:finishOnTaskLaunch="true"
-            android:icon="@drawable/ic_launcher_messages"
+            android:icon="@mipmap/ic_launcher_messages"
             android:label="@string/launcher_messages"
             android:parentActivityName=".MainActivity2"
             android:process=":messages"
@@ -156,7 +156,7 @@
         <activity
             android:name=".readMailActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout"
-            android:icon="@drawable/ic_launcher_messages"
+            android:icon="@mipmap/ic_launcher_messages"
             android:parentActivityName=".messagesActivity" />
         <activity
             android:name=".actionSelector"
@@ -173,7 +173,7 @@
             android:theme="@style/toolbarTheme" />
         <activity
             android:name=".ComposeMessageActivity"
-            android:icon="@drawable/ic_launcher_messages">
+            android:icon="@mipmap/ic_launcher_messages">
             <intent-filter android:label="@string/sendPM">
                 <action android:name="android.intent.action.SEND" />
                 <!-- category android:name="android.intent.category.DEFAULT" / -->
@@ -250,15 +250,35 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <activity android:name=".TorrentsListActivity"
-            android:icon="@mipmap/ic_launcher_downloads"
-            android:label="@string/downloads"
-            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity2">
+        </activity>
+
+        <activity-alias
+            android:label="@string/downloads"
+            android:icon="@mipmap/ic_launcher_downloads"
+            android:launchMode="singleTop"
+            android:name=".launcherDownloads"
+            android:enabled="true"
+            android:targetActivity=".TorrentsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+
+        <activity-alias
+            android:label="@string/launcher_messages"
+            android:icon="@mipmap/ic_launcher_messages"
+            android:launchMode="singleTop"
+            android:name=".launcherMessages"
+            android:enabled="true"
+            android:targetActivity=".messagesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
     </application>
 
 </manifest>

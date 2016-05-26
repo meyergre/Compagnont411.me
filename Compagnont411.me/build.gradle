@@ -19,22 +19,15 @@ android {
     defaultConfig {
         minSdkVersion 12
         targetSdkVersion 23
-        versionCode 155
-        versionName "2016.05-155"
+        versionCode 156
+        versionName "2016.05-156"
         applicationId "fr.lepetitpingouin.android.t411"
 
         resConfigs "en", "fr"
-        splits {
-            density {
-                enable true
-                exclude "ldpi", "tvdpi", "xxxhdpi"
-            }
-        }
     }
     buildTypes {
         release {
             minifyEnabled false
-            shrinkResources true
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

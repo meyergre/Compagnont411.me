@@ -2,11 +2,13 @@ package fr.lepetitpingouin.android.t411;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -50,6 +53,9 @@ public class messagesActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout srl;
 
+    PackageManager pkgMgr;
+    ComponentName cn;
+
     @Override
     public void onDestroy() {
         mF = null;
@@ -62,6 +68,9 @@ public class messagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_msglist);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        pkgMgr = getPackageManager();
+        cn = new ComponentName(getPackageName(), getPackageName()+".launcherMessages");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -112,6 +121,7 @@ public class messagesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_msglist, menu);
+        menu.findItem(R.id.msg_showHome).setChecked(pkgMgr.getComponentEnabledSetting(cn)!=PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
         return true;
     }
 
@@ -119,11 +129,10 @@ public class messagesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            /*case R.id.action_update:
-                update();
-                return true;*/
-            case android.R.id.home:
-                supportFinishAfterTransition();
+            case R.id.msg_showHome:
+                pkgMgr.setComponentEnabledSetting(cn, item.isChecked()?PackageManager.COMPONENT_ENABLED_STATE_DISABLED:PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+                item.setChecked(!item.isChecked());
+                Toast.makeText(getApplicationContext(), "L'icône va "+(item.isChecked()?"apparaître":"disparaître")+" dans quelques instants...", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
