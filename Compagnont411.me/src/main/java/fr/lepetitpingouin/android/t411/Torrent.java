@@ -104,12 +104,15 @@ public class Torrent {
             file.delete();
         }
         JSONArray newJson = new JSONArray();
+        Boolean deleted = false;
         for(int i = 0; i < json.length(); i++) {
 
             try {
                 Log.e("json ", json.get(i).toString() + "/ID+ "+this.id);
-                if(!((JSONObject)json.get(i)).get("id").equals(this.id)) {
+                if(deleted || !((JSONObject)json.get(i)).get("id").equals(this.id)) {
                     newJson.put(json.get(i));
+                } else {
+                    deleted = true;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
