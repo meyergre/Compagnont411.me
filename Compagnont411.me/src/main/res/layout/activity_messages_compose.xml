@@ -4,6 +4,13 @@
     android:background="#fff"
     android:orientation="vertical">
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/toolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

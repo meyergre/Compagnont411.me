@@ -1,5 +1,6 @@
 package fr.lepetitpingouin.android.t411;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +45,7 @@ import java.util.Locale;
 public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     public static final String INTENT_ERROR = "fr.lepetitpingouin.android.t411.update.error";
+
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private SharedPreferences prefs;
@@ -82,8 +85,10 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         if (getIntent().hasExtra("message"))
             Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle( getResources().getString(R.string.app_name) );
 
         filter = new IntentFilter();
         filter.addAction(Default.Appwidget_update);
@@ -92,7 +97,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         drw = (NavigationView) findViewById(R.id.navview);
         navHeader = drw.getHeaderView(0);
-        //navHeader = drw.inflateHeaderView(R.layout.drawer_header);
 
         mAdView = (AdView)navHeader.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -101,18 +105,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 .build();
 
         mAdView.loadAd(adRequest);
-
-
-
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            mAdView.animate()
-                    .alpha(0.3f)
-                    .setDuration(5000)
-                    .setStartDelay(15000)
-                    .start();
-        }
-        */
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         drw.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -198,15 +190,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         swrl = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
         swrl.setOnRefreshListener(this);
-        swrl.setColorSchemeColors(R.color.t411_action_blue);
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        if (!prefs.getBoolean("firstLogin", false)) {
-            Intent myIntent = new Intent(getApplicationContext(), FirstLoginActivity.class);
-            startActivity(myIntent);
-            finish();
-        }
+        swrl.setColorSchemeColors(getResources().getColor(R.color.t411_action_blue));
 
         initWidgets();
 
@@ -233,9 +217,9 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 String titre = prefs.getString("titre", "");
                 String status = classe + ((titre.length() > 1) ? ", " + titre : "");
                 ((TextView)findViewById(R.id.widget_userclass)).setText(status);
-                ((TextView)findViewById(R.id.widget_upload)).setText( "▲ " + new BSize(prefs.getString("lastUpload", "0.00 GB")).convert());
-                ((TextView)findViewById(R.id.widget_download)).setText("▼ " + new BSize(prefs.getString("lastDownload", "0.00 GB")).convert());
-                ((TextView)findViewById(R.id.widget_ratio)).setText("R " + prefs.getString("lastRatio", " "));
+                ((TextView)findViewById(R.id.widget_upload)).setText(new BSize(prefs.getString("lastUpload", "0.00 GB")).convert());
+                ((TextView)findViewById(R.id.widget_download)).setText( new BSize(prefs.getString("lastDownload", "0.00 GB")).convert());
+                ((TextView)findViewById(R.id.widget_ratio)).setText( prefs.getString("lastRatio", " "));
                 ((ImageView)findViewById(R.id.widget_avatar)).setImageBitmap(new AvatarFactory().getFromPrefs(prefs));
 
 
@@ -257,7 +241,10 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
                     displayedDate = getResources().getString(R.string.lastUpdate) + lastDate;
 
-                    ((TextView) findViewById(R.id.tvUpdateTime)).setText(displayedDate);
+                    //((TextView) findViewById(R.id.tvUpdateTime)).setText(displayedDate);
+                    getSupportActionBar().setSubtitle(displayedDate);
+                } else {
+                    getSupportActionBar().setSubtitle("Glissez vers le bas pour mettre à jour");
                 }
 
                 findViewById(R.id.widget_news).setOnClickListener(new View.OnClickListener() {
@@ -290,17 +277,16 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 ((TextView)navHeader.findViewById(R.id.drw_username)).setText(prefs.getString("lastUsername", "Non connecté"));
                 ((TextView)navHeader.findViewById(R.id.drw_class)).setText(status);
 
-                findViewById(R.id.helpButtonPopup).setVisibility(prefs.getBoolean("hideHelpButton", false)?View.GONE:View.VISIBLE);
-
             }
-
-    public void removeHelpButton(View v) {
-        prefs.edit().putBoolean("hideHelpButton", true).apply();
-        findViewById(R.id.helpButtonPopup).setVisibility(View.GONE);
-    }
 
     @Override
     public void onResume() {
+
+        if (!prefs.getBoolean("firstLogin", false) || prefs.getInt("assistantVersion", 0) < Default.SHOW_ASSISTANT_FOR_VERSION_UNDER) {
+            prefs.edit().putInt("assistantVersion", Default.SHOW_ASSISTANT_FOR_VERSION_UNDER).apply();
+            Intent myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
+            startActivity(myIntent);
+        }
 
         initBP();
         initWidgets();
@@ -314,7 +300,9 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             permissionStorage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    }
                 }
             });
         }
@@ -392,19 +380,19 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             public void onFastTorrent(View v) {
                 Intent i;
                 i = new Intent();
-                i.setClass(getApplicationContext(), torrentsActivity.class);
-                i.putExtra("url", Default.T411_TOP_100);
+                i.setClass(getApplicationContext(), SearchResultsActivity.class);
+                i.putExtra("url", Default.API_T411_TOP_100);
                 i.putExtra("keywords", getString(R.string.fast_torrents));
                 i.putExtra("showIcons", false);
-                i.putExtra("sender", "100");
+                i.putExtra("sender", "top");
                 startActivity(i);
             }
 
             public void onDailyTorrent(View v) {
                 Intent i;
                 i = new Intent();
-                i.setClass(getApplicationContext(), torrentsActivity.class);
-                i.putExtra("url", Default.T411_TOP_TODAY);
+                i.setClass(getApplicationContext(), SearchResultsActivity.class);
+                i.putExtra("url", Default.API_T411_TOP_TODAY);
                 i.putExtra("keywords", getString(R.string.daily_torrents));
                 i.putExtra("showIcons", false);
                 i.putExtra("sender", "top");
@@ -414,8 +402,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             public void onWeeklyTorrent(View v) {
                 Intent i;
                 i = new Intent();
-                i.setClass(getApplicationContext(), torrentsActivity.class);
-                i.putExtra("url", Default.T411_TOP_WEEK);
+                i.setClass(getApplicationContext(), SearchResultsActivity.class);
+                i.putExtra("url", Default.API_T411_TOP_WEEK);
                 i.putExtra("keywords", getString(R.string.weekly_torrents));
                 i.putExtra("showIcons", false);
                 i.putExtra("sender", "top");
@@ -425,8 +413,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             public void onMonthlyTorrent(View v) {
                 Intent i;
                 i = new Intent();
-                i.setClass(getApplicationContext(), torrentsActivity.class);
-                i.putExtra("url", Default.T411_TOP_MONTH);
+                i.setClass(getApplicationContext(), SearchResultsActivity.class);
+                i.putExtra("url", Default.API_T411_TOP_MONTH);
                 i.putExtra("keywords", getString(R.string.monthly_torrents));
                 i.putExtra("showIcons", false);
                 i.putExtra("sender", "top");
@@ -447,7 +435,9 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                         edit.remove("firstLogin");
                         edit.remove("login");
                         edit.remove("password");
+                        edit.remove("assistantVersion");
                         edit.putBoolean("autoUpdate", false);
+                        edit.clear();
                         edit.commit();
                         finish();
                     }

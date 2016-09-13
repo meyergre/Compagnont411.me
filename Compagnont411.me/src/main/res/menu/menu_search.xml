@@ -3,8 +3,7 @@
     <item
         android:id="@+id/action_search"
         android:title="Recherche"
-        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:icon="@drawable/ic_action_search"
         android:orderInCategory="100"
-        android:showAsAction="always"
         fr.lepetitpingouin.android.t411:showAsAction="always" />
 </menu>

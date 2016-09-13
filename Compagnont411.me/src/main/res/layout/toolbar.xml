@@ -4,9 +4,8 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#00000000"
+    android:background="@color/t411_action_blue_darker"
     android:minHeight="?attr/actionBarSize"
     app:navigationContentDescription="@string/abc_action_bar_up_description"
     app:navigationIcon="?attr/homeAsUpIndicator"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:title="@string/action_settings" />
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+
 /**
  * Created by gregory on 23/05/2016.
  */
@@ -27,9 +29,20 @@ class TorrentsListAdapter extends BaseAdapter {
     public TorrentsListAdapter(Context context) {
         this.context = context;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        this.json = new JSONArray();
 
         try {
-            this.json = new JSONArray(prefs.getString("jsonTorrentList", "[]"));
+            JSONArray _json = new JSONArray(prefs.getString("jsonTorrentList", "[]"));
+            for (int i = 0; i <  _json.length(); i++) {
+                JSONObject o = (JSONObject) _json.get(i);
+                Torrent t = new Torrent(this.context, o.get("title").toString(), o.get("id").toString(), o.get("size").toString(), o.get("uploader").toString(), o.get("category").toString());
+                if( new File(t.getTorrentPath(), t.getTorrentName()).exists()) {
+                    this.json.put(o);
+                } else {
+                    t.delete();
+                }
+
+            }
         } catch(Exception ex) {
             ex.printStackTrace();
         }

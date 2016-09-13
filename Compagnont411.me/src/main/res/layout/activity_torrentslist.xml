@@ -3,22 +3,27 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context="torrentsActivity">
+    tools:context="torrentsActivity"
+    android:background="@color/t411_action_blue">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/toolbar" />
 
     <GridView
         android:id="@+id/malistviewperso"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/widget_content_background"
         android:cacheColorHint="#00000000"
         android:padding="5dip"
         android:divider="#00000000"
         android:focusable="false"
         android:longClickable="true"
         android:clipToPadding="false"
-        android:smoothScrollbar="true"
-        android:fastScrollEnabled="true"
         android:listSelector="@drawable/androidt411_btn"
         android:columnWidth="420dp"
         android:numColumns="auto_fit" />
@@ -31,12 +36,12 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:background="@drawable/bg_card_blue"
         android:clickable="true"
         android:focusable="true"
         android:id="@+id/category_filter"
         android:layout_weight="0"
-        android:padding="4dp">
+        android:padding="4dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored">
 
         <ImageView
             android:layout_width="42dp"
@@ -51,50 +56,47 @@
             android:text="-- Tout --"
             android:id="@+id/tvCatListFilter"
             android:layout_weight="1"
+            android:clickable="false"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#FFF"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:backgroundTint="#eee"
+            style="@style/Widget.AppCompat.Spinner.DropDown" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@drawable/ic_dropdown"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:layout_margin="4dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:id="@+id/navbar"
-        android:background="#eee">
+        android:id="@+id/navbar">
 
         <ImageButton
             android:layout_width="42dp"
             android:layout_height="match_parent"
             android:id="@+id/navbtn_prev"
             android:src="@drawable/ic_arrow_prev"
+            android:clickable="true"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:padding="5dp"
-            android:background="@drawable/androidt411_btn" />
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:backgroundTint="#eee"
+            android:tint="#eee" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_card_blue"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/navbtn_list"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:padding="4dp">
+            android:padding="4dp"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored">
 
             <ProgressBar
-                android:layout_width="42dp"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:id="@+id/subcat_progressbar"
                 android:indeterminate="false"
@@ -112,16 +114,11 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="#FFF"
-                android:singleLine="true" />
+                android:clickable="false"
+                android:singleLine="true"
+                android:backgroundTint="#eee"
+                style="@style/Widget.AppCompat.Spinner.DropDown"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView4"
-                android:src="@drawable/ic_dropdown"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:layout_margin="4dp" />
         </LinearLayout>
 
         <ImageButton
@@ -131,7 +128,11 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_arrow_next"
             android:padding="5dp"
-            android:background="@drawable/androidt411_btn" />
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:backgroundTint="#eee"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:tint="#eee" />
 
     </LinearLayout>
 </LinearLayout>

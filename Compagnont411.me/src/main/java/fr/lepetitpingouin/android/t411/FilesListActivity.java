@@ -2,6 +2,7 @@ package fr.lepetitpingouin.android.t411;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,6 +16,7 @@ public class FilesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_files);
 
+        setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setTitle("Liste des fichiers");
         getSupportActionBar().setIcon(R.drawable.ic_list_files);
         getSupportActionBar().setHomeButtonEnabled(true);

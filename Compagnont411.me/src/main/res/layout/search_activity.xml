@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="3dp">
+    android:padding="3dp"
+    android:background="@color/t411_action_blue">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/searchtoolbar"
@@ -18,6 +19,7 @@
         android:background="@drawable/bg_card"
         android:minHeight="?attr/actionBarSize"
         android:transitionName="searchWidget"
+        app:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp">
 
@@ -74,11 +76,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_card_blue"
                 android:clickable="true"
 
                 android:focusable="true"
-                android:padding="7dp">
+                android:padding="7dp"
+                style="@style/Widget.AppCompat.Button.Borderless">
 
                 <ImageView
                     android:id="@+id/ddl_icon"
@@ -97,57 +99,12 @@
                     android:padding="6dp"
                     android:singleLine="true"
                     android:text="Toutes catégorie"
+                    android:backgroundTint="#eee"
+                    android:clickable="false"
+                    style="@style/Widget.AppCompat.Spinner.DropDown"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#FFF" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_dropdown" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_subcat"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_card_blue"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="7dp">
-
-                <ProgressBar
-                    android:id="@+id/subcat_progressbar"
-                    android:layout_width="44dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0"
-                    android:indeterminate="false"
-                    android:indeterminateDrawable="@drawable/loading"
-                    android:padding="8dp"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/subcat_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:padding="6dp"
-                    android:singleLine="true"
-                    android:text="-- Tous --"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#FFF" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_dropdown" />
             </LinearLayout>
 
             <LinearLayout
@@ -161,10 +118,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_card_blue"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="7dp">
+                    android:padding="7dp"
+                    style="@style/Widget.AppCompat.Button.Borderless">
 
                     <ImageView
                         android:id="@+id/lst_sortIcon"
@@ -172,6 +129,7 @@
                         android:layout_height="42dp"
                         android:layout_gravity="center_vertical"
                         android:padding="3dp"
+                        android:tint="#fff"
                         android:src="@drawable/ic_sort_default" />
 
                     <TextView
@@ -182,17 +140,12 @@
                         android:layout_weight="1"
                         android:padding="6dp"
                         android:singleLine="true"
+                        android:backgroundTint="#eee"
+                        android:clickable="false"
+                        style="@style/Widget.AppCompat.Spinner.DropDown"
                         android:text="Aucun filtre"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="#FFF" />
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="6dp"
-                        android:src="@drawable/ic_dropdown" />
 
                 </LinearLayout>
 
@@ -201,18 +154,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/bg_card_blue"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="7dp">
+                    android:padding="7dp"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:gravity="right">
 
                     <CheckBox
                         android:id="@+id/sortOrder"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:button="@drawable/radio_sort_order"
                         android:checked="true"
-                        android:clickable="true" />
+                        android:clickable="true"
+                        android:gravity="center" />
                 </LinearLayout>
             </LinearLayout>
 

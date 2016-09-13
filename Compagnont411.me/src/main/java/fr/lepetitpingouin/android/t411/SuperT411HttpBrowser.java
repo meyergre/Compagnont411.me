@@ -77,7 +77,7 @@ public class SuperT411HttpBrowser {
 
     private Boolean proxy = false;
 
-    private Boolean skipLogin = false;
+    private Boolean skipLogin = false, rawResult = false;
 
     private HttpHost httpproxy;
     //Proxy httpproxy;
@@ -160,6 +160,12 @@ public class SuperT411HttpBrowser {
     public SuperT411HttpBrowser skipLogin() {
         this.skipLogin = true;
         new T411Logger(this.ctx).writeLine("Cette connexion ne nécessite pas de se connecter au profil t411");
+        return this;
+    }
+
+    public SuperT411HttpBrowser rawResult() {
+        this.rawResult = true;
+        new T411Logger(this.ctx).writeLine("Récupération du résultat brut");
         return this;
     }
 
@@ -385,6 +391,7 @@ public class SuperT411HttpBrowser {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(8);
         nameValuePairs.add(new BasicNameValuePair("remember", "1"));
         nameValuePairs.add(new BasicNameValuePair("login", username));
+        nameValuePairs.add(new BasicNameValuePair("username", username));
         nameValuePairs.add(new BasicNameValuePair("password", password));
         nameValuePairs.add(new BasicNameValuePair("url", "/"));
         // captcha
@@ -420,7 +427,7 @@ public class SuperT411HttpBrowser {
 
             try {
                 String conError = Jsoup.parse(responseString).select("div.fade").first().text();
-                if (!conError.equals("") && !conError.contains("identifié")) {
+                if (!conError.equals(null) && !conError.equals("") && !conError.contains("identifié")) {
                     errorMessage = conError;
 
                     new T411Logger(this.ctx).writeLine("Le site a répondu : " + errorMessage, T411Logger.WARN);
@@ -458,7 +465,7 @@ public class SuperT411HttpBrowser {
 
         try {
 
-            e = new UrlEncodedFormEntity(data);
+            e = new UrlEncodedFormEntity(this.data);
 
             httppost.setEntity(e);
 
@@ -476,7 +483,11 @@ public class SuperT411HttpBrowser {
                 this.mresponseStream = EntityUtils.toByteArray(entity);
 
                 //responseString = EntityUtils.toString(entity, encoding);
-                responseString = new String(this.mresponseStream, encoding);
+                if(this.rawResult) {
+                    responseString = entity.getContent().toString();
+                } else {
+                    responseString = new String(this.mresponseStream, encoding);
+                }
 
                 new T411Logger(this.ctx).writeLine("La connexion a répondu : 200 OK ");
             } else {
@@ -506,8 +517,13 @@ public class SuperT411HttpBrowser {
         String retValue = "";
 
         try {
-            retValue = new String(responseString.getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e1) {
+            if(this.rawResult)
+                retValue = responseString;
+            else {
+                retValue = new String(responseString.getBytes("UTF-8"));
+            }
+        } catch (Exception e1) {
+            retValue = responseString;
             e1.printStackTrace();
         }
 

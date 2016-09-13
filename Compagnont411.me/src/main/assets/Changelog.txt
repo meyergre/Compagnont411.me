@@ -1,5 +1,19 @@
 CHANGELOG
 
+2016.09-159
+- Intégration de l'API de t411 pour booster la vitesse des recherches de torrents
+- Nettoyage des ressources de l'application
+- Changement de thème visuel
+
+
+2016.07-158
+- Correction de la récupération des ratios > 1000
+
+
+2016.05-157
+- Suppression automatique des fichiers effacés dans la liste des téléchargements
+
+
 2016.05-156
 - Correction des tailles d'icones
 - Les icones Messagerie et Téléchargements peuvent être masquées

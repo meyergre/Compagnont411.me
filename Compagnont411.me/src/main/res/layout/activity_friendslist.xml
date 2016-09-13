@@ -4,6 +4,13 @@
     android:background="#fff"
     android:orientation="vertical">
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        layout="@layout/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/toolbar" />
+
     <GridView
         android:id="@+id/malistviewperso"
         android:layout_width="fill_parent"
@@ -13,7 +20,7 @@
         android:divider="#eee"
         android:dividerHeight="0dp"
         android:listSelector="@drawable/androidt411_btn"
-        android:background="#ddd"
+        android:background="@color/t411_action_blue"
         android:columnWidth="260dp"
         android:numColumns="auto_fit"
         android:scrollingCache="false" />

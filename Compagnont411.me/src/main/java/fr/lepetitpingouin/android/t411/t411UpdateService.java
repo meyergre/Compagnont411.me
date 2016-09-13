@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -109,12 +111,15 @@ public class t411UpdateService extends Service {
 
         if (!prefs.getBoolean("wifiOnly", false) || (prefs.getBoolean("wifiOnly", false) && isConnectedToWifi())) {
 
+            new asyncApiLogin().execute();
+            new asyncApiUpdate().execute();
 
             upd = new AsyncUpdate();
             upd.execute();
             try {
                 new newsFetcher().execute();
             } catch(Exception ex) {ex.printStackTrace();}
+
         }
 
         stopSelf();
@@ -172,11 +177,8 @@ public class t411UpdateService extends Service {
 
         }
 
-        Log.e("ERROR", doc.body().toString());
-        Log.e("ERROR", doc.title().toString());
-
         try {
-            ratio = Math.round(Float.valueOf(doc.select(".rate").first().text().replace(',', '.')) * 100.0) / 100.0;
+            ratio = Math.round(Float.valueOf(doc.select(".rate").first().text().replace(',', '.').replace(" ", "")) * 100.0) / 100.0;
             new T411Logger(getApplicationContext()).writeLine("Récupération du ratio : "+ ratio);
 
             username = doc.select(".avatar-big").attr("alt");
@@ -328,12 +330,7 @@ public class t411UpdateService extends Service {
 
             if (mails != null)
                 editor.putInt("lastMails", mails);
-            if (upload != null)
-                editor.putString("lastUpload", upload);
-            if (download != null)
-                editor.putString("lastDownload", download);
-            if (ratio != Double.NaN)
-                editor.putString("lastRatio", String.valueOf(ratio));
+
             editor.putString("usernumber", usernumber);
 
             if (mails < prefs.getInt("lastMails", 0))
@@ -537,6 +534,77 @@ public class t411UpdateService extends Service {
         protected void onPostExecute(Void arg) {
             getApplicationContext().sendBroadcast(new Intent(Default.Intent_Refresh_Newspaper));
         }
+    }
+
+    private class asyncApiLogin extends AsyncTask<Void, JSONObject[], JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            new T411Logger(getApplicationContext()).writeLine("Début de la mise à jour");
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+
+            String apiUrl = Default.API_T411 + "/auth";
+            APIBrowser api_browser = new APIBrowser(getApplicationContext());
+            new T411Logger(getApplicationContext()).writeLine("Connexion à l'adresse " + apiUrl);
+            String username = prefs.getString("login", ""), password = prefs.getString("password", "");
+            return api_browser.connect(apiUrl).addPOSTParam("username", username).addPOSTParam("password", password).loadObject();
+        }
+
+        @Override
+        public void onPostExecute(JSONObject value) {
+            try {
+                prefs.edit().putString("APIToken",value.getString("token")).commit();
+                prefs.edit().putString("uid",value.getString("uid")).commit();
+                new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + value.getString("token"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                new T411Logger(getApplicationContext()).writeLine("Erreur de récupération du token : " + e.getMessage());
+            }
+        }
+
+    }
+
+    private class asyncApiUpdate extends AsyncTask<Void, JSONObject[], JSONObject> {
+
+        @Override
+        protected void onPreExecute() {
+            new T411Logger(getApplicationContext()).writeLine("Début de la mise à jour");
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+
+            String apiUrl = Default.API_T411 + "/users/profile/"+prefs.getString("uid", "");
+            APIBrowser api_browser = new APIBrowser(getApplicationContext());
+            return api_browser.connect(apiUrl).loadObject();
+        }
+
+        @Override
+        public void onPostExecute(JSONObject value) {
+            try {
+                prefs.edit().putString("lastUpload",BSize.quickConvert(value.getString("uploaded"))).commit();
+                prefs.edit().putString("lastDownload",BSize.quickConvert(value.getString("downloaded"))).commit();
+
+
+                prefs.edit().putString(
+                        "lastRatio",
+                        String.format(
+                                "%.2f",
+                                (Float.parseFloat(value.getString("uploaded")) / Float.parseFloat(value.getString("downloaded")))
+                        )
+                ).commit();
+
+                new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + value.getString("token"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                new T411Logger(getApplicationContext()).writeLine("Erreur de récupération du token : " + e.getMessage());
+            }
+            sendBroadcast(new Intent(Default.Appwidget_update));
+        }
+
     }
 
     private class grapher extends AsyncTask<Void, String[], String> {

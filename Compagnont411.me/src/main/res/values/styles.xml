@@ -2,6 +2,6 @@
 
     <style name="AppTheme" parent="android:Theme.Light" />
 
-    <color name="t411_action_darkblue">#ff020442</color>
+    <color name="t411_action_darkblue">#020442</color>
 
 </resources>

@@ -11,7 +11,7 @@
         android:id="@+id/listView"
         android:paddingTop="16dp"
         android:layout_centerHorizontal="true"
- />
+        android:layout_below="@+id/toolbar" />
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -23,15 +23,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
+    <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Appui long pour les options"
-        android:id="@+id/textView37"
-        android:gravity="center"
-        android:textSize="10sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        layout="@layout/toolbar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/toolbar" />
 </RelativeLayout>

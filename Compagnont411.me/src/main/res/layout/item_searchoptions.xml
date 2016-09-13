@@ -26,7 +26,8 @@
         android:id="@+id/lso_title"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="#111111" />
 
     <TextView
         android:layout_width="0dp"

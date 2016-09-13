@@ -36,7 +36,7 @@
         android:layout_height="32dp"
         android:layout_gravity="center"
         android:layout_marginRight="5dp"
-        android:src="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:src="@drawable/ic_search"
         android:tint="#555" />
 
 </LinearLayout>

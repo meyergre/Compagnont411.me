@@ -2,6 +2,7 @@ package fr.lepetitpingouin.android.t411;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ public class NfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfo);
 
+        setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setTitle("NFO");
         getSupportActionBar().setIcon(R.drawable.ic_nfo_file);
         getSupportActionBar().setHomeButtonEnabled(true);

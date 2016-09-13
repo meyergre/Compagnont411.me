@@ -4,6 +4,12 @@
     android:orientation="vertical"
     android:background="#FFF">
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar"
+        android:layout_gravity="center_horizontal" />
+
     <WebView
         android:layout_width="match_parent"
         android:layout_height="0dp"

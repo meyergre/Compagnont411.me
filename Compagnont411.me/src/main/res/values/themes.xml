@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Translucent theme -->
+        <style name="Theme.Transparent" parent="@style/Theme.AppCompat.Light.NoActionBar">
+            <item name="android:windowIsTranslucent">true</item>
+            <item name="android:windowBackground">@android:color/transparent</item>
+            <item name="android:windowContentOverlay">@null</item>
+            <item name="android:windowNoTitle">true</item>
+            <item name="android:backgroundDimEnabled">false</item>
+        </style>
+
     <!-- the theme applied to the application or activity -->
 
     <style name="toolbarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <item name="android:statusBarColor">#22000000</item>
+        <item name="android:statusBarColor">@color/t411_action_blue_darker</item>
         <item name="android:navigationBarColor">@color/t411_action_blue</item>
         <item name="colorPrimary">@color/t411_action_blue</item>
         <item name="colorPrimaryDark">@color/t411_action_blue_darker</item>
@@ -75,13 +85,13 @@
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
 
-        <item name="android:background">@color/t411_action_blue</item>
+        <item name="android:background">@color/t411_action_blue_darker</item>
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
         <item name="android:subtitleTextStyle">@style/MyActionBarSubTitleText</item>
 
 
         <!-- Support library compatibility -->
-        <item name="background">@drawable/actionbar_new</item>
+        <item name="background">@color/t411_action_blue_darker</item>
         <item name="titleTextStyle">@style/MyActionBarTitleText</item>
 
     </style>

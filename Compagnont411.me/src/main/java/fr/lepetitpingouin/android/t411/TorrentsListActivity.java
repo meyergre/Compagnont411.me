@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -35,6 +36,8 @@ public class TorrentsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torrents_list);
+
+        setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
 
         getSupportActionBar().setTitle("Téléchargements");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

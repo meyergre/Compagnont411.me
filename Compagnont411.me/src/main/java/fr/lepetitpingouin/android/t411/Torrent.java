@@ -2,6 +2,7 @@ package fr.lepetitpingouin.android.t411;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,8 +33,8 @@ import java.util.Map;
 public class Torrent {
 
     public String name;
-    private String id;
-    private String url;
+    public String id;
+    public String url;
     public String category="";
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
     public static String STATUS_PENDING = "(P)";
@@ -186,6 +188,7 @@ public class Torrent {
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
         i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+
 
         context.startActivity(i);
     }
@@ -441,11 +444,11 @@ public class Torrent {
         }
     }
 
-    private String getTorrentPath() {
+    public String getTorrentPath() {
         return prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
     }
 
-    private String getTorrentName() {
+    public String getTorrentName() {
         return name.replaceAll("/", "_") + ".torrent";
     }
 }

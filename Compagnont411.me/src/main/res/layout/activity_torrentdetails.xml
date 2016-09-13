@@ -4,9 +4,16 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar"
+        android:layout_gravity="center_horizontal" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/scrollView4"
         android:layout_centerHorizontal="true"
         android:background="#fff"

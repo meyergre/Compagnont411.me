@@ -17,7 +17,6 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:background="@drawable/rounded_button"
                 android:backgroundTint="#2372a9"
                 android:drawableLeft="@drawable/ic_btn_fast"
                 android:elevation="3dp"
@@ -25,7 +24,8 @@
                 android:onClick="onFastTorrent"
                 android:padding="5dp"
                 android:text=" rapides"
-                android:textColor="#FFF" />
+                android:textColor="#FFF"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
 
             <Button
                 android:id="@+id/button2"
@@ -34,7 +34,6 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:background="@drawable/rounded_button"
                 android:backgroundTint="#2372a9"
                 android:drawableLeft="@drawable/ic_btn_day"
                 android:elevation="3dp"
@@ -42,7 +41,8 @@
                 android:onClick="onDailyTorrent"
                 android:padding="5dp"
                 android:text=" du jour"
-                android:textColor="#FFF" />
+                android:textColor="#FFF"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
 
             <Button
                 android:id="@+id/button3"
@@ -51,7 +51,6 @@
                 android:layout_margin="4dp"
                 android:singleLine="true"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_button"
                 android:backgroundTint="#2b6d9a"
                 android:drawableLeft="@drawable/ic_btn_week"
                 android:elevation="3dp"
@@ -59,7 +58,8 @@
                 android:onClick="onWeeklyTorrent"
                 android:padding="5dp"
                 android:text=" de la semaine"
-                android:textColor="#FFF" />
+                android:textColor="#FFF"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
 
             <Button
                 android:id="@+id/button4"
@@ -68,7 +68,6 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:background="@drawable/rounded_button"
                 android:backgroundTint="#2081c5"
                 android:drawableLeft="@drawable/ic_btn_month"
                 android:elevation="3dp"
@@ -76,5 +75,6 @@
                 android:onClick="onMonthlyTorrent"
                 android:padding="5dp"
                 android:text=" du mois"
-                android:textColor="#FFF" />
+                android:textColor="#FFF"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
         </LinearLayout>

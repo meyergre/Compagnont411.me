@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.1.3'
     }
 }
 apply plugin: 'com.android.application'
@@ -13,14 +13,14 @@ repositories {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         minSdkVersion 12
-        targetSdkVersion 23
-        versionCode 156
-        versionName "2016.05-156"
+        targetSdkVersion 24
+        versionCode 159
+        versionName "2016.08-159"
         applicationId "fr.lepetitpingouin.android.t411"
 
         resConfigs "en", "fr"
@@ -35,11 +35,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:palette-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:palette-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
     compile 'org.jsoup:jsoup:1.9.2'
     compile 'com.anjlab.android.iab.v3:library:1.0.31'
-    compile 'com.google.android.gms:play-services-ads:9.0.0'
+    compile 'com.google.android.gms:play-services-ads:9.4.0'
 }

@@ -345,4 +345,14 @@
     <string name="downloads_prez">Accéder à la prez</string>
     <string name="downloads_change_passkey">Change passkey</string>
     <string name="downloads">Téléchargements</string>
+    <string name="app_title_fr" >Compagnon</string>
+    <string name="app_title_en"> </string>
+    <string name="btn_liftoff">Commencer</string>
+    <string name="btn_next">Suivant</string>
+    <string name="welcome_message_launchers">En plus du lanceur principal, l\'application propose des accès directs depuis votre écran d\'accueil, que vous pouvez activer ou désactiver ci-dessous</string>
+    <string name="you_can_edit_in_settings">Vous pouvez changer ces réglages dans les paramètres</string>
+    <string name="skip">Ignorer</string>
+    <string name="btn_done">Terminé</string>
+    <string name="wlcm_last_message">Merci d\'utiliser mon application ! Vous êtes maintenant prêt à vous lancer.\n\nCet assistant pourra éventuellement se représenter à vous à l\'avenir, dans le cas d\'un ajout de fonctionnalité.</string>
+    <string name="loadMore">Résultats suivants</string>
 </resources>

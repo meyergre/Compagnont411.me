@@ -1,6 +1,6 @@
 <resources>
 
-    <color name="t411_blue">#0059B4</color>
+    <color name="t411_blue">#0059b4</color>
     <color name="t411_red">#b40000</color>
     <color name="t411_green">#129b00</color>
     <color name="t411_black">#000000</color>
@@ -352,4 +352,15 @@
     <string name="downloads_prez">Show description</string>
     <string name="downloads_change_passkey">Change passkey</string>
     <string name="downloads">Downloads</string>
+    <string name="app_title_en">Companion</string>
+    <string name="app_title_fr" > </string>
+    <string name="btn_liftoff">Begin</string>
+    <string name="btn_next">Next</string>
+    <string name="welcome_message_launchers">In addition to the main app launcher, the below ones are proposed. Please choose which ones you would like to be shown in your app drawer</string>
+    <string name="you_can_edit_in_settings">You can change this later in app\'s settings</string>
+    <string name="welcome_presentation_proxy" translatable="false">Si votre pays bloque l\'accès au serveur de t411, une option de contournement est proposée dans les paramètres.</string>
+    <string name="skip">Skip</string>
+    <string name="btn_done">Done</string>
+    <string name="wlcm_last_message">Thanks for using my app ! You\'re now ready to go by yourself.\n\nPlease note that this assistant might show up again in the future, in case of new feature.</string>
+    <string name="loadMore">Load more results</string>
 </resources>

@@ -18,7 +18,7 @@ class CategoryIcon {
     public int getIcon() {
 
         //Musique
-        if ("395, 623,400, 403, 642".contains(catCode))
+        if ("395, 623, 400, 403, 642".contains(catCode))
             return R.drawable.ic_new_music;
 
         //Ebooks

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card"
+        android:layout_gravity="center"
+        android:baselineAligned="false"
+        android:layout_margin="2dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_gravity="left|center_vertical">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tNom"
+                        android:textAllCaps="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textSize="16sp"
+                        android:textColor="@color/t411_action_blue"
+                        android:maxLines="2"
+                        android:text="torrent title"
+                        android:layout_gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/t_up_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="none"
+                        android:singleLine="false"
+                        android:textSize="7sp"
+                        android:textColor="@color/t411_action_lightgrey"
+                        android:maxLines="2"
+                        android:text="torrent uploader, date"
+                        android:layout_marginLeft="10dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/tIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_new_t411"
+                    android:focusable="false"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="4dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/linearLayout4"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tTaille"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="#88000000"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/linearLayout7"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="3dp">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ratio :"
+                            android:textColor="#000"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/tRatioBase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="-"
+                            android:textColor="#88000000"
+                            android:textSize="8sp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="→"
+                            android:textColor="#44000000"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/tRatio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="-"
+                            android:textColor="#88000000"
+                            android:textSize="8sp"
+                            android:layout_marginLeft="5dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp">
+
+                            <TextView
+                                android:id="@+id/tSeeders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="-"
+                                android:textColor="@color/t411_green"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="Seeders"
+                                android:textColor="@color/t411_green"
+                                android:textSize="6sp"
+                                android:singleLine="true" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/linearLayout5"
+                            android:gravity="center_horizontal"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp">
+
+                            <TextView
+                                android:id="@+id/tLeechers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="-"
+                                android:textColor="@color/t411_red"
+                                android:textSize="24sp"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal" />
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Leechers"
+                                android:textColor="@color/t411_red"
+                                android:textSize="6sp"
+                                android:singleLine="true"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                android:textIsSelectable="false" />
+
+                        </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/linearLayout3"
+                        android:gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:id="@+id/tCompleted"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="-"
+                            android:textColor="#88000000"
+                            android:layout_weight="0"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:singleLine="true" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="complets"
+                            android:textColor="#000"
+                            android:textSize="6sp"
+                            android:singleLine="true"
+                            android:gravity="center"
+                            android:layout_weight="0" />
+                    </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

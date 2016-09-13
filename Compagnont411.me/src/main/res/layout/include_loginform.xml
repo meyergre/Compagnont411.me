@@ -13,12 +13,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="2dp"
         android:background="@drawable/input_text"
-        android:elevation="4dp"
         android:hint="@string/main_login"
         android:singleLine="true"
         android:padding="12dp"
         android:textAlignment="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/login_password"
@@ -27,13 +27,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="2dp"
         android:background="@drawable/input_text"
-        android:elevation="4dp"
         android:ems="10"
         android:hint="@string/main_password"
         android:inputType="textPassword"
         android:singleLine="true"
         android:padding="12dp"
         android:textAlignment="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="14sp" />
 
 </LinearLayout>

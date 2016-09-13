@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/clouds"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_message_launchers"
+        android:id="@+id/textView42"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/t411_action_blue" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView8"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_launcher_downloads"
+                android:layout_marginRight="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/downloads"
+                android:id="@+id/textView43"
+                android:layout_weight="1"
+                android:textColor="@color/t411_action_blue" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBoxDownloads"
+                android:checked="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView9"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_launcher_messages"
+                android:layout_marginRight="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/launcher_messages"
+                android:id="@+id/textView44"
+                android:layout_weight="1"
+                android:textColor="@color/t411_action_blue" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBoxMessages"
+                android:checked="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/you_can_edit_in_settings"
+        android:id="@+id/textView45"
+        android:textSize="12sp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/t411_action_blue" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_next"
+        android:id="@+id/button7"
+        android:layout_gravity="center_horizontal"
+        android:drawableRight="@drawable/ic_chevron"
+        android:layout_weight="0"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/t411_blue"
+        android:onClick="onLauncherIcons" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp" />
+</LinearLayout>

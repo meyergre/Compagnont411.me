@@ -8,16 +8,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.inputmethod.EditorInfo;
@@ -34,13 +37,19 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
     private CheckBox sortMode;
@@ -49,13 +58,12 @@ public class SearchActivity extends AppCompatActivity {
 
     private LinearLayout dropdown_category;
     private LinearLayout dropdown_sort;
-    private LinearLayout dropdown_subcat;
 
-    private subCatFetcher scF;
     private favoritesFetcher fF;
 
     private ImageView ivSort;
     private ImageView ivCat;
+    private TextView tvCat;
     private EditText tx_description;
     private EditText tx_uploader;
     private EditText tx_fichier;
@@ -71,32 +79,26 @@ public class SearchActivity extends AppCompatActivity {
     private String subCatCode = "";
     private String sort = "";
 
-    private HashMap<String, String> mapCat;
     private HashMap<String, String> mapSort;
-    private HashMap<String, String> mapSubcat;
     private HashMap<String, String> mapFav;
-    private SimpleAdapter mScheduleCat;
     private SimpleAdapter mScheduleSort;
-    private SimpleAdapter mScheduleSubcat;
     private SimpleAdapter mScheduleFav;
 
     private ListView maListViewPersoCat;
     private ListView maListViewPersoSort;
-    private ListView maListViewPersoSubcat;
     private ListView getMaListViewPersoFav;
-    private ArrayList<HashMap<String, String>> listItemCat;
     private ArrayList<HashMap<String, String>> listItemSort;
-    private ArrayList<HashMap<String, String>> listItemSubcat;
     private ArrayList<HashMap<String, String>> listItemFav;
     private Dialog cat_dialog;
     private Dialog sort_dialog;
-    private Dialog subcat_dialog;
     private Dialog favorites_dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_activity);
+
+        new asyncApiGetCategories().execute();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -109,6 +111,9 @@ public class SearchActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
 
         sh = new SearchHistory(getApplicationContext());
+
+        ivCat = (ImageView)findViewById(R.id.ddl_icon);
+        tvCat = (TextView)findViewById(R.id.ddl_category);
 
         keywords = (AutoCompleteTextView) findViewById(R.id.action_search_keywords);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sh.getValues());
@@ -174,97 +179,21 @@ public class SearchActivity extends AppCompatActivity {
         sortMode = (CheckBox) findViewById(R.id.sortOrder);
 
         cat_dialog = new Dialog(this, R.style.MyDialogTheme);
+        cat_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         cat_dialog.setContentView(R.layout.dialog_listview);
-        cat_dialog.setTitle("Choisir une catégorie...");
 
         maListViewPersoCat = (ListView) cat_dialog.findViewById(R.id.dialoglistview);
-        listItemCat = new ArrayList<HashMap<String, String>>();
 
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_t411));
-        mapCat.put("name", getString(R.string.search_cat_all));
-        mapCat.put("code", "");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_music));
-        mapCat.put("name", getString(R.string.search_cat_audio));
-        mapCat.put("code", "395");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_ebook));
-        mapCat.put("name", getString(R.string.search_cat_eBooks));
-        mapCat.put("code", "404");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_emulation));
-        mapCat.put("name", "Emulation");
-        mapCat.put("code", "340");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_game));
-        mapCat.put("name", getString(R.string.search_cat_videogames));
-        mapCat.put("code", "624");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_gps));
-        mapCat.put("name", getString(R.string.search_cat_GPS));
-        mapCat.put("code", "392");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_mobile));
-        mapCat.put("name", getString(R.string.search_cat_applications));
-        mapCat.put("code", "233");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_film));
-        mapCat.put("name", getString(R.string.search_cat_movies));
-        mapCat.put("code", "210");
-        listItemCat.add(mapCat);
-
-        mapCat = new HashMap<String, String>();
-        mapCat.put("icon", String.valueOf(R.drawable.ic_new_xxx));
-        mapCat.put("name", "xXx");
-        mapCat.put("code", "456");
-        listItemCat.add(mapCat);
-
-        mScheduleCat = new SimpleAdapter(
-                this.getBaseContext(), listItemCat,
-                R.layout.item_searchoptions, new String[]{"icon", "name",
-                "code"}, new int[]{R.id.lso_icon,
-                R.id.lso_title, R.id.lso_code});
-
-        maListViewPersoCat.setAdapter(mScheduleCat);
         maListViewPersoCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             @SuppressWarnings("unchecked")
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                HashMap<String, String> map = (HashMap<String, String>) maListViewPersoCat
-                        .getItemAtPosition(position);
-
+                HashMap<String, String> map = (HashMap<String, String>) maListViewPersoCat.getItemAtPosition(position);
                 catCode = map.get("code");
-                subCatCode = "";
-                TextView tv = (TextView) findViewById(R.id.ddl_category);
-                tv.setText(map.get("name"));
-                ivCat = (ImageView) findViewById(R.id.ddl_icon);
-                ivCat.setImageResource(Integer.valueOf(map.get("icon")));
-                icon_category = Integer.valueOf(map.get("icon"));
-                dropdown_subcat.setVisibility(View.VISIBLE);
-                tv = (TextView) findViewById(R.id.subcat_title);
-                tv.setText("-- Tous --");
-                scF = new subCatFetcher();
-                try {
-                    scF.execute();
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Erreur...", Toast.LENGTH_SHORT).show();
-                }
                 cat_dialog.dismiss();
+                ivCat.setImageResource(Integer.parseInt(map.get("icon")));
+                tvCat.setText(map.get("name"));
             }
         });
 
@@ -386,48 +315,6 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-
-
-
-        dropdown_subcat = (LinearLayout) findViewById(R.id.ll_subcat);
-        dropdown_subcat.setVisibility(View.GONE);
-        dropdown_subcat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                subcat_dialog.show();
-            }
-        });
-
-        subcat_dialog = new Dialog(this, R.style.MyDialogTheme);
-        subcat_dialog.setContentView(R.layout.dialog_listview);
-        subcat_dialog.setTitle("Choisir une sous-catégorie...");
-
-        maListViewPersoSubcat = (ListView) subcat_dialog.findViewById(R.id.dialoglistview);
-        listItemSubcat = new ArrayList<HashMap<String, String>>();
-
-        mScheduleSubcat = new SimpleAdapter(
-                getBaseContext(), listItemSubcat,
-                R.layout.item_searchoptions, new String[]{"icon", "name",
-                "code"}, new int[]{R.id.lso_icon,
-                R.id.lso_title, R.id.lso_code});
-
-        maListViewPersoSubcat.setAdapter(mScheduleSubcat);
-        maListViewPersoSubcat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                HashMap<String, String> map = (HashMap<String, String>) maListViewPersoSubcat
-                        .getItemAtPosition(position);
-
-                subCatCode = map.get("code");
-                TextView tv = (TextView) findViewById(R.id.subcat_title);
-                tv.setText(map.get("name"));
-                ivCat = (ImageView) findViewById(R.id.ddl_icon);
-                ivCat.setImageResource(Integer.valueOf(map.get("icon")));
-                subcat_dialog.dismiss();
-            }
-        });
-
         fF = new favoritesFetcher();
         try {
             fF.execute();
@@ -438,12 +325,6 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        /*fF = new favoritesFetcher();
-        try {
-            fF.execute();
-        } catch (Exception e) {
-        }*/
-
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connManager.getActiveNetworkInfo();
         if (!(netInfo != null && netInfo.isConnectedOrConnecting())) {
@@ -493,8 +374,10 @@ public class SearchActivity extends AppCompatActivity {
 
         Intent i;
         i = new Intent();
-        i.setClass(getApplicationContext(), torrentsActivity.class);
-        i.putExtra("url", url);
+        //i.setClass(getApplicationContext(), torrentsActivity.class);
+        i.setClass(getApplicationContext(), SearchResultsActivity.class);
+        //i.putExtra("url", url);
+        i.putExtra("cat", (!subCatCode.isEmpty()?subCatCode:catCode));
         i.putExtra("keywords", keywords.getText().toString());
         i.putExtra("order", sort);
         i.putExtra("sender", "search");
@@ -608,58 +491,6 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private class subCatFetcher extends AsyncTask<Void, String[], Void> {
-
-        @Override
-        protected void onPreExecute() {
-            loading.setVisibility(View.VISIBLE);
-            listItemSubcat.clear();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            Document doc;
-
-            try {
-
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
-                        .login(prefs.getString("login", ""), prefs.getString("password", ""))
-                        .connect(Default.URL_GET_SUBCAT + catCode)
-                        .executeInAsyncTask());
-
-                Elements options = doc.select("#search-subcat > option");
-
-                for (Element option : options) {
-                    mapSubcat = new HashMap<String, String>();
-                    mapSubcat.put("icon", String.valueOf(icon_category));
-                    mapSubcat.put("name", option.text());
-                    mapSubcat.put("code", option.attr("value"));
-                    listItemSubcat.add(mapSubcat);
-                }
-
-
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            mScheduleSubcat = new SimpleAdapter(
-                    getBaseContext(), listItemSubcat,
-                    R.layout.item_searchoptions, new String[]{"icon", "name",
-                    "code"}, new int[]{R.id.lso_icon,
-                    R.id.lso_title, R.id.lso_code});
-
-            maListViewPersoSubcat.setAdapter(mScheduleSubcat);
-
-            loading.setVisibility(View.INVISIBLE);
-        }
-    }
-
-
-
 
     public class ResizeAnimation extends Animation {
         final int targetHeight;
@@ -727,4 +558,74 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+    private class asyncApiGetCategories extends AsyncTask<Void, String, JSONObject> {
+
+        private ArrayList<HashMap<String, String>> catList;
+
+        public asyncApiGetCategories() {
+            this.catList = new ArrayList<>();
+        }
+
+        private void extractFromJson(JSONObject json) {
+            try {
+                Iterator<String> iter = json.keys();
+                while (iter.hasNext()) {
+                    String key = iter.next();
+                    try {
+                        JSONObject value = new JSONObject(json.getString(key));
+                        HashMap<String, String> catMap = new HashMap<>();
+                        catMap.put("icon", String.valueOf(new CategoryIcon(value.getString("id")).getIcon()));
+                        catMap.put("name", value.getString("name"));
+                        catMap.put("code", value.getString("id"));
+                        catList.add(catMap);
+
+                        if(value.has("cats")) {
+                            extractFromJson(value.getJSONObject("cats"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                SimpleAdapter adapter = new SimpleAdapter(
+                        getApplicationContext(), catList,
+                        R.layout.item_searchoptions,
+                        new String[]{"icon", "name", "code"},
+                        new int[]{R.id.lso_icon, R.id.lso_title, R.id.lso_code});
+                maListViewPersoCat.setAdapter(adapter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+
+            publishProgress("Connexion API...");
+            String apiUrl = Default.API_T411 + "/categories/tree";
+            APIBrowser api_browser = new APIBrowser(getApplicationContext());
+            JSONObject o = api_browser.connect(apiUrl).loadObject();
+            return o;
+        }
+
+        @Override
+        public void onPostExecute(JSONObject json) {
+            extractFromJson(json);
+        }
+
+    }
 }

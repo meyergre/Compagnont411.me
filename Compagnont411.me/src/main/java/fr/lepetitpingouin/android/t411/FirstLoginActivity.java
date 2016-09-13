@@ -24,6 +24,8 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -93,75 +95,9 @@ public class FirstLoginActivity extends AppCompatActivity {
                 //finish();
             }
         });
-
-        ImageView girl = (ImageView)findViewById(R.id.login_iv_girl);
-        ImageView city = (ImageView)findViewById(R.id.login_iv_city);
-
         final View login = findViewById(R.id.login_inc_loginform);
         fab = findViewById(R.id.fablogin);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            city.animate()
-                    .setDuration(0)
-                    .setStartDelay(0)
-                    .alpha(0)
-                    .start();
-
-            city.animate()
-                    .setDuration(3000)
-                    .setStartDelay(800)
-                    .alpha(1)
-                    .start();
-            city.animate()
-                    .setStartDelay(0)
-                    .scaleX(1.1f)
-                    .scaleY(1.1f)
-                    .setDuration(15000)
-                    .start();
-
-
-            girl.animate()
-                    .setDuration(0)
-                    .setStartDelay(0)
-                    .translationYBy((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 320, getResources().getDisplayMetrics()))
-                    .start();
-            girl.animate()
-                    .setDuration(1000)
-                    .setStartDelay(500)
-                    .translationYBy(-(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 320, getResources().getDisplayMetrics()))
-                    .start();
-
-            ((AnimationDrawable)girl.getDrawable()).start();
-
-
-            login.animate()
-                    .setDuration(0)
-                    .setStartDelay(0)
-                    .y((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -130, getResources().getDisplayMetrics()))
-                    .alpha(0)
-                    .start();
-            login.animate()
-                    .setDuration(900)
-                    .setStartDelay(500)
-                    .alpha(1)
-                    .y((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()))
-                    .start();
-
-            fab.animate()
-                    .setDuration(0)
-                    .setStartDelay(0)
-                    .scaleX(0)
-                    .scaleY(0)
-                    .rotation(-500)
-                    .start();
-            fab.animate()
-                    .setDuration(600)
-                    .setStartDelay(4000)
-                    .scaleX(1)
-                    .scaleY(1)
-                    .rotation(0)
-                    .start();
-        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +112,7 @@ public class FirstLoginActivity extends AppCompatActivity {
         });
     }
 
-    private class AsyncConnector extends AsyncTask<Void, String[], Void> {
+    private class AsyncConnector extends AsyncTask<Void, JSONObject[], JSONObject> {
 
         String message, mLogin, mPassword;
 
@@ -190,48 +126,29 @@ public class FirstLoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... arg0) {
+        protected JSONObject doInBackground(Void... arg0) {
 
-            Document doc;
-            try {
-
-                String html = new SuperT411HttpBrowser(getApplicationContext())
-                        .login(mLogin, mPassword)
-                        .connect(Default.URL_LOGIN)
-                        .executeLoginForMessage();
-
-                if (!html.equals("OK")) {
-                    doc = Jsoup.parse(html);
-                    message = doc.select("#messages > p").first().text();
-                } else message = "Connexion réussie !";
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
+            String apiUrl = Default.API_T411 + "/auth";
+            APIBrowser api_browser = new APIBrowser(getApplicationContext());
+            new T411Logger(getApplicationContext()).writeLine("Connexion à l'adresse " + apiUrl);
+            return api_browser.connect(apiUrl).addPOSTParam("username", this.mLogin).addPOSTParam("password", this.mPassword).loadObject();
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(JSONObject value) {
             dialog.dismiss();
             try {
-                if (message != null && message.contains("incorrect")) {
-                    dialog.dismiss();
-                    edit.putBoolean("firstLogin", false);
-
-                    Snackbar snk = Snackbar.make(fab, message, Snackbar.LENGTH_SHORT);
-                    View snkView = snk.getView();
-                    ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
-                    snkView.setBackgroundColor(Color.RED);
-                    snk.show();
-
-                    edit.commit();
-                } else if (message != null && message.contains("captcha")) {
-                    Snackbar snk = Snackbar.make(fab, message, Snackbar.LENGTH_SHORT);
-                    View snkView = snk.getView();
-                    ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
-                    snkView.setBackgroundColor(Color.RED);
-                    snk.show();
+                if(value.has("error")) {
+                    Snackbar snk = null;
+                    try {
+                        snk = Snackbar.make(fab, value.getString("error"), Snackbar.LENGTH_LONG);
+                        View snkView = snk.getView();
+                        ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
+                        snkView.setBackgroundColor(Color.RED);
+                        snk.show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else {
                     edit.putString("login", login.getText().toString());

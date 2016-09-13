@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,7 @@ public class aboutActivity extends AppCompatActivity {
         version = "????";
         PackageInfo pInfo;
 
-        getSupportActionBar().setIcon(R.drawable.ic_about);
+        setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setTitle(getResources().getString(R.string.about));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

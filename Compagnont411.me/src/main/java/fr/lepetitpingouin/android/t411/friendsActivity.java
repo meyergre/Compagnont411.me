@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +57,8 @@ public class friendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friendslist);
 
-        getSupportActionBar().setIcon(R.drawable.ic_friends);
+        setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
+
         getSupportActionBar().setTitle(getResources().getString(R.string.my_friends));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

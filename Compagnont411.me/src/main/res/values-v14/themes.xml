@@ -79,5 +79,5 @@
 
     <color name="t411_action_blue">#002244</color>
     <color name="t411_action_grey">#555</color>
-    <color name="t411_action_lightgrey">#AAA</color>
+    <color name="t411_action_lightgrey">#aaaaaa</color>
 </resources>
