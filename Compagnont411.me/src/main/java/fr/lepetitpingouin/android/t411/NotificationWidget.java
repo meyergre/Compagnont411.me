@@ -33,23 +33,14 @@ class NotificationWidget {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         RemoteViews contentView = new RemoteViews(context.getPackageName(), R.layout.notification_widget);
-        contentView.setTextViewText(R.id.nw_username, prefs.getString("lastUsername", "???"));
+        contentView.setTextViewText(R.id.nw_username, prefs.getString("lastUsername", "..."));
         contentView.setTextViewText(R.id.nw_down, new BSize(prefs.getString("lastDownload", "0 KB")).convert());
         contentView.setTextViewText(R.id.nw_up, new BSize(prefs.getString("lastUpload", "0 KB")).convert());
         contentView.setTextViewText(R.id.nw_mails, String.valueOf(prefs.getInt("lastMails", 0)));
-        contentView.setTextViewText(R.id.nw_ratio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0"))));
+        contentView.setTextViewText(R.id.nw_ratio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0").replace(",","."))));
         contentView.setTextViewText(R.id.nw_date, prefs.getString("lastDate", "???"));
 
-        String encodedImage = prefs.getString("avatar", "");
-        if (!encodedImage.equalsIgnoreCase("")) {
-            try {
-                byte[] b = Base64.decode(encodedImage.getBytes(), 0);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
-                contentView.setImageViewBitmap(R.id.nw_avatar, bitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
 
         contentView.setImageViewResource(R.id.nw_smiley, new Ratio(context).getSmiley());
 
@@ -60,10 +51,10 @@ class NotificationWidget {
         builder.setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, MainActivity2.class), 0));
 
         if (!prefs.getBoolean("notificationWidget", false)) {
-            mNotificationManager.cancel(1);
+            mNotificationManager.cancel(4096);
             return false;
         }
-        mNotificationManager.notify(1, builder.build());
+        mNotificationManager.notify(4096, builder.build());
         return true;
     }
 }

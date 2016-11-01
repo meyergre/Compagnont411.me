@@ -110,7 +110,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/linear_search_filters">
 
                 <LinearLayout
                     android:id="@+id/ll_sort"

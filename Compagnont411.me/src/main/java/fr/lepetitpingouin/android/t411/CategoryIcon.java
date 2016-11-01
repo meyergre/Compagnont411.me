@@ -11,11 +11,13 @@ class CategoryIcon {
         this.catCode = category;
     }
 
-    public static boolean isPr0n(int icon) {
-        return (icon == R.drawable.ic_new_xxx || icon == R.drawable.ic_new_t411);
+    public static boolean isPrOn(int icon) {
+        return icon == R.drawable.ic_new_xxx || icon == R.drawable.ic_new_t411;
     }
 
     public int getIcon() {
+
+        if(catCode.isEmpty()) return R.drawable.ic_new_t411;
 
         //Musique
         if ("395, 623, 400, 403, 642".contains(catCode))

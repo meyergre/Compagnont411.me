@@ -43,9 +43,9 @@ public class statsActivity extends AppCompatActivity {
         String titre = prefs.getString("titre", "");
         String status = classe + ((titre.length() > 1) ? ", " + titre : "");
         ((TextView)findViewById(R.id.stat_class)).setText(status);
-        ((TextView)findViewById(R.id.stat_upload)).setText("▲ " + new BSize(prefs.getString("lastUpload", "0.00 GB")).convert());
-        ((TextView)findViewById(R.id.stat_download)).setText("▼ " + new BSize(prefs.getString("lastDownload", "0.00 GB")).convert());
-        ((TextView)findViewById(R.id.stat_ratio)).setText("R " + prefs.getString("lastRatio", " "));
+        ((TextView)findViewById(R.id.stat_upload)).setText(new BSize(prefs.getString("lastUpload", "0.00 GB")).convert());
+        ((TextView)findViewById(R.id.stat_download)).setText(new BSize(prefs.getString("lastDownload", "0.00 GB")).convert());
+        ((TextView)findViewById(R.id.stat_ratio)).setText(prefs.getString("lastRatio", " "));
         ((ImageView)findViewById(R.id.stat_avatar)).setImageBitmap(new AvatarFactory().getFromPrefs(prefs));
 
         ((TextView)findViewById(R.id.tv_up24)).setText(new BSize(prefs.getString("up24", "0.00 GB")).convert());

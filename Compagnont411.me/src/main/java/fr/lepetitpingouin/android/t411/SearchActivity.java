@@ -3,6 +3,7 @@ package fr.lepetitpingouin.android.t411;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,7 +55,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
-    private CheckBox sortMode;
+    private CheckBox sortMode, apiSearch;
     private SharedPreferences prefs;
     private Toolbar toolbar;
 
@@ -93,6 +96,8 @@ public class SearchActivity extends AppCompatActivity {
     private Dialog sort_dialog;
     private Dialog favorites_dialog;
 
+    private boolean isApiSearchEnabled;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +106,9 @@ public class SearchActivity extends AppCompatActivity {
         new asyncApiGetCategories().execute();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        isApiSearchEnabled = prefs.getBoolean("enableApiSearch", false);
+
+        showHideApiOptions();
 
         toolbar = (Toolbar)findViewById(R.id.searchtoolbar);
         setSupportActionBar(toolbar);
@@ -111,6 +119,17 @@ public class SearchActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
 
         sh = new SearchHistory(getApplicationContext());
+
+        apiSearch = (CheckBox)findViewById(R.id.checkBoxApiSearch);
+        apiSearch.setChecked(isApiSearchEnabled);
+        apiSearch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isApiSearchEnabled = b;
+                prefs.edit().putBoolean("enableApiSearch", b).apply();
+                showHideApiOptions();
+            }
+        });
 
         ivCat = (ImageView)findViewById(R.id.ddl_icon);
         tvCat = (TextView)findViewById(R.id.ddl_category);
@@ -144,7 +163,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
                         if(advanced.getHeight() < 100) {
-                            int targetSize = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, getResources().getDisplayMetrics()));
+                            int targetSize = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 190, getResources().getDisplayMetrics()));
                             MResizeAnimation mra = new MResizeAnimation(advanced, targetSize);
                             mra.setDuration(400);
                             advanced.startAnimation(mra);
@@ -275,6 +294,12 @@ public class SearchActivity extends AppCompatActivity {
                 ivSort.setImageResource(Integer.valueOf(map.get("icon")));
                 icon_sort = Integer.valueOf(map.get("icon"));
                 sort_dialog.dismiss();
+
+                Snackbar sk = Snackbar.make(toolbar, getString(R.string.apiDoesNotSupportSorting), Snackbar.LENGTH_LONG);
+                sk.getView().setBackgroundColor(Color.RED);
+                if(!sort.equals("") && isApiSearchEnabled) {
+                    sk.show();
+                }
             }
         });
 
@@ -321,6 +346,17 @@ public class SearchActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showHideApiOptions() {
+        // Affichage / masquage des éléments
+        //findViewById(R.id.lv_mysearches).setVisibility(isApiSearchEnabled?View.GONE:View.VISIBLE);
+        findViewById(R.id.advancedItems).setVisibility(isApiSearchEnabled?View.GONE:View.VISIBLE);
+        findViewById(R.id.linear_search_filters).setVisibility(isApiSearchEnabled?View.GONE:View.VISIBLE);
+        findViewById(R.id.tv_apidetails).setVisibility(isApiSearchEnabled?View.VISIBLE:View.GONE);
+
+        // Refresh de la liste des catégories (les catégories parentes ne marchent pas par l'API...)
+        new asyncApiGetCategories().execute();
     }
 
     @Override
@@ -374,9 +410,11 @@ public class SearchActivity extends AppCompatActivity {
 
         Intent i;
         i = new Intent();
-        //i.setClass(getApplicationContext(), torrentsActivity.class);
-        i.setClass(getApplicationContext(), SearchResultsActivity.class);
-        //i.putExtra("url", url);
+        if(isApiSearchEnabled && sort.isEmpty() && !keywords.getText().toString().isEmpty() && tx_uploader.getText().toString().isEmpty() && tx_description.getText().toString().isEmpty() && tx_fichier.getText().toString().isEmpty())
+            i.setClass(getApplicationContext(), SearchResultsActivity.class); // api
+        else
+            i.setClass(getApplicationContext(), torrentsActivity.class); // ancienne méthode
+        i.putExtra("url", url);
         i.putExtra("cat", (!subCatCode.isEmpty()?subCatCode:catCode));
         i.putExtra("keywords", keywords.getText().toString());
         i.putExtra("order", sort);
@@ -585,9 +623,16 @@ public class SearchActivity extends AppCompatActivity {
                         JSONObject value = new JSONObject(json.getString(key));
                         HashMap<String, String> catMap = new HashMap<>();
                         catMap.put("icon", String.valueOf(new CategoryIcon(value.getString("id")).getIcon()));
-                        catMap.put("name", value.getString("name"));
+                        if(value.has("cats")) {
+                            catMap.put("name", "--" + value.getString("name") + "--");
+                        } else {
+                            catMap.put("name", value.getString("name"));
+                        }
                         catMap.put("code", value.getString("id"));
-                        catList.add(catMap);
+
+                        if(!isApiSearchEnabled || !value.has("cats")) catList.add(catMap);
+
+                        Log.e(value.getString("id"), value.getString("name"));
 
                         if(value.has("cats")) {
                             extractFromJson(value.getJSONObject("cats"));

@@ -28,25 +28,51 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Map;
 
-public class Torrent {
+public class Torrent implements Comparator<Torrent> {
 
     public String name;
     public String id;
     public String url;
     public String category="";
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
-    public static String STATUS_PENDING = "(P)";
-    public static String STATUS_BANNED = "(B)";
-    public static String STATUS_VOTE = "(V)";
-    public static String STATUS_NEW = "(N)";
-    public static String STATUS_VALID = "(A)";
+    public Long date = 0L;
     private Context context;
     private SharedPreferences prefs;
     private torrentFileGetter tDL;
     private AsyncDlLater dll;
     private AsyncDlLaterNot dllNot;
+
+    public static final Comparator<Torrent> DATE_COMPARATOR = new Comparator<Torrent>() {
+        public int compare(Torrent t, Torrent t1) {
+            if((t.date) > (t1.date)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    };
+    public static final Comparator<Torrent> SEEDERS_COMPARATOR = new Comparator<Torrent>() {
+        public int compare(Torrent t, Torrent t1) {
+            return Integer.parseInt(t.seeders) - Integer.parseInt(t1.seeders);
+        }
+    };
+    public static final Comparator<Torrent> LEECHERS_COMPARATOR = new Comparator<Torrent>() {
+        public int compare(Torrent t, Torrent t1) {
+            return Integer.parseInt(t.leechers) - Integer.parseInt(t1.leechers);
+        }
+    };
+    public static final Comparator<Torrent> SIZE_COMPARATOR = new Comparator<Torrent>() {
+        public int compare(Torrent t, Torrent t1) {
+            if(Long.parseLong(t.size) > Long.parseLong(t1.size)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    };
 
     private JSONArray json;
 
@@ -187,10 +213,15 @@ public class Torrent {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
-        i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+        i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
 
 
         context.startActivity(i);
+    }
+
+    @Override
+    public int compare(Torrent torrent, Torrent t1) {
+        return 0;
     }
 
     private class AsyncDlLaterNot extends AsyncTask<Void, String[], Void> {
@@ -401,10 +432,10 @@ public class Torrent {
                 i.setAction(android.content.Intent.ACTION_VIEW);
                 //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension("torrent"));
                 if (prefs.getBoolean("addMimeType", false))
-                    i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+                    i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
                 else //auto-detect
                     //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.getName().substring(file.getName().lastIndexOf(".")+1)));
-                    i.setData(Uri.fromFile(file));
+                    i.setData(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file));
 
                 PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
                 //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);

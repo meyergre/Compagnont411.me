@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:gravity="center|top"
         android:orientation="vertical"
-        android:background="#eee">
+        android:background="#fff">
 
         <ScrollView
             android:id="@+id/scrollView1"
@@ -26,16 +26,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView14"
+                    android:src="@drawable/clouds"
+                    android:scaleType="fitXY" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_margin="3dp"
                     android:orientation="vertical"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="-20dp"
+                    android:layout_marginRight="4dp">
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -48,7 +56,7 @@
                             android:layout_height="100dp"
                             android:id="@+id/imageView"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/ic_launcher_new" />
+                            android:src="@mipmap/ic_launcher" />
 
                         <LinearLayout
                             android:orientation="vertical"
@@ -90,52 +98,59 @@
                     android:orientation="vertical"
                     android:layout_gravity="center">
 
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/considerDonate"
-                        android:textColor="#012f54"
-                        android:textSize="16dp"
-                        android:textStyle="italic"
-                        android:layout_gravity="center_horizontal" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="#ddd"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/support_the_dev"
-                        android:id="@+id/textView3"
-                        android:textSize="16dp"
-                        android:padding="4dp"
-                        android:layout_gravity="center_horizontal" />
-
                     <LinearLayout
-                        android:id="@+id/paypal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/paypal"
-                        android:gravity="right|center"
-                        android:paddingLeft="15dip"
-                        android:paddingRight="15dip">
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/TextView05"
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/textView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/considerDonate"
+                                android:textColor="#012f54"
+                                android:textSize="16dp"
+                                android:textStyle="italic"
+                                android:gravity="left" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/support_the_dev"
+                                android:id="@+id/textView3"
+                                android:textSize="16dp"
+                                android:padding="4dp"
+                                android:gravity="left" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/paypal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/donate"
-                            android:textColor="#FF000000"
-                            android:textSize="18sp"
-                            android:layout_margin="4dp" />
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/paypal"
+                            android:gravity="right|center"
+                            android:paddingLeft="15dip"
+                            android:paddingRight="15dip">
 
+                            <TextView
+                                android:id="@+id/TextView05"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/donate"
+                                android:textColor="#FF000000"
+                                android:textSize="18sp"
+                                android:layout_margin="4dp" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
                     <TextView

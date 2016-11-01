@@ -11,16 +11,18 @@ class BSize {
     private double koctets;
 
     public BSize(String input) {
+        this.rawData = input.replaceAll(",", ".");
         try {
-            this.rawData = input.replaceAll(",", ".");
             tmp = rawData.split(" ");
             this.unit = tmp[tmp.length - 1];
             double raw = Double.valueOf(tmp[tmp.length - 2]);
 
             koctets = unit.contains("KB") ? raw : unit.contains("MB") ? raw * (1024) : unit.contains("GB") ? raw * (1024 * 1024) : unit.contains("TB") ? raw * (1024 * 1024 * 1024) : raw / 1024;
         } catch (Exception e) {
+
             this.unit = "KB";
-            this.koctets = 0;
+            this.koctets = Double.parseDouble(rawData) / 1024;
+
         }
     }
 

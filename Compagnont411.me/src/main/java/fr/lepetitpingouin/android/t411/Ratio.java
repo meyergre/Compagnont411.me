@@ -44,7 +44,7 @@ class Ratio {
         //String upload = new BSize(prefs.getString("lastUpload", "0.00 MB")).convert();
         BSize _upload = new BSize(prefs.getString("lastUpload", "0.00 MB"));
 
-        double numRatio = Double.valueOf(ratio);
+        double numRatio = Double.valueOf(ratio.replace(",","."));
 
         if (numRatio == 0.00)
             return R.drawable.smiley_angel;

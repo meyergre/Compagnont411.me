@@ -22,7 +22,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical">
 
                 <LinearLayout
@@ -45,7 +45,9 @@
                         android:textColor="@color/t411_action_blue"
                         android:maxLines="2"
                         android:text="torrent title"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical" />
 
                     <TextView
                         android:id="@+id/t_up_date"
@@ -53,11 +55,12 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="none"
                         android:singleLine="false"
-                        android:textSize="7sp"
-                        android:textColor="@color/t411_action_lightgrey"
+                        android:textSize="9sp"
+                        android:textColor="@color/t411_action_grey"
                         android:maxLines="2"
                         android:text="torrent uploader, date"
-                        android:layout_marginLeft="10dp" />
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="0" />
                 </LinearLayout>
 
                 <ImageView
@@ -80,7 +83,8 @@
                     android:orientation="vertical"
                     android:layout_width="150dp"
                     android:layout_height="fill_parent"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="2">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -118,7 +122,7 @@
                             android:textSize="8sp" />
 
                         <TextView
-                            android:id="@+id/tRatioBase"
+                            android:id="@+id/ratioFrom"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="-"
@@ -136,7 +140,7 @@
                             android:textSize="8sp" />
 
                         <TextView
-                            android:id="@+id/tRatio"
+                            android:id="@+id/ratioTo"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="-"
@@ -149,7 +153,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"
                     android:orientation="vertical">
@@ -168,8 +172,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:gravity="center_horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_weight="1">
 
                             <TextView
                                 android:id="@+id/tSeeders"
@@ -177,7 +180,8 @@
                                 android:layout_height="fill_parent"
                                 android:text="-"
                                 android:textColor="@color/t411_green"
-                                android:textSize="24sp" />
+                                android:textSize="22sp"
+                                android:singleLine="true" />
 
                             <TextView
                                 android:id="@+id/textView4"
@@ -185,7 +189,7 @@
                                 android:layout_height="fill_parent"
                                 android:text="Seeders"
                                 android:textColor="@color/t411_green"
-                                android:textSize="6sp"
+                                android:textSize="8sp"
                                 android:singleLine="true" />
 
                         </LinearLayout>
@@ -197,8 +201,7 @@
                             android:layout_gravity="center_horizontal"
                             android:id="@+id/linearLayout5"
                             android:gravity="center_horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_weight="1">
 
                             <TextView
                                 android:id="@+id/tLeechers"
@@ -206,9 +209,10 @@
                                 android:layout_height="fill_parent"
                                 android:text="-"
                                 android:textColor="@color/t411_red"
-                                android:textSize="24sp"
+                                android:textSize="22sp"
                                 android:gravity="center"
-                                android:layout_gravity="center_horizontal" />
+                                android:layout_gravity="center_horizontal"
+                                android:singleLine="true" />
 
                             <TextView
                                 android:id="@+id/textView8"
@@ -216,7 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Leechers"
                                 android:textColor="@color/t411_red"
-                                android:textSize="6sp"
+                                android:textSize="8sp"
                                 android:singleLine="true"
                                 android:gravity="center"
                                 android:layout_gravity="center_horizontal"
@@ -233,8 +237,7 @@
                         android:id="@+id/linearLayout3"
                         android:gravity="center"
                         android:layout_marginTop="3dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/tCompleted"
@@ -243,7 +246,7 @@
                             android:text="-"
                             android:textColor="#88000000"
                             android:layout_weight="0"
-                            android:textSize="24sp"
+                            android:textSize="22sp"
                             android:gravity="center"
                             android:singleLine="true" />
 
@@ -253,7 +256,7 @@
                             android:layout_height="fill_parent"
                             android:text="complets"
                             android:textColor="#000"
-                            android:textSize="6sp"
+                            android:textSize="8sp"
                             android:singleLine="true"
                             android:gravity="center"
                             android:layout_weight="0" />

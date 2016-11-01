@@ -363,4 +363,9 @@
     <string name="btn_done">Done</string>
     <string name="wlcm_last_message">Thanks for using my app ! You\'re now ready to go by yourself.\n\nPlease note that this assistant might show up again in the future, in case of new feature.</string>
     <string name="loadMore">Load more results</string>
+    <string name="apiDoesNotSupportSorting">API does not support advanced search. Old method will be used.</string>
+    <string name="sort">Sort by...</string>
+    <string name="nowWithApi">Now with API support !</string>
+    <string name="switch_api_search">Search using API</string>
+    <string name="searchApiExplainations">API Search has limitations. You can\'t filter or sort, nor search for a whole parent category (Videos, Aurio, etc...)</string>
 </resources>

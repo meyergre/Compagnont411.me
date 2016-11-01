@@ -43,13 +43,13 @@ public class CalculatorActivity extends AppCompatActivity {
 
         txtDLLeft.setText(prefs.getString("GoLeft", "??"));
         txtUPLeft.setText(prefs.getString("UpLeft", "??"));
-        ratioOriginal.setText(String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "00"))));
+        ratioOriginal.setText(String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "00").replace(",","."))));
         ratioEstimated.setText(ratioOriginal.getText());
 
-        txtRatio.setText(String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "0.00"))));
+        txtRatio.setText(String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "0.00").replace(",","."))));
 
-        txtLowRatio.setText(String.format("%.2f", Float.valueOf(prefs.getString("ratioMinimum", "0.00"))));
-        txtTargetRatio.setText(String.format("%.2f", Float.valueOf(prefs.getString("ratioCible", "0.00"))));
+        txtLowRatio.setText(String.format("%.2f", Float.valueOf(prefs.getString("ratioMinimum", "0.00").replace(",","."))));
+        txtTargetRatio.setText(String.format("%.2f", Float.valueOf(prefs.getString("ratioCible", "0.00").replace(",","."))));
 
         RaZ_simu.setOnClickListener(new View.OnClickListener() {
             @Override

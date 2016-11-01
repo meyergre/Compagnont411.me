@@ -59,6 +59,13 @@
                     android:textColor="#111111" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/nowWithApi"
+                android:id="@+id/textView52" />
+
         </LinearLayout>
 
     </LinearLayout>

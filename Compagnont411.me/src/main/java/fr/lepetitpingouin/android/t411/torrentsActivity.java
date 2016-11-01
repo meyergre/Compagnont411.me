@@ -99,6 +99,17 @@ public class torrentsActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torrentslist);
@@ -592,7 +603,7 @@ public class torrentsActivity extends AppCompatActivity {
 
                             map.put("ratio", estimatedRatio);
                             map.put("icon", String.valueOf(new CategoryIcon(catCode).getIcon()));
-                            map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "0"))));
+                            map.put("ratioBase", String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "0").replace(",","."))));
                             listItem.add(map);
 
                         } catch (Exception e) {

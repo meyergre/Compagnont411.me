@@ -361,8 +361,9 @@ public class torrentDetailsActivity extends AppCompatActivity {
                         .login(username, password)
                         .connect(torrent_URL);
 
-                if (!CategoryIcon.isPr0n(getIntent().getIntExtra("icon", R.drawable.ic_new_t411))) {
-                    browser.skipLogin();
+                if (!CategoryIcon.isPrOn(getIntent().getIntExtra("icon", R.drawable.ic_new_t411))) {
+                    //browser.skipLogin();
+                } else {
                     new T411Logger(getApplicationContext()).writeLine("Torrent XXX, connexion nécessaire");
                 }
 
@@ -419,6 +420,13 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez = customCSS + "<body>" + hadopi + "<br/>" + qualite + doc.select(".description").first().html() + "<br/><table width=100%>";// + comments+"</body></html>";
                 prez = prez.replaceAll("<noscript>", "");
                 prez = prez.replaceAll("</noscript>", "");
+
+
+                /*if(prez.contains("<h2 class=\"align-center\">LIENS DE TÉLÉCHARGEMENT</h2>"))
+                    prez = prez.split("<h2 class=\"align-center\">LIENS DE TÉLÉCHARGEMENT</h2>")[0] + "</article></div></div>";*/
+                prez = prez.replaceAll("\" href=\"http://adprovider.adlure.net", " display: none;\" href=\"http://adprovider.adlure.net");
+                prez = prez.replaceAll("href=\"http://adprovider.adlure.net", "style=\"display: none;\" href=\"http://adprovider.adlure.net");
+
                 torrent_NFO = doc.select("pre").first().text();
 
                 //prez += "<img src=\"file:///android_asset/picts/top.png\" onclick=\"scroll(0,0);\" style='z-index: 99999; position: fixed; top: 2px; right: 2px;' />";

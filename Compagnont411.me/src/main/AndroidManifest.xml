@@ -18,6 +18,17 @@
         android:largeHeap="true"
         android:theme="@style/toolbarTheme"
         android:vmSafeMode="true">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <activity
             android:name=".MainActivity2"
             android:label="@string/title_activity_main"
@@ -172,7 +183,7 @@
             android:taskAffinity="fr.lepetitpingouin.android.t411.SearchActivity"
             android:theme="@style/toolbarTheme" />
         <activity android:name=".SearchResultsActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden" />
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout" />
         <activity
             android:name=".ComposeMessageActivity"
             android:icon="@mipmap/ic_launcher_messages">

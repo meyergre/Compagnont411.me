@@ -78,18 +78,14 @@ class TorrentAdapter extends BaseAdapter {
 
 
             // Calcul du ratio
-            double estimatedDl = Double.parseDouble(prefs.getString("lastDownload", "0.00").replace(",",".")) + new BSize(t.size).getInKB()*1024;
-            double estimatedRatio = (Double.parseDouble(prefs.getString("lastUpload", "0").replace(",",".")) / estimatedDl) - 0.01;
+            double estimatedDl = (new BSize(prefs.getString("lastDownload", "0.00").replace(",",".")).getInMB()) + new BSize(t.size).getInMB();
+            double estimatedRatio = (new BSize(prefs.getString("lastUpload", "0.00").replace(",",".")).getInMB() / estimatedDl) - 0.005;
 
-            Log.e("TEST", estimatedDl+"");
-            Log.e("TEST", estimatedRatio+"");
-
-            TextView ratio = (TextView) vi.findViewById(R.id.tRatioBase);
-            ratio.setText(String.format("%.2f", Float.valueOf(prefs.getString("lastRatio", "0"))));
-
-            TextView ratioEst = (TextView) vi.findViewById(R.id.tRatio);
+            TextView ratioEst = (TextView) vi.findViewById(R.id.ratioTo);
             ratioEst.setText(String.format("%.2f", estimatedRatio));
 
+            TextView ratio = (TextView) vi.findViewById(R.id.ratioFrom);
+            ratio.setText(prefs.getString("lastRatio", "0"));
 
         } catch(Exception ex) {
             ex.printStackTrace();

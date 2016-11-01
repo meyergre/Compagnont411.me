@@ -42,27 +42,27 @@
             <include
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                layout="@layout/view_welcome_1" />
+                layout="@layout/view_welcome_splashscreen" />
 
             <include
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                layout="@layout/view_welcome_2" />
+                layout="@layout/view_welcome_login" />
 
             <include
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                layout="@layout/view_welcome_3" />
+                layout="@layout/view_welcome_shortcuts" />
 
             <include
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                layout="@layout/view_welcome_4" />
+                layout="@layout/view_welcome_proxy" />
 
             <include
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                layout="@layout/view_welcome_5" />
+                layout="@layout/view_welcome_final" />
 
         </ViewFlipper>
 

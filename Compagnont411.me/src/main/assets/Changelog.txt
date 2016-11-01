@@ -1,9 +1,16 @@
 CHANGELOG
 
-2016.09-159
+2016.09-160 BETA
+- Correction du calcul du ratio après téléchargement
+- Correction de FC lors du changement d'orientationsur les listes de résultats de recherches par l'API
+- Rafraichissement du widget de notification
+- Mise sous condition de la recherche par API a cause de ses limitations
+
+
+2016.09-159 BETA
 - Intégration de l'API de t411 pour booster la vitesse des recherches de torrents
-- Nettoyage des ressources de l'application
-- Changement de thème visuel
+- Rafraichissement visuel
+- Suppression de certaines pubs cliquables dans les prez
 
 
 2016.07-158

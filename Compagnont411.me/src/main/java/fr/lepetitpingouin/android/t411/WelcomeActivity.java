@@ -2,6 +2,7 @@ package fr.lepetitpingouin.android.t411;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -155,6 +156,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 edit.putString("password", this.mPassword);
                 edit.putBoolean("firstLogin", true);
                 edit.commit();
+                startService(new Intent(getApplicationContext(), t411UpdateService.class));
                 vf.showNext();
             }
 

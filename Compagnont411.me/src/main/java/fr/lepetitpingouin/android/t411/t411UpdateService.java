@@ -62,10 +62,6 @@ public class t411UpdateService extends Service {
         if (mWifi.isConnected()) {
             return true;
         }
-        Intent i = new Intent(Default.Appwidget_update);
-        i.putExtra("LED_T411", true);
-        i.putExtra("LED_Net", false);
-        sendBroadcast(i);
         return false;
     }
 
@@ -588,6 +584,11 @@ public class t411UpdateService extends Service {
                 prefs.edit().putString("lastUpload",BSize.quickConvert(value.getString("uploaded"))).commit();
                 prefs.edit().putString("lastDownload",BSize.quickConvert(value.getString("downloaded"))).commit();
 
+                Time today = new Time(Time.getCurrentTimezone());
+                today.setToNow();
+                prefs.edit().putString("lastDate", today.format("%d/%m/%Y %k:%M:%S")).commit();
+                prefs.edit().putString("lastUsername", username).commit();
+
 
                 prefs.edit().putString(
                         "lastRatio",
@@ -597,10 +598,9 @@ public class t411UpdateService extends Service {
                         )
                 ).commit();
 
-                new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + value.getString("token"));
+                new NotificationWidget(getApplicationContext()).updateNotificationWidget();
             } catch (JSONException e) {
                 e.printStackTrace();
-                new T411Logger(getApplicationContext()).writeLine("Erreur de récupération du token : " + e.getMessage());
             }
             sendBroadcast(new Intent(Default.Appwidget_update));
         }

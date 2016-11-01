@@ -1,23 +1,75 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    tools:context="torrentsActivity"
-    android:background="#FFF">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_height="match_parent" android:layout_width="match_parent"
+    android:orientation="vertical">
 
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/toolbar"
-        android:layout_gravity="center_horizontal"
         android:id="@+id/toolbar"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_weight="0" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@color/t411_action_blue"
+        android:gravity="center_vertical"
+        android:id="@+id/view_catFilter">
+
+        <ImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:id="@+id/iv_catIcon"
+            android:src="@drawable/ic_new_t411"
+            android:adjustViewBounds="true"
+            android:layout_weight="0" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:id="@+id/dropdown_catlist">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--TOUT--"
+                android:id="@+id/tv_catLabel"
+
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Spinner.DropDown"
+                android:textColor="#FFF"
+                android:gravity="center"
+                android:backgroundTint="#eee"
+                android:clickable="false" />
+        </FrameLayout>
+
+        <ImageButton
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:id="@+id/btn_filter"
+            android:layout_weight="0"
+            android:src="@drawable/ic_filter"
+            style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+    </LinearLayout>
 
     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:context="torrentsActivity"
+        android:background="#FFF"
+        android:layout_weight="1">
+
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_below="@+id/toolbar"
         android:id="@+id/relativeLayout2">
 
         <ImageView
@@ -28,15 +80,6 @@
             android:scaleType="fitXY" />
 
     </RelativeLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loadMore"
-        android:id="@+id/btn_loadmore"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onLoadMore" />
 
     <GridView
         android:id="@+id/malistviewperso"
@@ -58,6 +101,20 @@
         android:paddingTop="50dp"
         android:paddingRight="5dp"
         android:paddingBottom="?attr/actionBarSize"
-        android:layout_below="@+id/toolbar" />
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loadMore"
+        android:id="@+id/btn_loadmore"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onLoadMore"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/t411_action_blue"
+        android:layout_margin="3dp" />
 
 </RelativeLayout>
+
+</LinearLayout>

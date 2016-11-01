@@ -64,8 +64,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 swrl.setRefreshing(true);
             } else {
                 swrl.setRefreshing(false);
-                initWidgets();
             }
+            initWidgets();
 
             if (intent.getAction().equals(INTENT_ERROR) && getIntent().hasExtra("message")) {
                 Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
