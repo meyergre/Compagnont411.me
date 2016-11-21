@@ -60,7 +60,7 @@ public class Widget_half extends AppWidgetProvider {
             views.setTextViewText(R.id.wUpload, new BSize(prefs.getString("lastUpload", "0.00")).convert());
             views.setTextViewText(R.id.wDownload, new BSize(prefs.getString("lastDownload", "0.00")).convert());
             views.setTextViewText(R.id.wMails, String.valueOf(prefs.getInt("lastMails", 0)));
-            views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0.00"))));
+            views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0.00").replace(",","."))));
 
             views.setImageViewResource(R.id.wSmiley, new Ratio(context).getSmiley());
 

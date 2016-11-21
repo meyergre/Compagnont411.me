@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -34,6 +35,8 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import org.jsoup.helper.StringUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -282,6 +285,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     @Override
     public void onResume() {
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         if (!prefs.getBoolean("firstLogin", false) || prefs.getInt("assistantVersion", 0) < Default.SHOW_ASSISTANT_FOR_VERSION_UNDER) {
             prefs.edit().putInt("assistantVersion", Default.SHOW_ASSISTANT_FOR_VERSION_UNDER).apply();
             Intent myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
@@ -308,6 +313,12 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         }
         else {
             permissionStorage.setVisibility(View.GONE);
+        }
+
+        if(!prefs.getString("custom_domain", "").isEmpty()) {
+            Snackbar bar = Snackbar.make(toolbar, getResources().getString(R.string.warning_custom_domain)+" (" + prefs.getString("custom_domain", "") + ")",Snackbar.LENGTH_LONG);
+            bar.getView().setBackgroundColor(Color.RED);
+            bar.show();
         }
 
         super.onResume();

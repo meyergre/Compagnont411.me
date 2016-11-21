@@ -170,6 +170,12 @@
             android:summary="@string/settings_caption_connection_summary"
             android:title="@string/settings_caption_connection">
 
+            <EditTextPreference
+                android:key="custom_domain"
+                android:dialogMessage="@string/settings_custom_domain_warning"
+                android:summary="@string/settings_custom_domain_summary"
+                android:title="@string/settings_custom_domain_title" />
+
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="useHTTPS"

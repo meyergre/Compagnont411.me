@@ -1,11 +1,13 @@
 package fr.lepetitpingouin.android.t411;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -101,6 +103,21 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void onLogin(View v) {
         new AsyncConnector().execute();
+    }
+
+    public void onRateOnPlaystore(View v) {
+        /* This code assumes you are inside an activity */
+        final Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+        final Intent rateAppIntent = new Intent(Intent.ACTION_VIEW, uri);
+
+        if (getPackageManager().queryIntentActivities(rateAppIntent, 0).size() > 0)
+        {
+            startActivity(rateAppIntent);
+        }
+        else
+        {
+            /* handle your error case: the device has no way to handle market urls */
+        }
     }
 
     public void onLauncherIcons(View v) {

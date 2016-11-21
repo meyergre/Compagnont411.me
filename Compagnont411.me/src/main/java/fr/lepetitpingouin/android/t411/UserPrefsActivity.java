@@ -83,6 +83,19 @@ public class UserPrefsActivity extends PreferenceActivity {
             e.printStackTrace();
         }
 
+        Preference customDomain = findPreference("custom_domain");
+        customDomain.setSummary(prefs.getString("custom_domain", Default.IP_T411));
+        customDomain.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                if(o.toString().isEmpty()) {
+                    prefs.edit().remove("custom_domain");
+                }
+                prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                preference.setSummary(prefs.getString("custom_domain", Default.IP_T411));
+                return true;
+            }
+        });
 
 
         Preference openProxyStatus = findPreference("option_proxy");

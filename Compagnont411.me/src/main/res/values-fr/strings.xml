@@ -360,4 +360,9 @@
     <string name="nowWithApi">Maintenant avec support de l\'API !</string>
     <string name="switch_api_search">Rechercher par l\'API</string>
     <string name="searchApiExplainations">Les fonctionnalités de l\'API sont limitées. Le tri, les filtres, et la recherche par cétégorie parente (Vidéo, Audio, etc…) ne sont pas supportés</string>
+    <string name="wlcm_rate_app">Notez-moi sur le Play Store !</string>
+    <string name="settings_custom_domain_summary">Indiquer l\'URL du serveur manuellement</string>
+    <string name="settings_custom_domain_title">Choisir le domaine</string>
+    <string name="settings_custom_domain_warning">Attention : l\'application utilisera le domaine indiqué au lieu de celui par défaut, même si le développeur met à jour ce dernier. (Laisser vide pour annuler, sinon saisir le domaine sans http[s]://)</string>
+    <string name="warning_custom_domain">Vous utilisez un domaine personnalisé</string>
 </resources>

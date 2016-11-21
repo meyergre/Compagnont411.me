@@ -74,7 +74,7 @@ public class Torrent implements Comparator<Torrent> {
         }
     };
 
-    private JSONArray json;
+    public JSONArray json;
 
     public Torrent(Context context, String name, String id) {
         this.context = context.getApplicationContext();
@@ -93,6 +93,7 @@ public class Torrent implements Comparator<Torrent> {
         this.uploader = uploader;
         this.url = Default.URL_GET_TORRENT + id;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        this.json = new JSONArray();
         try {
             this.json = new JSONArray(prefs.getString("jsonTorrentList", "[]"));
         } catch(Exception ex) {
@@ -210,13 +211,20 @@ public class Torrent implements Comparator<Torrent> {
     public void open() {
         Intent i = new Intent();
         i.setAction(android.content.Intent.ACTION_VIEW);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FROM_BACKGROUND);
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
-        i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
 
+        if(Build.VERSION.SDK_INT >= 24) {
+            i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
 
-        context.startActivity(i);
+            Log.e("TESTTEST", FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file).toString());
+        }
+        else {
+            i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+        }
+
+        context.startActivity(Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override
@@ -335,6 +343,15 @@ public class Torrent implements Comparator<Torrent> {
         Connection.Response resTorrent;
         byte[] torrentFileContent;
         String torrentContent;
+        JSONArray json;
+
+        public torrentFileGetter() {
+            try {
+                json = new JSONArray(prefs.getString("jsonTorrentList", "[]"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         @Override
         protected void onPreExecute() {
@@ -353,43 +370,16 @@ public class Torrent implements Comparator<Torrent> {
             String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
             try {
-
-                boolean proxy = prefs.getBoolean("usePaidProxy", false);
-                new T411Logger(context).writeLine(proxy?"Proxy dédié actif":"Proxy dédié inactif");
-
-                /*
-
-                new T411Logger(context).writeLine("Connexion par login/password pour " + username);
-                Connection.Response res = Jsoup
-                        .connect(Default.URL_LOGIN)
-                        .data("login", username, "password", password)
-                        .method(Connection.Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .execute();
-
-                Map<String, String> Cookies = res.cookies();
-
-                new T411Logger(context).writeLine("Lecture du fichier torrent...");
-
-
-                resTorrent = Jsoup.connect(Default.URL_GET_TORRENT + id)
-                        .data("login", username, "password", password)
-                        .method(Connection.Method.POST)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                                //.timeout(prefs.getInt("timeoutValue", Default.timeout) * 1000)
-                        .cookies(Cookies)
-                        .execute();
-                        torrentFileContent = resTorrent.bodyAsBytes();
-                        */
                 SuperT411HttpBrowser browser = new SuperT411HttpBrowser(context)
                         .connect(Default.URL_GET_TORRENT + id)
                         .login(username, password);
-                torrentContent = browser.executeInAsyncTask();
 
+                //APIBrowser apiBrowser = new APIBrowser(context).connect(Default.API_T411 + Default.URL_API_GET_TORRENT + id);
+
+                torrentContent = browser.executeInAsyncTask();
                 torrentFileContent = browser.getByteResponse();
+
+                //torrentFileContent = apiBrowser.loadFile();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -407,7 +397,7 @@ public class Torrent implements Comparator<Torrent> {
             file.setWritable(true, false);
 
             try {
-                json.put(new JSONObject("{'title':'"+name+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"', 'category':'"+category+"'}"));
+                json.put(new JSONObject("{'title':'"+name.replaceAll("'", "\\'")+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"', 'category':'"+category+"'}"));
                 prefs.edit().putString("jsonTorrentList",json.toString()).apply();
             } catch(Exception ex) {
                 ex.printStackTrace();
@@ -430,12 +420,11 @@ public class Torrent implements Comparator<Torrent> {
 
                 Intent i = new Intent();
                 i.setAction(android.content.Intent.ACTION_VIEW);
-                //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension("torrent"));
-                if (prefs.getBoolean("addMimeType", false))
+
+                i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+                if(Build.VERSION.SDK_INT >= 24) {
                     i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
-                else //auto-detect
-                    //i.setDataAndType(Uri.fromFile(file), MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.getName().substring(file.getName().lastIndexOf(".")+1)));
-                    i.setData(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file));
+                }
 
                 PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
                 //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);

@@ -1,6 +1,27 @@
 CHANGELOG
 
-2016.09-160 BETA
+2016.11-164
+- Correction d'un problème d'ouverture de fichier qui passait pour un PDF
+
+
+2016.11-163
+- Rétablissement des widgets
+
+
+2016.11-162 BETA
+- Changement de domaine
+- Correction des connexions API
+- Ajustements mineurs
+
+
+2016.11-161 BETA
+- Correction du listing des téléchargements
+- Début de mise en place du support d'ouverture de fichiers depuis android 7
+- Ajout d'une option pour indiquer manuellement un domaine
+- Mise à jour des libs tierces
+
+
+2016.10-160 BETA
 - Correction du calcul du ratio après téléchargement
 - Correction de FC lors du changement d'orientationsur les listes de résultats de recherches par l'API
 - Rafraichissement du widget de notification

@@ -59,7 +59,7 @@ public class Widget_nano extends AppWidgetProvider {
 
             views.setTextViewText(R.id.updatedTime, prefs.getString("lastDate", "?????"));
             views.setTextViewText(R.id.wMails, String.valueOf(prefs.getInt("lastMails", 0)));
-            views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0.00"))));
+            views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0.00").replace(",","."))));
 
             views.setImageViewResource(R.id.wSmiley, new Ratio(context).getSmiley());
 

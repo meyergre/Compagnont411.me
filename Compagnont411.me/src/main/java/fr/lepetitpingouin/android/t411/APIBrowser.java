@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.jsoup.helper.StringUtil;
 
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -40,7 +41,12 @@ public class APIBrowser {
 
     private HttpsURLConnection conn;
 
+    private byte[] byteContent;
+
     public APIBrowser(Context context) {
+
+        this.byteContent = "".getBytes();
+
         this.bodyParts = new ArrayList<>();
         this.auth = PreferenceManager.getDefaultSharedPreferences(context).getString("APIToken", "");
 
@@ -89,7 +95,7 @@ public class APIBrowser {
         URL mUrl = null;
         String response = "";
         try {
-            mUrl = new URL(this.url);
+            mUrl = new URL(this.url.replace(Default.IP_T411, prefs.getString("custom_domain", Default.IP_T411)));
             if (this.proxy || this.customProxy) {
                 conn = (HttpsURLConnection) mUrl.openConnection(this.proxyServer);
             } else {
@@ -104,9 +110,12 @@ public class APIBrowser {
             out.close();
 
             Scanner inStream = new Scanner(conn.getInputStream());
+
             while(inStream.hasNextLine()) {
                 response+=(inStream.nextLine());
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,6 +140,15 @@ public class APIBrowser {
             e.printStackTrace();
             return new JSONArray();
         }
+    }
+
+    public byte[] loadFile() {
+        try {
+            return this.load().getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

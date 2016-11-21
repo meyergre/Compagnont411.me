@@ -21,7 +21,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="fr.lepetitpingouin.android.t411.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -247,7 +247,7 @@
             android:allowTaskReparenting="true"
             android:label="@string/title_savePath"
             android:parentActivityName=".UserPrefsActivity"
-            android:theme="@style/toolbarTheme" />
+            android:theme="@style/toolbarLoginTheme" />
         <activity android:name=".NfoActivity" />
         <activity
             android:name=".UserPrefsActivity"

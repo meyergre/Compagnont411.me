@@ -175,7 +175,7 @@ public class SuperT411HttpBrowser {
 
     public SuperT411HttpBrowser connect(String mUrl) {
 
-        this.url = mUrl;//.replace("www.t411.ch", prefs.getString("SiteIP", Default.IP_T411));
+        this.url = mUrl.replace(Default.API_T411, prefs.getString("custom_domain", Default.IP_T411));
         /*/TEST TRUE PROXY/*if(proxy){
             this.url = Private.URL_PROXY + this.url.replace("http://", "");
         }*/

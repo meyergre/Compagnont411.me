@@ -145,7 +145,7 @@ public class ProxyActivity extends AppCompatActivity {
 
         if(BuildConfig.DEBUG) {
             subscribed.setVisibility(View.VISIBLE);
-            abo.setVisibility(View.GONE);
+            //abo.setVisibility(View.GONE);
         }
     }
 

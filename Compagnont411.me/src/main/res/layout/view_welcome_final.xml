@@ -31,6 +31,26 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/t411_action_blue_darker"
             android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wlcm_rate_app"
+            android:layout_marginTop="40dp"
+            android:id="@+id/textView57"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onRateOnPlaystore"
+            android:textColor="@color/t411_action_blue_darker"
+            android:gravity="center" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRateOnPlaystore"
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:rating="4.5"
+            android:stepSize="0.5" />
     </LinearLayout>
 
     <Button

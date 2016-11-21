@@ -368,4 +368,9 @@
     <string name="nowWithApi">Now with API support !</string>
     <string name="switch_api_search">Search using API</string>
     <string name="searchApiExplainations">API Search has limitations. You can\'t filter or sort, nor search for a whole parent category (Videos, Aurio, etc...)</string>
+    <string name="wlcm_rate_app">Rate me on the Play Store !</string>
+    <string name="settings_custom_domain_summary">Choose manually t411\'s address</string>
+    <string name="settings_custom_domain_title">Choose domain</string>
+    <string name="settings_custom_domain_warning">Caution : this will OVERRIDE the default domain, even if the developer updates the defaults.</string>
+    <string name="warning_custom_domain">You defined a custom domain in the settings</string>
 </resources>

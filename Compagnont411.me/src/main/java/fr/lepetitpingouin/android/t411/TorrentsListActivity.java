@@ -68,6 +68,12 @@ public class TorrentsListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter = new TorrentsListAdapter(getApplicationContext());
+        adapter.notifyDataSetChanged();
+    }
 
 
     private void emptyList() {
