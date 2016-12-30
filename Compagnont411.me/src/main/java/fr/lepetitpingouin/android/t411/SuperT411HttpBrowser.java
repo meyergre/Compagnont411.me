@@ -317,7 +317,7 @@ public class SuperT411HttpBrowser {
                 throw new IOException(statusLine.getReasonPhrase());
             }
         } catch (Exception ex) {
-            //TODO Handle problems..
+            ex.printStackTrace();
         }
         //httpclient.close();
         if (responseString == null)
@@ -458,7 +458,6 @@ public class SuperT411HttpBrowser {
             }
 
         } catch (Exception ex) {
-            //TODO Handle problems..
             ex.printStackTrace();
         }
         //return responseString;
@@ -513,7 +512,6 @@ public class SuperT411HttpBrowser {
             }
 
         } catch (Exception ex) {
-            //TODO Handle problems..
             ex.printStackTrace();
         }
 

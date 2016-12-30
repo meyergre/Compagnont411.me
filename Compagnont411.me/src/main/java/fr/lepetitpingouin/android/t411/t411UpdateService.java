@@ -101,9 +101,7 @@ public class t411UpdateService extends Service {
         if (prefs.getBoolean("autoUpdate", false)) {
             planRefresh();
         }
-
-        refreshWidget();
-
+        //refreshWidget();
 
         if (!prefs.getBoolean("wifiOnly", false) || (prefs.getBoolean("wifiOnly", false) && isConnectedToWifi())) {
 
@@ -198,7 +196,7 @@ public class t411UpdateService extends Service {
                         .maxBodySize(0).followRedirects(true).ignoreContentType(true)
                         .ignoreContentType(true).execute();
                 avatar = Base64.encodeToString(avatarRes.bodyAsBytes(), 0);
-                Log.e("avatar", avatar);
+                //Log.e("avatar", avatar);
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -454,8 +452,8 @@ public class t411UpdateService extends Service {
             } catch (Exception ex) {
 
                 new T411Logger(getApplicationContext()).writeLine("Impossible d'atteindre le serveur", T411Logger.ERROR);
-                Intent i = new Intent(Default.Appwidget_update);
-                sendBroadcast(i);
+                //Intent i = new Intent(Default.Appwidget_update);
+                //sendBroadcast(i);
             }
             return null;
         }
@@ -602,7 +600,7 @@ public class t411UpdateService extends Service {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            sendBroadcast(new Intent(Default.Appwidget_update));
+            //sendBroadcast(new Intent(Default.Appwidget_update));
         }
 
     }

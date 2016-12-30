@@ -25,6 +25,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import org.jsoup.helper.StringUtil;
@@ -108,6 +110,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 .build();
 
         mAdView.loadAd(adRequest);
+        //mAdView.setAdSize(new AdSize(288, 50));
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         drw.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -297,6 +300,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         initWidgets();
 
         registerReceiver(receiver, filter);
+        swrl.setRefreshing(false);
 
         View permissionStorage = findViewById(R.id.storage_permission);
 

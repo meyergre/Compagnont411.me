@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        ads:adSize="SMART_BANNER"
+        ads:adSize="FLUID"
         ads:adUnitId="@string/banner_ad_unit_id" />
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:textColor="#ED0000"
         android:onClick="onLogout"
-        android:text="Logout"
+        android:text="@string/btn_logout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

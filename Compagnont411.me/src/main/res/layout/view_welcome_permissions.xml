@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/clouds"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/img_notif"
+            android:id="@+id/imageView18"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wlcm_permission_notif"
+            android:id="@+id/textView41"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/t411_action_blue_darker"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_next"
+        android:id="@+id/button8"
+        android:layout_gravity="center_horizontal"
+        android:drawableRight="@drawable/ic_chevron"
+        android:layout_weight="0"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/t411_blue"
+        android:onClick="onNext" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp" />
+</LinearLayout>

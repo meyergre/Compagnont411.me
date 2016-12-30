@@ -373,4 +373,8 @@
     <string name="settings_custom_domain_title">Choose domain</string>
     <string name="settings_custom_domain_warning">Caution : this will OVERRIDE the default domain, even if the developer updates the defaults.</string>
     <string name="warning_custom_domain">You defined a custom domain in the settings</string>
+    <string name="notif_apierror_reconnect">Please try log of and on again</string>
+    <string name="notif_apierror">API Error</string>
+    <string name="wlcm_permission_notif">The app uses notifications to keep you informed about what\'s going on (download, error...) Make sure your phone does not block notifications!</string>
+    <string name="btn_logout">LOGOUT</string>
 </resources>

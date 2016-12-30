@@ -1,9 +1,14 @@
 package fr.lepetitpingouin.android.t411;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpHost;
 import org.json.JSONArray;
@@ -39,10 +44,13 @@ public class APIBrowser {
     private Boolean customProxy = false;
     private SharedPreferences prefs;
     private Proxy proxyServer;
+    private Context ctx;
 
     private HttpsURLConnection conn;
 
     public APIBrowser(Context context) {
+
+        this.ctx = context;
 
         this.bodyParts = new ArrayList<>();
         this.auth = PreferenceManager.getDefaultSharedPreferences(context).getString("APIToken", "");
@@ -116,6 +124,31 @@ public class APIBrowser {
                 response+=(inStream.nextLine());
             }
 
+            NotificationManager mNotificationManager = (NotificationManager) this.ctx.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.cancel(12345);
+
+            try {
+                JSONObject o = new JSONObject(response);
+                if(o.has("error")) {
+
+                    String code = o.get("code").toString();
+                    String error = o.get("error").toString();
+                    if(code.startsWith("1") || code.startsWith("2")) { // erreur token ou utilisateur
+                        error += " - " + this.ctx.getResources().getString(R.string.notif_apierror_reconnect);
+                    }
+
+                    NotificationCompat.Builder n = new NotificationCompat.Builder(this.ctx.getApplicationContext());
+                    n.setContentTitle(this.ctx.getResources().getString(R.string.notif_apierror) + " ["+code+"]");
+                    n.setSmallIcon(R.drawable.ic_notif_torrent_failure);
+                    n.setContentText(error);
+                    n.setDefaults(Notification.DEFAULT_ALL);
+                    n.setOnlyAlertOnce(true);
+
+                    mNotificationManager.notify(12345, n.build());
+                }
+            } catch(Exception ex){
+                ex.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

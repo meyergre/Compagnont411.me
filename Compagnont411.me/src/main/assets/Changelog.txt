@@ -1,5 +1,9 @@
 CHANGELOG
 
+2016.12-168
+- Ajout de notifications en cas d'erreurs API
+
+
 2016.12-167
 - Mise à jour des outils de développement
 - Correction de l'ouverture des fichiers sur Android 7

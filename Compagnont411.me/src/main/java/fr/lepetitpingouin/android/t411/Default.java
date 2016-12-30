@@ -6,7 +6,7 @@ class Default {
     public static final String API_T411 = "https://api."+IP_T411;
     public static final String URL_API_GET_TORRENT = "/torrents/download/"; // + ID
 
-    public static final int SHOW_ASSISTANT_FOR_VERSION_UNDER = 162;
+    public static final int SHOW_ASSISTANT_FOR_VERSION_UNDER = 168;
 
     public static final String T411_TOP_100 = "http://"+IP_T411+"/top/100/";
     public static final String T411_TOP_TODAY = "http://"+IP_T411+"/top/today/";

@@ -11,6 +11,15 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_5fa3a2c3b05e5e3ee21e97533b5ecc994b785f62/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-base-10.0.1_3165fffb70db897869b0342b3243a6967076908a.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/10.0.1/jars/classes.jar"
         jumboMode="true"
@@ -18,6 +27,15 @@
         revision="23.0.3"
         sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-10.0.1_54671648f2afeb346cdcddbde4f89b7e391ec00b/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-media-compat-25.1.0_f67a5c5148f477f7055788245c990f0ce128edbb.jar" />
     </item>
     <item
         is-multidex="true"
@@ -65,6 +83,42 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.34_cc82e127ea66b67bc554ccfeb17e41fa57342b71/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-fragment-25.1.0_1e6f37ce674f3e85268a726f8964d29a7ff1cacc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-25.1.0_4d7dcbf7766a7d7c8a901c79c663501d32ce24dd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-vector-drawable-25.1.0_b52e1a602cd43ac0a63c415ebd9110b572c72458.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-animated-vector-drawable-25.1.0_789544036c10a077cde6de0d238a2e66eab48f55.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
@@ -72,6 +126,24 @@
         revision="23.0.3"
         sha1="aeb47b6b622f0eb886364018f29ced374b4dc143">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_c496030e452bbd090ca709fd4d8ec3c724dabc4e/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-core-utils-25.1.0_c7257e0dc1db5b640957ee27db25db53523074e5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b955cb3a1ad6f1b6ff728ce1e0cd592c1717b440">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-ads-lite-10.0.1_b41369152412264f43670f955878b29d441e4641.jar" />
     </item>
     <item
         is-multidex="true"
@@ -155,6 +227,15 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/jsoup-1.9.2_b93db4a63ed09cd6712fe5b28d8eb3ae1590a89d/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/palette-v7/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6f68018b5ddc2493f5e5cecc5601c05d0539281a">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-palette-v7-25.1.0_5c9cbefcf98cf4c388bb7c6a7456afedca5e61ef.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
         jumboMode="true"
@@ -164,6 +245,24 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.0_4eb1db4c0185f12bf56acd57d496e4069471ba74/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-recyclerview-v7-25.1.0_3aec049cc9eff58c2b3d56e6a885c0e16556a743.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-basement-10.0.1_f2c148d19ff0d6a3ced53d37533e41a38958d162.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/10.0.1/jars/classes.jar"
         jumboMode="true"
@@ -171,6 +270,15 @@
         revision="25.0.2"
         sha1="25438f55fc6d906a0e72f30b21487541430ede43">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-10.0.1_3165fffb70db897869b0342b3243a6967076908a/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/support-annotations-25.1.0_5fa3a2c3b05e5e3ee21e97533b5ecc994b785f62.jar" />
     </item>
     <item
         is-multidex="true"
@@ -218,6 +326,15 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-10.0.1_f4e1efc02627f17445f10e93c588dc84edf4ab4a/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/.gradle/caches/modules-2/files-2.1/com.anjlab.android.iab.v3/library/1.0.34/525f76f11c47aabd9e70ffe7a5e3a75959ec18c8/library-1.0.34.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="525f76f11c47aabd9e70ffe7a5e3a75959ec18c8">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/library-1.0.34_cc82e127ea66b67bc554ccfeb17e41fa57342b71.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/10.0.1/jars/classes.jar"
         jumboMode="true"
@@ -263,6 +380,15 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_b52e1a602cd43ac0a63c415ebd9110b572c72458/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-tasks-10.0.1_54671648f2afeb346cdcddbde4f89b7e391ec00b.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
         jumboMode="true"
@@ -270,6 +396,15 @@
         revision="25.0.2"
         sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.0_3aec049cc9eff58c2b3d56e6a885c0e16556a743/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1d193729baf37df3d902a423291423a0df7e3779">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-clearcut-10.0.1_9f9d3f8f609140ecd9b7e88bf5d208ef8394662a.jar" />
     </item>
     <item
         is-multidex="true"
@@ -281,13 +416,58 @@
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-10.0.1_b41369152412264f43670f955878b29d441e4641/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d0460bf07cc3657e0be518ca01c174493951c6b8">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-ads-10.0.1_f4e1efc02627f17445f10e93c588dc84edf4ab4a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/10.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="57c2eceb8548de84509d1ebc293fedec53231f6c">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.google.android.gms-play-services-gass-10.0.1_cc37768ed80dbe739d3e548914be4f6528490e52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-core-ui-25.1.0_7e47a3df1d1aaf4ad2be7eba67f2dee56c2ee948.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/design/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-design-25.1.0_678fada89e74b15b409a517b0e2054aed293067d.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="790b5a9a6f3bee58a12ed77775b1739f98959e21">
+        sha1="0edf20e837a4dad76f9cc60984cfcf3a4179c993">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a8de76aee272fdea47d29ba48c665d77f01e0622/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-compat-25.1.0_a956f5bcfa41186fa73e6a5e01200dcab3599794.jar" />
     </item>
     <item
         is-multidex="true"
@@ -297,6 +477,24 @@
         revision="23.0.3"
         sha1="25438f55fc6d906a0e72f30b21487541430ede43">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-10.0.1_3165fffb70db897869b0342b3243a6967076908a/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-transition-25.1.0_0b257e0f64c689fe53e3f125fd29401ba32f264f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.9.2/5e3bda828a80c7a21dfbe2308d1755759c2fd7b4/jsoup-1.9.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5e3bda828a80c7a21dfbe2308d1755759c2fd7b4">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/jsoup-1.9.2_b93db4a63ed09cd6712fe5b28d8eb3ae1590a89d.jar" />
     </item>
     <item
         is-multidex="true"
@@ -315,6 +513,15 @@
         revision="25.0.2"
         sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
         <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-10.0.1_f2c148d19ff0d6a3ced53d37533e41a38958d162/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/gregory/AndroidStudioProjects/Compagnont411.me/Compagnont411.me/build/intermediates/pre-dexed/release/com.android.support-support-v4-25.1.0_4eb1db4c0185f12bf56acd57d496e4069471ba74.jar" />
     </item>
     <item
         is-multidex="true"
