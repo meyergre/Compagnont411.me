@@ -211,7 +211,7 @@ public class SearchActivity extends AppCompatActivity {
                 HashMap<String, String> map = (HashMap<String, String>) maListViewPersoCat.getItemAtPosition(position);
                 catCode = map.get("code");
                 cat_dialog.dismiss();
-                ivCat.setImageResource(Integer.parseInt(map.get("icon")));
+                ivCat.setImageResource(Integer.parseInt(map.get("icon")==null?"0":map.get("icon")));
                 tvCat.setText(map.get("name"));
             }
         });
@@ -612,16 +612,22 @@ public class SearchActivity extends AppCompatActivity {
 
         public asyncApiGetCategories() {
             this.catList = new ArrayList<>();
+            HashMap<String, String> catMap = new HashMap<>();
+            catMap.put("name", "-- Tout --");
+            catMap.put("code", "");
+            catList.add(catMap);
         }
 
         private void extractFromJson(JSONObject json) {
             try {
                 Iterator<String> iter = json.keys();
+                HashMap<String, String> catMap = new HashMap<>();
+
                 while (iter.hasNext()) {
                     String key = iter.next();
                     try {
                         JSONObject value = new JSONObject(json.getString(key));
-                        HashMap<String, String> catMap = new HashMap<>();
+                        catMap = new HashMap<>();
                         catMap.put("icon", String.valueOf(new CategoryIcon(value.getString("id")).getIcon()));
                         if(value.has("cats")) {
                             catMap.put("name", "--" + value.getString("name") + "--");

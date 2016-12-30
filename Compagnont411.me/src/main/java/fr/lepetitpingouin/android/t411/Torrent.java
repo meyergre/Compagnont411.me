@@ -33,6 +33,8 @@ import java.util.Map;
 
 public class Torrent implements Comparator<Torrent> {
 
+    public static String DOWNLOAD_FOLDER = "Torrents t411";
+
     public String name;
     public String id;
     public String url;
@@ -82,6 +84,8 @@ public class Torrent implements Comparator<Torrent> {
         this.id = id;
         this.url = Default.URL_GET_TORRENT + id;
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        checkFolder();
     }
 
     public Torrent(Context context, String name, String id, String size, String uploader, String category) {
@@ -98,6 +102,17 @@ public class Torrent implements Comparator<Torrent> {
             this.json = new JSONArray(prefs.getString("jsonTorrentList", "[]"));
         } catch(Exception ex) {
             ex.printStackTrace();
+        }
+
+        checkFolder();
+    }
+
+    private void checkFolder() {
+        File dir = new File(Environment.getExternalStorageDirectory(), DOWNLOAD_FOLDER);
+        if(!dir.exists()) {
+            if(!dir.mkdir()) {
+                doNotify(R.drawable.ic_notif_torrent_failure, "Erreur dossier", "Création du dossier de téléchargements impossible.", 90, null);
+            }
         }
     }
 
@@ -215,10 +230,9 @@ public class Torrent implements Comparator<Torrent> {
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
 
+        i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         if(Build.VERSION.SDK_INT >= 24) {
             i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
-
-            Log.e("TESTTEST", FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file).toString());
         }
         else {
             i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
@@ -422,6 +436,7 @@ public class Torrent implements Comparator<Torrent> {
                 i.setAction(android.content.Intent.ACTION_VIEW);
 
                 i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+                i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 if(Build.VERSION.SDK_INT >= 24) {
                     i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
                 }
@@ -432,7 +447,7 @@ public class Torrent implements Comparator<Torrent> {
                 if (prefs.getBoolean("openAfterDl", false)) {
                     //ouvrir le fichier
                     try {
-                        context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT | Intent.FLAG_FROM_BACKGROUND));
+                        context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT | Intent.FLAG_FROM_BACKGROUND | Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION));
                         if (prefs.getBoolean("openAfterDlCancelNotify", false))
                             cancelNotify(Integer.valueOf(id));
                     } catch (Exception e) {
@@ -465,7 +480,7 @@ public class Torrent implements Comparator<Torrent> {
     }
 
     public String getTorrentPath() {
-        return prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath());
+        return new File(Environment.getExternalStorageDirectory().getPath(), DOWNLOAD_FOLDER).getPath();
     }
 
     public String getTorrentName() {

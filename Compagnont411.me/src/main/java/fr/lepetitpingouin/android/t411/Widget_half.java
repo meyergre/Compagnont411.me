@@ -57,8 +57,8 @@ public class Widget_half extends AppWidgetProvider {
             }
 
             views.setTextViewText(R.id.updatedTime, prefs.getString("lastDate", "?????"));
-            views.setTextViewText(R.id.wUpload, new BSize(prefs.getString("lastUpload", "0.00")).convert());
-            views.setTextViewText(R.id.wDownload, new BSize(prefs.getString("lastDownload", "0.00")).convert());
+            views.setTextViewText(R.id.wUpload, new BSize(prefs.getString("lastUpload", "0.00").replace(",",".")).convert());
+            views.setTextViewText(R.id.wDownload, new BSize(prefs.getString("lastDownload", "0.00").replace(",",".")).convert());
             views.setTextViewText(R.id.wMails, String.valueOf(prefs.getInt("lastMails", 0)));
             views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(prefs.getString("lastRatio", "0.00").replace(",","."))));
 

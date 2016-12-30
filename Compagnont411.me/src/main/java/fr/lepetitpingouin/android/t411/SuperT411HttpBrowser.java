@@ -149,7 +149,11 @@ public class SuperT411HttpBrowser {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
-                    return true;
+                    if(hostname.contains("t411")) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             });
         } catch (Exception ex) {

@@ -242,7 +242,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                         ex.printStackTrace();
                     }
 
-                    displayedDate = getResources().getString(R.string.lastUpdate) + lastDate;
+                    displayedDate = getResources().getString(R.string.lastUpdate) + lastDate.replaceAll("'", "");
 
                     //((TextView) findViewById(R.id.tvUpdateTime)).setText(displayedDate);
                     getSupportActionBar().setSubtitle(displayedDate);

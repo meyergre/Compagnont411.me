@@ -32,7 +32,7 @@ class T411Logger {
     public String logFilePath() {
         String filename = android.text.format.DateFormat.format("yyyy-MM-dd", new java.util.Date()).toString() + "_T411.log";
 
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
+        File file = new File(Environment.getExternalStorageDirectory(), filename);
 
         return file.getAbsolutePath();
     }
@@ -67,7 +67,7 @@ class T411Logger {
 
         } catch(Exception e) {
             e.printStackTrace();
-            Log.e("T411Logger", e.getMessage());
+            Log.e("T411Logger", ""+e.getMessage());
         }
     }
 

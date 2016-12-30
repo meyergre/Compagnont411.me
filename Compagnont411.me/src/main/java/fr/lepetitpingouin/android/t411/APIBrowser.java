@@ -20,6 +20,7 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,11 +42,7 @@ public class APIBrowser {
 
     private HttpsURLConnection conn;
 
-    private byte[] byteContent;
-
     public APIBrowser(Context context) {
-
-        this.byteContent = "".getBytes();
 
         this.bodyParts = new ArrayList<>();
         this.auth = PreferenceManager.getDefaultSharedPreferences(context).getString("APIToken", "");
@@ -81,7 +78,11 @@ public class APIBrowser {
     }
 
     public APIBrowser addPOSTParam(String key, String value) {
-        this.bodyParts.add(key + "=" + value);
+        try {
+            this.bodyParts.add(URLEncoder.encode(key, "utf-8") + "=" + URLEncoder.encode(value, "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 

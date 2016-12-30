@@ -75,7 +75,7 @@ public class UserPrefsActivity extends PreferenceActivity {
                 }
             });
 
-            filePicker.setSummary(prefs.getString("filePicker", "Aucun chemin choisi"));
+            //filePicker.setSummary(prefs.getString("filePicker", "Aucun chemin choisi"));
         } catch (ClassCastException cce) {
             Toast.makeText(this, "Erreur d'ICC détectée. Veuillez suivre les instructions données dans les notes de version du Play Store.", Toast.LENGTH_LONG).show();
             finish();
@@ -92,7 +92,7 @@ public class UserPrefsActivity extends PreferenceActivity {
                     prefs.edit().remove("custom_domain");
                 }
                 prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                preference.setSummary(prefs.getString("custom_domain", Default.IP_T411));
+                preference.setSummary(prefs.getString("custom_domain", Default.IP_T411 + " (default)"));
                 return true;
             }
         });

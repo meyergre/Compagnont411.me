@@ -125,7 +125,8 @@
 
             <Preference
                 android:key="savePath"
-                android:summary="Définir le chemin de téléchargement"
+                android:enabled="false"
+                android:summary="[SDCARD]/Torrents t411/"
                 android:title="@string/save_path" />
 
             <CheckBoxPreference
@@ -143,6 +144,7 @@
 
             <CheckBoxPreference
                 android:defaultValue="true"
+                android:enabled="false"
                 android:key="addMimeType"
                 android:summary="@string/description_settings_addMime"
                 android:title="@string/settings_addMime" />

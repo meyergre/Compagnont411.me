@@ -1,5 +1,22 @@
 CHANGELOG
 
+2016.12-167
+- Mise à jour des outils de développement
+- Correction de l'ouverture des fichiers sur Android 7
+- Retour de la catégorie "Tout"
+
+
+2016.12-166
+- Mise en conformité avec les directives Google concernant la connexion HTTPS
+- Correction des problème de "Wrong password" liés à l'encodage des caractères
+
+
+2016.11-165
+- Correction des widgets
+- Rétablissement de l'ouverture des liens vers t411.li par l'application
+- Le répertoire de téléchargement est maintenant forcé au dossier "Torrents t411" à la racine du stockage externe, pour la compatibilité avec Android 7
+
+
 2016.11-164
 - Correction d'un problème d'ouverture de fichier qui passait pour un PDF
 

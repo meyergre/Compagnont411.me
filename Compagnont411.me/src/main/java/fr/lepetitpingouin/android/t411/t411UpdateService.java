@@ -350,7 +350,7 @@ public class t411UpdateService extends Service {
 
                     new T411Logger(getApplicationContext()).writeLine("Nouveau MP reçu, envoi d'une notification");
 
-                    doNotify(R.drawable.ic_launcher_messages, getString(R.string.notif_msg_title), getString(R.string.notif_msg_content), 2907, pI);
+                    doNotify(R.drawable.ic_notif_message, getString(R.string.notif_msg_title), getString(R.string.notif_msg_content), 2907, pI);
                 }
             }
 
@@ -631,14 +631,6 @@ public class t411UpdateService extends Service {
 
 
             try {
-                /* res = Jsoup
-                        .connect(url + prefs.getString("usernumber", "0"))
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true).execute();
-                doc = res.parse(); */
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)

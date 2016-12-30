@@ -121,7 +121,7 @@ public class Widget_huge extends AppWidgetProvider {
                 String clockImpls[][] = {
                         {"HTC Alarm Clock", "com.htc.android.worldclock",
                                 "com.htc.android.worldclock.WorldClockTabControl"},
-                        {"Standar Alarm Clock", "com.android.deskclock",
+                        {"Standard Alarm Clock", "com.android.deskclock",
                                 "com.android.deskclock.AlarmClock"},
                         {"Froyo Nexus Alarm Clock",
                                 "com.google.android.deskclock",
