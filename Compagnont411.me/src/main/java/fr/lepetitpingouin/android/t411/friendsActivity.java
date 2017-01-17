@@ -22,7 +22,6 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Connection;

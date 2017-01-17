@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
-import java.io.IOException;
-
 /**
  * Created by gregory on 22/11/2013.
  */

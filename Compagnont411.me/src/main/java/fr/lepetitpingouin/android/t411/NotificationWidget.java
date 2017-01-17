@@ -5,14 +5,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Base64;
 import android.widget.RemoteViews;
-
-import java.io.IOException;
 
 /**
  * Created by gregory on 16/08/13.

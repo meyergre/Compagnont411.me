@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 12
         targetSdkVersion 25
-        versionCode 168
-        versionName "2016.12-168"
+        versionCode 170
+        versionName "2017.01-170"
         applicationId "fr.lepetitpingouin.android.t411"
 
         resConfigs "en", "fr"
@@ -39,7 +39,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:palette-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
-    compile 'org.jsoup:jsoup:1.9.2'
-    compile 'com.anjlab.android.iab.v3:library:1.0.34'
+    compile 'org.jsoup:jsoup:1.10.2'
+    compile 'com.anjlab.android.iab.v3:library:1.0.+'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
 }

@@ -91,7 +91,7 @@ class TorrentsListAdapter extends BaseAdapter {
             uploader.setText(t.uploader);
 
             TextView size = (TextView) vi.findViewById(R.id.torrent_size);
-            size.setText(t.size);
+            size.setText(BSize.quickConvert(t.size));
 
             ImageView img = (ImageView) vi.findViewById(R.id.imageViewCatIcon);
             img.setImageResource(new CategoryIcon(t.category).getIcon());

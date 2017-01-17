@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -84,28 +85,18 @@ public class ProxyActivity extends AppCompatActivity {
         bp = new BillingProcessor(this, Private.API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
-                subscribed.setVisibility(View.VISIBLE);
-                abo.setVisibility(View.GONE);
                 edit.putBoolean("showProxyAlert", true).apply();
-                ((CheckBox) findViewById(R.id.checkBox_proxyAlert)).setChecked(true);
-                new T411Logger(getApplicationContext()).writeLine("Abonnement souscrit");
+                edit.putBoolean("usePaidProxy", true).commit();
+                checkPurchasedWithBp(true);
+                ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(true);
+                new T411Logger(getApplicationContext()).writeLine("Abonnement souscrit et activé par défaut");
+                Snackbar.make(findViewById(R.id.proxyshield), getResources().getString(R.string.proxy_subscribed), Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onPurchaseHistoryRestored() {
                 new T411Logger(getApplicationContext()).writeLine("BP : HistoryRestored");
-                if(bp.isSubscribed(Private.PROXY_ITEM_ID)) {
-                    subscribed.setVisibility(View.VISIBLE);
-                    abo.setVisibility(View.GONE);
-                    new T411Logger(getApplicationContext()).writeLine("Souscription effective, affichage de l'option");
-
-                } else {
-                    subscribed.setVisibility(View.GONE);
-                    abo.setVisibility(View.VISIBLE);
-                    new T411Logger(getApplicationContext()).writeLine("La souscription n'est pas effective");
-                    ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(false);
-                    edit.putBoolean("usePaidProxy", false).commit();
-                }
+                checkPurchasedWithBp(false);
             }
 
             @Override
@@ -115,7 +106,15 @@ public class ProxyActivity extends AppCompatActivity {
 
             @Override
             public void onBillingInitialized() {
+                bp.loadOwnedPurchasesFromGoogle();
+
                 new T411Logger(getApplicationContext()).writeLine("BP : BillingInitialized");
+                TransactionDetails transactionDetails = bp.getPurchaseTransactionDetails(Private.PROXY_ITEM_ID);
+                if (transactionDetails != null) {
+                    //Already purchased
+                    //You may save this as boolean in the SharedPreferences.
+                }
+                checkPurchasedWithBp(false);
             }
         });
         if (!BillingProcessor.isIabServiceAvailable(getApplicationContext())) {
@@ -125,9 +124,14 @@ public class ProxyActivity extends AppCompatActivity {
             abo.setEnabled(false);
         }
 
-        bp.loadOwnedPurchasesFromGoogle();
+        checkPurchasedWithBp(false);
 
-        if(bp.isSubscribed(Private.PROXY_ITEM_ID)) {
+        ((CheckBox)findViewById(R.id.checkBox_proxyAlert)).setChecked(prefs.getBoolean("showProxyAlert", true));
+        ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(prefs.getBoolean("usePaidProxy", false));
+    }
+
+    private void checkPurchasedWithBp(boolean force) {
+        if(bp.isSubscribed(Private.PROXY_ITEM_ID)||BuildConfig.DEBUG||force) {
             subscribed.setVisibility(View.VISIBLE);
             abo.setVisibility(View.GONE);
             new T411Logger(getApplicationContext()).writeLine("Souscription effective, affichage de l'option");
@@ -138,14 +142,6 @@ public class ProxyActivity extends AppCompatActivity {
             new T411Logger(getApplicationContext()).writeLine("La souscription n'est pas effective");
             ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(false);
             edit.putBoolean("usePaidProxy", false).commit();
-        }
-
-        ((CheckBox)findViewById(R.id.checkBox_proxyAlert)).setChecked(prefs.getBoolean("showProxyAlert", true));
-        ((CheckBox)findViewById(R.id.cbx_use_proxy)).setChecked(prefs.getBoolean("usePaidProxy", false));
-
-        if(BuildConfig.DEBUG) {
-            subscribed.setVisibility(View.VISIBLE);
-            //abo.setVisibility(View.GONE);
         }
     }
 

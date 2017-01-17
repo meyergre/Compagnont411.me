@@ -34,7 +34,6 @@ import org.jsoup.nodes.Element;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.security.cert.X509Certificate;
@@ -97,11 +96,9 @@ public class SuperT411HttpBrowser {
 
         if (this.proxy) {
             this.httpproxy = new HttpHost(Private.URL_PROXY, 411);
-            //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(Private.URL_PROXY, 411));
             new T411Logger(this.ctx).writeLine("Utilisation du proxy dédié");
         } else if (this.customProxy) {
             this.httpproxy = new HttpHost(prefs.getString("customProxy", ""), 411);
-            //httpproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(prefs.getString("customProxy", ""), 411));
 
             final String pLogin = prefs.getString("proxy_login", "");
             final String pPassword = prefs.getString("proxy_pasword", "");
@@ -149,11 +146,7 @@ public class SuperT411HttpBrowser {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
-                    if(hostname.contains("t411")) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    return hostname.contains("t411");
                 }
             });
         } catch (Exception ex) {
@@ -340,7 +333,7 @@ public class SuperT411HttpBrowser {
                         ex.printStackTrace();
                     }
                 } else {
-                    Log.e("CAPTCHA", "Abandon après 3 essais");
+                    new T411Logger(this.ctx).writeLine("Impossible de résoudre le captcha après 3 tentatives", T411Logger.ERROR);
                     }
                 }
 
@@ -421,7 +414,6 @@ public class SuperT411HttpBrowser {
                 out.close();
                 responseString = out.toString();
                 this.mresponseStream = out.toByteArray();
-                new T411Logger(this.ctx).writeLine("La connexion a répondu : " + "200 OK");
             } else {
                 //Closes the connection.
                 response.getEntity().getContent().close();

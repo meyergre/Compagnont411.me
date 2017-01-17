@@ -2,11 +2,11 @@ package fr.lepetitpingouin.android.t411;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 public class Torrent implements Comparator<Torrent> {
@@ -226,19 +227,18 @@ public class Torrent implements Comparator<Torrent> {
     public void open() {
         Intent i = new Intent();
         i.setAction(android.content.Intent.ACTION_VIEW);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FROM_BACKGROUND);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_FROM_BACKGROUND|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        i.setType("application/x-bittorrent");
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
-
-        i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         if(Build.VERSION.SDK_INT >= 24) {
-            i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
+            i.setDataAndNormalize(FileProvider.getUriForFile(context.getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", file));
         }
         else {
-            i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+            i.setData(Uri.fromFile(file));
         }
 
-        context.startActivity(Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        context.startActivity(Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)));
     }
 
     @Override

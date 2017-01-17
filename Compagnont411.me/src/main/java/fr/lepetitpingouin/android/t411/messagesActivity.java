@@ -154,6 +154,7 @@ public class messagesActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        if(info.position>maListViewPerso.getCount()) return false;
         itemMap = (HashMap<String, String>) maListViewPerso.getItemAtPosition(info.position);
         switch (item.getItemId()) {
             case R.id.messages_context_menu_read:

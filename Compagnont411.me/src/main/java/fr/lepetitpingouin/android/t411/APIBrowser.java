@@ -1,16 +1,11 @@
 package fr.lepetitpingouin.android.t411;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.Toast;
 
-import org.apache.http.HttpHost;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,10 +15,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
-import java.net.SocketAddress;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -47,6 +40,7 @@ public class APIBrowser {
     private Context ctx;
 
     private HttpsURLConnection conn;
+    public String errorMessage, errorCode;
 
     public APIBrowser(Context context) {
 
@@ -101,7 +95,7 @@ public class APIBrowser {
 
     public String load() {
 
-        URL mUrl = null;
+        URL mUrl;
         String response = "";
         try {
             mUrl = new URL(this.url.replace(Default.IP_T411, prefs.getString("custom_domain", Default.IP_T411)));
@@ -133,6 +127,9 @@ public class APIBrowser {
 
                     String code = o.get("code").toString();
                     String error = o.get("error").toString();
+
+                    this.errorCode = code;
+                    this.errorMessage = error;
                     if(code.startsWith("1") || code.startsWith("2")) { // erreur token ou utilisateur
                         error += " - " + this.ctx.getResources().getString(R.string.notif_apierror_reconnect);
                     }
@@ -141,7 +138,8 @@ public class APIBrowser {
                     n.setContentTitle(this.ctx.getResources().getString(R.string.notif_apierror) + " ["+code+"]");
                     n.setSmallIcon(R.drawable.ic_notif_torrent_failure);
                     n.setContentText(error);
-                    n.setDefaults(Notification.DEFAULT_ALL);
+                    n.setDefaults(0);
+                    n.setSound(null);
                     n.setOnlyAlertOnce(true);
 
                     mNotificationManager.notify(12345, n.build());

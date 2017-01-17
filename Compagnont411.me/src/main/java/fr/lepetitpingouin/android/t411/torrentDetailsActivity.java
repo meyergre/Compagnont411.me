@@ -30,7 +30,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Connection;
@@ -492,9 +491,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez += "</table></body></html>";
 
                 prez = prez.replaceAll("_____", "");
-
-                if (comments.select("tr").size() > 0)
-                    prez += "<a href=\"" + torrent_URL.replace("/torrents/torrents", "/torrents") + "\"><center><br/>La suite sur t411...<br/><br/></center></a>";
 
                 try {
                     //vidéos youtube

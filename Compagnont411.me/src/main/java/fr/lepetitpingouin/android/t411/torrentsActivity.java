@@ -15,12 +15,12 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -33,7 +33,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Connection;
@@ -42,10 +41,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class torrentsActivity extends AppCompatActivity {
@@ -558,7 +560,7 @@ public class torrentsActivity extends AppCompatActivity {
                         Elements tds = row.select("td");
 
 
-                        String[] t_catCode = tds.get(base + 0).select("a").first().attr("href").split("=");
+                        String[] t_catCode = tds.get(base).select("a").first().attr("href").split("=");
                         String catCode = t_catCode[t_catCode.length - 1];
 
                         try {
@@ -570,8 +572,8 @@ public class torrentsActivity extends AppCompatActivity {
                             String temp = tds.get(base + 4).text().split(" ")[1];
 
                             switch (temp){
-                                case "minutes":tTime = 0+tTime ;break;
-                                case "minute":tTime = 0+tTime ;break;
+                                case "minutes":tTime = tTime;break;
+                                case "minute":tTime = tTime;break;
                                 case "heures":tTime = tTime*60;break;
                                 case "heure":tTime = tTime*60;break;
                                 case "jours":tTime = tTime * 1440;break;
@@ -585,6 +587,7 @@ public class torrentsActivity extends AppCompatActivity {
                             }
 
                             publishProgress(++count + " " + getString(R.string.torrents_found));
+
                             map = new HashMap<String, String>();
                             //map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
                             map.put("nomComplet", tds.get(base + 1).select("a").first().text().toString());
@@ -629,11 +632,7 @@ public class torrentsActivity extends AppCompatActivity {
                 }
             } catch (RuntimeException rte) {
 
-                /*new Handler().post(new Runnable() {
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.runtime_ex), Toast.LENGTH_LONG).show();
-                    }
-                });*/
+                rte.printStackTrace();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -656,6 +655,8 @@ public class torrentsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+
+
 
             try {
                 Element elmtPrev = doc.select(".pagebar a").first();

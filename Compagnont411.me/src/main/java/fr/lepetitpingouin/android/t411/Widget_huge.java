@@ -171,7 +171,7 @@ public class Widget_huge extends AppWidgetProvider {
             views.setTextViewText(R.id.wUpload, upload);
             views.setTextViewText(R.id.wDownload, download);
             views.setTextViewText(R.id.wMails, mails);
-            views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(ratio)).replace(",","."));
+            views.setTextViewText(R.id.wRatio, String.format("%.2f", Double.valueOf(ratio.replace(",","."))));
             views.setTextViewText(R.id.wUsername, username);
 
             // updating time

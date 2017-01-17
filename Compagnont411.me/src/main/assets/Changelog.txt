@@ -1,39 +1,41 @@
 CHANGELOG
+2017.01-170
+- Nettoyage du changelog
+- Mise à jour de la lib JSoup
+- Mise à jour de la lib IABv3
+- Correction du chemin vers le fichier journal
+
+2017.01-169
+- Correction d'un bug sur le widget
+- Ajout d'une solution de fallback en attendant un fix de l'API par l'équipe du site
 
 2016.12-168
 - Ajout de notifications en cas d'erreurs API
-
 
 2016.12-167
 - Mise à jour des outils de développement
 - Correction de l'ouverture des fichiers sur Android 7
 - Retour de la catégorie "Tout"
 
-
 2016.12-166
 - Mise en conformité avec les directives Google concernant la connexion HTTPS
 - Correction des problème de "Wrong password" liés à l'encodage des caractères
-
 
 2016.11-165
 - Correction des widgets
 - Rétablissement de l'ouverture des liens vers t411.li par l'application
 - Le répertoire de téléchargement est maintenant forcé au dossier "Torrents t411" à la racine du stockage externe, pour la compatibilité avec Android 7
 
-
 2016.11-164
 - Correction d'un problème d'ouverture de fichier qui passait pour un PDF
 
-
 2016.11-163
 - Rétablissement des widgets
-
 
 2016.11-162 BETA
 - Changement de domaine
 - Correction des connexions API
 - Ajustements mineurs
-
 
 2016.11-161 BETA
 - Correction du listing des téléchargements
@@ -41,38 +43,30 @@ CHANGELOG
 - Ajout d'une option pour indiquer manuellement un domaine
 - Mise à jour des libs tierces
 
-
 2016.10-160 BETA
 - Correction du calcul du ratio après téléchargement
 - Correction de FC lors du changement d'orientationsur les listes de résultats de recherches par l'API
 - Rafraichissement du widget de notification
 - Mise sous condition de la recherche par API a cause de ses limitations
 
-
 2016.09-159 BETA
 - Intégration de l'API de t411 pour booster la vitesse des recherches de torrents
 - Rafraichissement visuel
 - Suppression de certaines pubs cliquables dans les prez
 
-
 2016.07-158
 - Correction de la récupération des ratios > 1000
 
-
 2016.05-157
 - Suppression automatique des fichiers effacés dans la liste des téléchargements
-
 
 2016.05-156
 - Correction des tailles d'icones
 - Les icones Messagerie et Téléchargements peuvent être masquées
 
-
-
 2016.05-155
 - Corrections diverses
 - Optimisation de la taille de l'APK
-
 
 2016.05-154
 - Mise à jour de JSOUP
@@ -80,55 +74,42 @@ CHANGELOG
 - Optimisations de code
 - Ajout du listing de téléchargements
 
-
-
 2016.03-153
 - Correction de l'utilisation d'un proxy perso avec auth
-
 
 2016.02-151/2
 - Passage à t411.ch
 
-
 2016.01-148
 - Correction des demandes de permissions pour android 6
-
 
 2016.01-146/7
 - Refonte visuelle de la page de login
 - Refonte visuelle de la page de détails du torrent
 - Amélioration de l'ouverture des fichiers torrent
 
-
 2015.12-145
 - Recompilation avec les derniers outils de développement (API 23)
-
 
 2015.12-143/4
 - Bugfix
 
-
 2015.12-142
 - Correction d'une erreur provoquant des résultats de recherche vide
-
 
 2015.10-141
 - Correction de l'utilisation d'un proxy personnel
 
-
 2015.10-140
 - Correction de l'ouverture des fiches torrent
 
-
 2015.10-139
 - Bugfix
-
 
 2015.10-138
 - Modifications de l'usage de proxy perso
 - Modifications de l'option d'envoi de logs
 - Ajout de publicités sur les pages de chargement
-
 
 2015.10-137
 - Optimisations du navigateur interne
@@ -136,17 +117,14 @@ CHANGELOG
 - Ajout d'une option de proxy sécurisé par mot de passe (test)
 - Retour du descriptif des torrents XXX
 
-
 2015.10-136
 - Correction du téléchargement des torrents par proxy
-
 
 2015.10-135
 - Correction de typos
 - Rétablissement du fonctionnement du widget pour lancer l'application
 - Ajout d'une option de proxy personnel en cas de futur blocage (port 411 imposé)
 - Autocomplétion des termes de recherches basée sur l'historique local
-
 
 2015.09-134
 - Accélération des recherches de torrent (jusqu'à x2)
@@ -155,11 +133,9 @@ CHANGELOG
 - Rétablissement de la date de dernière mise à jour
 - Ajout de logs activables dans les options
 
-
 2015.09-132/133
 - Rectifications cosmétiques
 - Corrections de bugs mineurs
-
 
 2015.09-131
 - Introduction d'éléments de Material Design
@@ -168,37 +144,29 @@ CHANGELOG
 - Rétablissement de l'option HTTPS
 - Correction des problèmes de login
 
-
 2015.09-130
 - Suppression de la compatibilité avec android 2.1 par manque de support des outils de développement
 - Remise en place d'une solution contre la censure
 - Correction de l'affichage de l'avatar lors de l'utilisation du proxy
 
-
 2015.08-126 / 2015.09-129
 - tests non publiés
-
 
 2015.08-125
 - Contournement du captcha (3 essais avant abandon)
 
-
 2015.08-123/4
 - Contournement de la censure en France
-
 
 2015.05-122
 - Affichage des images suite à une modification du site
 - Ajout des sous catégories Audio/Podcast et XXX/Animation
 
-
 2015.05-121
 - Correction de l'affichage des catégories vides dans les tops
 
-
 2015.02-118/2015.03-119/2015.04-120
 - Corrections suite au passage du site au .io
-
 
 2015.01-117
 - Correction du numéro de version (passé a 2011.xx-xxx a cause d'une erreur de frappe...)
@@ -208,34 +176,27 @@ CHANGELOG
 2015.01-116
 - Correction des mises à jour des données
 
-
 2015.01-115
 - Correction des plantages sur Wiko
-
 
 2014.12-114
 - Correction des plantages sur tablette
 
-
 2014.12-113
 - Recompilation avec le dernier SDK
 - Correction de l'affichage tablette
-
 
 2014.11-112
 - Fix des titres de torrents dans les résultats de recherche
 - Masquage de l'erreur de Captcha
 - Densification de l'interface des résultats de recherche en mode paysage pour les grands écrans
 
-
 2014.10-111
 - Fix des recherches enregistrées, en tenant compte des champs avancés
-
 
 2014.10-110
 - Fix de l'affichage des descriptions sur tablettes / format paysage
 - Nettoyage des logs dans le logcat
-
 
 
 2014.10-109
@@ -243,31 +204,25 @@ CHANGELOG
 - Fix de la messagerie qui reste visible dans le menu
 - Fix du curseur dans la zone de recherche
 
-
 2014.09-108
 - Mise à jour des outils de développement
 - Retrait du lien messagerie imposé dans la liste des applications
 - Fix de "Mes recherches" ne renvoyant pas les bons résultats
 
-
 2014.07-107
 - Adaptation aux changements du site (changement de l'affichage du code de catégorie) dans les résultats de recherche et les top torrents
 - correction des traductions
-
 
 2014.06-106
 - correction des traductions
 - optimisations du code
 - ajout de la déconnexion dans le slide menu
 
-
 2014.03-105
 - correction des plantages en cas de présence d'espaces dans les termes de recherche
 
-
 2014.03-104
 - Prise en compte des nouvelles options de recherche du site
-
 
 2014.02-103
 - Fix certains FC lors du listing des torrents
@@ -275,11 +230,9 @@ CHANGELOG
 - Fix de la pagination des torrents dans les résultats de recherche
 - Cosmétique (critères inexistants dans les listes de torrents)
 
-
 2014.02-102
 - Fix connexion HTTPS
 - Fix certains FC lors des recherches
-
 
 2014.01-101
 - Support des liens t411 (ouvrir avec...)
@@ -287,24 +240,20 @@ CHANGELOG
 - BugFix android 2.3 (envoi de messages)
 - Optimisations visuelles
 
-
 2014.01-99/100
 - Correction du chargement des top torrents
 - Correction du chargement des uploads
 - Affichage de la progression lors du chargement des résultats de recherche
 
-
 2014.01-98
 - Corrections diverses pour android < 2.3.3
 - Corrections de l'affichage du contenu des messages
-
 
 2013.12-97
 - Correction des traductions (anglais)
 - Correction de fautes de frappes
 - Recompilation avec le dernier SDK (v19, KitKat)
 - Corrections diverses
-
 
 2013.12-96
 - Possibilité de forcer ou non le type MIME lors de l'ouverture d'un torrent
@@ -313,36 +262,29 @@ CHANGELOG
 - Amélioration de la lisibilité du titre des torrents dans les résultats de recherche
 - Corrections diverses dans les textes des messages
 
-
 2013.12-95
 - Redirection vers youtube des vidéos en IFRAME dans les prez
 - Option pour ouvrir directement un torrent après un téléchargement
 - Rétablissement des messages d'erreur de connexion
 - Correction des plantages à l'envoi de MP
 
-
 2013.11-94
 - Correction du nom du torrent affiché lors d'un téléchargement depuis la liste des résultats
 - Correction des info-bulles vides lors de l'ajout aux futurs téléchargements
-
 
 2013.11-93
 - Ajout d'actions au long-clic sur les torrents
 - Ajout d'actions au long-clic sur les messages
 
-
 2013.11-92
 - Bugfix
-
 
 2013.11-91
 - Correction du chemin de téléchargement
 
-
 2013.11-90
 - Correction de l'encodage des caractères accentués reçus
 - Correction du téléchargement de torrents corrompus
-
 
 2013.11-89
 - Correction du chemin d'enregistrement des fichiers dans le sélecteur
@@ -353,11 +295,9 @@ CHANGELOG
 - Correction des accès https
 - Correction des plantages de l'horloge
 
-
 2013.11-88
 - La touche Entrée valide la recherche
 - Mise à jour des grands widgets (nom et disposition)
-
 
 2013.11-87
 - Correction de l'accès au panneau latéral pour les anciennes versions d'android
@@ -365,10 +305,8 @@ CHANGELOG
 - Correction de l'encodage des MP
 - Plus de rechargement au changement d'orientation dans les messages
 
-
 2013.11-86
 - Fix d'un problème d'ouverture pour les anciennes versions d'android
-
 
 2013.11-85
 - Autorisation des virgules pour les ratios minimum/maximum
@@ -379,7 +317,6 @@ CHANGELOG
 - Correction de l'interface tablette
 (Merci à Kévin S)
 
-
 2013.11-84
 - Réécriture partielle de l'application
 - Implémentation de l'ActionBar native
@@ -389,20 +326,16 @@ CHANGELOG
 - Support de uTorrent Remote lors de l'ouverture d'un torrent
 - Mise à jour du lien vers mes autres apps
 
-
 2013.10-83
 - Correctifs mineurs
-
 
 2013.10-82
 - Bugfix : boutons du widget "Plus"
 - Bugfix : plantages à l'ouverture de "mes amis" sans connexion
 
-
 2013.9-81
 - Ajout de swipe pour ouvrir le menu
 - Ajout de "Mes uploads"
-
 
 2013.9-80
 - Ajout de la liste des fichiers d'un torrent
@@ -454,12 +387,10 @@ CHANGELOG
 - Correction de l'affichage de l'avatar si HTTPS est coché
 
 2013.8-70
-
 - Correction des recherches enregistrées
 - Correction de la quantité restante à télécharger
 
 2013.7-69
-
 - Mise à jour de l'affichage des notifications (lib support v4)
 - Correction de l'affichage des quantités restantes a seeder/leecher avant les ratios voulus
 - Accès aux paramètres en cas d'échec de téléchargement
@@ -468,27 +399,22 @@ CHANGELOG
 - Suppression des options de développement des paramètres
 
 2013.7-68
-
 - Ajout d'un filtre de catégorie sur les torrents du jour/semaine/mois
 
 2013.7-67
-
 - Correction des filtres de recherche sur les torrents X
 - Ajout d'un layout Tablette pour l'écran d'accueil
 - Correction de l'affichage du smiley Père Noël le 24 juillet ;)
 
 2013.7-66
-
 - Correction de l'affichage des prez des torrents X
 - Correction de l'affichage du titre des torrents
 
 2013.7-65
-
 - Retour des torrents X
 - Retour des torrents de la semaine/du mois
 
 2013.7-64
-
 - Scroll rapide en haut/bas des pages de prez
 - Ajout du fast scroll sur la liste des résultats de recherche
 - Suppression des publicités (lourdes et pas rentables)
@@ -498,34 +424,27 @@ CHANGELOG
 - Ajout d'une alerte Hadopi (en option) si plusieurs commentaires en parlent (3 ou +)
 - Mise à jour du code complet sur GitHub : https://github.com/meyergre/devel-compagnon-t411
 - Optimisations diverses du code
-
 Note :
 J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash de disque dur, les modifications de ces 2 versions ont dû être recodées dans la 2013.7-64
 
 2013.6-63
-
 - Correction de l'affichage des smileys spéciaux
 - Rétablissement des commentaires
 
 2013.6-62
-
 - Correction des termes de recherche non pris en charge
 
 2013.6-61
-
 - optimisation de l'affichage des smileys et couleurs de texte (classe)
 - correction du bug de DL des torrents dont le nom comporte des slash (/)
 - correction de certaines traductions
 
 2013.6-60
-
 - ajout des top jour/semaine/mois
 - correction du bug de la boite de réception vide
 - ajout de la composition de MPs
 
-
 2013.6-59
-
 - ajout du nom de l'uploader sur la fiche du torrent
 - distinction des commentaires de l'uploader dans la liste des commentaires (noir)
 - correction des seeders/leechers sur les fiches des torrents
@@ -534,15 +453,12 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - correction de certains layouts
 
 2013.6-58
-
 - correction de l'affichage des prez sans commentaires
 - liens vers les vidéos youtube des prez
 - ajout de la qualité des vidéos (DVDrip, TVrip, etc...) sur la fiche de la prez
 - redesign des commentaires sur les fiches des prez
 
-
 2013.6-57
-
 - Accès aux recherches personnalisées depuis l'interface de recherche (Mes recherches)
 - Correction du bug d'affichage de certaines prez
 - Gestion des futurs téléchargements
@@ -550,24 +466,18 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - Ajout de la pagination dans les résultats de recherche
 - Ajout d'infos sur la fiche du .torrent
 
-
 2013.6-54
-
 - correction d'un pb d'affichage de la calculatrice
 - correction du "NaN"
 - ajout du choix de l'emplacement des téléchargements
 - ajout des sous-catégories de recherche
 
-
 2013.6-53
-
 - nouvelle interface de recherchew
 - corrections mineures
 - nettoyage des resources inutilisées
 
-
 2013.6-50
-
 - Choix du mode de téléchargement des .torrents (direct ou via le navigateur)
 - Choix des menus a masquer de l'écran principal
 - Ajout de filtres de recherche (commentaires, complétés)
@@ -578,22 +488,16 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - Ajout d'une interface de première connexion, qui vérifie les identifiants avant de les enregistrer
 - retrait du manuel utilisateur (pas très utile, et lourd en ressources)
 
-
 2013.05 (4)
-
 - ajout de l'estimation du temps de seed jusqu'au ratio idéal dans la calculatrice
 - ajout des filtres de tri dans la recherche de .torrents
 
-
 2013.05 (3)
-
 - ajout du Top 100
 - correction de l'affichage des news
 - ouverture par l'application des liens vers une prez t411 (www.t411.me/torrents/torrents/id=xxxxxxx)
 
-
 2013.05 (2)
-
 - ajout d'un accès au thread du forum
 - ajout des news depuis la page d'accueil
 - réorganisation du menu
@@ -605,16 +509,12 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 => possibilité de partager un lien vers un torrent depuis la fonction de recherche
 => accès au NFO depuis la fonction de recherche
 
-
 2013.05 (1)
-
 - harmonisation des graphismes
 - ajout de la calculatrice (beta)
 - amélioration de l'affichage paysage (tablettes, etc...)
 
-
 2013.03 (2)
-
 - support du protocole HTTPS (dans les options)
 - cure d'amaigrissement de l'APK (due à la compression et au remplacement de certaines resources et images)
 - tentative de correction du bug du ratio à 0.0 (n'hésitez pas à le signaler s'il se manifeste a nouveau)
@@ -624,25 +524,19 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - ajout d'une option pour désactiver les mises à jour pendant la veille du terminal (deep sleep). Peut avoir de bonnes conséquences sur l'utilisation de la batterie, mais au détriment de la fréquence des mises à jour (logique  )
 - correction de certaines traductions
 
-
 2013.03 (1)
-
 - réduction des images (l'apk gagne 10%)
 - mise à jour de JSOUP 1.6.2 -> 1.7.2
 - (petit) lifting graphique (affichage des pubs, écran "à propos")
 - ajout du bouton "rechercher" sur l'écran d'accueil
 - mise à jour du manuel utilisateur
 
-
 2013.02 (2)
-
 - correction des plantages du widget t411+ sur certains launchers
 - redimensionnement possible pour les widgets 4x1 et 4x2 (j'ai vu que c'était pas terrible en paysage sur certaines tablettes...)
 - ajout définitif du widget "News" pour rester au courant des nouvelles du site
 
-
 2013.02 (1)
-
 - possibilité de ne faire les mises à jour qu'en wifi (@larzac4ever)
 - ajout d'un bandeau de pub (patapé!! il est désactivable en cochant une case dans les réglages.)
 - mise à jour des layouts
@@ -651,17 +545,13 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - Mise à jour des icônes et du thème général (partiel pour l'instant)
 - Ajout d'un widget et d'une fonction de recherche (via le navigateur)
 
-
 2012.12 (3)
-
 - correction des plantages à la mise à jour si mode avion ou pas de connexion
 - correction de l'affichage de l'UP/DOWN sur les dernières 24h (testé sur simulateur et Nexus4)
 - correction du bug de l'horloge qui s'arrête
 --> Après une mise à jour, il est nécessaire de relancer manuellement l'horloge via le bouton en haut à droite du widget
 
-
 2012.12 (2)
-
 - mise en couleur du pseudo selon le statut (j'ai vu que j'étais passé Power Seeder...  )
 - Ajout d'un widget "+" en 4x2 avec les infos suivantes :
 -> upload, download, ratio, messages
@@ -672,31 +562,22 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 -> bouton Refresh sur le widget (en plus de la liste d'actions)
 - correction du bug de calcul du DL restant (en principe... je ne suis pas encore au TB pour vérifier  )
 
-
 2012.12 (1)
-
 - correction de bugs du widget horloge sous android 2.1 (Eclair)
 - ajout d'un lien vers le réveil au clic sur l'horloge (si compatible)
 - @Kiyoshi : les FC devraient avoir complètement disparu pour la partie Messages
 
-
 2012.11 v0.9.4 beta
-
 - correction du layout tablette pour les écrans 7"
 - ajout de la quantité de téléchargement restante avant d'atteindre la limite basse du ratio
 - correction de la date du widget horloge (figée sur JEU. 22 NOVEMBRE)
 - rétablissement des timeouts de 10 secondes pour éviter de figer l'appli pendant une mise à jour
 
-
 2012.11 v0.9.2 beta
-
 - Correction de la surconsommation de batterie
 - mise à jour du widget en utilisant ACTION_TIME_TICK, donc a chaque changement de l'horloge système (1x/minute)
 
-
-
 2012.11 v0.9.1 beta
-
 - ajout des éléments du compte (pseudo, up/down, messages et ratio) sur la page principale (actualisation a l'ouverture de l'appli uniquement)
 - ajout d'un layout "tablette" pour la page d'accueil
 - ajout d'un widget "horloge t411" (4x2), pour joindre l'utile (l'horloge) à... l'indispensable  (le ratio)
@@ -705,17 +586,12 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - corrections de bugs mineurs dus aux composants dépréciés dans le SDK version 17 (4.2)
 - rétablissement des vibrations lors des notifications
 
-
 2012.11 v0.9 beta
-
 - ajout d'un widget "mini" (2x1), comme prévu initialement (voir 1er post)
 - passage d'"Alpha" à "Beta", car le tout a bien gagné en stabilité
 - widgets compatibles avec le lockscreen d'Android 4.2 (testé sur Nexus 4)
 
-
-
 2012.11 v0.8 alpha (dev)
-
 - correction des bugs (Force Close) de la version précédente
 - ajout de l'archivage/suppression des messages
 - possibilité d'activer/désactiver les mises à jour auto
@@ -724,32 +600,25 @@ J'ai perdu le code source des versions 2013.6-62 et 2013.6-63 suite à un crash 
 - nouveaux graphismes sur le play store
 - nouvelle icône, plus en accord avec les codes Android (mais toujours en conservant l'esprit du site )
 
-
 2012.10 v0.7 alpha (dev)
-
 - ajout de la liste des messages dans la boite de réception !
 - ajout du contenu des messages dans la boite de réception
 - plus de problème de Force Close en cas de timeout (timeout illimité...)
 - nettoyage du code de connexion au site
 
-
 2012.10 v0.6 alpha (dev)
-
 - enregistrement des valeurs dans la config, pour pouvoir les afficher sur le widget à la place des ??? en cas d'absence de données (typiquement à l'ajout du widget ou au démarrage du téléphone)
 - ajout d'un bouton de mise à jour sur la page principale de l'application
 - correction du bug du popup qui affichait l'application en arrière-plan
 - utilisation de la notification système (vibration, voyant lumineux et son par défaut)
 
-
 2012.10 - v0.5 alpha (dev)
-
 - compatibilité à partir d'Android 2.1 (Eclair)
 - choix d'action au clic sur le widget
 - ouverture du site t411.me (sans être connecté d'office toutefois...)
 - nettoyage du code (un peu  )
 - amélioration de la mise à jour des données (beaucoup plus rapide)
 - moins d'impact sur la batterie (<1% d'après le gestionnaire de mon Nexus One sous JellyBean 4.1.2, contre 3% précédemment)
-
 - retour à la page d'accueil et démarrage de la mise à jour après enregistrement du login/password
 - un appui sur le logo du widget ouvre l'application
 - possibilité d'activer/désactiver l'affichage des notification "mise à jour..."

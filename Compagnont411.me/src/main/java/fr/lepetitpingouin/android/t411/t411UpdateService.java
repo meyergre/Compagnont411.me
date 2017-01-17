@@ -18,7 +18,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -59,10 +58,7 @@ public class t411UpdateService extends Service {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if (mWifi.isConnected()) {
-            return true;
-        }
-        return false;
+        return mWifi.isConnected();
     }
 
     @Override
@@ -70,6 +66,11 @@ public class t411UpdateService extends Service {
         handler = new Handler();
         this.retry = 0;
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        super.onCreate();
+    }
+
+    private void initBp() {
         bp = new BillingProcessor(getApplicationContext(), Private.API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
@@ -85,16 +86,24 @@ public class t411UpdateService extends Service {
 
             @Override
             public void onBillingInitialized() {
+                new T411Logger(getApplicationContext()).writeLine("InAppBilling initialisé");
+                bp.loadOwnedPurchasesFromGoogle();
+                new T411Logger(getApplicationContext()).writeLine("Proxy " + (bp.isSubscribed(Private.PROXY_ITEM_ID)?"souscrit":"non-souscrit"));
+                new T411Logger(getApplicationContext()).writeLine("Proxy " + (prefs.getBoolean("usePaidProxy", false)?"activé":"non-activé"));
+                if(!bp.isSubscribed(Private.PROXY_ITEM_ID) && prefs.getBoolean("usePaidProxy", false)) {
+                    new T411Logger(getApplicationContext()).writeLine("Proxy actif en l'absence de souscription !! Désactivation de l'option", T411Logger.FATAL);
+                    prefs.edit().putBoolean("usePaidProxy", false).apply();
+                }
             }
         });
-
-        super.onCreate();
+        bp.loadOwnedPurchasesFromGoogle();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        bp.loadOwnedPurchasesFromGoogle();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        initBp();
 
         new T411Logger(getApplicationContext()).writeLine("Lancement du service de mise à jour");
 
@@ -288,11 +297,13 @@ public class t411UpdateService extends Service {
 
                 double curRatio = upData / dlData;
 
-
                 double targetRatio = Double.valueOf(prefs.getString("ratioCible", "1"));
 
-
                 toLimit = (targetRatio * upData / curRatio) - upData;
+
+                prefs.edit().putString("lastUpload",BSize.quickConvert(String.valueOf(new BSize(upload).getInBytes()))).commit();
+                prefs.edit().putString("lastDownload",BSize.quickConvert(String.valueOf(new BSize(download).getInBytes()))).commit();
+                prefs.edit().putString("lastRatio", String.format("%.2f", curRatio)).commit();
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -479,42 +490,25 @@ public class t411UpdateService extends Service {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 url = Default.URL_INDEX;
 
-
-
-                /* res = Jsoup.connect(url)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .execute();
-                doc = res.parse(); */
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext()).login(prefs.getString("login", ""), prefs.getString("password", "")).connect(url).executeInAsyncTask());
 
                 if (doc != null) {
                     edit = prefs.edit();
                     edit.putString("title1", doc.select(".newsWrapper .title").get(0).text());
                     edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
-                    if(prefs.getBoolean("usePaidProxy", false))
-                        edit.putString("readMore1", doc.select(".newsWrapper .readmore").get(0).attr("href"));
-                    else
-                        edit.putString("readMore1", url + doc.select(".newsWrapper .readmore").get(0).attr("href"));
+                    edit.putString("readMore1", doc.select(".newsWrapper .readmore").get(0).attr("href"));
                     edit.commit();
 
                     edit = prefs.edit();
                     edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
                     edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
-                    if(prefs.getBoolean("usePaidProxy", false))
-                        edit.putString("readMore2", doc.select(".newsWrapper  .readmore").get(1).attr("href"));
-                    else
-                        edit.putString("readMore2", url + doc.select(".newsWrapper  .readmore").get(1).attr("href"));
+                    edit.putString("readMore2", doc.select(".newsWrapper  .readmore").get(1).attr("href"));
                     edit.commit();
 
                     edit = prefs.edit();
                     edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
                     edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
-                    if(prefs.getBoolean("usePaidProxy", false))
-                        edit.putString("readMore3", doc.select(".newsWrapper  .readmore").get(2).attr("href"));
-                    else
-                        edit.putString("readMore3", url + doc.select(".newsWrapper  .readmore").get(2).attr("href"));
+                    edit.putString("readMore3", doc.select(".newsWrapper  .readmore").get(2).attr("href"));
                     edit.commit();
 
                 }
@@ -579,24 +573,34 @@ public class t411UpdateService extends Service {
         @Override
         public void onPostExecute(JSONObject value) {
             try {
-                prefs.edit().putString("lastUpload",BSize.quickConvert(value.getString("uploaded"))).commit();
-                prefs.edit().putString("lastDownload",BSize.quickConvert(value.getString("downloaded"))).commit();
+                if(value.has("error")) {
+                    new T411Logger(getApplicationContext()).writeLine("Erreur API : " + value.get("error"), T411Logger.ERROR);
+                    new T411Logger(getApplicationContext()).writeLine("Fallback sur l'ancienne méthode d'update", T411Logger.INFO);
+                    cancelNotify(12345);
+                    //doNotify(0, getResources().getString(R.string.notif_apierror), getResources().getString(R.string.notif_apierror_fallback), 12345, null);
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.notif_apierror) + " - " + getResources().getString(R.string.notif_apierror_fallback), Toast.LENGTH_LONG).show();
+                    new AsyncUpdate().execute();
+                } else {
 
-                Time today = new Time(Time.getCurrentTimezone());
-                today.setToNow();
-                prefs.edit().putString("lastDate", today.format("%d/%m/%Y %k:%M:%S")).commit();
-                prefs.edit().putString("lastUsername", username).commit();
+                    prefs.edit().putString("lastUpload",BSize.quickConvert(value.getString("uploaded"))).commit();
+                    prefs.edit().putString("lastDownload",BSize.quickConvert(value.getString("downloaded"))).commit();
+
+                    Time today = new Time(Time.getCurrentTimezone());
+                    today.setToNow();
+                    prefs.edit().putString("lastDate", today.format("%d/%m/%Y %k:%M:%S")).commit();
+                    prefs.edit().putString("lastUsername", username).commit();
 
 
-                prefs.edit().putString(
-                        "lastRatio",
-                        String.format(
-                                "%.2f",
-                                (Float.parseFloat(value.getString("uploaded")) / Float.parseFloat(value.getString("downloaded")))
-                        )
-                ).commit();
+                    prefs.edit().putString(
+                            "lastRatio",
+                            String.format(
+                                    "%.2f",
+                                    (Float.parseFloat(value.getString("uploaded")) / Float.parseFloat(value.getString("downloaded")))
+                            )
+                    ).commit();
 
-                new NotificationWidget(getApplicationContext()).updateNotificationWidget();
+                    new NotificationWidget(getApplicationContext()).updateNotificationWidget();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

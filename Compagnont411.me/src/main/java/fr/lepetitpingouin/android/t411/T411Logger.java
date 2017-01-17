@@ -23,6 +23,7 @@ class T411Logger {
     public static String ERROR = "ERR";
     public static String WARN = "WRN";
     public static String INFO = "INF";
+    public static String FATAL = "FATAL_ERROR";
 
     public T411Logger(Context context) {
         this.context = context;
@@ -32,7 +33,7 @@ class T411Logger {
     public String logFilePath() {
         String filename = android.text.format.DateFormat.format("yyyy-MM-dd", new java.util.Date()).toString() + "_T411.log";
 
-        File file = new File(Environment.getExternalStorageDirectory(), filename);
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
 
         return file.getAbsolutePath();
     }

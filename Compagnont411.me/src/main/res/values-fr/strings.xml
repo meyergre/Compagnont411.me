@@ -369,4 +369,6 @@
     <string name="notif_apierror">Erreur API</string>
     <string name="wlcm_permission_notif">L\'application utilise des notifications pour donner l\'avancement des téléchargements ou avertir d\'une erreur. Vérifiez dans les paramètres de votre téléphone qu\'elles soient autorisées !</string>
     <string name="btn_logout">Déconnexion</string>
+    <string name="notif_apierror_fallback">Fallback sur l\'ancienne méthode...</string>
+    <string name="proxy_subscribed">Proxy souscrit et activé !</string>
 </resources>
