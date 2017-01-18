@@ -92,7 +92,7 @@ public class t411UpdateService extends Service {
                 new T411Logger(getApplicationContext()).writeLine("Proxy " + (prefs.getBoolean("usePaidProxy", false)?"activé":"non-activé"));
                 if(!bp.isSubscribed(Private.PROXY_ITEM_ID) && prefs.getBoolean("usePaidProxy", false)) {
                     new T411Logger(getApplicationContext()).writeLine("Proxy actif en l'absence de souscription !! Désactivation de l'option", T411Logger.FATAL);
-                    prefs.edit().putBoolean("usePaidProxy", false).apply();
+                    if(!BuildConfig.DEBUG) prefs.edit().putBoolean("usePaidProxy", false).apply();
                 }
             }
         });
