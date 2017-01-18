@@ -19,7 +19,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -45,13 +44,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class torrentsActivity extends AppCompatActivity {
@@ -635,7 +631,7 @@ public class torrentsActivity extends AppCompatActivity {
 
                             map = new HashMap<String, String>();
                             //map.put("nomComplet", tds.get(base + 1).select("a").first().attr("title").toString());
-                            map.put("nomComplet", tds.get(base + 1).select("a").first().text().toString());
+                            map.put("nomComplet", tds.get(base + 1).select("a").first().text());
                             map.put("ID", t_ID[t_ID.length-1]);
                             map.put("age", tds.get(base + 4).text());
                             map.put("added", tTime.toString());

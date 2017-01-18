@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -98,14 +99,14 @@ public class Widget_Full extends AppWidgetProvider {
 
             views.setImageViewBitmap(R.id.topLogo, new AvatarFactory().getFromPrefs(prefs));
 
-            if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 0
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 23)
+            Date date = Calendar.getInstance().getTime();
+            SimpleDateFormat format = new SimpleDateFormat("MMdd");
+            int noel = Integer.parseInt(format.format(date));
+
+            if (noel == 1223)
                 views.setImageViewResource(R.id.topLogo, R.drawable.ic_xmastree);
 
-            if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > 22
-                    && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 27)
+            if (noel >= 1223 && noel <1228)
                 views.setImageViewResource(R.id.topLogo, R.drawable.ic_xmas);
 
             /*if (prefs.getBoolean("useHTTPS", false)) {

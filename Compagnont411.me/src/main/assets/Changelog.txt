@@ -9,6 +9,7 @@ CHANGELOG
 - Snackbar de téléchargement des torrents depuis la prez
 - Correction du téléchargement des torrents dont le titre contient des apostrophes
 - Activation automatique du proxy lors d'un abonnement
+- Corrections de bugs mineurs
 
 2017.01-169
 - Correction d'un bug sur le widget

@@ -64,13 +64,13 @@
     <string name="notif_ratio_title">Your ratio is low</string>
     <string name="notif_ratio_content">Touch to configure</string>
 
-    <string name="waiting_for_update">Waiting for update...</string>
+    <string name="waiting_for_update">Waiting for update…</string>
     <string name="askWhatToDo">Always ask</string>
     <string name="ChooseAction">Chose action</string>
 
     <string name="pleasewait">Please wait</string>
-    <string name="getMesages">Getting messages list...</string>
-    <string name="getMesageContent">Getting message content...</string>
+    <string name="getMesages">Getting messages list…</string>
+    <string name="getMesageContent">Getting message content…</string>
 
     <string name="donate">Buy me a beer ! ;o)</string>
     <string name="donateWarning">Note that the money will go to the developer, not the website.</string>
@@ -88,13 +88,13 @@
     <string name="UploadLeft">to seed before wished ratio.</string>
 
     <string name="statistics">My statistics</string>
-    <string name="noConError">t411 app is not able to reach Internet...</string>
+    <string name="noConError">t411 app is not able to reach Internet…</string>
     <string name="title_search">Torrent download</string>
 
     <string name="launcher_messages">t411 PM</string>
 
     <string name="appwidget_search">t411 search widget</string>
-    <string name="placeholder_search">Search...</string>
+    <string name="placeholder_search">Search…</string>
     <string name="search_cat_all">All categories</string>
     <string name="search_cat_audio">Audio</string>
     <string name="search_cat_eBooks">eBooks</string>
@@ -269,14 +269,14 @@
     <string name="share_direct_link">Share torrent link</string>
     <string name="description_share_direct_link">Share the direct link to a torrent instead of its presentation page (needs your recipient to be logged in to t411).</string>
     <string name="sort_by_date">Sort torrents by date</string>
-    <string name="description_sort_by_date">If checked, torrents list in search, today, ... will be sorted by date instead by name.</string>
+    <string name="description_sort_by_date">If checked, torrents list in search, today, … will be sorted by date instead by name.</string>
     <string name="torrents_found">Torrents found</string>
-    <string name="connecting">Getting page\'s content...</string>
+    <string name="connecting">Getting page\'s content…</string>
     <string name="sendPM">Send a PM</string>
-    <string name="fetchingCat">Retrieving categories...</string>
+    <string name="fetchingCat">Retrieving categories…</string>
     <string name="catFetched">categories found</string>
     <string name="pagesFetched">pages found</string>
-    <string name="fetchingPages">listing pages...</string>
+    <string name="fetchingPages">listing pages…</string>
     <string name="runtime_ex">Runtime Exception. Please try again !</string>
     <string name="button_disconnect">Disconnect</string>
     <string name="disconnectConfirmTitle">Disconnection</string>
@@ -285,7 +285,7 @@
     <string name="YES">Yes</string>
     <string name="t411_site_ip">website\'s IP</string>
     <string name="t411_site_ip_summary">Choose the IP to use to reach t411</string>
-    <string name="errorGraph">Unable to get graph data. Sorry... Maybe the website did change the page ?</string>
+    <string name="errorGraph">Unable to get graph data. Sorry… Maybe the website did change the page ?</string>
     <string name="gettingFriend">Getting info for friend :</string>
 
     <string-array name="widget_actions">
@@ -304,7 +304,7 @@
     <string name="title_activity_report" translatable="false">ReportActivity</string>
     <string name="action_settings">Settings</string>
     <string name="report_explain">Write here your message. Some additional informations about your system will be transferred to the developer, you can revew them below.</string>
-    <string name="report_yourmessage">Write your message here...</string>
+    <string name="report_yourmessage">Write your message here…</string>
     <string name="create_report">Report issue</string>
     <string name="settings_use_proxy">Use proxy to bypass censorship</string>
     <string name="proxypart1">Dans certains pays, les gouvernements ont ordonné la censure de t411 par les fournisseurs d\'accès. C\'est notamment le cas en France et en Belgique.\nDe ce fait, pour accéder au site, il est nécessaire d\'utiliser une solution de contournement.</string>
@@ -324,7 +324,7 @@
     <string name="sendLogs_summary">Send today\'s log to the developer, attached to an e-mail</string>
     <string name="settings_caption_logging">Logging</string>
     <string name="settings_caption_logging_summary">Enable debug logging to help developer in troubleshooting</string>
-    <string name="initialLoad">Fetching your data for the 1st time...</string>
+    <string name="initialLoad">Fetching your data for the 1st time…</string>
     <string name="custom_proxy_title">Use your *OWN* proxy</string>
     <string name="custom_proxy_detail">If you have the required knowledge, you can build and use your own proxy server to bypass censorship. For security reason, to avoid you using any free and unsecure proxy on the web, the only allowed port is 411.\nPlease enter your proxy\'s IP below</string>
     <string name="settings_proxy_screen">Proxy settings</string>
@@ -347,7 +347,7 @@
     <string name="open_with_app">Open with…</string>
     <string name="permissions_needed">Storage access is needed. Please allow the app tu access your storage by clicking this message</string>
     <string name="torrentslist">Téléchargements</string>
-    <string name="downloads_open">Open file...</string>
+    <string name="downloads_open">Open file…</string>
     <string name="downloads_delete">Delete torrent</string>
     <string name="downloads_prez">Show description</string>
     <string name="downloads_change_passkey">Change passkey</string>
@@ -364,10 +364,10 @@
     <string name="wlcm_last_message">Thanks for using my app ! You\'re now ready to go by yourself.\n\nPlease note that this assistant might show up again in the future, in case of new feature.</string>
     <string name="loadMore">Load more results</string>
     <string name="apiDoesNotSupportSorting">API does not support advanced search. Old method will be used.</string>
-    <string name="sort">Sort by...</string>
+    <string name="sort">Sort by…</string>
     <string name="nowWithApi">Now with API support !</string>
     <string name="switch_api_search">Search using API</string>
-    <string name="searchApiExplainations">API Search has limitations. You can\'t filter or sort, nor search for a whole parent category (Videos, Aurio, etc...)</string>
+    <string name="searchApiExplainations">API Search has limitations. You can\'t filter or sort, nor search for a whole parent category (Videos, Aurio, etc…)</string>
     <string name="wlcm_rate_app">Rate me on the Play Store !</string>
     <string name="settings_custom_domain_summary">Choose manually t411\'s address</string>
     <string name="settings_custom_domain_title">Choose domain</string>
@@ -375,9 +375,9 @@
     <string name="warning_custom_domain">You defined a custom domain in the settings</string>
     <string name="notif_apierror_reconnect">Please try log of and on again</string>
     <string name="notif_apierror">API Error</string>
-    <string name="wlcm_permission_notif">The app uses notifications to keep you informed about what\'s going on (download, error...) Make sure your phone does not block notifications!</string>
+    <string name="wlcm_permission_notif">The app uses notifications to keep you informed about what\'s going on (download, error…) Make sure your phone does not block notifications!</string>
     <string name="btn_logout">LOGOUT</string>
-    <string name="notif_apierror_fallback">Falling back to the old update method...</string>
+    <string name="notif_apierror_fallback">Falling back to the old update method…</string>
     <string name="proxy_subscribed">Proxy subscribed and enabled !</string>
     <string name="list">List</string>
     <string name="recent">Recent</string>

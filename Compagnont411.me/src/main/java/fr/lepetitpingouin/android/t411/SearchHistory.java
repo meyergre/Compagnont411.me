@@ -32,7 +32,7 @@ class SearchHistory {
         String rawValues = prefs.getString("searchHistory", "");
         String[] sValues;
         try {
-            sValues = rawValues.split("");
+            sValues = rawValues.split("õ");
             for (String val : sValues) {
                 this.values.add(val);
             }
@@ -49,7 +49,7 @@ class SearchHistory {
     public void save(String newValue) {
         if (!values.contains(newValue)) {
             this.values.add(newValue);
-            edit.putString("searchHistory", StringUtil.join(this.values, "")).commit();
+            edit.putString("searchHistory", StringUtil.join(this.values, "õ")).commit();
         }
     }
 }

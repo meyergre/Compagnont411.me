@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by meyergre on 17/06/13.
@@ -71,8 +73,11 @@ class Ratio {
 
         // easter egg :) si on est le 24/12 ou le 25/12, on affiche le pere
         // noel-droid
-        if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER
-                && ((Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 25) || (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 24)))
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("MMdd");
+        int noel = Integer.parseInt(format.format(date));
+
+        if (noel > 1223 && noel < 1226)
             return R.drawable.smiley_xmas;
 
         if (numRatio < 0.75)

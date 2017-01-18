@@ -50,7 +50,7 @@
             android:summary="@string/auto_update_summary"
             android:title="@string/auto_update" />
         <EditTextPreference
-            android:defaultValue="60"
+            android:defaultValue="120"
             android:key="updateFreq"
             android:numeric="integer"
             android:summary="@string/description_frequency"

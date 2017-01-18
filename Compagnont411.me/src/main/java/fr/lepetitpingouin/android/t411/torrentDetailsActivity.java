@@ -173,9 +173,9 @@ public class torrentDetailsActivity extends AppCompatActivity {
             //test
 
             String htmlpage = new SuperT411HttpBrowser(getApplicationContext()).connect(torrent_URL).execute();
-            String href = Jsoup.parse(htmlpage).select(".shortlink").attr("href").toString();
+            String href = Jsoup.parse(htmlpage).select(".shortlink").attr("href");
             String _id = href.substring(href.lastIndexOf("/") + 1);
-            String _title = Jsoup.parse(htmlpage).select("span:has(a.shortlink)").html().replaceAll("<a\\b[^>]+>([^<]*(?:(?!</a)<[^<]*)*)</a>", "").toString();
+            String _title = Jsoup.parse(htmlpage).select("span:has(a.shortlink)").html().replaceAll("<a\\b[^>]+>([^<]*(?:(?!</a)<[^<]*)*)</a>", "");
 
             //test
 
@@ -275,7 +275,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
             requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
         else {
-            Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, t_uploader.toString(), t_cat);
+            Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, t_uploader, t_cat);
             torrent.download();
         }
     }
@@ -605,10 +605,10 @@ public class torrentDetailsActivity extends AppCompatActivity {
             details_www.loadDataWithBaseURL(null, "<style></style>"+prez, mimeType, encoding, "");
 
             try {
-                getSupportActionBar().setTitle("Prez " + (tduploader.toString().length() > 0 ? "(" + tduploader.toString() + ")" : ""));
+                getSupportActionBar().setTitle("Prez " + (tduploader.length() > 0 ? "(" + tduploader + ")" : ""));
                 getSupportActionBar().setSubtitle(torrent_Name);
 
-                t_uploader = tduploader.toString();
+                t_uploader = tduploader;
 
                 tdt_seeders = doc.select(".details table tr td.up").first().text();
                 tdt_leechers = doc.select(".details table tr td.down").first().text();

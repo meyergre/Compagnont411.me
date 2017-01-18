@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -16,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -30,11 +30,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
-public class Torrent implements Comparator<Torrent> {
+public class Torrent implements Comparable {
 
     public static final String INTENT_UPDATE_STATUS = "INTENT_TORRENT_UPDATE_STATUS";
     public static String DOWNLOAD_FOLDER = "Torrents t411";
@@ -43,7 +41,7 @@ public class Torrent implements Comparator<Torrent> {
     public String id;
     public String url;
     public String category="";
-    public Long download_date=0l;
+    public Long download_date=0L;
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
     public Long date = 0L;
     private Context context;
@@ -241,9 +239,10 @@ public class Torrent implements Comparator<Torrent> {
         Intent i = new Intent();
         i.setAction(android.content.Intent.ACTION_VIEW);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_FROM_BACKGROUND|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        i.setType("application/x-bittorrent");
+        //i.setType("application/x-bittorrent");
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
+        i.setType(MimeTypeMap.getSingleton().getMimeTypeFromExtension(".torrent"));
         if(Build.VERSION.SDK_INT >= 24) {
             i.setDataAndNormalize(FileProvider.getUriForFile(context.getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", file));
         }
@@ -255,7 +254,7 @@ public class Torrent implements Comparator<Torrent> {
     }
 
     @Override
-    public int compare(Torrent torrent, Torrent t1) {
+    public int compareTo(Object o) {
         return 0;
     }
 

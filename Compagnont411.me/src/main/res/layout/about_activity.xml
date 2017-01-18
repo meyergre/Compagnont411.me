@@ -280,6 +280,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#eee"
+        style="?android:attr/buttonBarStyle"
         android:gravity="center">
 
         <Button
@@ -293,6 +294,7 @@
             android:textSize="16sp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_weight="1" />
 
         <Button
@@ -306,6 +308,7 @@
             android:textSize="16sp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_weight="1" />
     </LinearLayout>
 

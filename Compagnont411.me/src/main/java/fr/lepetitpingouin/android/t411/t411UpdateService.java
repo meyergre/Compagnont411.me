@@ -164,7 +164,7 @@ public class t411UpdateService extends Service {
         browser = new SuperT411HttpBrowser(getApplicationContext());
         doc = Jsoup.parse(browser.login(login, password).connect(mUrl).executeInAsyncTask());
 
-        if (doc.select("title").contains("503"))
+        if (doc.select("title").text().contains("503"))
             doNotify(R.drawable.ic_maintenance, "Maintenance", "t411 est actuellement indisponible.", 411, null);
         else
             cancelNotify(411);
