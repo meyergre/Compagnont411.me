@@ -493,10 +493,12 @@ public class SuperT411HttpBrowser {
             }
 
             try {
-                String conError = Jsoup.parse(responseString).select("div.fade").first().text();
-                if (!conError.equals("")) {
-                    fadeMessage = conError;
-                    new T411Logger(this.ctx).writeLine("Le site a répondu : " + mUrl, T411Logger.WARN);
+                if(Jsoup.parse(responseString).select("div.fade").first()!=null) {
+                    String conError = Jsoup.parse(responseString).select("div.fade").first().text();
+                    if (!conError.equals("")) {
+                        fadeMessage = conError;
+                        new T411Logger(this.ctx).writeLine("Le site a répondu : " + mUrl, T411Logger.WARN);
+                    }
                 }
             } catch (Exception ex) {
                 new T411Logger(ctx).writeLine(ex.getMessage(), T411Logger.INFO);

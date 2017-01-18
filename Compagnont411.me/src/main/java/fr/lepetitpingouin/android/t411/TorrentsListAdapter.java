@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Collections;
 
 /**
  * Created by gregory on 23/05/2016.
@@ -46,7 +47,6 @@ class TorrentsListAdapter extends BaseAdapter {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     @Override
@@ -61,6 +61,7 @@ class TorrentsListAdapter extends BaseAdapter {
         try {
             o = (JSONObject) this.json.get(position);
             t = new Torrent(this.context, o.get("title").toString(), o.get("id").toString(), o.get("size").toString(), o.get("uploader").toString(), o.get("category").toString());
+            if(o.has("download_date")) t.download_date = (Long)o.get("download_date");
             return t;
 
         } catch (Exception ex) {
@@ -91,11 +92,13 @@ class TorrentsListAdapter extends BaseAdapter {
             uploader.setText(t.uploader);
 
             TextView size = (TextView) vi.findViewById(R.id.torrent_size);
-            size.setText(BSize.quickConvert(t.size));
+            size.setText(t.size);
 
             ImageView img = (ImageView) vi.findViewById(R.id.imageViewCatIcon);
             img.setImageResource(new CategoryIcon(t.category).getIcon());
 
+            TextView recent = (TextView) vi.findViewById(R.id.torrent_recent);
+            if(System.currentTimeMillis() - t.download_date < 1000*60*60*24)recent.setVisibility(View.VISIBLE);
 
         } catch(Exception ex) {
             ex.printStackTrace();

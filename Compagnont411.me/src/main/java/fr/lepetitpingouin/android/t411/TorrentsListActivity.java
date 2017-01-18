@@ -18,6 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Collection;
+import java.util.Collections;
+
 public class TorrentsListActivity extends AppCompatActivity {
 
     private ListView list;

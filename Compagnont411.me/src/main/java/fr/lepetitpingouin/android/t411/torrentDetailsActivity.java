@@ -1,8 +1,11 @@
 package fr.lepetitpingouin.android.t411;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -16,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -63,9 +67,35 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
     String t_uploader;
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Torrent.INTENT_UPDATE_STATUS)) {
+                Snackbar sb = Snackbar.make(details_www, intent.getStringExtra("message"), 3000);
+                sb.setActionTextColor(getResources().getColor(android.R.color.white));
+                if(intent.getBooleanExtra("success",false)) {
+                    sb.getView().setBackgroundColor(getResources().getColor(R.color.t411_green));
+                } else {
+                    sb.getView().setBackgroundColor(getResources().getColor(R.color.t411_red));
+                }
+                if(intent.getBooleanExtra("downloads",false)) {
+                    sb.setAction(getResources().getString(R.string.list), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(getApplicationContext(), TorrentsListActivity.class));
+                        }
+                    });
+                }
+                sb.show();
+            }
+        }
+    };
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(receiver);
     }
 
     @Override
@@ -81,6 +111,9 @@ public class torrentDetailsActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), getString(R.string.noConError), Toast.LENGTH_SHORT).show();
             finish();
         }
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Torrent.INTENT_UPDATE_STATUS);
+        registerReceiver(receiver, filter);
         super.onResume();
     }
 
@@ -461,9 +494,17 @@ public class torrentDetailsActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        String comm_up = object.select("th").first().select("span").get(1).outerHtml();
-                        String comm_down = object.select("th").first().select("span").get(2).outerHtml();
-                        String comm_ratio = object.select("th").first().select("span").get(3).outerHtml();
+                        String comm_up = "";
+                        String comm_down = "";
+                        String comm_ratio = "";
+
+                        try {
+                            comm_up = object.select("th").first().select("span").get(1).outerHtml();
+                            comm_down = object.select("th").first().select("span").get(2).outerHtml();
+                            comm_ratio = object.select("th").first().select("span").get(3).outerHtml();
+                        } catch(Exception ex) {
+                            ex.printStackTrace();
+                        }
 
                         String comm_comm = "<img src=\'file:///android_asset/picts/" + arrowPict + "\' width=10 style='position: relative; left: -13px; top: 3px;' />";
                         comm_comm += object.select("td").first().select("p").first().html();

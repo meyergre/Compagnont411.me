@@ -379,4 +379,6 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="notif_apierror_fallback">Falling back to the old update method...</string>
     <string name="proxy_subscribed">Proxy subscribed and enabled !</string>
+    <string name="list">List</string>
+    <string name="recent">Recent</string>
 </resources>

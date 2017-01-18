@@ -29,15 +29,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:singleLine="true"
+                        android:text="Torrent title"
+                        android:id="@+id/torrent_title"
+                        android:textColor="@color/t411_action_blue" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:singleLine="true"
-                    android:text="Torrent title"
-                    android:id="@+id/torrent_title"
-                    android:textColor="@color/t411_action_blue" />
+                    </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -52,10 +57,17 @@
                         android:id="@+id/torrent_size"
                         android:textColor="#777" />
 
-                    <FrameLayout
+                    <TextView
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:singleLine="true"
+                        android:text="@string/recent"
+                        android:id="@+id/torrent_recent"
+                        android:gravity="center"
+                        android:visibility="invisible"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"/>
+                        android:textColor="@color/t411_green" />
 
                     <TextView
                         android:layout_width="wrap_content"

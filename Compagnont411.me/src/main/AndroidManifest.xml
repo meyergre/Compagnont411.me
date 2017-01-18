@@ -149,13 +149,6 @@
             android:parentActivityName=".MainActivity2"
             android:process=":messages"
             android:taskAffinity="fr.lepetitpingouin.android.t411.messagesActivity">
-
-            <!--
-            intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter
-            -->
         </activity>
         <activity
             android:name=".statsActivity"
@@ -174,7 +167,7 @@
             android:label="@string/WhatToDo"
             android:process=":t411action"
             android:taskAffinity="fr.lepetitpingouin.android.t411.actionSelector"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:name=".SearchActivity"
             android:configChanges="orientation|keyboard|keyboardHidden"
@@ -248,7 +241,7 @@
             android:label="@string/title_savePath"
             android:parentActivityName=".UserPrefsActivity"
             android:theme="@style/toolbarLoginTheme" />
-        <activity android:name=".NfoActivity" />
+        <activity android:name=".NfoActivity"/>
         <activity
             android:name=".UserPrefsActivity"
             android:allowTaskReparenting="true"

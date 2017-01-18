@@ -28,18 +28,22 @@ import org.jsoup.nodes.Document;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Torrent implements Comparator<Torrent> {
 
+    public static final String INTENT_UPDATE_STATUS = "INTENT_TORRENT_UPDATE_STATUS";
     public static String DOWNLOAD_FOLDER = "Torrents t411";
 
     public String name;
     public String id;
     public String url;
     public String category="";
+    public Long download_date=0l;
     public String size, uploader, age, seeders, leechers, avis, complets, ratioa, ratiob;
     public Long date = 0L;
     private Context context;
@@ -65,6 +69,15 @@ public class Torrent implements Comparator<Torrent> {
     public static final Comparator<Torrent> LEECHERS_COMPARATOR = new Comparator<Torrent>() {
         public int compare(Torrent t, Torrent t1) {
             return Integer.parseInt(t.leechers) - Integer.parseInt(t1.leechers);
+        }
+    };
+    public static final Comparator<Torrent> DOWNLOAD_DATE_COMPARATOR = new Comparator<Torrent>() {
+        public int compare(Torrent t, Torrent t1) {
+            if(t.download_date > t1.download_date) {
+                return 1;
+            } else {
+                return -1;
+            }
         }
     };
     public static final Comparator<Torrent> SIZE_COMPARATOR = new Comparator<Torrent>() {
@@ -405,13 +418,26 @@ public class Torrent implements Comparator<Torrent> {
         @Override
         protected void onPostExecute(Void result) {
 
+            Intent dlstatus = new Intent(Torrent.INTENT_UPDATE_STATUS);
+            try {
+                if(new String(torrentFileContent, "utf-8").startsWith("<html")) {
+                    new T411Logger(context).writeLine("fichier torrent invalide (<html)", T411Logger.ERROR);
+                    dlstatus.putExtra("message", "Fichier torrent invalide");
+                    dlstatus.putExtra("success", false);
+                    context.sendBroadcast(dlstatus);
+                    return;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
             new T411Logger(context).writeLine("Ecriture du fichier torrent...");
 
             File file = new File(getTorrentPath(), getTorrentName());
             file.setWritable(true, false);
 
             try {
-                json.put(new JSONObject("{'title':'"+name.replaceAll("'", "\\'")+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"', 'category':'"+category+"'}"));
+                json.put(new JSONObject("{'title':'"+name.replaceAll("\'","\\\\'")+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"', 'category':'"+category+"', download_date: "+System.currentTimeMillis()+"}"));
                 prefs.edit().putString("jsonTorrentList",json.toString()).apply();
             } catch(Exception ex) {
                 ex.printStackTrace();
@@ -422,6 +448,7 @@ public class Torrent implements Comparator<Torrent> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             try {
 
                 FileOutputStream fo = new FileOutputStream(file);
@@ -444,6 +471,10 @@ public class Torrent implements Comparator<Torrent> {
                 PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
                 //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
                 doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
+                dlstatus.putExtra("message", "Téléchargement terminé");
+                dlstatus.putExtra("downloads", true);
+                dlstatus.putExtra("success", true);
+
                 if (prefs.getBoolean("openAfterDl", false)) {
                     //ouvrir le fichier
                     try {
@@ -462,6 +493,8 @@ public class Torrent implements Comparator<Torrent> {
                 doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
                 e.printStackTrace();
                 new T411Logger(context).writeLine("Accès au répertoire choisi impossible : " + prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
+                dlstatus.putExtra("message", "Téléchargement échoué");
+                dlstatus.putExtra("success", false);
             } catch (Exception e) {
                 Intent i = new Intent();
                 i.setClass(context, UserPrefsActivity.class);
@@ -475,6 +508,10 @@ public class Torrent implements Comparator<Torrent> {
                 } else {
                     doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur inconnue.", Integer.valueOf(id), pI);
                 }
+                dlstatus.putExtra("message", "Téléchargement échoué");
+                dlstatus.putExtra("success", false);
+            } finally {
+                context.sendBroadcast(dlstatus);
             }
         }
     }

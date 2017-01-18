@@ -2,7 +2,10 @@ package fr.lepetitpingouin.android.t411;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -13,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
@@ -95,6 +99,47 @@ public class torrentsActivity extends AppCompatActivity {
 
     private SimpleAdapter mSchedule;
     private SimpleAdapter mTorrentsAdapter;
+
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Torrent.INTENT_UPDATE_STATUS)) {
+                Snackbar sb = Snackbar.make(maListViewPerso, intent.getStringExtra("message"), 3000);
+                sb.setActionTextColor(getResources().getColor(android.R.color.white));
+                if(intent.getBooleanExtra("success",false)) {
+                    sb.getView().setBackgroundColor(getResources().getColor(R.color.t411_green));
+                } else {
+                    sb.getView().setBackgroundColor(getResources().getColor(R.color.t411_red));
+                }
+                if(intent.getBooleanExtra("downloads",false)) {
+                    sb.setAction(getResources().getString(R.string.list), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(getApplicationContext(), TorrentsListActivity.class));
+                        }
+                    });
+                }
+                sb.show();
+            }
+        }
+    };
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(receiver);
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Torrent.INTENT_UPDATE_STATUS);
+        registerReceiver(receiver, filter);
+        super.onResume();
+    }
+
 
     @Override
     public void onDestroy() {

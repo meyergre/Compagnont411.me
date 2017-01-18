@@ -371,4 +371,6 @@
     <string name="btn_logout">Déconnexion</string>
     <string name="notif_apierror_fallback">Fallback sur l\'ancienne méthode...</string>
     <string name="proxy_subscribed">Proxy souscrit et activé !</string>
+    <string name="list">Liste</string>
+    <string name="recent">Récent</string>
 </resources>
