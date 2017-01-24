@@ -31,7 +31,7 @@ public class Widget_half extends AppWidgetProvider {
                 String[] choices = context.getResources().getStringArray(R.array.widget_actions);
 
                 if (prefs.getString("widgetAction", "").equals(choices[0])) {
-                    myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.MainActivity");
+                    myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.MainActivity2");
                     pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
 
                 } else if (prefs.getString("widgetAction", "").equals(choices[1])) {

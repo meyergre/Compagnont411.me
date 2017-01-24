@@ -38,7 +38,7 @@ public class Widget_Plus extends AppWidgetProvider {
 
 
                 prefs = PreferenceManager.getDefaultSharedPreferences(context);
-                myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.MainActivity");
+                myIntent.setClassName("fr.lepetitpingouin.android.t411", "fr.lepetitpingouin.android.t411.MainActivity2");
                 pIntent = PendingIntent.getActivity(context, 0, myIntent, 0);
 
                 views.setOnClickPendingIntent(R.id.nw_icon, pIntent);
