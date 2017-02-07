@@ -137,6 +137,27 @@ public class messagesActivity extends AppCompatActivity {
                 item.setChecked(!item.isChecked());
                 Toast.makeText(getApplicationContext(), "L'icône va "+(item.isChecked()?"apparaître":"disparaître")+" dans quelques instants...", Toast.LENGTH_SHORT).show();
                 return true;
+                case R.id.msg_deleteAll:
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.delete) + " ?")
+                        .setMessage(getString(R.string.confirmDeleteAllMessage))
+                        .setPositiveButton(getString(R.string.delete).toUpperCase(), new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO: find way to call real deleteall function on site (if exist)
+                                for (int i=0; i<maListViewPerso.getCount();i++) {
+                                    // Remove mail here
+                                    itemMap = (HashMap<String, String>) maListViewPerso.getItemAtPosition(i);
+                                    new Message(getApplicationContext(), itemMap.get("id")).delete();
+                                }
+                                update();
+                            }
+
+                        })
+                        .setNegativeButton(getString(R.string.cancel).toUpperCase(), null)
+                        .show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
