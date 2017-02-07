@@ -381,4 +381,5 @@
     <string name="proxy_subscribed">Proxy subscribed and enabled !</string>
     <string name="list">List</string>
     <string name="recent">Recent</string>
+    <string name="confirmDeleteAllMessage" >Do you really want to delete ALL messages ?</string>
 </resources>
