@@ -4,4 +4,9 @@
         android:checkable="true"
         android:title="Afficher sur le lanceur"
         />
+    <item
+        android:id="@+id/msg_deleteAll"
+        android:checkable="false"
+        android:title="Effacer tous les messages"
+        />
 </menu>
