@@ -373,4 +373,5 @@
     <string name="proxy_subscribed">Proxy souscrit et activé !</string>
     <string name="list">Liste</string>
     <string name="recent">Récent</string>
+    <string name="confirmDeleteAllMessage">Voulez-vous réellement effacer TOUS les messages ?</string>
 </resources>
