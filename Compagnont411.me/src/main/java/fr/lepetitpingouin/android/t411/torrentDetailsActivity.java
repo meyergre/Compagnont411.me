@@ -23,6 +23,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -402,6 +403,17 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
                 doc = Jsoup.parse(browser.executeInAsyncTask());
 
+                Elements blocsCentre = doc.select("article > div.align-center");
+                if(blocsCentre.size() > 2) {
+                    Element blocCentre = blocsCentre.get(0);
+                    if (blocCentre.children().size() == 2)
+                        blocCentre.attr("style", "display: none;");
+
+                    blocCentre = blocsCentre.get(blocsCentre.size() - 1);
+                    if (blocCentre.outerHtml().contains("élécharg") || blocCentre.outerHtml().contains("ratuit"))
+                        blocCentre.attr("style", "display: none;");
+                }
+
                 try {
                     html_filelist = doc.select(".accordion div").get(1).outerHtml();
                 } catch (Exception e) {
@@ -449,14 +461,14 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
                 }
 
-                String customCSS = "<meta name=\"viewport\" content=\"width=" + viewport + "; user-scalable=no\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')}</style>";
-                prez = customCSS + "<body>" + hadopi + "<br/>" + qualite + doc.select(".description").first().html() + "<br/><table width=100%>";// + comments+"</body></html>";
+                String customCSS = "<meta name=\"viewport\" content=\"width=" + viewport + "; user-scalable=no\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')} h2.align-center{display: none;}</style>";
+                prez = customCSS + "<body>" + hadopi + "<br/>" + qualite + "<br/>" + doc.select("article").first().html() + "<br/><table width=100%>";// + comments+"</body></html>";
                 prez = prez.replaceAll("<noscript>", "");
                 prez = prez.replaceAll("</noscript>", "");
 
 
-                /*if(prez.contains("<h2 class=\"align-center\">LIENS DE TÉLÉCHARGEMENT</h2>"))
-                    prez = prez.split("<h2 class=\"align-center\">LIENS DE TÉLÉCHARGEMENT</h2>")[0] + "</article></div></div>";*/
+                // Pubs
+
                 prez = prez.replaceAll("\" href=\"http://adprovider.adlure.net", " display: none;\" href=\"http://adprovider.adlure.net");
                 prez = prez.replaceAll("href=\"http://adprovider.adlure.net", "style=\"display: none;\" href=\"http://adprovider.adlure.net");
 
@@ -571,6 +583,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                         e.printStackTrace();
                         prez = prez.replace(object.outerHtml(), "");
                     }
+
                 }
 
 

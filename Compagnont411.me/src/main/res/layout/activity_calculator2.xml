@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/toolbar" />
 
 
     <ScrollView
@@ -21,6 +28,196 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/include_calculator_header" />
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_card"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:text="@string/calc_simulation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView13"
+                    android:textSize="18sp"
+                    android:textColor="@color/t411_action_darkblue" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:layout_weight="0">
+
+                            <EditText
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:selectAllOnFocus="true"
+                                android:ems="10"
+                                android:id="@+id/et_qtdl"
+                                android:layout_weight="0"
+                                android:layout_width="80dp"
+                                android:gravity="right|center_vertical"
+                                android:inputType="number" />
+
+                            <Spinner
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/unitedl"
+                                android:entries="@array/dl_units"
+                                android:layout_weight="0"
+                                android:spinnerMode="dropdown" />
+                        </LinearLayout>
+                        <TextView
+                            android:text="Download"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/t411_red"
+                            android:layout_weight="0"
+                            android:textAlignment="center"
+                            android:textSize="12sp"
+                            android:alpha="0.5" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0">
+
+                            <EditText
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:ems="10"
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/et_qtup"
+                                android:layout_weight="0"
+                                android:layout_width="80dp"
+                                android:gravity="right|center_vertical"
+                                android:inputType="number" />
+
+                            <Spinner
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/uniteup"
+                                android:entries="@array/dl_units"
+                                android:layout_weight="0"
+                                android:spinnerMode="dropdown" />
+                        </LinearLayout>
+                        <TextView
+                            android:text="Upload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/t411_green"
+                            android:layout_weight="0"
+                            android:textAlignment="center"
+                            android:textSize="12sp"
+                            android:alpha="0.5" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_card"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:text="@string/upload_simulation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/t411_action_darkblue" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:selectAllOnFocus="true"
+                        android:ems="10"
+                        android:id="@+id/et_qtconn"
+                        android:layout_weight="0"
+                        android:layout_width="80dp"
+                        android:gravity="right|center_vertical"
+                        android:inputType="number" />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/uniteconn"
+                        android:entries="@array/netspeed_units"
+                        android:layout_weight="0"
+                        android:spinnerMode="dropdown" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/upspeedResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#012f54"
+                    android:layout_weight="0"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

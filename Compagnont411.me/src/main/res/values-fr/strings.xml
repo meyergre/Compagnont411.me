@@ -373,5 +373,18 @@
     <string name="proxy_subscribed">Proxy souscrit et activé !</string>
     <string name="list">Liste</string>
     <string name="recent">Récent</string>
+    <string name="UpLeftString" formatted="false">%s jusqu\'au ratio souhaité (%d).</string>
+
+    <string-array name="dl_units">
+        <item>MB</item>
+        <item>GB</item>
+        <item>TB</item>
+    </string-array>
+
+    <string-array name="netspeed_units">
+        <item>KB/s</item>
+        <item>MB/s</item>
+        <item>GB/s</item>
+    </string-array>
     <string name="confirmDeleteAllMessage">Voulez-vous réellement effacer TOUS les messages ?</string>
 </resources>

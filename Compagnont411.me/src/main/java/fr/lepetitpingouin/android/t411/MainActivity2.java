@@ -130,7 +130,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                         startActivity(i);
                         break;
                     case R.id.action_calculator:
-                        startActivity(new Intent(getApplicationContext(), CalculatorActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CalculatorActivity2.class));
                         break;
                     case R.id.action_friends:
                         startActivity(new Intent(getApplicationContext(), friendsActivity.class));

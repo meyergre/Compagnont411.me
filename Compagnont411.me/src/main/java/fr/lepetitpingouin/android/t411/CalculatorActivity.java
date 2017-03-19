@@ -131,7 +131,8 @@ public class CalculatorActivity extends AppCompatActivity {
                     result += " " + min + " " + getApplicationContext().getString(R.string.minute) + ((min > 1) ? "s" : "");
                 result += ".";
 
-                upSpeedResult.setText(result);
+                if(result.equals("~.")) upSpeedResult.setText("");
+                else upSpeedResult.setText(result);
             }
 
             @Override

@@ -1,4 +1,19 @@
 CHANGELOG
+2017.01-174
+- Ajout de la proposition de jmgfr pour la suppression massive de messages
+- Mise à jour des outils de développement
+- Corrections de bugs mineurs
+
+2017.01-173
+- Filtrage des pubs sur les prez
+- Redesign de la calculatrice
+
+2017.01-172
+- Correction de l'ouverture de l'app depuis les widgets (merci @jmgfr)
+
+2017.01-171
+- Correction d'un bug a l'ouverture des torrents sur certains mobiles Samsung
+
 2017.01-170
 - Nettoyage du changelog
 - Mise à jour de la lib JSoup

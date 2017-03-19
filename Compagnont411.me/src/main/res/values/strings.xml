@@ -381,5 +381,18 @@
     <string name="proxy_subscribed">Proxy subscribed and enabled !</string>
     <string name="list">List</string>
     <string name="recent">Recent</string>
+    <string name="UpLeftString" formatted="false">%s to seed until your ideal ratio (%d).</string>
+
+    <string-array name="dl_units">
+        <item>MB</item>
+        <item>GB</item>
+        <item>TB</item>
+    </string-array>
+
+    <string-array name="netspeed_units">
+        <item>KB/s</item>
+        <item>MB/s</item>
+        <item>GB/s</item>
+    </string-array>
     <string name="confirmDeleteAllMessage" >Do you really want to delete ALL messages ?</string>
 </resources>

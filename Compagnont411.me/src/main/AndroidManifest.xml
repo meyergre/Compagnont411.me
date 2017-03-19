@@ -187,8 +187,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CalculatorActivity"
-            android:parentActivityName=".MainActivity2" />
+            android:name=".CalculatorActivity2"
+            android:parentActivityName=".MainActivity2"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|layoutDirection|screenLayout" />
         <activity
             android:name=".torrentDetailsActivity"
             android:configChanges="orientation|screenSize">

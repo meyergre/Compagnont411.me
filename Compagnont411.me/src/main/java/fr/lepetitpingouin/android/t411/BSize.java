@@ -26,6 +26,19 @@ class BSize {
         }
     }
 
+    public static String quickConvert(double koctets) {
+        if(koctets > 1024*1024*1024) {
+            return String.format("%.2f", koctets/(1024*1024*1024)) + " TB";
+        }
+        if(koctets > 1024*1024) {
+            return String.format("%.2f", koctets/(1024*1024)) + " GB";
+        }
+        if(koctets > 1024) {
+            return String.format("%.2f", koctets/(1024)) + " MB";
+        }
+        else return String.format("%.2f",koctets) + " KB";
+    }
+
     public static String quickConvert(String val) {
         Double koctets = Double.valueOf(val)/1024;
         if(koctets > 1024*1024*1024) {
@@ -78,8 +91,12 @@ class BSize {
         return koctets / (1024 * 1024 * 1024);
     }
 
-    public double getInAuto() {
+    public String getInAuto() {
 
-        return 0;
+        if(koctets < 1024) return this.convert("KB");
+        if(koctets < 1024*1024) return this.convert("MB");
+        if(koctets < 1024*1024*1024) return this.convert("GB");
+        return this.convert("TB");
+
     }
 }

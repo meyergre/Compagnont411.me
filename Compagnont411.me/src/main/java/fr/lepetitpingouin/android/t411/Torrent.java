@@ -238,7 +238,7 @@ public class Torrent implements Comparable {
     public void open() {
         Intent i = new Intent();
         i.setAction(android.content.Intent.ACTION_VIEW);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_FROM_BACKGROUND|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         //i.setType("application/x-bittorrent");
 
         File file = new File(this.getTorrentPath(), this.getTorrentName());
@@ -250,7 +250,7 @@ public class Torrent implements Comparable {
             i.setData(Uri.fromFile(file));
         }
 
-        context.startActivity(Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)));
+        context.startActivity(Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override
@@ -462,7 +462,7 @@ public class Torrent implements Comparable {
                 i.setAction(android.content.Intent.ACTION_VIEW);
 
                 i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
-                i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 if(Build.VERSION.SDK_INT >= 24) {
                     i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
                 }

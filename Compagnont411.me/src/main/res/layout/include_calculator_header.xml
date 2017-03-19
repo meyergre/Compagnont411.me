@@ -11,22 +11,23 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/clouds"
         android:id="@+id/imageView21"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false" />
+        android:adjustViewBounds="true" />
 
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="340dp"
         android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-25dp">
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_width="100dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:id="@+id/layout_download">
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Download"
@@ -37,17 +38,17 @@
             android:inputType="text"
             android:gravity="center_vertical|center"
             android:textColor="@color/t411_darkred" />
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
             android:ems="10"
-            android:id="@+id/editText4"
+            android:id="@+id/tv_download"
             android:gravity="center"
             android:singleLine="true"
             android:selectAllOnFocus="false"
             android:textColor="@color/t411_darkred"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -57,9 +58,11 @@
         android:layout_height="128dp"
         android:layout_width="128dp"
         android:backgroundTint="@color/t411_action_blue"
-        android:elevation="4dp">
+        android:focusableInTouchMode="true"
+        android:elevation="4dp"
+        android:id="@+id/circle_ratio">
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -67,12 +70,58 @@
             android:ems="10"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/editText7"
+            android:id="@+id/tv_ratio"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="#FFF"
             android:textStyle="normal|bold"
             android:textSize="30sp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_update"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/fab_refresh"
+            app:backgroundTint="@color/t411_action_lightgrey"
+            app:elevation="0dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ratio"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratioMin"
+                android:layout_weight="0"
+                android:alpha="0.5"
+                android:textColor="#FFF" />
+
+            <TextView
+                android:text=" - "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="#FFF" />
+
+            <TextView
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratioMax"
+                android:layout_weight="0"
+                android:alpha="0.5"
+                android:textColor="#FFF" />
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -80,9 +129,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:id="@+id/layout_upload">
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upload"
@@ -93,17 +143,17 @@
             android:inputType="text"
             android:gravity="center_vertical|center"
             android:textColor="@color/t411_green" />
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
             android:ems="10"
-            android:id="@+id/editText6"
+            android:id="@+id/tv_upload"
             android:gravity="center"
             android:singleLine="true"
             android:selectAllOnFocus="false"
             android:textColor="@color/t411_green"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
     </LinearLayout>
     </LinearLayout>
 

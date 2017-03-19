@@ -17,10 +17,10 @@ android {
     buildToolsVersion "25.0.2"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        minSdkVersion 12
+        minSdkVersion 14
         targetSdkVersion 25
-        versionCode 170
-        versionName "2017.01-170"
+        versionCode 174
+        versionName "2017.03-174"
         applicationId "fr.lepetitpingouin.android.t411"
 
         resConfigs "en", "fr"
@@ -35,11 +35,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:palette-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:palette-v7:25.3.0'
+    compile 'com.android.support:design:25.3.0'
     compile 'org.jsoup:jsoup:1.10.2'
-    compile 'com.anjlab.android.iab.v3:library:1.0.+'
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.anjlab.android.iab.v3:library:1.0.31'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
 }
