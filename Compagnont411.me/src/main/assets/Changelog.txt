@@ -1,8 +1,9 @@
-CHANGELOG
 2017.01-174
 - Ajout de la proposition de jmgfr pour la suppression massive de messages
 - Mise à jour des outils de développement
-- Corrections de bugs mineurs
+- Corrections de bugs mineurs (Calculatrice)
+- Changement de l'URL du proxy proposé
+- Mise à jour du système du serveur proxy
 
 2017.01-173
 - Filtrage des pubs sur les prez

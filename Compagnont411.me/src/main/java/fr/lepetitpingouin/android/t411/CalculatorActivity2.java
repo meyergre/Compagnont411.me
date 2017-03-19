@@ -255,7 +255,7 @@ public class CalculatorActivity2 extends AppCompatActivity {
             if (result.equals("~")) upSpeedResult.setText("");
             else
                 upSpeedResult.setText(getString(R.string.UpLeftString).replace("%s", result).replace("%d", String.format("%.2f", Float.valueOf(prefs.getString("ratioCible", "0.00").replace(",", ".")))));
-        } finally {
+        } catch(Exception e) {
 
         }
     }
@@ -292,7 +292,7 @@ public class CalculatorActivity2 extends AppCompatActivity {
             ratio.setText(String.format("%.2f", uploadValue / downloadValue));
 
             animateRatioChange();
-        } finally {
+        } catch(Exception e) {
 
         }
     }
