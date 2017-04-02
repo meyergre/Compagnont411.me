@@ -578,7 +578,7 @@ public class t411UpdateService extends Service {
                     new T411Logger(getApplicationContext()).writeLine("Fallback sur l'ancienne méthode d'update", T411Logger.INFO);
                     cancelNotify(12345);
                     //doNotify(0, getResources().getString(R.string.notif_apierror), getResources().getString(R.string.notif_apierror_fallback), 12345, null);
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.notif_apierror) + " - " + getResources().getString(R.string.notif_apierror_fallback), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), getResources().getString(R.string.notif_apierror) + " - " + getResources().getString(R.string.notif_apierror_fallback), Toast.LENGTH_LONG).show();
                     new AsyncUpdate().execute();
                 } else {
 

@@ -3,17 +3,28 @@ package fr.lepetitpingouin.android.t411;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.helper.StringUtil;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Authenticator;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -41,6 +52,7 @@ public class APIBrowser {
 
     private HttpsURLConnection conn;
     public String errorMessage, errorCode;
+    private String downloadError;
 
     public APIBrowser(Context context) {
 
@@ -93,6 +105,66 @@ public class APIBrowser {
         return this;
     }
 
+    public boolean download(File file) {
+
+        this.downloadError = "";
+
+        final int BUFFER_SIZE = 4096;
+
+        try {
+            URL url = new URL(this.url.replace(Default.IP_T411, prefs.getString("custom_domain", Default.IP_T411)));
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestProperty("Authorization", this.auth);
+            int responseCode = httpConn.getResponseCode();
+
+            // always check HTTP response code first
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                String fileName = "";
+                String disposition = httpConn.getHeaderField("Content-Disposition");
+                String contentType = httpConn.getContentType();
+                int contentLength = httpConn.getContentLength();
+
+                if(!contentType.equals("application/x-bittorrent")) {
+                    this.downloadError = this.ctx.getString(R.string.dlErrorBadContentType, contentType);
+                }
+
+                if (disposition != null) {
+                    // extracts file name from header field
+                    int index = disposition.indexOf("filename=");
+                    if (index > 0) {
+                    fileName = disposition.substring(index + 10, disposition.length() - 1);
+                        Log.e("FileName", fileName);
+                }
+            }
+
+            // opens input stream from the HTTP connection
+            InputStream inputStream = httpConn.getInputStream();
+
+            // opens an output stream to save into file
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            int bytesRead = -1;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            outputStream.close();
+            inputStream.close();
+
+        } else {
+            this.downloadError = this.ctx.getString(R.string.dlErrorNoFile, "HTTP"+responseCode);
+        }
+        httpConn.disconnect();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            this.downloadError = "Erreur interne.";
+        }
+
+        return this.downloadError.equals("");
+    }
+
     public String load() {
 
         URL mUrl;
@@ -105,18 +177,27 @@ public class APIBrowser {
                 conn = (HttpsURLConnection) mUrl.openConnection();
             }
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Authorization", this.auth);
 
             PrintWriter out = new PrintWriter(conn.getOutputStream());
             out.print(StringUtil.join(this.bodyParts, "&"));
             out.close();
 
-            Scanner inStream = new Scanner(conn.getInputStream());
-
+            /*Scanner inStream = new Scanner(conn.getInputStream(), "UTF-8");
             while(inStream.hasNextLine()) {
                 response+=(inStream.nextLine());
+            }*/
+
+            //InputStream in = new BufferedInputStream(conn.getInputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = in.readLine()) != null) {
+                sb.append(line);
             }
+            in.close();
+            response = sb.toString();
 
             NotificationManager mNotificationManager = (NotificationManager) this.ctx.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(12345);

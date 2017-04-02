@@ -364,12 +364,11 @@ public class Torrent implements Comparable {
 
     }
 
-    private class torrentFileGetter extends AsyncTask<Void, String[], Void> {
+    private class torrentFileGetter extends AsyncTask<Object, Object, Boolean> {
 
-        Connection.Response resTorrent;
-        byte[] torrentFileContent;
-        String torrentContent;
         JSONArray json;
+        APIBrowser apiBrowser;
+        File file;
 
         public torrentFileGetter() {
             try {
@@ -385,132 +384,97 @@ public class Torrent implements Comparable {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context.checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 doNotify(R.drawable.ic_notif_torrent_failure, name, "Permissions nécessaires", Integer.valueOf(id), null);
             }
-
             doNotify(R.drawable.ic_notif_torrent_downloading, name, "Téléchargement...", Integer.valueOf(id), null);
             new T411Logger(context).writeLine("Initialisation du téléchargement");
+
+            file = new File(getTorrentPath(), getTorrentName());
         }
 
         @Override
-        protected Void doInBackground(Void... arg0) {
-
-            String username = prefs.getString("login", ""), password = prefs.getString("password", "");
-
-            try {
-                SuperT411HttpBrowser browser = new SuperT411HttpBrowser(context)
-                        .connect(Default.URL_GET_TORRENT + id)
-                        .login(username, password);
-
-                //APIBrowser apiBrowser = new APIBrowser(context).connect(Default.API_T411 + Default.URL_API_GET_TORRENT + id);
-
-                torrentContent = browser.executeInAsyncTask();
-                torrentFileContent = browser.getByteResponse();
-
-                //torrentFileContent = apiBrowser.loadFile();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
+        protected Boolean doInBackground(Object... arg0) {
+            apiBrowser = new APIBrowser(context).connect(Default.API_T411 + Default.URL_API_GET_TORRENT + id);
+            new T411Logger(context).writeLine("Téléchargement du fichier torrent...");
+            return apiBrowser.download(file);
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(Boolean result) {
+
+            new T411Logger(context).writeLine("Procédure de téléchargement terminée (" + (result?"OK":"ERROR") + ")", (result?T411Logger.INFO:T411Logger.ERROR));
 
             Intent dlstatus = new Intent(Torrent.INTENT_UPDATE_STATUS);
-            try {
-                if(new String(torrentFileContent, "utf-8").startsWith("<html")) {
-                    new T411Logger(context).writeLine("fichier torrent invalide (<html)", T411Logger.ERROR);
-                    dlstatus.putExtra("message", "Fichier torrent invalide");
-                    dlstatus.putExtra("success", false);
-                    context.sendBroadcast(dlstatus);
-                    return;
-                }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
 
-            new T411Logger(context).writeLine("Ecriture du fichier torrent...");
-
-            File file = new File(getTorrentPath(), getTorrentName());
-            file.setWritable(true, false);
-
-            try {
-                json.put(new JSONObject("{'title':'"+name.replaceAll("\'","\\\\'")+"','uploader':'"+uploader+"','size':'"+size+"','id':'"+id+"', 'url':'"+url+"', 'category':'"+category+"', download_date: "+System.currentTimeMillis()+"}"));
-                prefs.edit().putString("jsonTorrentList",json.toString()).apply();
-            } catch(Exception ex) {
-                ex.printStackTrace();
-            }
-
-            try {
-                file.createNewFile();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-
-                FileOutputStream fo = new FileOutputStream(file);
-                fo.write(torrentFileContent);
-                fo.close();
-
-                /*OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file));
-                osw.write(torrentContent);
-                osw.close();*/
-
-                Intent i = new Intent();
-                i.setAction(android.content.Intent.ACTION_VIEW);
-
-                i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                if(Build.VERSION.SDK_INT >= 24) {
-                    i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
-                }
-
-                PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
-                //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
-                doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
-                dlstatus.putExtra("message", "Téléchargement terminé");
-                dlstatus.putExtra("downloads", true);
-                dlstatus.putExtra("success", true);
-
-                if (prefs.getBoolean("openAfterDl", false)) {
-                    //ouvrir le fichier
-                    try {
-                        context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT | Intent.FLAG_FROM_BACKGROUND | Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION));
-                        if (prefs.getBoolean("openAfterDlCancelNotify", false))
-                            cancelNotify(Integer.valueOf(id));
-                    } catch (Exception e) {
-                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Erreur d'ouverture du torrent\nAucune application trouvée.", Integer.valueOf(id), null);
-                    }
-                }
-
-            } catch (IOException e) {
-                Intent i = new Intent();
-                i.setClass(context, UserPrefsActivity.class);
-                PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
-                e.printStackTrace();
-                new T411Logger(context).writeLine("Accès au répertoire choisi impossible : " + prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
-                dlstatus.putExtra("message", "Téléchargement échoué");
+            if(!result) {
+                new T411Logger(context).writeLine(apiBrowser.errorMessage, T411Logger.ERROR);
+                dlstatus.putExtra("message", apiBrowser.errorMessage);
                 dlstatus.putExtra("success", false);
-            } catch (Exception e) {
-                Intent i = new Intent();
-                i.setClass(context, UserPrefsActivity.class);
-                PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                if (file.exists() && file.length() == 0) {
-                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
-                    e.printStackTrace();
-                    new T411Logger(context).writeLine("Impossible de lire le contenu du fichier", T411Logger.ERROR);
-                } else if (!file.exists()) {
-                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nImpossible de créer le fichier.", Integer.valueOf(id), pI);
-                } else {
-                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur inconnue.", Integer.valueOf(id), pI);
-                }
-                dlstatus.putExtra("message", "Téléchargement échoué");
-                dlstatus.putExtra("success", false);
-            } finally {
                 context.sendBroadcast(dlstatus);
+            } else {
+
+                try {
+                    json.put(new JSONObject("{'title':'" + name.replaceAll("\'", "\\\\'") + "','uploader':'" + uploader + "','size':'" + size + "','id':'" + id + "', 'url':'" + url + "', 'category':'" + category + "', download_date: " + System.currentTimeMillis() + "}"));
+                    prefs.edit().putString("jsonTorrentList", json.toString()).apply();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+
+                try {
+
+                    Intent i = new Intent();
+                    i.setAction(android.content.Intent.ACTION_VIEW);
+
+                    i.setDataAndType(Uri.fromFile(file), "application/x-bittorrent");
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    if(Build.VERSION.SDK_INT >= 24) {
+                        i.setDataAndType(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file), "application/x-bittorrent");
+                    }
+
+                    PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
+                    //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
+                    doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
+                    dlstatus.putExtra("message", "Téléchargement terminé");
+                    dlstatus.putExtra("downloads", true);
+                    dlstatus.putExtra("success", true);
+
+                    if (prefs.getBoolean("openAfterDl", false)) {
+                        //ouvrir le fichier
+                        try {
+                            context.getApplicationContext().startActivity(i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | PendingIntent.FLAG_UPDATE_CURRENT | Intent.FLAG_FROM_BACKGROUND | Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION));
+                            if (prefs.getBoolean("openAfterDlCancelNotify", false))
+                                cancelNotify(Integer.valueOf(id));
+                        } catch (Exception e) {
+                            doNotify(R.drawable.ic_notif_torrent_failure, name, "Erreur d'ouverture du torrent\nAucune application trouvée.", Integer.valueOf(id), null);
+                        }
+                    }
+
+                /*} catch (IOException e) {
+                    Intent i = new Intent();
+                    i.setClass(context, UserPrefsActivity.class);
+                    PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
+                    e.printStackTrace();
+                    new T411Logger(context).writeLine("Accès au répertoire choisi impossible : " + prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
+                    dlstatus.putExtra("message", "Téléchargement échoué");
+                    dlstatus.putExtra("success", false);
+                } catch (Exception e) {
+                    Intent i = new Intent();
+                    i.setClass(context, UserPrefsActivity.class);
+                    PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                    if (file.exists() && file.length() == 0) {
+                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
+                        e.printStackTrace();
+                        new T411Logger(context).writeLine("Impossible de lire le contenu du fichier", T411Logger.ERROR);
+                    } else if (!file.exists()) {
+                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nImpossible de créer le fichier.", Integer.valueOf(id), pI);
+                    } else {
+                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur inconnue.", Integer.valueOf(id), pI);
+                    }
+                    dlstatus.putExtra("message", "Téléchargement échoué");
+                    dlstatus.putExtra("success", false);
+                */} finally {
+                    context.sendBroadcast(dlstatus);
+                }
             }
         }
     }

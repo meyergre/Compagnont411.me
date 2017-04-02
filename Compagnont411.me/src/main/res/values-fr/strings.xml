@@ -387,4 +387,6 @@
         <item>GB/s</item>
     </string-array>
     <string name="confirmDeleteAllMessage">Voulez-vous réellement effacer TOUS les messages ?</string>
+    <string name="dlErrorNoFile">No file to download. Server replied HTTP code : %s</string>
+    <string name="dlErrorBadContentType">Bad encoding : %s. Try to log back in.</string>
 </resources>

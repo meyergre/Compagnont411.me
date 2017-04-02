@@ -1,4 +1,12 @@
-2017.01-174
+2017.04-176
+- Changement de méthode de téléchargement des torrents pour un moyen plus fiable
+- Des erreurs API subsistent, mais relèvent de la compétence de l'équipe du site
+
+2017.03-175
+- Passage a t411.ai
+- Réduction de la quantité de messages d'informations sur l'état du serveur
+
+2017.03-174
 - Ajout de la proposition de jmgfr pour la suppression massive de messages
 - Mise à jour des outils de développement
 - Corrections de bugs mineurs (Calculatrice)
@@ -45,7 +53,7 @@
 
 2016.11-165
 - Correction des widgets
-- Rétablissement de l'ouverture des liens vers t411.li par l'application
+- Rétablissement de l'ouverture des liens vers t411 par l'application
 - Le répertoire de téléchargement est maintenant forcé au dossier "Torrents t411" à la racine du stockage externe, pour la compatibilité avec Android 7
 
 2016.11-164
