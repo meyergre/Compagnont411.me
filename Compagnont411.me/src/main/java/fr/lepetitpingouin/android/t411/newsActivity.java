@@ -37,13 +37,13 @@ public class newsActivity extends AppCompatActivity {
         String customCSS = "<style>.readmore {display: none;}</style>";
 
         WebView warticle1 = (WebView) findViewById(R.id.www_article1);
-        warticle1.loadDataWithBaseURL(null, customCSS + prefs.getString("article1", "...").replaceAll("<[aA]", "<u").replaceAll("</[aA]>", "</u>"), mimeType, encoding, "");
+        warticle1.loadDataWithBaseURL(null, customCSS + prefs.getString("article1", "..."), mimeType, encoding, "");
 
         WebView warticle2 = (WebView) findViewById(R.id.www_article2);
-        warticle2.loadDataWithBaseURL(null, customCSS + prefs.getString("article2", "...").replaceAll("<[aA]", "<u").replaceAll("</[aA]>", "</u>"), mimeType, encoding, "");
+        warticle2.loadDataWithBaseURL(null, customCSS + prefs.getString("article2", "..."), mimeType, encoding, "");
 
         WebView warticle3 = (WebView) findViewById(R.id.www_article3);
-        warticle3.loadDataWithBaseURL(null, customCSS + prefs.getString("article3", "...").replaceAll("<[aA]", "<u").replaceAll("</[aA]>", "</u>"), mimeType, encoding, "");
+        warticle3.loadDataWithBaseURL(null, customCSS + prefs.getString("article3", "..."), mimeType, encoding, "");
 
         Button readMore1 = (Button) findViewById(R.id.news_readmore1);
         readMore1.setOnClickListener(new View.OnClickListener() {

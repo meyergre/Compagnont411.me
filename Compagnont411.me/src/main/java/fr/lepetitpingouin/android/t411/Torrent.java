@@ -260,52 +260,34 @@ public class Torrent implements Comparable {
 
     private class AsyncDlLaterNot extends AsyncTask<Void, String[], Void> {
 
-        String msg = "";
+        String msg;
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            String username = prefs.getString("login", ""), password = prefs
-                    .getString("password", "");
+            APIBrowser apiBrowser = new APIBrowser(context).connect(Default.API_T411 + Default.URL_API_BOOKMARK_DELETE + id);
+            new T411Logger(context).writeLine("Suppression du bookmark du torrent...");
+            JSONObject o = apiBrowser.loadObject();
 
-            Connection.Response res = null;
-            Document doc = null;
+            this.msg = context.getString(R.string.bookmark_delete_success);
 
-            try {
-                res = Jsoup
-                        .connect(Default.URL_LOGIN)
-                        .data("login", username, "password", password)
-                        .method(Connection.Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .execute();
-
-                Map<String, String> Cookies = res.cookies();
-
-                res = Jsoup
-                        .connect(Default.URL_UNBOOKMARK)
-                        .cookies(Cookies)
-                        .data("id", "", "submit", "Supprimer", "ids[]", id)
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .method(Connection.Method.POST)
-                        .execute();
-
-                doc = res.parse();
-
-                msg = doc.select("div#messages").first().text();
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(o.has("code")) {
+                try {
+                    if(o.getInt("code") == 1401
+                            || o.getInt("code") == 401) {
+                        new T411Logger(context).writeLine("Bookmark introuvable", T411Logger.WARN);
+                        this.msg = context.getString(R.string.bookmark_notfound);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            if (!msg.equals(""))
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -316,43 +298,28 @@ public class Torrent implements Comparable {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            String username = prefs.getString("login", ""), password = prefs.getString("password", "");
-
-            Connection.Response res;
-            Document doc;
-
-            try {
-
-                res = Jsoup
-                        .connect(Default.URL_LOGIN)
-                        .data("login", username, "password", password)
-                        .method(Connection.Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .execute();
-
-                Map<String, String> Cookies = res.cookies();
-
-                res = Jsoup
-                        .connect(Default.URL_BOOKMARK + id)
-                        .cookies(Cookies)
-                        .data("login", username, "password", password)
-                        .method(Connection.Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-                        .maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                        .ignoreContentType(true).execute();
-
-                doc = res.parse();
-
-                //doc = Jsoup.parse(new SuperT411HttpBrowser(context).login(username, password).connect(Default.URL_BOOKMARK + id).executeInAsyncTask());
-
-                //Log.e("bookmark", doc.body().toString());
-                msg = doc.select("div.fade").first().text();
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            APIBrowser apiBrowser = new APIBrowser(context).connect(Default.API_T411 + Default.URL_API_BOOKMARK_TORRENT + id);
+            new T411Logger(context).writeLine("Bookmark du torrent...");
+            JSONObject o = apiBrowser.loadObject();
+            if(o.has("id")) {
+                new T411Logger(context).writeLine("Bookmark du torrent réussi");
+                this.msg = context.getString(R.string.bookmark_torrent_success);
+            } else {
+                if(o.has("code")) {
+                    try {
+                        if(o.getInt("code") == 1402
+                            || o.getInt("code") == 402) {
+                            new T411Logger(context).writeLine("Doublon de bookmark", T411Logger.WARN);
+                            this.msg = context.getString(R.string.bookmark_torrent_duplicate);
+                        } else if(o.getInt("code") == 1403
+                                || o.getInt("code") == 403) {
+                            new T411Logger(context).writeLine("Erreur interne T411", T411Logger.ERROR);
+                            this.msg = context.getString(R.string.bookmark_torrent_error);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
             return null;
         }
@@ -431,7 +398,6 @@ public class Torrent implements Comparable {
                     }
 
                     PendingIntent pI = PendingIntent.getActivity(context, 0, Intent.createChooser(i, context.getResources().getString(R.string.open_with_app)), PendingIntent.FLAG_UPDATE_CURRENT);
-                    //doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
                     doNotify(R.drawable.ic_notif_torrent_done, name, "Téléchargement terminé !", Integer.valueOf(id), pI);
                     dlstatus.putExtra("message", "Téléchargement terminé");
                     dlstatus.putExtra("downloads", true);
@@ -447,32 +413,7 @@ public class Torrent implements Comparable {
                             doNotify(R.drawable.ic_notif_torrent_failure, name, "Erreur d'ouverture du torrent\nAucune application trouvée.", Integer.valueOf(id), null);
                         }
                     }
-
-                /*} catch (IOException e) {
-                    Intent i = new Intent();
-                    i.setClass(context, UserPrefsActivity.class);
-                    PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                    doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nAccès au répertoire choisi impossible.", Integer.valueOf(id), pI);
-                    e.printStackTrace();
-                    new T411Logger(context).writeLine("Accès au répertoire choisi impossible : " + prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
-                    dlstatus.putExtra("message", "Téléchargement échoué");
-                    dlstatus.putExtra("success", false);
-                } catch (Exception e) {
-                    Intent i = new Intent();
-                    i.setClass(context, UserPrefsActivity.class);
-                    PendingIntent pI = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-                    if (file.exists() && file.length() == 0) {
-                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur réseau : impossible de télécharger le contenu du fichier. Veuillez réessayer.", Integer.valueOf(id), pI);
-                        e.printStackTrace();
-                        new T411Logger(context).writeLine("Impossible de lire le contenu du fichier", T411Logger.ERROR);
-                    } else if (!file.exists()) {
-                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nImpossible de créer le fichier.", Integer.valueOf(id), pI);
-                    } else {
-                        doNotify(R.drawable.ic_notif_torrent_failure, name, "Le téléchargement a échoué...\nErreur inconnue.", Integer.valueOf(id), pI);
-                    }
-                    dlstatus.putExtra("message", "Téléchargement échoué");
-                    dlstatus.putExtra("success", false);
-                */} finally {
+                } finally {
                     context.sendBroadcast(dlstatus);
                 }
             }

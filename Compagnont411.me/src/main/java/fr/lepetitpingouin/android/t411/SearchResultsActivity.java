@@ -207,6 +207,9 @@ public class SearchResultsActivity extends AppCompatActivity {
             this.standardSearch = false;
             findViewById(R.id.view_catFilter).setVisibility(View.VISIBLE);
             new asyncApiSearch().execute(getIntent().getStringExtra("url"));
+        } else if(getIntent().getStringExtra("sender").equals("bookmarks")) {
+            this.standardSearch = false;
+            new asyncApiSearch().execute(Default.API_T411 + Default.URL_API_BOOKMARKS);
         } else {
             findViewById(R.id.view_catFilter).setVisibility(View.GONE);
             new asyncApiSearch().execute();

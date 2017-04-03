@@ -159,7 +159,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayUseLogoEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
 
 
         torrent_URL = getIntent().getStringExtra("url");

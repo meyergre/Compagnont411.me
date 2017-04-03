@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -21,6 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -30,6 +32,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
+import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 
 import java.io.ByteArrayOutputStream;
@@ -173,11 +176,6 @@ public class SuperT411HttpBrowser {
     public SuperT411HttpBrowser connect(String mUrl) {
 
         this.url = mUrl.replace(Default.API_T411, prefs.getString("custom_domain", Default.IP_T411));
-        /*/TEST TRUE PROXY/*if(proxy){
-            this.url = Private.URL_PROXY + this.url.replace("http://", "");
-        }*/
-
-        //this.url = this.url.replace("t411.io", "t411.ch");
 
         if (prefs.getBoolean("useHTTPS", false) && !proxy) {
             new T411Logger(this.ctx).writeLine("Connexion HTTPS activée");
@@ -258,10 +256,6 @@ public class SuperT411HttpBrowser {
 
         DefaultHttpClient httpclient = new DefaultHttpClient();
 
-
-        //httpclient.getConnectionManager().getSchemeRegistry().register(new Scheme("https", sslsf, 443));
-
-
         if (proxy || customProxy) {
             httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
             if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
@@ -316,6 +310,7 @@ public class SuperT411HttpBrowser {
         if (responseString == null)
             responseString = "OK";
 
+        Log.e("COOKIES", StringUtil.join(httpclient.getCookieStore().getCookies(), ";"));
 
         try {
             String conError = Jsoup.parse(responseString).select("div.fade").first().text();
@@ -381,7 +376,7 @@ public class SuperT411HttpBrowser {
         new T411Logger(this.ctx).writeLine("Initiation de la connexion HTTP vers " + mUrl);
 
         HttpPost httppost = new HttpPost(mUrl);
-        httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        httppost.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
         HttpResponse response;
         String responseString = null;
@@ -404,6 +399,8 @@ public class SuperT411HttpBrowser {
 
             httppost.setEntity(e);
 
+            clientcontext = new BasicHttpContext();
+            clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
 
@@ -456,13 +453,18 @@ public class SuperT411HttpBrowser {
 
         httppost = new HttpPost(this.url);
 
-        new T411Logger(this.ctx).writeLine("Initiation de la connexion HTTP vers " + mUrl);
+        new T411Logger(this.ctx).writeLine("Initiation de la connexion HTTP vers " + this.url);
 
         try {
 
             e = new UrlEncodedFormEntity(this.data);
 
             httppost.setEntity(e);
+
+            //clientcontext = new BasicHttpContext();
+            //clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+
+            httppost.addHeader("Cookie", "authApi=" + prefs.getString("APIKey", "") + ";uid=" + prefs.getString("uid", "") + ";");
 
             response = httpclient.execute(httppost, clientcontext);
             StatusLine statusLine = response.getStatusLine();
@@ -522,6 +524,8 @@ public class SuperT411HttpBrowser {
             retValue = responseString;
             e1.printStackTrace();
         }
+
+        Log.e("COOKIES", StringUtil.join(httpclient.getCookieStore().getCookies(), ";"));
 
         return retValue;
     }

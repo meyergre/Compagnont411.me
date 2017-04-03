@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/t411_action_blue"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -12,7 +14,11 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,6 +27,7 @@
 
             <Button
                 android:id="@+id/button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
                 android:layout_margin="4dp"
@@ -32,11 +39,11 @@
                 android:onClick="onFastTorrent"
                 android:padding="5dp"
                 android:text=" rapides"
-                android:textColor="#FFF"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:textColor="#FFF" />
 
             <Button
                 android:id="@+id/button2"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
                 android:layout_margin="4dp"
@@ -48,8 +55,7 @@
                 android:onClick="onDailyTorrent"
                 android:padding="5dp"
                 android:text=" du jour"
-                android:textColor="#FFF"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:textColor="#FFF" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,6 +65,7 @@
 
             <Button
                 android:id="@+id/button3"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
                 android:layout_margin="4dp"
@@ -70,11 +77,11 @@
                 android:onClick="onWeeklyTorrent"
                 android:padding="5dp"
                 android:text=" de la semaine"
-                android:textColor="#FFF"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:textColor="#FFF" />
 
             <Button
                 android:id="@+id/button4"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
                 android:layout_margin="4dp"
@@ -86,8 +93,7 @@
                 android:onClick="onMonthlyTorrent"
                 android:padding="5dp"
                 android:text=" du mois"
-                android:textColor="#FFF"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:textColor="#FFF" />
         </LinearLayout>
 
     </LinearLayout>

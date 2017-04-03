@@ -77,18 +77,18 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //toolbar = (Toolbar)findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         if (getIntent().hasExtra("message"))
             Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle( getResources().getString(R.string.app_name) );
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setTitle( getResources().getString(R.string.app_name) );
 
         filter = new IntentFilter();
         filter.addAction(Default.Appwidget_update);
@@ -122,10 +122,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                         break;
                     case R.id.action_future:
                         i = new Intent();
-                        i.setClass(getApplicationContext(), torrentsActivity.class);
-                        i.putExtra("url", Default.URL_BOOKMARKS);
-                        i.putExtra("keywords", getString(R.string.bookmarks));
-                        i.putExtra("showIcons", false);
+                        i.setClass(getApplicationContext(), SearchResultsActivity.class);
                         i.putExtra("sender", "bookmarks");
                         startActivity(i);
                         break;
@@ -212,12 +209,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             private void initWidgets() {
 
                 ((TextView)findViewById(R.id.widget_username)).setText(prefs.getString("lastUsername", "..."));
-                ((TextView)findViewById(R.id.widget_username)).setTextColor(new Ratio(this).getTitleColor());
+                //((TextView)findViewById(R.id.widget_username)).setTextColor(new Ratio(this).getTitleColor());
 
-                String classe = prefs.getString("classe", "...");
-                String titre = prefs.getString("titre", "");
-                String status = classe + ((titre.length() > 1) ? ", " + titre : "");
-                ((TextView)findViewById(R.id.widget_userclass)).setText(status);
                 ((TextView)findViewById(R.id.widget_upload)).setText(new BSize(prefs.getString("lastUpload", "0.00 GB")).convert());
                 ((TextView)findViewById(R.id.widget_download)).setText( new BSize(prefs.getString("lastDownload", "0.00 GB")).convert());
                 ((TextView)findViewById(R.id.widget_ratio)).setText( prefs.getString("lastRatio", " "));
@@ -242,10 +235,12 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
                     displayedDate = getResources().getString(R.string.lastUpdate) + lastDate.replaceAll("'", "");
 
-                    //((TextView) findViewById(R.id.tvUpdateTime)).setText(displayedDate);
-                    getSupportActionBar().setSubtitle(displayedDate);
+                    //getSupportActionBar().setSubtitle(displayedDate);
+                    ((TextView)findViewById(R.id.tvDateUpdate)).setText(displayedDate);
+
                 } else {
-                    getSupportActionBar().setSubtitle("Glissez vers le bas pour mettre à jour");
+                    //getSupportActionBar().setSubtitle("Glissez vers le bas pour mettre à jour");
+                    ((TextView)findViewById(R.id.tvDateUpdate)).setText("Glissez vers le bas pour mettre à jour");
                 }
 
                 findViewById(R.id.widget_news).setOnClickListener(new View.OnClickListener() {
@@ -276,7 +271,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 findViewById(R.id.seedbox).setVisibility(prefs.getBoolean("seedbox", false) ? View.VISIBLE : View.GONE);
 
                 ((TextView)navHeader.findViewById(R.id.drw_username)).setText(prefs.getString("lastUsername", "Non connecté"));
-                ((TextView)navHeader.findViewById(R.id.drw_class)).setText(status);
 
             }
 
@@ -432,7 +426,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             }
 
     public void onLogout(View v) {
-        //Snackbar.make(toolbar, "Logging out... (no, kidding ;) )", Snackbar.LENGTH_LONG).show();
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_disconnect)
                 .setTitle(R.string.disconnectConfirmTitle)

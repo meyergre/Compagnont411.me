@@ -31,18 +31,8 @@ public class statsActivity extends AppCompatActivity {
 
         www.loadDataWithBaseURL(null, prefs.getString("lastGraph", getString(R.string.errorGraph)), "text/html", "utf-8", null);
 
-
-
         findViewById(R.id.seedbox).setVisibility(prefs.getBoolean("seedbox", false) ? View.VISIBLE : View.GONE);
 
-
-        ((TextView)findViewById(R.id.stat_username)).setText(prefs.getString("lastUsername", "..."));
-        ((TextView)findViewById(R.id.stat_username)).setTextColor(new Ratio(this).getTitleColor());
-
-        String classe = prefs.getString("classe", "...");
-        String titre = prefs.getString("titre", "");
-        String status = classe + ((titre.length() > 1) ? ", " + titre : "");
-        ((TextView)findViewById(R.id.stat_class)).setText(status);
         ((TextView)findViewById(R.id.stat_upload)).setText(new BSize(prefs.getString("lastUpload", "0.00 GB")).convert());
         ((TextView)findViewById(R.id.stat_download)).setText(new BSize(prefs.getString("lastDownload", "0.00 GB")).convert());
         ((TextView)findViewById(R.id.stat_ratio)).setText(prefs.getString("lastRatio", " "));

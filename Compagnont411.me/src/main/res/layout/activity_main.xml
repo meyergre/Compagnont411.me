@@ -14,10 +14,11 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            android:layout_height="58dp"
             android:background="@color/t411_action_blue_darker"
+            android:visibility="gone"
             app:popupTheme="@style/Theme.AppCompat.NoActionBar"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:layout_height="58dp" />
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/swipe_container"
@@ -37,72 +38,92 @@
                     android:animateLayoutChanges="true"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:orientation="vertical"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/t411_action_blue">
+                        android:layout_height="wrap_content"
+                        android:background="@color/t411_action_blue_darker"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="14dp">
+
+                        <TextView
+                            android:id="@+id/widget_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="non connecté"
+                            android:textAllCaps="true"
+                            android:textColor="#FFF"
+                            android:textSize="18sp" />
 
                         <LinearLayout
                             android:id="@+id/fakesearch"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="?attr/actionBarSize"
-                            android:layout_below="@+id/toolbar"
-                            android:layout_centerInParent="true"
+                            android:layout_alignParentEnd="true"
 
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/toolbar"
+                            android:layout_centerVertical="true"
+
+                            android:layout_gravity="right"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="-5dp"
                             android:clickable="true"
+                            android:gravity="center_vertical"
                             android:onClick="onSearch"
                             android:orientation="horizontal"
-                            android:paddingLeft="12dp"
-
-                            android:paddingRight="12dp"
-                            android:transitionName="searchWidget"
-                            android:gravity="center_vertical|right"
-                            android:layout_marginLeft="7dp"
-                            android:layout_marginRight="7dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@drawable/bg_card">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/placeholder_search"
-                                android:id="@+id/textView47"
-                                android:layout_weight="1"
-                                android:textColor="#66000000" />
+                            android:transitionName="searchWidget">
 
                             <ImageView
                                 android:id="@+id/imageView4"
-                                android:layout_width="wrap_content"
+                                android:layout_width="90dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_action_search" />
+                                android:adjustViewBounds="true"
+                                android:cropToPadding="true"
+                                android:src="@drawable/ic_home_search" />
                         </LinearLayout>
 
-                        <include
-                            android:id="@+id/linearLayout2"
-                            layout="@layout/activity_main2_buttons"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvDateUpdate"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/fakesearch"
-                            android:layout_centerInParent="true"
-                            android:layout_margin="5dp" />
-                    </LinearLayout>
+                            android:layout_alignLeft="@+id/widget_username"
+                            android:layout_alignStart="@+id/widget_username"
+                            android:layout_below="@+id/widget_username"
+                            android:text="..."
+                            android:textColor="#66FFFFFF"
+                            android:textSize="11sp" />
+
+                    </RelativeLayout>
 
 
-                    <ImageView
+                    <include
+                        android:id="@+id/linearLayout2"
+                        layout="@layout/activity_main2_buttons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/fakesearch"
+                        android:layout_centerInParent="true" />
+
+                    <ImageView
                         android:id="@+id/imageView11"
-                        android:src="@drawable/clouds"
-                        android:scaleType="centerCrop" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/clouds" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="7dp">
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/widget_avatar"
@@ -112,9 +133,9 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:src="@drawable/avatar_default"
+                            android:layout_gravity="center_vertical"
                             android:layout_margin="7dp"
-                            android:layout_gravity="center_vertical" />
+                            android:src="@drawable/avatar_default" />
 
                         <LinearLayout
                             android:id="@+id/relativeLayout"
@@ -122,28 +143,18 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/linearLayout2"
                             android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:onClick="onGraph"
                             android:orientation="vertical"
-                            android:padding="5dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center">
+                            android:padding="5dp">
 
                             <RelativeLayout
                                 android:id="@+id/statTop"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:transitionName="statTop"
-                                android:layout_weight="0">
-
-                                <TextView
-                                    android:id="@+id/widget_username"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_alignParentTop="true"
-                                    android:text="non connecté"
-                                    android:textAppearance="?android:attr/textAppearanceLarge"
-                                    android:textColor="#000"
-                                    android:textSize="14sp" />
+                                android:layout_weight="0"
+                                android:transitionName="statTop">
 
                                 <ImageView
                                     android:id="@+id/seedbox"
@@ -163,9 +174,9 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_below="@+id/widget_avatar"
+                                android:layout_weight="0"
                                 android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:layout_weight="0">
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/widget_upload"
@@ -173,10 +184,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center_horizontal"
+                                    android:singleLine="true"
                                     android:text="3.60 TB"
                                     android:textColor="@color/t411_green"
-                                    android:textSize="14sp"
-                                    android:singleLine="true" />
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:id="@+id/widget_download"
@@ -184,10 +195,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center_horizontal"
+                                    android:singleLine="true"
                                     android:text="571.44 GB"
                                     android:textColor="@color/t411_darkred"
-                                    android:textSize="14sp"
-                                    android:singleLine="true" />
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:id="@+id/widget_ratio"
@@ -195,53 +206,53 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center_horizontal"
+                                    android:singleLine="true"
                                     android:text="6.44"
                                     android:textColor="#555"
-                                    android:textSize="14sp"
-                                    android:singleLine="true" />
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="0">
+                                android:layout_weight="0"
+                                android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:text="UPLOAD"
                                     android:id="@+id/textView37"
-                                    android:layout_weight="1"
-                                    android:textSize="8sp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/t411_green" />
-
-                                <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="UPLOAD"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:text="DOWNLOAD"
+                                    android:textColor="@color/t411_green"
+                                    android:textSize="8sp" />
+
+                                <TextView
                                     android:id="@+id/textView38"
-                                    android:layout_weight="1"
-                                    android:textSize="8sp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/t411_darkred" />
-
-                                <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:text="RATIO"
-                                    android:id="@+id/textView35"
-                                    android:layout_weight="1"
-                                    android:textSize="8sp"
                                     android:layout_gravity="center"
-                                    android:gravity="center" />
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="DOWNLOAD"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textColor="@color/t411_darkred"
+                                    android:textSize="8sp" />
+
+                                <TextView
+                                    android:id="@+id/textView35"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="RATIO"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textSize="8sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -249,33 +260,33 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:id="@+id/storage_permission"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/bg_card_red"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginTop="3dp"
                         android:layout_marginRight="7dp"
-                        android:padding="5dp"
-                        android:id="@+id/storage_permission" >
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/bg_card_red"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <ImageView
+                            android:id="@+id/imageView19"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:id="@+id/imageView19"
-                            android:src="@drawable/ic_permission"
-                            android:padding="6dp" />
+                            android:padding="6dp"
+                            android:src="@drawable/ic_permission" />
 
                         <TextView
+                            android:id="@+id/textView36"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/permissions_needed"
-                            android:id="@+id/textView36"
-                            android:layout_weight="1"
                             android:layout_gravity="center_vertical"
-                            android:textSize="12dp"
-                            android:textColor="#fff" />
+                            android:layout_weight="1"
+                            android:text="@string/permissions_needed"
+                            android:textColor="#fff"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -342,12 +353,12 @@
                             android:id="@+id/widget_news1title"
                             android:layout_width="match_parent"
                             android:layout_height="42dp"
+                            android:background="#00000000"
                             android:clickable="false"
                             android:drawableLeft="@drawable/ic_btn_news"
                             android:enabled="true"
                             android:gravity="left|center_vertical"
-                            android:text="Titre de la news 1"
-                            android:background="#00000000" />
+                            android:text="Titre de la news 1" />
 
                         <Button
                             android:id="@+id/widget_news2title"
@@ -370,7 +381,6 @@
                             android:enabled="true"
                             android:gravity="left|center_vertical"
                             android:text="Titre de la news 3" />
-
 
 
                     </LinearLayout>

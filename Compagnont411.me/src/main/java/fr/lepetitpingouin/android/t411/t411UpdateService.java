@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -497,18 +498,17 @@ public class t411UpdateService extends Service {
                     edit.putString("title1", doc.select(".newsWrapper .title").get(0).text());
                     edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
                     edit.putString("readMore1", doc.select(".newsWrapper .readmore").get(0).attr("href"));
-                    edit.commit();
 
                     edit = prefs.edit();
                     edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
                     edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
                     edit.putString("readMore2", doc.select(".newsWrapper  .readmore").get(1).attr("href"));
-                    edit.commit();
 
                     edit = prefs.edit();
                     edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
                     edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
                     edit.putString("readMore3", doc.select(".newsWrapper  .readmore").get(2).attr("href"));
+
                     edit.commit();
 
                 }
@@ -560,6 +560,7 @@ public class t411UpdateService extends Service {
         @Override
         protected void onPreExecute() {
             new T411Logger(getApplicationContext()).writeLine("Début de la mise à jour");
+
         }
 
         @Override
@@ -572,6 +573,7 @@ public class t411UpdateService extends Service {
 
         @Override
         public void onPostExecute(JSONObject value) {
+            new grapher().execute();
             try {
                 if(value.has("error")) {
                     new T411Logger(getApplicationContext()).writeLine("Erreur API : " + value.get("error"), T411Logger.ERROR);
@@ -588,7 +590,7 @@ public class t411UpdateService extends Service {
                     Time today = new Time(Time.getCurrentTimezone());
                     today.setToNow();
                     prefs.edit().putString("lastDate", today.format("%d/%m/%Y %k:%M:%S")).commit();
-                    prefs.edit().putString("lastUsername", username).commit();
+                    prefs.edit().putString("lastUsername", value.get("username").toString()).commit();
 
 
                     prefs.edit().putString(
@@ -612,38 +614,44 @@ public class t411UpdateService extends Service {
     private class grapher extends AsyncTask<Void, String[], String> {
 
         String scripts = "<script src=\"file:///android_asset/jquery1.6.4.min.js\" type=\"text/javascript\"></script><script src=\"file:///android_asset/highcharts.min.js\" type=\"text/javascript\"></script>";
+        String userID = "";
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            new T411Logger(getApplicationContext()).writeLine("Récupération des données du graphique...");
+            this.userID = prefs.getString("uid", "");
+            if(this.userID.equals("")) {
+                new asyncApiLogin().execute();
+            }
             pagecontent = "";
         }
 
         @Override
         protected String doInBackground(Void... arg0) {
 
-            String username = prefs.getString("login", ""), password = prefs
-                    .getString("password", "");
+            String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
-
-            Connection.Response res = null;
             Document doc = null;
 
-            String url = Default.URL_STATS;
-
+            String url = Default.URL_STATS + this.userID;
 
             try {
 
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
-                        .connect(url + prefs.getString("usernumber", "0"))
+                        .connect(url)
                         .executeInAsyncTask());
+
+                Log.e("DOCJSOUP", doc.body().outerHtml());
 
                 try {
                     pagecontent = "<html><head>"
-                            + scripts
-                            + "</head><body><div id=\"chart\" style=\"display: block; height: 100%;\"></div><script>"
-                            + doc.select("div#chart").first().nextElementSibling().html()
+                            + this.scripts
+                            + "</head><body><div id=\"chart\" data-highcharts-chart=\"0\" style=\"display: block; height: 100%;\">"
+                            + "<div class=\"highcharts-container\" id=\"highcharts-0\"></div>"
+                            + "</div><script>"
+                            + doc.select("#chart").first().nextElementSibling().html()
                             + "</script></body></html>";
 
                 } catch (Exception ex) {
@@ -652,14 +660,16 @@ public class t411UpdateService extends Service {
 
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
 
+            Log.e("HTML", pagecontent);
             return pagecontent;
         }
 
         @Override
         public void onPostExecute(String value) {
+            new T411Logger(getApplicationContext()).writeLine("Enregistrement du graphique");
             if (!pagecontent.equals(""))
                 prefs.edit().putString("lastGraph", pagecontent).commit();
         }

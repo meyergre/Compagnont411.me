@@ -5,6 +5,9 @@ class Default {
 
     public static final String API_T411 = "https://api."+IP_T411;
     public static final String URL_API_GET_TORRENT = "/torrents/download/"; // + ID
+    public static final String URL_API_BOOKMARKS = "/bookmarks";
+    public static final String URL_API_BOOKMARK_TORRENT = "/bookmarks/save/"; // + ID
+    public static final String URL_API_BOOKMARK_DELETE = "/bookmarks/delete/"; // + ID
 
     public static final int SHOW_ASSISTANT_FOR_VERSION_UNDER = 168;
 
@@ -19,12 +22,17 @@ class Default {
     public static final String API_T411_TOP_MONTH = API_T411+"/torrents/top/month";
 
 
+    public static final String URL_STATS = "http://"+IP_T411+"/users/daily-stats/?id="; // + user ID
+
     public static final String URL_FRIENDS = "http://"+IP_T411+"/my/friends/";
     public static final String URL_CHATI = "http://"+IP_T411+"/chati/index.php?room=support";
     public static final String URL_MESSAGE_DEL = "http://"+IP_T411+"/mailbox/delete/?id=";//+ID
     public static final String URL_MESSAGE_ARC = "http://"+IP_T411+"/mailbox/archive/?id=";//+ID
     public static final String URL_OTHERAPPS = "http://play.google.com/store/search?q=pub:Gr%C3%A9gory+Meyer";
     public static final String URL_FRIENDPROFILE = "http://"+IP_T411+"/users/profile/?id=";
+
+
+
     // Fr�quence de mise � jour par d�faut (en minutes)
     public static String UpdateFreq = "60";
     public static String timeout = "25";
@@ -60,7 +68,6 @@ class Default {
     public static String URL_SEARCH_GET = "http://"+IP_T411+"/my/search/";
     public static String URL_UNFAVORITE = "http://"+IP_T411+"/my/search-delete/"; // Authentification requise au préalable
     public static String URL_SENDMAIL = "http://"+IP_T411+"/mailbox/compose/"; // Authentification requise au préalable
-    public static String URL_STATS = "http://"+IP_T411+"/users/daily-stats/?id=";
     public static String URL_UPLOADS = "http://"+IP_T411+"/my/torrents/?order=added&type=desc";
     public static String Intent_Update_News = "android.appwidget.action.UPDATE_NEWS";
     public static String Intent_Refresh_Newspaper = "android.appwidget.action.REFRESH_NEWSPAPER";
