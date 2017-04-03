@@ -654,12 +654,10 @@ public class t411UpdateService extends Service {
                     ex.printStackTrace();
                 }
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            Log.e("HTML", pagecontent);
             return pagecontent;
         }
 

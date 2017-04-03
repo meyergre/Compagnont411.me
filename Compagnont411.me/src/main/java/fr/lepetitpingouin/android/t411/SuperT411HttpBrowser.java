@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -308,8 +309,8 @@ public class SuperT411HttpBrowser {
             clientcontext = new BasicHttpContext();
             clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
             response = httpclient.execute(httppost, clientcontext);
+            for(Header h : response.getAllHeaders()) Log.e("HEADERS", h.getName() + " = " + h.getValue());
             StatusLine statusLine = response.getStatusLine();
-
 
             if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -375,6 +376,7 @@ public class SuperT411HttpBrowser {
             httppost.addHeader("Cookie", "authApi=" + prefs.getString("APIKey", "") + ";uid=" + prefs.getString("uid", "") + ";");
 
             response = httpclient.execute(httppost, clientcontext);
+            for(Header h : response.getAllHeaders()) Log.e("HEADERS", h.getName() + " = " + h.getValue());
             StatusLine statusLine = response.getStatusLine();
             if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
                 //responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
@@ -432,8 +434,6 @@ public class SuperT411HttpBrowser {
             retValue = responseString;
             e1.printStackTrace();
         }
-
-        Log.e("COOKIES", StringUtil.join(httpclient.getCookieStore().getCookies(), ";"));
 
         return retValue;
     }
