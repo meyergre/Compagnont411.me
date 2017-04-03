@@ -2,7 +2,9 @@
 - Passage des bookmarks par l'API
 - Correction de la récupération du pseudo par l'API
 - Les liens dans les news sont rendus cliquables
+- Rétablissement des news et du graphique des stats
 - Suppression de l'affichage de la classe utilisateur, non fournie par l'API
+- Poursuite de la modernisation de l'interface
 
 2017.04-176
 - Changement de méthode de téléchargement des torrents pour un moyen plus fiable

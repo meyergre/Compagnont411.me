@@ -499,12 +499,10 @@ public class t411UpdateService extends Service {
                     edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
                     edit.putString("readMore1", doc.select(".newsWrapper .readmore").get(0).attr("href"));
 
-                    edit = prefs.edit();
                     edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
                     edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
                     edit.putString("readMore2", doc.select(".newsWrapper  .readmore").get(1).attr("href"));
 
-                    edit = prefs.edit();
                     edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
                     edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
                     edit.putString("readMore3", doc.select(".newsWrapper  .readmore").get(2).attr("href"));
@@ -642,8 +640,6 @@ public class t411UpdateService extends Service {
                         .login(username, password)
                         .connect(url)
                         .executeInAsyncTask());
-
-                Log.e("DOCJSOUP", doc.body().outerHtml());
 
                 try {
                     pagecontent = "<html><head>"

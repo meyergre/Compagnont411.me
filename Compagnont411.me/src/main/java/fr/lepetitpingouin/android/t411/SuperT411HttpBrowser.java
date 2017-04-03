@@ -324,32 +324,34 @@ public class SuperT411HttpBrowser {
                 throw new IOException(statusLine.getReasonPhrase());
             }
 
-            try {
-                String conError = Jsoup.parse(responseString).select("div.fade").first().text();
-                if (!conError.equals(null) && !conError.equals("") && !conError.contains("identifié")) {
-                    errorMessage = conError;
+            if(Jsoup.parse(responseString).select("div.fade").first() != null) {
+                try {
+                    String conError = Jsoup.parse(responseString).select("div.fade").first().text();
+                    if (!conError.equals(null) && !conError.equals("") && !conError.contains("identifié")) {
+                        errorMessage = conError;
 
-                    new T411Logger(this.ctx).writeLine("Le site a répondu : " + errorMessage, T411Logger.WARN);
+                        new T411Logger(this.ctx).writeLine("Le site a répondu : " + errorMessage, T411Logger.WARN);
 
-                    if (retry < 3) {
-                        retry++;
-                        new T411Logger(this.ctx).writeLine("Essai " + retry + "/3");
+                        if (retry < 3) {
+                            retry++;
+                            new T411Logger(this.ctx).writeLine("Essai " + retry + "/3");
 
-                        try {
-                            Element doc = Jsoup.parse(responseString).select(".loginForm").first();
-                            resolveCaptcha(doc.select("input[name=captchaToken]").first().val(), doc.select("input[name=captchaQuery]").first().val());
+                            try {
+                                Element doc = Jsoup.parse(responseString).select(".loginForm").first();
+                                resolveCaptcha(doc.select("input[name=captchaToken]").first().val(), doc.select("input[name=captchaQuery]").first().val());
 
-                            executeInAsyncTask();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
+                                executeInAsyncTask();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        } else {
+                            new T411Logger(this.ctx).writeLine("Abandon après 3 essais" + mUrl);
                         }
-                    } else {
-                        new T411Logger(this.ctx).writeLine("Abandon après 3 essais" + mUrl);
-                    }
 
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
 
         } catch (Exception ex) {
