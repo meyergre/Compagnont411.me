@@ -2,7 +2,6 @@
 - Passage des bookmarks par l'API
 - Correction de la récupération du pseudo par l'API
 - Les liens dans les news sont rendus cliquables
-- Rétablissement du graphique de stats
 - Suppression de l'affichage de la classe utilisateur, non fournie par l'API
 
 2017.04-176

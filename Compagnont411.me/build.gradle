@@ -15,7 +15,6 @@ repositories {
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
@@ -42,4 +41,5 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.2'
     compile 'com.anjlab.android.iab.v3:library:1.0.31'
     compile 'com.google.android.gms:play-services-ads:10.2.1'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }

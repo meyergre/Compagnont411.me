@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:animateLayoutChanges="true"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -46,23 +47,34 @@
                         android:orientation="horizontal"
                         android:paddingBottom="14dp">
 
+                        <ImageView
+                            android:id="@+id/iv_navToggle"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_margin="10dp"
+                            app:srcCompat="@drawable/ic_home_menu" />
+
                         <TextView
                             android:id="@+id/widget_username"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="12dp"
-                            android:layout_marginTop="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="non connecté"
                             android:textAllCaps="true"
                             android:textColor="#FFF"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:layout_alignTop="@+id/iv_navToggle"
+                            android:layout_toRightOf="@+id/iv_navToggle"
+                            android:layout_toEndOf="@+id/iv_navToggle" />
 
                         <LinearLayout
                             android:id="@+id/fakesearch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="?attr/actionBarSize"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
 
                             android:layout_alignParentRight="true"
@@ -81,10 +93,10 @@
 
                             <ImageView
                                 android:id="@+id/imageView4"
-                                android:layout_width="90dp"
-                                android:layout_height="wrap_content"
-                                android:adjustViewBounds="true"
-                                android:cropToPadding="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:adjustViewBounds="false"
+                                android:scaleType="centerInside"
                                 android:src="@drawable/ic_home_search" />
                         </LinearLayout>
 
@@ -117,13 +129,112 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/clouds" />
 
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-16dp"
+                        android:gravity="center_horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/widget_upload"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:gravity="right|center_horizontal"
+                            android:singleLine="true"
+                            android:text="3.60 TB"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/t411_green"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/textView37"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/widget_upload"
+                            android:layout_alignRight="@+id/widget_upload"
+                            android:layout_below="@+id/widget_upload"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="UPLOAD"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/t411_green"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/widget_download"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/textView38"
+                            android:layout_alignRight="@+id/textView38"
+                            android:layout_below="@+id/textView38"
+                            android:layout_weight="1"
+                            android:gravity="right|center_horizontal"
+                            android:singleLine="true"
+                            android:text="571.44 GB"
+                            android:textColor="@color/t411_darkred"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/textView38"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/textView37"
+                            android:layout_alignRight="@+id/textView37"
+                            android:layout_below="@+id/textView37"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="DOWNLOAD"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/t411_darkred"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/textView35"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="6dp"
+                            android:layout_toEndOf="@+id/widget_upload"
+                            android:layout_toRightOf="@+id/widget_upload"
+                            android:layout_weight="1"
+                            android:gravity="left|center"
+                            android:text="RATIO"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/widget_ratio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/textView35"
+                            android:layout_alignStart="@+id/textView35"
+                            android:layout_below="@+id/textView35"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:singleLine="true"
+                            android:text="6.44"
+                            android:textColor="#555"
+                            android:textSize="36sp" />
+                    </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:layout_marginTop="2dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/widget_avatar"
@@ -178,39 +289,6 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/widget_upload"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:singleLine="true"
-                                    android:text="3.60 TB"
-                                    android:textColor="@color/t411_green"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/widget_download"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:singleLine="true"
-                                    android:text="571.44 GB"
-                                    android:textColor="@color/t411_darkred"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/widget_ratio"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:singleLine="true"
-                                    android:text="6.44"
-                                    android:textColor="#555"
-                                    android:textSize="14sp" />
-
                             </LinearLayout>
 
                             <LinearLayout
@@ -219,40 +297,6 @@
                                 android:layout_weight="0"
                                 android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/textView37"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="UPLOAD"
-                                    android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:textColor="@color/t411_green"
-                                    android:textSize="8sp" />
-
-                                <TextView
-                                    android:id="@+id/textView38"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="DOWNLOAD"
-                                    android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:textColor="@color/t411_darkred"
-                                    android:textSize="8sp" />
-
-                                <TextView
-                                    android:id="@+id/textView35"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="RATIO"
-                                    android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:textSize="8sp" />
                             </LinearLayout>
 
                         </LinearLayout>

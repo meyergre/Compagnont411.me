@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.Log;
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -22,7 +22,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -246,99 +245,6 @@ public class SuperT411HttpBrowser {
     public SuperT411HttpBrowser addData(String key, String value) {
         this.data.add(new BasicNameValuePair(key, value));
         return this;
-    }
-
-    public String executeLoginForMessage() {
-
-        HttpContext clientcontext;
-        clientcontext = new BasicHttpContext();
-        clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-
-        DefaultHttpClient httpclient = new DefaultHttpClient();
-
-        if (proxy || customProxy) {
-            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
-            if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
-                httpclient.getCredentialsProvider().setCredentials(
-                        new AuthScope(prefs.getString("customProxy", ""), 411),
-                        new UsernamePasswordCredentials(
-                                prefs.getString("proxy_login", ""), prefs.getString("proxy_pasword", "")));
-            }
-        }
-        httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-
-        HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
-        HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
-        HttpClientParams.setRedirecting(httpclient.getParams(), true);
-
-        String mUrl = Default.URL_LOGIN;
-        //if(proxy) mUrl = Private.URL_PROXY + mUrl;
-        HttpPost httppost = new HttpPost(mUrl);
-
-        HttpResponse response;
-        String responseString = null;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(7);
-        nameValuePairs.add(new BasicNameValuePair("remember", "1"));
-        nameValuePairs.add(new BasicNameValuePair("login", username));
-        nameValuePairs.add(new BasicNameValuePair("password", password));
-        // captcha
-        nameValuePairs.add(new BasicNameValuePair("captchaToken", qpT));
-        nameValuePairs.add(new BasicNameValuePair("captchaQuery", qpQ));
-        nameValuePairs.add(new BasicNameValuePair("captchaAnswer", qpA));
-
-
-        HttpEntity e = null;
-
-        try {
-            e = new UrlEncodedFormEntity(nameValuePairs);
-
-            httppost.setEntity(e);
-
-            response = httpclient.execute(httppost, clientcontext);
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-            } else {
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        //httpclient.close();
-        if (responseString == null)
-            responseString = "OK";
-
-        Log.e("COOKIES", StringUtil.join(httpclient.getCookieStore().getCookies(), ";"));
-
-        try {
-            String conError = Jsoup.parse(responseString).select("div.fade").first().text();
-            if (!conError.equals("OK") && !conError.contains("identifié")) {
-
-                if (retry < 3) {
-                    retry++;
-
-                    try {
-                        Element doc = Jsoup.parse(responseString).select("#loginForm").first();
-                        resolveCaptcha(doc.select("input[name=captchaToken]").first().val(), doc.select("input[name=captchaQuery]").first().val());
-
-                        executeLoginForMessage();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    new T411Logger(this.ctx).writeLine("Impossible de résoudre le captcha après 3 tentatives", T411Logger.ERROR);
-                    }
-                }
-
-        } catch (Exception ex) {
-            new T411Logger(ctx).writeLine(ex.getMessage(), T411Logger.INFO);
-            ex.printStackTrace();
-        }
-
-
-        return responseString;
     }
 
     public String executeInAsyncTask() {

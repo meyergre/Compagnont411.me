@@ -183,6 +183,13 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
+        findViewById(R.id.iv_navToggle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drw);
+            }
+        });
+
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
 
