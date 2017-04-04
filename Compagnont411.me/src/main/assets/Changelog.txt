@@ -2,6 +2,7 @@
 - Optimisation des ressources de l'application
 - Réécriture du navigateur interne
 - Stockage des Cookies pour des connexions plus rapide (EXPERIMENTAL)
+- Correction de crashes en cas de domaine personnalisé (non recommandé)
 
 2017.04-177
 - Passage des bookmarks par l'API

@@ -94,7 +94,7 @@ public class readMailActivity extends AppCompatActivity {
 
         //dialog = ProgressDialog.show(this,this.getString(R.string.getMesageContent), this.getString(R.string.pleasewait), true, false);
 
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this, R.style.AdTitleDialog);
         dialog.setMessage(this.getString(R.string.pleasewait));
         AdView mAdView;
         AdRequest adRequest;

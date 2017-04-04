@@ -31,7 +31,6 @@ public class FirstLoginActivity extends AppCompatActivity {
     private EditText login;
     private EditText passwd;
 
-    TextView infoError;
     private ProgressDialog dialog;
 
     private AsyncConnector asc;
@@ -67,7 +66,7 @@ public class FirstLoginActivity extends AppCompatActivity {
         passwd = (EditText) findViewById(R.id.login_password);
 
 
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this, R.style.AdTitleDialog);
         dialog.setMessage("Connexion...");
         dialog.setCancelable(true);
 
@@ -79,14 +78,12 @@ public class FirstLoginActivity extends AppCompatActivity {
         adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
         dialog.setCustomTitle(view);
         mAdView.loadAd(adRequest);
-        //dialog.show();
 
         dialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
                 asc.cancel(true);
                 asc = null;
-                //finish();
             }
         });
         final View login = findViewById(R.id.login_inc_loginform);

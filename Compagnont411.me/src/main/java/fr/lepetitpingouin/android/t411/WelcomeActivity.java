@@ -17,7 +17,6 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -77,7 +76,7 @@ public class WelcomeActivity extends AppCompatActivity {
         login.setText(prefs.getString("login", ""));
         passwd.setText(prefs.getString("password", ""));
 
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this, R.style.AdTitleDialog);
         dialog.setMessage("Connexion...");
         dialog.setCancelable(true);
 

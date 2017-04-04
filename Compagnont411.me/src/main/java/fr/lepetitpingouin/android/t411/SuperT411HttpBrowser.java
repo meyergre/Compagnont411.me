@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
-import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -246,9 +244,6 @@ public class SuperT411HttpBrowser {
         }
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
-        new T411Logger(this.ctx).writeLine("Connexion de l'utilisateur " + username);
-        new T411Logger(this.ctx).writeLine("Initiation de la connexion vers " + Default.URL_LOGIN);
-
         String loginUrl = Default.URL_LOGIN;
         String referer = Default.URL_LOGIN;
         String origin = Default.IP_T411;
@@ -281,6 +276,9 @@ public class SuperT411HttpBrowser {
 
         if(!this.skipLogin)
         try {
+            new T411Logger(this.ctx).writeLine("Connexion de l'utilisateur " + username);
+            new T411Logger(this.ctx).writeLine("Initiation de la connexion vers " + Default.URL_LOGIN);
+
             httppost.setEntity(new UrlEncodedFormEntity(logindata, this.encoding));
 
             response = httpclient.execute(httppost);

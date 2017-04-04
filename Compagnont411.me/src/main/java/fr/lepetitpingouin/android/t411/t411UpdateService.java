@@ -18,7 +18,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;

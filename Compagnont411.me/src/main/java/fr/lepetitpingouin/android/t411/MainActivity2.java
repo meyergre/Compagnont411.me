@@ -47,7 +47,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     public static final String INTENT_ERROR = "fr.lepetitpingouin.android.t411.update.error";
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
     private SharedPreferences prefs;
     private SwipeRefreshLayout swrl;
     private AdView mAdView;
@@ -68,7 +68,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             initWidgets();
 
             if (intent.getAction().equals(INTENT_ERROR) && getIntent().hasExtra("message")) {
-                Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.tvDateUpdate), getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
             }
 
         }
@@ -83,7 +83,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         //setSupportActionBar(toolbar);
 
         if (getIntent().hasExtra("message"))
-            Snackbar.make(toolbar, getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.tvDateUpdate), getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -105,7 +105,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 .build();
 
         mAdView.loadAd(adRequest);
-        //mAdView.setAdSize(new AdSize(288, 50));
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         drw.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -164,7 +163,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         });
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawview);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
+        /*ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -178,10 +177,10 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
                 super.onDrawerOpened(drawerView);
             }
-        };
+        };*/
 
         //Setting the actionbarToggle to drawer layout
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        //drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         findViewById(R.id.iv_navToggle).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,7 +190,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         });
 
         //calling sync state is necessay or else your hamburger icon wont show up
-        actionBarDrawerToggle.syncState();
+        //actionBarDrawerToggle.syncState();
 
         swrl = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
         swrl.setOnRefreshListener(this);
@@ -316,7 +315,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         }
 
         if(!prefs.getString("custom_domain", "").isEmpty()) {
-            Snackbar bar = Snackbar.make(toolbar, getResources().getString(R.string.warning_custom_domain)+" (" + prefs.getString("custom_domain", "") + ")",Snackbar.LENGTH_LONG);
+            Snackbar bar = Snackbar.make(findViewById(R.id.tvDateUpdate), getResources().getString(R.string.warning_custom_domain)+" (" + prefs.getString("custom_domain", "") + ")",Snackbar.LENGTH_LONG);
             bar.getView().setBackgroundColor(Color.RED);
             bar.show();
         }
@@ -466,7 +465,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     }
 
     public void onSeedboxClick(View v) {
-        Snackbar.make(toolbar, "Seedbox / Optique / Dédié déclaré(e)", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.tvDateUpdate), "Seedbox / Optique / Dédié déclaré(e)", Snackbar.LENGTH_LONG).show();
 
     }
 

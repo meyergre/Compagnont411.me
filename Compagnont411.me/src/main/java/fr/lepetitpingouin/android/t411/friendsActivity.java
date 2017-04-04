@@ -97,7 +97,7 @@ public class friendsActivity extends AppCompatActivity {
     private void update() {
         //dialog = ProgressDialog.show(friendsActivity.this, this.getString(R.string.my_friends), this.getString(R.string.pleasewait), true, true);
 
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(this, R.style.AdTitleDialog);
         dialog.setMessage(this.getString(R.string.pleasewait));
         AdView mAdView;
         AdRequest adRequest;
