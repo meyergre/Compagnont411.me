@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/relativeLayout01"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -38,7 +36,6 @@
                     android:textSize="18sp"/>
 
                 <Button
-                    android:id="@+id/fdButtonSelectOld"
                     android:layout_height="wrap_content"
                     android:layout_width="0dip"
                     android:layout_weight="1"
@@ -72,7 +69,6 @@
             android:paddingBottom="5dp">
 
             <TextView
-                android:id="@+id/textViewFilename"
                 android:text="@string/file_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />

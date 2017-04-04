@@ -8,7 +8,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView7"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/clouds"
         android:scaleType="centerCrop" />
@@ -27,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wlcm_last_message"
-            android:id="@+id/textView41"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/t411_action_blue_darker"
             android:gravity="center" />
@@ -37,7 +35,6 @@
             android:layout_height="wrap_content"
             android:text="@string/wlcm_rate_app"
             android:layout_marginTop="40dp"
-            android:id="@+id/textView57"
             android:layout_gravity="center_horizontal"
             android:onClick="onRateOnPlaystore"
             android:textColor="@color/t411_action_blue_darker"
@@ -47,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRateOnPlaystore"
-            android:id="@+id/ratingBar"
             android:numStars="5"
             android:rating="4.5"
             android:stepSize="0.5" />
@@ -57,7 +53,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_done"
-        android:id="@+id/button7"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0"
         style="@style/Base.Widget.AppCompat.Button.Borderless"

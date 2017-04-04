@@ -78,7 +78,7 @@
                             android:layout_alignParentEnd="true"
 
                             android:layout_alignParentRight="true"
-                            android:layout_below="@+id/toolbar"
+
                             android:layout_centerVertical="true"
 
                             android:layout_gravity="right"
@@ -92,7 +92,6 @@
                             android:transitionName="searchWidget">
 
                             <ImageView
-                                android:id="@+id/imageView4"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:adjustViewBounds="false"
@@ -123,7 +122,6 @@
                         android:layout_centerInParent="true" />
 
                     <ImageView
-                        android:id="@+id/imageView11"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
@@ -249,7 +247,6 @@
                             android:src="@drawable/avatar_default" />
 
                         <LinearLayout
-                            android:id="@+id/relativeLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/linearLayout2"
@@ -316,14 +313,12 @@
                         android:padding="5dp">
 
                         <ImageView
-                            android:id="@+id/imageView19"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_permission" />
 
                         <TextView
-                            android:id="@+id/textView36"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -345,7 +340,6 @@
                         android:padding="5dp">
 
                         <LinearLayout
-                            android:id="@+id/linearLayout9"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"

@@ -622,21 +622,23 @@ public class SearchActivity extends AppCompatActivity {
                     String key = iter.next();
                     try {
                         JSONObject value = new JSONObject(json.getString(key));
-                        catMap = new HashMap<>();
-                        catMap.put("icon", String.valueOf(new CategoryIcon(value.getString("id")).getIcon()));
-                        if(value.has("cats")) {
-                            catMap.put("name", "--" + value.getString("name") + "--");
-                        } else {
-                            catMap.put("name", value.getString("name"));
-                        }
-                        catMap.put("code", value.getString("id"));
+                        if(value.has("id")) {
+                            catMap = new HashMap<>();
+                            catMap.put("icon", String.valueOf(new CategoryIcon(value.getString("id")).getIcon()));
+                            if (value.has("cats")) {
+                                catMap.put("name", "--" + value.getString("name") + "--");
+                            } else {
+                                catMap.put("name", value.getString("name"));
+                            }
+                            catMap.put("code", value.getString("id"));
 
-                        if(!isApiSearchEnabled || !value.has("cats")) catList.add(catMap);
+                            if (!isApiSearchEnabled || !value.has("cats")) catList.add(catMap);
 
-                        Log.e(value.getString("id"), value.getString("name"));
+                            Log.e(value.getString("id"), value.getString("name"));
 
-                        if(value.has("cats")) {
-                            extractFromJson(value.getJSONObject("cats"));
+                            if (value.has("cats")) {
+                                extractFromJson(value.getJSONObject("cats"));
+                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

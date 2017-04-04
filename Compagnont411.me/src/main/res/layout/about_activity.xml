@@ -19,7 +19,6 @@
         android:background="#fff">
 
         <ScrollView
-            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -31,7 +30,6 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView14"
                     android:src="@drawable/clouds"
                     android:scaleType="fitXY" />
 
@@ -65,7 +63,6 @@
                             android:layout_gravity="center_vertical">
 
                             <TextView
-                                android:id="@+id/TextView02"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -110,7 +107,6 @@
                             android:layout_weight="1">
 
                             <TextView
-                                android:id="@+id/textView1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/considerDonate"
@@ -123,7 +119,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/support_the_dev"
-                                android:id="@+id/textView3"
                                 android:textSize="16dp"
                                 android:padding="4dp"
                                 android:gravity="left" />
@@ -141,7 +136,6 @@
                             android:paddingRight="15dip">
 
                             <TextView
-                                android:id="@+id/TextView05"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -157,7 +151,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/donateWarning"
-                        android:id="@+id/textView4"
                         android:textSize="13dp"
                         android:padding="4dp"
                         android:layout_gravity="center_horizontal"
@@ -174,7 +167,6 @@
                     android:background="@drawable/torrent_card">
 
                     <TextView
-                        android:id="@+id/textView33"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -194,7 +186,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_inapp_subscription_details"
-                        android:id="@+id/textView34"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:textSize="16dp"
@@ -212,7 +203,6 @@
                     android:id="@+id/statBtm">
 
                     <TextView
-                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -229,7 +219,6 @@
                         android:background="#ddd" />
 
                     <TextView
-                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
@@ -267,7 +256,6 @@
         android:background="#EEEEEE">
 
         <FrameLayout
-            android:id="@+id/frameBtns"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

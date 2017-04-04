@@ -17,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:id="@+id/linearLayout6"
         android:layout_gravity="center">
 
         <LinearLayout
@@ -26,15 +25,13 @@
             android:layout_height="fill_parent"
             android:background="@drawable/torrent_card"
             android:layout_weight="1"
-            android:minWidth="180dp"
-            android:id="@+id/linearLayout7">
+            android:minWidth="180dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/current_ratio"
-                android:id="@+id/textView7"
                 android:layout_gravity="left|center_vertical"
                 android:textColor="#012f54"
                 android:textStyle="italic"
@@ -45,8 +42,7 @@
                 android:layout_height="1dp"
                 android:layout_gravity="left|center_vertical"
                 android:background="#33000000"
-                android:layout_margin="3dp"
-                android:id="@+id/frameLayout9" />
+                android:layout_margin="3dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/notif_ratio"
-                android:id="@+id/textView14"
                 android:layout_gravity="left|center_vertical"
                 android:textColor="#012f54"
                 android:textStyle="italic"
@@ -83,8 +78,7 @@
                 android:layout_height="1dp"
                 android:layout_gravity="right|center_vertical"
                 android:background="#33000000"
-                android:layout_margin="3dp"
-                android:id="@+id/frameLayout7" />
+                android:layout_margin="3dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,7 +104,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/target_ratio"
-                android:id="@+id/textView16"
                 android:layout_gravity="left|center_vertical"
                 android:textColor="#012f54"
                 android:textStyle="italic"
@@ -121,8 +114,7 @@
                 android:layout_height="1dp"
                 android:layout_gravity="left|center_vertical"
                 android:background="#33000000"
-                android:layout_margin="3dp"
-                android:id="@+id/frameLayout8" />
+                android:layout_margin="3dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,7 +159,6 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/DL_left"
-                        android:id="@+id/textView3"
                         android:layout_gravity="left|center_vertical"
                         android:textColor="#012f54"
                         android:textStyle="italic"
@@ -178,8 +169,7 @@
                         android:layout_height="1dp"
                         android:layout_gravity="right|center_vertical"
                         android:background="#33000000"
-                        android:layout_margin="3dp"
-                        android:id="@+id/frameLayout2" />
+                        android:layout_margin="3dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -205,7 +195,6 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/UP_left"
-                        android:id="@+id/textView6"
                         android:layout_gravity="left|center_vertical"
                         android:textColor="#012f54"
                         android:textStyle="italic"
@@ -216,8 +205,7 @@
                         android:layout_height="1dp"
                         android:layout_gravity="left|center_vertical"
                         android:background="#33000000"
-                        android:layout_margin="3dp"
-                        android:id="@+id/frameLayout3" />
+                        android:layout_margin="3dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -253,7 +241,6 @@
                         android:layout_weight="1"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/calc_simulation"
-                        android:id="@+id/textView4"
                         android:textColor="#012f54"
                         android:textStyle="italic"
                         android:layout_gravity="center"
@@ -262,8 +249,7 @@
                     <FrameLayout
                         android:layout_width="1dp"
                         android:layout_height="fill_parent"
-                        android:background="#33000000"
-                        android:id="@+id/frameLayout4" />
+                        android:background="#33000000" />
 
                     <Button
                         android:layout_width="wrap_content"
@@ -287,7 +273,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/download_simulation"
-                    android:id="@+id/textView8"
                     android:textColor="#012f54"
                     android:textStyle="italic"
                     android:layout_margin="3dp"
@@ -318,7 +303,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/upload_simulation"
-                    android:id="@+id/textView2"
                     android:textColor="#012f54"
                     android:textStyle="italic"
                     android:layout_margin="3dp"
@@ -348,15 +332,13 @@
                 <FrameLayout
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
-                    android:background="#33000000"
-                    android:id="@+id/frameLayout" />
+                    android:background="#33000000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
-                    android:padding="3dp"
-                    android:id="@+id/linearLayout4">
+                    android:padding="3dp">
 
                     <TextView
                         android:id="@+id/calc_ratio1"
@@ -398,7 +380,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/torrent_card"
                 android:layout_margin="5dp"
-                android:id="@+id/linearLayout5"
                 android:orientation="vertical"
                 android:padding="3dp"
                 android:minWidth="360dp">
@@ -414,7 +395,6 @@
                         android:layout_weight="1"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/simulation_seed_duration"
-                        android:id="@+id/textView5"
                         android:textColor="#012f54"
                         android:textStyle="italic"
                         android:layout_margin="3dp"
@@ -423,8 +403,7 @@
                     <FrameLayout
                         android:layout_width="1dp"
                         android:layout_height="fill_parent"
-                        android:background="#33000000"
-                        android:id="@+id/frameLayout5" />
+                        android:background="#33000000" />
 
                     <Button
                         android:layout_width="wrap_content"
@@ -448,7 +427,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/upload_speed"
-                    android:id="@+id/textView10"
                     android:textColor="#012f54"
                     android:textStyle="italic"
                     android:layout_margin="3dp"

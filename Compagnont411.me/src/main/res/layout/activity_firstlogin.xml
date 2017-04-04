@@ -9,7 +9,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView12"
         android:src="@drawable/rocket"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

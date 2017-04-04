@@ -11,52 +11,30 @@
     <color name="t411_salmon">#fe3333</color>
 
     <string name="app_name">t411 companion</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">t411 companion</string>
     <string name="main_login">Username</string>
     <string name="main_password">Password</string>
-    <string name="main_connect">Save</string>
-    <string name="description_logo">t411.ch logo</string>
-    <string name="service_settings">Settings</string>
     <string name="button_mail">Inbox</string>
     <string name="button_service">Settings</string>
-    <string name="button_useraccount">User account</string>
-    <string name="toggle_ON">ON</string>
-    <string name="toggle_OFF">OFF</string>
     <string name="chk_ratioAlert">Ratio alert</string>
-    <string name="chk_lowLimit">Low limit</string>
     <string name="chk_msgAlert">Message alert</string>
-    <string name="msgAlertEnabled">Enabled</string>
-    <string name="msgAlertDisabled">Disabled</string>
-    <string name="active">Enable</string>
     <string name="default_username">Username</string>
     <string name="lastUpdate">"Last update : "</string>
-    <string name="savedData">Saved.</string>
-    <string name="btnStartService">(Re)start service</string>
     <string name="about">About…</string>
     <string name="description_ratioAlert">Notify if ratio is lower than the fixed limit.</string>
     <string name="description_mailAlert">Notify on new message.</string>
-    <string name="repeatTime">Frequency (mn)</string>
     <string name="description_frequency">Define interval between updates. Warning : lower value
         means higher battery use…
     </string>
-    <string name="show_notifs">System notifications</string>
     <string name="WhatToDo">Choose an action</string>
     <string name="open_app">Open app</string>
     <string name="update_now">Update now</string>
     <string name="read_mails">Inbox</string>
     <string name="goto_t411">Browse t411.ch</string>
     <string name="widget_action">Widget action…</string>
-    <string name="answer">Answer</string>
     <string name="delete">Delete</string>
     <string name="archive">Archive</string>
 
-    <string name="notif_update">Updating…</string>
-    <string name="notif_upd_title">Upading</string>
-    <string name="notif_upd_content">Downloading data…</string>
-
-    <string name="notif_message">New messages</string>
     <string name="notif_msg_title">You have new messages on t411</string>
     <string name="notif_msg_content">Touch to read</string>
 
@@ -66,11 +44,8 @@
 
     <string name="waiting_for_update">Waiting for update…</string>
     <string name="askWhatToDo">Always ask</string>
-    <string name="ChooseAction">Chose action</string>
 
     <string name="pleasewait">Please wait</string>
-    <string name="getMesages">Getting messages list…</string>
-    <string name="getMesageContent">Getting message content…</string>
 
     <string name="donate">Buy me a beer ! ;o)</string>
     <string name="donateWarning">Note that the money will go to the developer, not the website.</string>
@@ -89,43 +64,24 @@
 
     <string name="statistics">My statistics</string>
     <string name="noConError">t411 app is not able to reach Internet…</string>
-    <string name="title_search">Torrent download</string>
 
     <string name="launcher_messages">t411 PM</string>
 
     <string name="appwidget_search">t411 search widget</string>
     <string name="placeholder_search">Search…</string>
     <string name="search_cat_all">All categories</string>
-    <string name="search_cat_audio">Audio</string>
-    <string name="search_cat_eBooks">eBooks</string>
-    <string name="search_cat_videogames">Video Games</string>
-    <string name="search_cat_GPS">GPS</string>
-    <string name="search_cat_movies">Films/Videos</string>
-    <string name="search_cat_applications">Applications</string>
     <string name="messages_compose">Compose</string>
     <string name="messages_compose_to">To :</string>
     <string name="messages_compose_subject">Subject :</string>
     <string name="messages_compose_message">Message :</string>
-    <string name="messages_compose_send">Send</string>
 
-    <string name="settings_caption_service">Service settings</string>
-    <string name="settings_caption_general">General settings</string>
-    <string name="settings_caption_other">Other settings</string>
     <string name="settings_only_wifi">Update only on Wifi network</string>
     <string name="settings_wifi_only_details">Perform updates only when connected to a Wifi network
         (saves DATA plan)
     </string>
-    <string name="settings_caption_development">Development settings</string>
     <string name="settings_caption_useraccount">User account</string>
-    <string name="settings_useraccount_details">Please double-check your credentials : no
-        verification will be made.
-    </string>
-    <string name="user_manual">User manual</string>
     <string name="news_widget">t411 News</string>
     <string name="Share">Share</string>
-    <string name="shareText">Checkout "t411 Companion" on Google Play !
-        https://play.google.com/store/apps/details?id=fr.lepetitpingouin.android.t411
-    </string>
     <string name="calculator">Calculator</string>
     <string name="settings_RTC">Do not update in standby mode</string>
     <string name="settings_RTC_details">Use RTC alarm instead of RTC_WAKEUP to perform updates. This
@@ -142,45 +98,26 @@
     <string name="RaZ">Rst.</string>
     <string name="upload_simulation">Upload Simulation</string>
     <string name="calc_simulation" translatable="false">Simulation</string>
-    <string name="btn_forum">Discussion thread</string>
-    <string name="btn_news">t411 News</string>
     <string name="contribute_on_t411">Support t411.ch !</string>
     <string name="learn_more">Learn more…</string>
     <string name="shareSignature">Sent from the t411 companion app for Android</string>
-    <string name="top_100">Top torrents…</string>
     <string name="simulation_seed_duration">Seed duration</string>
     <string name="target_ratio">Target Ratio</string>
     <string name="upload_speed">Upload Speed</string>
     <string name="current_ratio">Current ratio</string>
-    <string name="second">second</string>
     <string name="minute">minute</string>
     <string name="hour">hour</string>
     <string name="day">day</string>
     <string name="week">week</string>
     <string name="month">month</string>
     <string name="year">year</string>
-    <string name="order_by">Sort by :</string>
     <string name="no_result">No result… :(</string>
-    <string name="direct_download">Direct download</string>
     <string name="download_redirect">Redirect to website</string>
-    <string name="description_directdownload">Try to download the torrent file directly from within
-        the application.
-    </string>
     <string name="description_downloadredirect">Open the .torrent\'s URL using the default internet
         browser. Consider this if the method above does not work on your phone.
     </string>
-    <string name="menu_options">Menu options</string>
-    <string name="settings_menu_notes">Choose which links to hide on the main menu.</string>
     <string name="connect">Connect</string>
-    <string name="welcome">Welcome !</string>
     <string name="please_login">First of all, you should login using your t411.ch credentials…
-    </string>
-    <string name="need_an_account">Need an account ?</string>
-    <string name="longclick_share">Share on long press</string>
-    <string name="longclick_download">Download on long press</string>
-    <string name="description_longpress_share">Long press to share the .torrent link
-    </string>
-    <string name="description_longpress_download">Long press to download the .torrent, without seeing the pez.
     </string>
     <string name="sort_none">No filter</string>
     <string name="sort_comm">Comments</string>
@@ -190,7 +127,6 @@
     <string name="sort_seed">Seeders</string>
     <string name="sort_leech">Leechers</string>
 
-    <string name="location">Location</string>
     <string name="cant_read_folder">folder can\'t be read!</string>
     <string name="nnew">New</string>
     <string name="select">Select</string>
@@ -198,30 +134,17 @@
     <string name="cancel">Cancel</string>
     <string name="create">Save</string>
     <string name="no_data">No Data</string>
-    <color name="gray">#ffff0000</color>
-    <string name="err">Error</string>
     <string name="save_path">Save path</string>
-    <string name="bookmarks">Bookmarks</string>
-    <string name="my_searches">My Searches</string>
-    <string name="longclic_future">Long clic to add to wishlist</string>
-    <string name="description_longpress_future">Add torrent to wishlist by long-pressing</string>
     <string name="longpress_closetag">Long press to close tag</string>
     <string name="sentMessage">Sending message…</string>
     <string name="fast_torrents">Fast torrents</string>
     <string name="daily_torrents">Daily torrents</string>
     <string name="weekly_torrents">Weekly torrents</string>
     <string name="monthly_torrents">Monthly torrents</string>
-    <string name="torrentTitleSingleLine">Display torrent title on one line</string>
-    <string name="Timeout">Timeout</string>
-    <string name="description_timeout">Set the timeout (in sec.) for every web request (0 = no
-        limit)
-    </string>
     <string name="useNotificationWidget">Notification widget</string>
     <string name="useNotificationWidget_description">Display the current status of your t411
         account in the notification area.
     </string>
-    <string name="settings_caption_network">Network settings</string>
-    <string name="service_settings_advanced">Advanced settings</string>
     <string name="other_apps">Other apps</string>
     <string name="my_friends">My friends</string>
     <string name="my_uploads">My uploads</string>
@@ -235,8 +158,6 @@
     <string name="settings_caption_connection_summary">Set connection settings to t411 server</string>
     <string name="settings_use_https_summary_on">Encrypt data</string>
     <string name="settings_use_https_summary_off">Do not encrypt data</string>
-    <string name="settings_caption_connection_advanced_summary">Set advanced settings</string>
-    <string name="settings_caption_connection_advanced">Advanced</string>
     <string name="notification_settings">Notification settings</string>
     <string name="auto_update">Auto-update</string>
     <string name="auto_update_summary">Configure automatic data updates</string>
@@ -247,7 +168,6 @@
     <string name="title_settings">Settings</string>
     <string name="title_savePath">DOWNLOAD FOLDER</string>
     <string name="download">Download</string>
-    <string name="search">Search</string>
     <string name="widgets_settings">Configure widgets</string>
     <string name="widgets_settings_summary">Set the action to perform on widget click</string>
     <string name="messages_read">Read message</string>
@@ -277,14 +197,11 @@
     <string name="catFetched">categories found</string>
     <string name="pagesFetched">pages found</string>
     <string name="fetchingPages">listing pages…</string>
-    <string name="runtime_ex">Runtime Exception. Please try again !</string>
     <string name="button_disconnect">Disconnect</string>
     <string name="disconnectConfirmTitle">Disconnection</string>
     <string name="disconnectConfirmMessage">Are you sure you want to disconnect ? you won\'t be able to open the app unless you arre logged back in, and the app will no more be able to sync itself without your login information. Continue ?</string>
     <string name="NO">No</string>
     <string name="YES">Yes</string>
-    <string name="t411_site_ip">website\'s IP</string>
-    <string name="t411_site_ip_summary">Choose the IP to use to reach t411</string>
     <string name="errorGraph">Unable to get graph data. Sorry… Maybe the website did change the page ?</string>
     <string name="gettingFriend">Getting info for friend :</string>
 
@@ -296,16 +213,6 @@
         <item>@string/askWhatToDo</item>
     </string-array>
 
-    <string-array name="t411_ip_list" translatable="false">
-        <item>www.t411.ch</item>
-        <item>104.20.31.29 </item>
-        <item>104.20.30.29</item>
-    </string-array>
-    <string name="title_activity_report" translatable="false">ReportActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="report_explain">Write here your message. Some additional informations about your system will be transferred to the developer, you can revew them below.</string>
-    <string name="report_yourmessage">Write your message here…</string>
-    <string name="create_report">Report issue</string>
     <string name="settings_use_proxy">Use proxy to bypass censorship</string>
     <string name="proxypart1">Dans certains pays, les gouvernements ont ordonné la censure de t411 par les fournisseurs d\'accès. C\'est notamment le cas en France et en Belgique.\nDe ce fait, pour accéder au site, il est nécessaire d\'utiliser une solution de contournement.</string>
     <string name="option_proxy_name">Utiliser le proxy dédié</string>
@@ -313,11 +220,8 @@
     <string name="censorship_alternative_title">Solutions alternatives</string>
     <string name="censorship_alternative_detail">Si vous n\'avez pas accès au Play Store ou ne souhaitez pas contribuer au financement du serveur, d\'autres solutions s\'offrent à vous. Vous pouvez par exemple utiliser une application de VPN, ou encore modifier vos DNS ou votre fichier hosts (autorisations ROOT nécessaires).</string>
     <string name="enable_service">Enable anti-censorship</string>
-    <string name="anticensorship">Anti-censorship</string>
-    <string name="anticensorship_summary">Bypass government censorships by using a dedicated proxy</string>
     <string name="enable_service_summary">Enable dedicated proxy or discover alternatives</string>
     <string name="future_downloads">My future downloads</string>
-    <string name="swipe_down_update">Glisser vers le bas pour mettre à jour</string>
     <string name="preference_appLogs">Log app usage</string>
     <string name="preference_appLogs_summary">Record app usage to log files, that you can send to the developer on case of problems</string>
     <string name="sendLogs">Send logs</string>
@@ -343,14 +247,12 @@
     <string name="confirmDonationString">By checking this box, I agree that the payment is sent to the app developer as a donation to support his work, and not to claim any feature development or ratio buying</string>
     <string name="about_inapp_subscription">About in-app subscription</string>
     <string name="about_inapp_subscription_details" formatted="false">Subscription costs 0.50 €/month\n - VAT represents 20% (+ 0.10 €)\n - Google represents 30% of the amount.\n - Taxes represents 25% of the rest.</string>
-    <string name="helpbutton_text">Any issue ?\nFeel free to ask on t411.ch forum topic!\nYou can also enable the logging feature in the app settings, and then share your log with others, or the developper.</string>
     <string name="open_with_app">Open with…</string>
     <string name="permissions_needed">Storage access is needed. Please allow the app tu access your storage by clicking this message</string>
     <string name="torrentslist">Téléchargements</string>
     <string name="downloads_open">Open file…</string>
     <string name="downloads_delete">Delete torrent</string>
     <string name="downloads_prez">Show description</string>
-    <string name="downloads_change_passkey">Change passkey</string>
     <string name="downloads">Downloads</string>
     <string name="app_title_en">Companion</string>
     <string name="app_title_fr" > </string>
@@ -364,7 +266,6 @@
     <string name="wlcm_last_message">Thanks for using my app ! You\'re now ready to go by yourself.\n\nPlease note that this assistant might show up again in the future, in case of new feature.</string>
     <string name="loadMore">Load more results</string>
     <string name="apiDoesNotSupportSorting">API does not support advanced search. Old method will be used.</string>
-    <string name="sort">Sort by…</string>
     <string name="nowWithApi">Now with API support !</string>
     <string name="switch_api_search">Search using API</string>
     <string name="searchApiExplainations">API Search has limitations. You can\'t filter or sort, nor search for a whole parent category (Videos, Aurio, etc…)</string>
@@ -377,7 +278,6 @@
     <string name="notif_apierror">API Error</string>
     <string name="wlcm_permission_notif">The app uses notifications to keep you informed about what\'s going on (download, error…) Make sure your phone does not block notifications!</string>
     <string name="btn_logout">LOGOUT</string>
-    <string name="notif_apierror_fallback">Falling back to the old update method…</string>
     <string name="proxy_subscribed">Proxy subscribed and enabled !</string>
     <string name="list">List</string>
     <string name="recent">Recent</string>

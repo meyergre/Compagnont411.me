@@ -1,3 +1,8 @@
+2017.04-178
+- Optimisation des ressources de l'application
+- Réécriture du navigateur interne
+- Stockage des Cookies pour des connexions plus rapide (EXPERIMENTAL)
+
 2017.04-177
 - Passage des bookmarks par l'API
 - Correction de la récupération du pseudo par l'API

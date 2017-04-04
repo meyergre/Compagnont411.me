@@ -26,7 +26,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
@@ -42,7 +41,6 @@
                 android:textColor="#FFF" />
 
             <Button
-                android:id="@+id/button2"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
@@ -64,7 +62,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button3"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
@@ -80,7 +77,6 @@
                 android:textColor="#FFF" />
 
             <Button
-                android:id="@+id/button4"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="42dp"

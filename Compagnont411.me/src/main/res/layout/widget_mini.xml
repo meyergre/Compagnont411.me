@@ -4,26 +4,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="2dip"
+        android:background="@drawable/bg_card"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/widget_top_background">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/topLogo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:background="@drawable/widget_content_background"
+                android:layout_margin="1dip"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                android:padding="1dip"
-                android:layout_margin="1dip">
+                android:padding="1dip">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -60,8 +59,8 @@
                             android:id="@+id/wSmiley"
                             android:layout_width="20dip"
                             android:layout_height="20dip"
-                            android:layout_weight="1"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
                             android:scaleType="fitCenter"
                             android:src="@drawable/smiley_unknown" />
 
@@ -69,8 +68,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:gravity="right"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:gravity="right">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -79,7 +78,6 @@
                                 android:gravity="center">
 
                                 <ImageView
-                                    android:id="@+id/btn_mailUpdate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="25sp"
                                     android:layout_centerInParent="true"
@@ -92,12 +90,12 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
+                                    android:color="@color/t411_blue"
                                     android:gravity="center"
                                     android:text="0"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
                                     android:textColor="@color/t411_blue"
-                                    android:textSize="12sp"
-                                    android:color="@color/t411_blue" />
+                                    android:textSize="12sp" />
 
                             </RelativeLayout>
 
@@ -112,16 +110,15 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/widget_btm_background">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/updatedTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:ellipsize="marquee"
+                android:gravity="center"
                 android:lines="2"
                 android:text=" ???"
                 android:textAppearance="?android:attr/textAppearanceSmall"

@@ -8,7 +8,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView7"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/clouds"
         android:scaleType="centerCrop" />
@@ -17,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_message_launchers"
-        android:id="@+id/textView42"
         android:layout_margin="20dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
@@ -43,7 +41,6 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView8"
                 android:layout_gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher_downloads"
                 android:layout_marginRight="7dp" />
@@ -53,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/downloads"
-                android:id="@+id/textView43"
                 android:layout_weight="1"
                 android:textColor="@color/t411_action_blue" />
 
@@ -75,7 +71,6 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView9"
                 android:layout_gravity="center_horizontal"
                 android:src="@mipmap/ic_launcher_messages"
                 android:layout_marginRight="7dp" />
@@ -85,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/launcher_messages"
-                android:id="@+id/textView44"
                 android:layout_weight="1"
                 android:textColor="@color/t411_action_blue" />
 
@@ -103,7 +97,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/you_can_edit_in_settings"
-        android:id="@+id/textView45"
         android:textSize="12sp"
         android:layout_margin="20dp"
         android:gravity="center"
@@ -114,7 +107,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_next"
-        android:id="@+id/button7"
         android:layout_gravity="center_horizontal"
         android:drawableRight="@drawable/ic_chevron"
         android:layout_weight="0"

@@ -1,54 +1,32 @@
 <resources>
     <string name="app_name">Compagnon t411</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Paramètres</string>
     <string name="title_activity_main">Compagnon t411</string>
     <string name="main_login">Pseudonyme</string>
     <string name="main_password">Mot de passe</string>
-    <string name="main_connect">Enregistrer</string>
-    <string name="description_logo">Logo t411</string>
-    <string name="service_settings">Configuration</string>
     <string name="button_mail">Boite de réception</string>
     <string name="button_service">Configuration</string>
-    <string name="button_useraccount">Compte utilisateur</string>
-    <string name="toggle_ON">ON</string>
-    <string name="toggle_OFF">OFF</string>
     <string name="chk_ratioAlert">Alerte ratio</string>
-    <string name="chk_lowLimit">Limite basse</string>
     <string name="chk_msgAlert">Alerte messagerie</string>
-    <string name="msgAlertEnabled">Notification activér</string>
-    <string name="msgAlertDisabled">Notification désactivée</string>
-    <string name="active">Activer</string>
     <string name="default_username">Pseudonyme</string>
     <string name="lastUpdate">"Dernière mise à jour : "</string>
-    <string name="savedData">Données sauvegardées.</string>
-    <string name="btnStartService">(Re)démarrer le service</string>
     <string name="about">A propos…</string>
     <string name="description_ratioAlert">Afficher une notification si le ratio passe sous le seuil
         défini.
     </string>
     <string name="description_mailAlert">Afficher une notification à la réception d\'un message.
     </string>
-    <string name="repeatTime">Fréquence (mn)</string>
     <string name="description_frequency">Définir l\'intervalle entre 2 mises à jour (en minutes). Attention, une
         fréquence haute consomme davantage de batterie…
     </string>
-    <string name="show_notifs">Notifications système</string>
     <string name="WhatToDo">Que faire ?</string>
     <string name="open_app">Ouvrir l\'application</string>
     <string name="update_now">Mettre à jour</string>
     <string name="read_mails">Boîte de réception</string>
     <string name="goto_t411">Aller sur t411</string>
     <string name="widget_action">Action du widget…</string>
-    <string name="answer">Répondre</string>
     <string name="delete">Supprimer</string>
     <string name="archive">Archiver</string>
 
-    <string name="notif_update">Mise à jour…</string>
-    <string name="notif_upd_title">Mise à jour</string>
-    <string name="notif_upd_content">Téléchargement des données…</string>
-
-    <string name="notif_message">Nouveaux messages</string>
     <string name="notif_msg_title">Vous avez de nouveaux messages sur t411</string>
     <string name="notif_msg_content">Touchez pour les lire</string>
 
@@ -58,11 +36,8 @@
 
     <string name="waiting_for_update">Attente de mise à jour…</string>
     <string name="askWhatToDo">Toujours demander</string>
-    <string name="ChooseAction">Choisir une action</string>
 
     <string name="pleasewait">Veuillez patienter</string>
-    <string name="getMesages">Récupération des messages…</string>
-    <string name="getMesageContent">Récupération du contenu…</string>
 
     <string name="donate">Faire un don</string>
     <string name="donateWarning">Le don est adressé au développeur de l\'application, et n\'est pas lié au système de donation du site.</string>
@@ -87,22 +62,10 @@
     <string name="appwidget_search">Rechercher sur t411</string>
     <string name="placeholder_search">Rechercher…</string>
     <string name="search_cat_all">Toutes categories</string>
-    <string name="search_cat_audio">Audio</string>
-    <string name="search_cat_eBooks">eBooks</string>
-    <string name="search_cat_videogames">Jeux vidéo</string>
-    <string name="search_cat_GPS">GPS</string>
-    <string name="search_cat_movies">Films/Vidéos</string>
-    <string name="search_cat_applications">Applications</string>
     <string name="messages_compose">Composer</string>
     <string name="messages_compose_to">À :</string>
     <string name="messages_compose_subject">Objet :</string>
     <string name="messages_compose_message">Message :</string>
-    <string name="messages_compose_send">Envoyer</string>
-
-    <string name="settings_caption_service">Options du service</string>
-    <string name="settings_caption_general">Options générales</string>
-    <string name="settings_caption_development">Options de développement</string>
-    <string name="settings_caption_other">Divers</string>
 
     <string name="settings_only_wifi">Mise à jour via Wifi uniquement</string>
     <string name="settings_wifi_only_details">Ne faire les mises à jour que depuis un réseau Wifi
@@ -110,15 +73,8 @@
     </string>
     <string name="settings_caption_useraccount">Compte utilisateur</string>
 
-    <string name="settings_useraccount_details">Vérifiez bien vos identifiants : ils seront
-        enregistrés sans vérification. En cas d\'erreur de connexion, vous pouvez les modifier ici.
-    </string>
-    <string name="user_manual">Manuel utilisateur</string>
     <string name="news_widget">Actualité t411</string>
     <string name="Share">Partager</string>
-    <string name="shareText">Découvrez "Compagnon t411" sur Google Play !
-        https://play.google.com/store/apps/details?id=fr.lepetitpingouin.android.t411
-    </string>
 
     <string name="calculator">Calculatrice</string>
     <string name="settings_RTC">Ne pas mettre à jour en veille</string>
@@ -131,8 +87,6 @@
     <string name="download_simulation">Simulation de téléchargement</string>
     <string name="DL_left">DL restant</string>
     <string name="UP_left">UP restant</string>
-    <string name="btn_forum">Fil de discussion</string>
-    <string name="btn_news">Nouvelles du site</string>
     <string name="contribute_on_t411">Contribuer à t411 !</string>
     <string name="support_t411_text">Faites d\'une pierre deux coups ! en faisant un don à t411,
         vous participez aux frais de fonctionnement et de maintenance du site, et en plus vous
@@ -140,43 +94,24 @@
     </string>
     <string name="learn_more">En savoir +</string>
     <string name="shareSignature">Envoyé depuis l\'application Compagnon t411 pour Android</string>
-    <string name="top_100">Top torrents…</string>
     <string name="simulation_seed_duration">Calcul de la durée de seed</string>
     <string name="target_ratio">Ratio idéal</string>
     <string name="upload_speed">Débit montant</string>
     <string name="current_ratio">Ratio actuel</string>
-    <string name="second">seconde</string>
     <string name="minute">minute</string>
     <string name="hour">heure</string>
     <string name="day">jour</string>
     <string name="week">semaine</string>
     <string name="month">mois</string>
     <string name="year">année</string>
-    <string name="order_by">Tri par :</string>
     <string name="no_result">Aucun résultat… :(</string>
-    <string name="title_search">Téléchargement de .torrents</string>
-    <string name="direct_download">Téléchargement direct</string>
     <string name="download_redirect">Aller sur le site</string>
-    <string name="description_directdownload">Tenter de télécharger directement le fichier via
-        l\'application.
-    </string>
     <string name="description_downloadredirect">Ouvrir le lien vers le .torrent dans le navigateur
         internet. A activer si le téléchargement natif ne fonctionne pas.
     </string>
-    <string name="menu_options">Options du menu principal</string>
-    <string name="settings_menu_notes">Définir les menus à masquer sur le menu principal.</string>
     <string name="connect">Se connecter</string>
-    <string name="welcome">Bienvenue !</string>
     <string name="please_login">Avant de commencer, veuillez vous connecter avec vos identifiants
         t411 :
-    </string>
-    <string name="need_an_account">Créer un compte</string>
-    <string name="longclick_share">Appui long pour partager</string>
-    <string name="longclick_download">Appui long pour télécharger</string>
-    <string name="description_longpress_share">Partager le lien vers un .torrent par un appui long
-    </string>
-    <string name="description_longpress_download">Télécharger directement le .torrent via un appui
-        long, sans passer par la prez
     </string>
     <string name="sort_none">Aucun filtre</string>
     <string name="sort_comm">Commentaires</string>
@@ -186,7 +121,6 @@
     <string name="sort_seed">Seeders</string>
     <string name="sort_leech">Leechers</string>
 
-    <string name="location">Emplacement</string>
     <string name="cant_read_folder">Ce dossier ne peut être lu!</string>
     <string name="nnew">Nouveau</string>
     <string name="select">CHOISIR</string>
@@ -194,33 +128,17 @@
     <string name="cancel">ANNULER</string>
     <string name="create">Enregistrer</string>
     <string name="no_data">Aucune donnée</string>
-    <color name="gray">#ffff0000</color>
-    <string name="err">Erreur</string>
     <string name="save_path">Dossier de téléchargement</string>
-    <string name="bookmarks">Mes futurs téléchargements</string>
-    <string name="my_searches">Mes recherches</string>
-    <string name="longclic_future">Appui long pour futurs téléchargements</string>
-    <string name="description_longpress_future">Ajouter le torrent à la liste des futurs
-        téléchargements via un appui long
-    </string>
     <string name="longpress_closetag">Appui long pour fermer le tag</string>
     <string name="sentMessage">Envoi en cours…</string>
     <string name="fast_torrents">Torrents rapides</string>
     <string name="daily_torrents">Torrents du jour</string>
     <string name="weekly_torrents">Torrents de la semaine</string>
     <string name="monthly_torrents">Torrents du mois</string>
-    <string name="torrentTitleSingleLine">Afficher le titre du torrent sur une ligne (tronquer)
-    </string>
-    <string name="Timeout">Timeout</string>
-    <string name="description_timeout">Définir le timeout (en secondes) pour les requêtes web (0 =
-        illimité).
-    </string>
     <string name="useNotificationWidget">Widget de notification</string>
     <string name="useNotificationWidget_description">Afficher un widget dans la barre de
         notifications.
     </string>
-    <string name="settings_caption_network">Options réseau</string>
-    <string name="service_settings_advanced">Configuration (ancienne)</string>
     <string name="other_apps">Autres apps</string>
     <string name="my_friends">Mes amis</string>
     <string name="my_uploads">Mes uploads</string>
@@ -234,8 +152,6 @@
     <string name="settings_caption_connection_summary">Définir les paramètres des connexions au serveur t411</string>
     <string name="settings_use_https_summary_on">Chiffrer les données lors des transferts</string>
     <string name="settings_use_https_summary_off">Ne pas chiffrer les données lors des transferts</string>
-    <string name="settings_caption_connection_advanced_summary">Définir les réglages avancés</string>
-    <string name="settings_caption_connection_advanced">Avancé</string>
     <string name="notification_settings">Paramètres de notification</string>
     <string name="auto_update">Mise à jour automatique</string>
     <string name="auto_update_summary">Configurer la mise à jour automatique des données</string>
@@ -246,7 +162,6 @@
     <string name="title_settings">CONFIGURATION</string>
     <string name="title_savePath">DOSSIER DE TELECHARGEMENT</string>
     <string name="download">Téléchargement</string>
-    <string name="search">Recherche</string>
     <string name="widgets_settings">Configurer les widgets</string>
     <string name="widgets_settings_summary">Définit l\'action à effectuer au clic sur un widget</string>
     <string name="messages_read">Lire le message</string>
@@ -274,19 +189,13 @@
     <string name="catFetched">catégories trouvées</string>
     <string name="pagesFetched">pages trouvées</string>
     <string name="fetchingPages">Comptage des pages…</string>
-    <string name="runtime_ex">Erreur d\'exécution. Veuillez réessayer ultérieurement.</string>
     <string name="button_disconnect">Déconnexion…</string>
     <string name="disconnectConfirmTitle">Déconnexion</string>
     <string name="disconnectConfirmMessage">Une fois vos identifiants de connexion effacés, l\'application ne pourra plus être ouverte sans se connecter à nouveau. En outre, l\'actualisation automatique des données sera désactivée, et devra être réactivée manuellement dans les réglages. Voulez-vous continuer ?</string>
     <string name="NO">Non</string>
     <string name="YES">Oui</string>
-    <string name="t411_site_ip">IP du site</string>
-    <string name="t411_site_ip_summary">Choisir quelle adresse utiliser pour joindre t411</string>
     <string name="errorGraph">Désolé, impossible d\'afficher le graphique… peut-être que le site a modifié la page des stats ?</string>
     <string name="gettingFriend">Récupération des données de</string>
-    <string name="report_explain">Ecrivez ici votre message. Des données additionnelles seront envoyées au développeur, vous pouvez les consulter ci-dessous.</string>
-    <string name="report_yourmessage">Votre message ici…</string>
-    <string name="create_report">Signaler un problème</string>
 
     <string-array name="widget_actions">
         <item>@string/open_app</item>
@@ -295,7 +204,6 @@
         <item>@string/goto_t411</item>
         <item>@string/askWhatToDo</item>
     </string-array>
-    <string name="action_settings">Paramètres</string>
     <string name="settings_use_proxy">Utiliser le service</string>
     <string name="proxypart1">Dans certains pays, les gouvernements ont ordonné la censure de t411 par les fournisseurs d\'accès. C\'est notamment le cas en France et en Belgique.\nDe ce fait, pour accéder au site, il est nécessaire d\'utiliser une solution de contournement.</string>
     <string name="option_proxy_name">Utiliser le proxy dédié</string>
@@ -304,10 +212,7 @@
     <string name="censorship_alternative_detail">Si vous n\'avez pas accès au Play Store ou ne souhaitez pas contribuer au financement du serveur, d\'autres solutions s\'offrent à vous. Vous pouvez par exemple utiliser une application de VPN, ou encore modifier vos DNS ou votre fichier hosts (autorisations ROOT nécessaires).</string>
     <string name="enable_service">Solutions de contournement</string>
     <string name="enable_service_summary">Activer le proxy dédié ou découvrir d\'autres solutions</string>
-    <string name="anticensorship_summary">Contourner la censure et les blocages des FAI</string>
-    <string name="anticensorship">Anti-censure</string>
     <string name="future_downloads">Mes futurs téléchargements</string>
-    <string name="swipe_down_update">Glisser vers le bas pour mettre à jour</string>
     <string name="preference_appLogs">Journaliser</string>
     <string name="preference_appLogs_summary">Enregistre un journal de l\'application, qui peut être envoyé au développeur en cas de problème. Une fois l\'option activée, votre utilisation de l\'application sera enregistrée.</string>
     <string name="sendLogs">Envoyer le journal</string>
@@ -334,7 +239,6 @@
         En cochant cette case, j\'accepte que ce paiement soit envoyé au développeur de l\'application pour soutenir son travail, et non pour obtenir un développement ou du ratio</string>
     <string name="about_inapp_subscription">A propos de l\'abonnement</string>
     <string formatted="false" name="about_inapp_subscription_details">L\'application contient un abonnement a un serveur proxy dédié, pour éviter la censure DNS pratiquée par certains pays ou établissements. Ce dernier est proposé pour couvrir les frais d\'hébergement et de gestion d\'un serveur dédié à l\'application.\n\nAfin d\'y souscrire, il est nécessaire de disposer de la dernière version des services Google, ainsi que du Google Play Store.\n\nL\'abonnement est proposé pour 0.50 €/mois\n - La TVA représente 20% (+ 0.10 €)\n - La commission Google représente 30% du montant total.\n - Les impôts et cotisations représentent 25% du montant restant.\n\nIMPORTANT\nLa désinstallation de l\'application n\'entraine pas la résiliation automatique de votre abonnement. Vous pouvez vous désabonner manuellement à tout moment depuis la page de l\'application sur le Google Play Store.</string>
-    <string name="helpbutton_text">Un problème ?\nN\'hésitez pas a en discuter sur le topic du forum t411!\nVous pouvez également activer l\'option de journalisation dans les paramètres de l\'appli, et partager le journal avec le développeur.</string>
     <string name="open_with_app">Ouvrir avec…</string>
     <string name="permissions_needed">L\'accès au stockage est requis.\nCliquez ici pour autoriser l\'application à accéder au stockage de votre appareil.</string>
     <string name="description_sort_by_date">Si coché la liste des torrents dans les résultats de recherche (TOP 100, torrents du jour, etc…) sera triée par date d\'ajout.</string>
@@ -343,7 +247,6 @@
     <string name="downloads_open">Ouvrir avec…</string>
     <string name="downloads_delete">Supprimer le torrent</string>
     <string name="downloads_prez">Accéder à la prez</string>
-    <string name="downloads_change_passkey">Change passkey</string>
     <string name="downloads">Téléchargements</string>
     <string name="app_title_fr" >Compagnon</string>
     <string name="app_title_en"> </string>
@@ -356,7 +259,6 @@
     <string name="wlcm_last_message">Merci d\'utiliser mon application ! Vous êtes maintenant prêt à vous lancer.\n\nCet assistant pourra éventuellement se représenter à vous à l\'avenir, dans le cas d\'un ajout de fonctionnalité.</string>
     <string name="loadMore">Résultats suivants</string>
     <string name="apiDoesNotSupportSorting">L\'API ne supporte pas la recherche avancée. L\'ancienne méthode sera utilisée.</string>
-    <string name="sort">Trier par…</string>
     <string name="nowWithApi">Maintenant avec support de l\'API !</string>
     <string name="switch_api_search">Rechercher par l\'API</string>
     <string name="searchApiExplainations">Les fonctionnalités de l\'API sont limitées. Le tri, les filtres, et la recherche par cétégorie parente (Vidéo, Audio, etc…) ne sont pas supportés</string>
@@ -369,7 +271,6 @@
     <string name="notif_apierror">Erreur API</string>
     <string name="wlcm_permission_notif">L\'application utilise des notifications pour donner l\'avancement des téléchargements ou avertir d\'une erreur. Vérifiez dans les paramètres de votre téléphone qu\'elles soient autorisées !</string>
     <string name="btn_logout">Déconnexion</string>
-    <string name="notif_apierror_fallback">Fallback sur l\'ancienne méthode…</string>
     <string name="proxy_subscribed">Proxy souscrit et activé !</string>
     <string name="list">Liste</string>
     <string name="recent">Récent</string>

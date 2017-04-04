@@ -12,7 +12,6 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:id="@+id/imageView2"
             android:src="@drawable/logo_paypal"
             android:layout_weight="1" />
 
@@ -71,7 +70,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="€"
-                    android:id="@+id/textView2"
                     android:textSize="96dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0" />
@@ -89,7 +87,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="+"
-                    android:id="@+id/button3"
                     android:layout_gravity="center_horizontal|left"
                     android:background="@drawable/t411_btn"
                     android:textColor="#fff"
@@ -100,7 +97,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="-"
-                    android:id="@+id/button4"
                     android:layout_gravity="center_horizontal|left"
                     android:background="@drawable/t411_btn"
                     android:textColor="#fff"
@@ -120,7 +116,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/confirmDonationString"
-            android:id="@+id/confirmDonationCheckBox"
             android:checked="false"
             android:onClick="showHideButton"
             android:textSize="11dp"
@@ -151,7 +146,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Annuler"
-                android:id="@+id/button2"
                 android:layout_weight="1"
                 android:background="@drawable/t411_btn"
                 android:textColor="#fff"

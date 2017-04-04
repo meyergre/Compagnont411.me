@@ -7,7 +7,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView5"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/rocket"
         android:scaleType="centerCrop"
@@ -41,13 +40,11 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/app_title_fr"
-                    android:id="@+id/textView39"
                     android:textColor="#111111" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView6"
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
@@ -55,7 +52,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/app_title_en"
-                    android:id="@+id/textView40"
                     android:textColor="#111111" />
             </LinearLayout>
 
@@ -63,8 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/nowWithApi"
-                android:id="@+id/textView52" />
+                android:text="@string/nowWithApi" />
 
         </LinearLayout>
 
@@ -74,7 +69,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_liftoff"
-        android:id="@+id/button7"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0"
         android:drawableRight="@drawable/ic_chevron"

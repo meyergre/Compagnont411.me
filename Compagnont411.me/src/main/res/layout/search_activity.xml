@@ -45,7 +45,6 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
-        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -173,7 +172,6 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/relativeLst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/dropdown_favorites"

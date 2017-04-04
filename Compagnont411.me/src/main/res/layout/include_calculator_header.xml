@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/clouds"
-        android:id="@+id/imageView21"
         android:adjustViewBounds="true" />
 
     <LinearLayout android:layout_height="wrap_content"
@@ -32,7 +31,6 @@
             android:layout_height="wrap_content"
             android:text="Download"
             android:ems="10"
-            android:id="@+id/editText3"
             android:singleLine="true"
             android:selectAllOnFocus="false"
             android:inputType="text"
@@ -137,7 +135,6 @@
             android:layout_height="wrap_content"
             android:text="Upload"
             android:ems="10"
-            android:id="@+id/editText5"
             android:singleLine="true"
             android:selectAllOnFocus="false"
             android:inputType="text"

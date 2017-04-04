@@ -6,13 +6,9 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
@@ -21,28 +17,20 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.HttpClientParams;
-import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
-import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -53,11 +41,11 @@ import javax.net.ssl.X509TrustManager;
 
 public class SuperT411HttpBrowser {
 
-
     private boolean customProxy;
     private CookieStore cookieStore;
 
     private SharedPreferences prefs;
+    DefaultHttpClient httpclient;
 
     private String encoding = "utf-8";
 
@@ -66,6 +54,7 @@ public class SuperT411HttpBrowser {
     private String username;
     private String password;
     private String url;
+    private String cookies;
     private String errorMessage = "";
     private String fadeMessage = "";
 
@@ -79,23 +68,26 @@ public class SuperT411HttpBrowser {
 
     private Boolean proxy = false;
 
-    private Boolean skipLogin = false, rawResult = false;
+    private Boolean skipLogin = false;
+    private Boolean forceLogin = false;
 
     private HttpHost httpproxy;
-    //Proxy httpproxy;
-
-    private byte[] mresponseStream;
 
     public SuperT411HttpBrowser(Context context) {
         ctx = context;
-
         this.retry = 0;
 
-        cookieStore = new BasicCookieStore();
+        this.cookieStore = new BasicCookieStore();
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         this.proxy = prefs.getBoolean("usePaidProxy", false);
         this.customProxy = prefs.getBoolean("userProxy", false);
+        this.cookies = prefs.getString("cookies", "");
+
+        /* Si on a un cookie enregistré, on passe la connexion */
+        if(!this.cookies.equals("") && !this.forceLogin) {
+            this.skipLogin();
+        }
 
         if (this.proxy) {
             this.httpproxy = new HttpHost(Private.URL_PROXY, 411);
@@ -163,28 +155,19 @@ public class SuperT411HttpBrowser {
         return this;
     }
 
-    public SuperT411HttpBrowser rawResult() {
-        this.rawResult = true;
-        new T411Logger(this.ctx).writeLine("Récupération du résultat brut");
+    public SuperT411HttpBrowser forceLogin() {
+        this.forceLogin = true;
+        new T411Logger(this.ctx).writeLine("Login forcé");
         return this;
     }
 
-    public byte[] getByteResponse() {
-        return this.mresponseStream;
-    }
-
     public SuperT411HttpBrowser connect(String mUrl) {
-
         this.url = mUrl.replace(Default.API_T411, prefs.getString("custom_domain", Default.IP_T411));
-
-        if (prefs.getBoolean("useHTTPS", false) && !proxy) {
+        if (prefs.getBoolean("useHTTPS", false) ) {
             new T411Logger(this.ctx).writeLine("Connexion HTTPS activée");
             this.url = this.url.replace("http://", "https://");
         }
-
         new T411Logger(this.ctx).writeLine("Connexion à l'adresse " + this.url);
-
-        Log.e("t411Browser Connect", this.url);
         return this;
     }
 
@@ -218,7 +201,6 @@ public class SuperT411HttpBrowser {
     }
 
     public SuperT411HttpBrowser login(String username, String password) {
-        Log.e("t411UPDATER-URL", "login");
         this.username = username;
         this.password = password;
         return this;
@@ -234,9 +216,7 @@ public class SuperT411HttpBrowser {
         String value = "";
         try {
             value = new LoginTask(username, password).execute(url).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -252,78 +232,70 @@ public class SuperT411HttpBrowser {
 
         doHackTrustedCerts();
 
-        HttpContext clientcontext;
-        clientcontext = new BasicHttpContext();
-        clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+        this.httpclient = new DefaultHttpClient();
 
-        //AndroidHttpClient httpclient = AndroidHttpClient.newInstance(prefs.getString("User-Agent", Default.USER_AGENT));
-        DefaultHttpClient httpclient = new DefaultHttpClient();
-
-        httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-
-        if (proxy || customProxy) {
-            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
-            if (customProxy && !prefs.getString("proxy_login", "").equals("")) {
-                new T411Logger(this.ctx).writeLine("Utilisation du proxy avec le login " + prefs.getString("proxy_login", ""));
-                httpclient.getCredentialsProvider().setCredentials(
-                        new AuthScope(prefs.getString("customProxy", ""), 411),
+        if (this.proxy || this.customProxy) {
+            this.httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, this.httpproxy);
+            if (this.customProxy && !this.prefs.getString("proxy_login", "").equals("")) {
+                new T411Logger(this.ctx).writeLine("Utilisation du proxy avec le login " + this.prefs.getString("proxy_login", ""));
+                this.httpclient.getCredentialsProvider().setCredentials(
+                        new AuthScope(this.prefs.getString("customProxy", ""), 411),
                         new UsernamePasswordCredentials(
-                                prefs.getString("proxy_login", ""), prefs.getString("proxy_pasword", "")));
+                                this.prefs.getString("proxy_login", ""), this.prefs.getString("proxy_pasword", "")));
             }
         }
-
-        //HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
-        //HttpConnectionParams.setSoTimeout(httpclient.getParams(), Integer.valueOf(prefs.getString("timeout", Default.timeout)) * 1000);
         HttpClientParams.setRedirecting(httpclient.getParams(), true);
 
-        String mUrl = Default.URL_LOGIN;
-        //if(proxy) mUrl = Private.URL_PROXY + mUrl;
-
         new T411Logger(this.ctx).writeLine("Connexion de l'utilisateur " + username);
-        new T411Logger(this.ctx).writeLine("Initiation de la connexion HTTP vers " + mUrl);
+        new T411Logger(this.ctx).writeLine("Initiation de la connexion vers " + Default.URL_LOGIN);
 
-        HttpPost httppost = new HttpPost(mUrl);
+        String loginUrl = Default.URL_LOGIN;
+        String referer = Default.URL_LOGIN;
+        String origin = Default.IP_T411;
+
+        if (prefs.getBoolean("useHTTPS", false) ) {
+            loginUrl = loginUrl.replace("http://", "https://");
+            referer = referer.replace("http://", "https://");
+            origin = origin.replace("http://", "https://");
+        }
+
+        HttpPost httppost = new HttpPost(loginUrl);
+
+        httppost.addHeader("Host", Default.IP_T411);
+        httppost.addHeader("Referer", referer);
+        httppost.addHeader("Origin", origin);
         httppost.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
         HttpResponse response;
         String responseString = null;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(8);
-        nameValuePairs.add(new BasicNameValuePair("remember", "1"));
-        nameValuePairs.add(new BasicNameValuePair("login", username));
-        nameValuePairs.add(new BasicNameValuePair("username", username));
-        nameValuePairs.add(new BasicNameValuePair("password", password));
-        nameValuePairs.add(new BasicNameValuePair("url", "/"));
-        // captcha
-        nameValuePairs.add(new BasicNameValuePair("captchaToken", qpT));
-        nameValuePairs.add(new BasicNameValuePair("captchaQuery", qpQ));
-        nameValuePairs.add(new BasicNameValuePair("captchaAnswer", qpA));
 
-        HttpEntity e = null;
+        List<NameValuePair> logindata = new ArrayList();
+
+        logindata.add(new BasicNameValuePair("login", this.username));
+        logindata.add(new BasicNameValuePair("password", this.password));
+        if(qpT != null && qpQ != null && qpA != null) {
+            logindata.add(new BasicNameValuePair("captchaToken", qpT));
+            logindata.add(new BasicNameValuePair("captchaQuery", qpQ));
+            logindata.add(new BasicNameValuePair("captchaAnswer", qpA));
+        }
 
         if(!this.skipLogin)
         try {
-            e = new UrlEncodedFormEntity(nameValuePairs);
+            httppost.setEntity(new UrlEncodedFormEntity(logindata, this.encoding));
 
-            httppost.setEntity(e);
+            response = httpclient.execute(httppost);
+            responseString = EntityUtils.toString(response.getEntity(), this.encoding);
 
-            clientcontext = new BasicHttpContext();
-            clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-            response = httpclient.execute(httppost, clientcontext);
-            for(Header h : response.getAllHeaders()) Log.e("HEADERS", h.getName() + " = " + h.getValue());
-            StatusLine statusLine = response.getStatusLine();
-
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                out.close();
-                responseString = out.toString();
-                this.mresponseStream = out.toByteArray();
-            } else {
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                new T411Logger(this.ctx).writeLine("La connexion a répondu : " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase(), T411Logger.ERROR);
-                throw new IOException(statusLine.getReasonPhrase());
+            String tmpCookies = "";
+            for(Cookie c : httpclient.getCookieStore().getCookies()) {
+                tmpCookies += c.getName() + "=" + c.getValue() + ";";
             }
+            prefs.edit().putString("cookies", tmpCookies).apply();
+            new T411Logger(this.ctx).writeLine("Cookies enregistrés");
+
+            StatusLine statusLine = response.getStatusLine();
+            new T411Logger(this.ctx).writeLine("La connexion a répondu : " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase());
+
 
             if(Jsoup.parse(responseString).select("div.fade").first() != null) {
                 try {
@@ -346,7 +318,7 @@ public class SuperT411HttpBrowser {
                                 ex.printStackTrace();
                             }
                         } else {
-                            new T411Logger(this.ctx).writeLine("Abandon après 3 essais" + mUrl);
+                            new T411Logger(this.ctx).writeLine("Abandon après 3 essais " + Default.URL_LOGIN);
                         }
 
                     }
@@ -358,58 +330,32 @@ public class SuperT411HttpBrowser {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        //return responseString;
 
         httppost = new HttpPost(this.url);
 
-        new T411Logger(this.ctx).writeLine("Initiation de la connexion HTTP vers " + this.url);
-
+        new T411Logger(this.ctx).writeLine("Initiation de la connexion vers " + this.url);
         try {
 
-            e = new UrlEncodedFormEntity(this.data);
+            httppost.setEntity(new UrlEncodedFormEntity(this.data));
 
-            httppost.setEntity(e);
-
-            //clientcontext = new BasicHttpContext();
-            //clientcontext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-
-            httppost.addHeader("Cookie", "authApi=" + prefs.getString("APIKey", "") + ";uid=" + prefs.getString("uid", "") + ";");
-
-            response = httpclient.execute(httppost, clientcontext);
-            for(Header h : response.getAllHeaders()) Log.e("HEADERS", h.getName() + " = " + h.getValue());
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                //responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
-                /*ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                out.close();
-                this.mresponseStream = out.toByteArray();*/
-
-                HttpEntity entity = response.getEntity();
-
-                this.mresponseStream = EntityUtils.toByteArray(entity);
-
-                //responseString = EntityUtils.toString(entity, encoding);
-                if(this.rawResult) {
-                    responseString = entity.getContent().toString();
-                } else {
-                    responseString = new String(this.mresponseStream, encoding);
-                }
-
-                new T411Logger(this.ctx).writeLine("La connexion a répondu : 200 OK ");
-            } else {
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                new T411Logger(this.ctx).writeLine("La connexion a répondu : " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase(), T411Logger.ERROR);
-                throw new IOException(statusLine.getReasonPhrase());
+            /* Si on a un cookie sauvegardé, on l'utilise */
+            if(this.skipLogin && !this.cookies.equals("")) {
+                new T411Logger(this.ctx).writeLine("Connexion par les cookies enregistrés");
+                httppost.addHeader("Cookie", this.cookies);
             }
+
+            response = this.httpclient.execute(httppost);
+            responseString = EntityUtils.toString(response.getEntity(), this.encoding);
+
+            StatusLine statusLine = response.getStatusLine();
+            new T411Logger(this.ctx).writeLine("La connexion a répondu : " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase());
 
             try {
                 if(Jsoup.parse(responseString).select("div.fade").first()!=null) {
                     String conError = Jsoup.parse(responseString).select("div.fade").first().text();
                     if (!conError.equals("")) {
                         fadeMessage = conError;
-                        new T411Logger(this.ctx).writeLine("Le site a répondu : " + mUrl, T411Logger.WARN);
+                        new T411Logger(this.ctx).writeLine("Le site a répondu : " + conError, T411Logger.WARN);
                     }
                 }
             } catch (Exception ex) {
@@ -421,17 +367,11 @@ public class SuperT411HttpBrowser {
             ex.printStackTrace();
         }
 
-        //httpclient.close();
         String retValue = "";
 
         try {
-            if(this.rawResult)
-                retValue = responseString;
-            else {
-                retValue = new String(responseString.getBytes("UTF-8"));
-            }
+                retValue = new String(responseString.getBytes(this.encoding));
         } catch (Exception e1) {
-            retValue = responseString;
             e1.printStackTrace();
         }
 
@@ -442,8 +382,6 @@ public class SuperT411HttpBrowser {
 
         String username, password, url;
 
-        public LoginTask() {
-        }
 
         public LoginTask(String username, String password) {
             this.username = username;

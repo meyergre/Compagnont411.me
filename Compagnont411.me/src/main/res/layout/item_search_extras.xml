@@ -28,7 +28,6 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/imageView17"
                 android:src="@drawable/ic_description" />
 
             <EditText
@@ -53,7 +52,6 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/imageView20"
                 android:src="@drawable/ic_uploader" />
 
             <EditText
@@ -78,7 +76,6 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/imageView22"
                 android:src="@drawable/ic_fichier" />
 
             <EditText

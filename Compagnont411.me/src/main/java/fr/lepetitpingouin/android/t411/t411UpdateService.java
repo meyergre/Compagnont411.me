@@ -162,7 +162,7 @@ public class t411UpdateService extends Service {
         new T411Logger(getApplicationContext()).writeLine("Connexion à l'adresse " + mUrl);
 
 
-        browser = new SuperT411HttpBrowser(getApplicationContext());
+        browser = new SuperT411HttpBrowser(getApplicationContext()).forceLogin();
         doc = Jsoup.parse(browser.login(login, password).connect(mUrl).executeInAsyncTask());
 
         if (doc.select("title").text().contains("503"))

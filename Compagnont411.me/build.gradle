@@ -18,8 +18,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 176
-        versionName "2017.04-176"
+        versionCode 178
+        versionName "2017.04-178"
         applicationId "fr.lepetitpingouin.android.t411"
 
         resConfigs "en", "fr"

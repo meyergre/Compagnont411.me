@@ -230,20 +230,12 @@
 
 
             </PreferenceScreen>
-
+<!--
             <PreferenceScreen
                 android:enabled="true"
                 android:summary="@string/settings_caption_connection_advanced_summary"
                 android:title="@string/settings_caption_connection_advanced">
 
-                <!--ListPreference android:key="SiteIP"
-                    android:title="@string/t411_site_ip"
-                    android:summary="@string/t411_site_ip_summary"
-                    android:entries="@array/t411_ip_list"
-                    android:entryValues="@array/t411_ip_list"
-                    android:defaultValue="www.t411.ch">
-
-                </ListPreference-->
 
                 <EditTextPreference
                     android:defaultValue="Android (Compagnon t411 internal browser)"
@@ -259,6 +251,7 @@
                     android:title="Timeout" />
 
             </PreferenceScreen>
+    -->
 
         </PreferenceScreen>
 

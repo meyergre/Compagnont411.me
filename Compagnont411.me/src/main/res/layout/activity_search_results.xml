@@ -69,13 +69,11 @@
 
         <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:id="@+id/relativeLayout2">
+        android:layout_height="64dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView13"
             android:src="@drawable/clouds"
             android:scaleType="fitXY" />
 

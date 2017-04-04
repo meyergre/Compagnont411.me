@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/group1">
+    <group>
         <item
             android:id="@+id/action_mailbox"
             android:icon="@drawable/ic_action_inbox"
@@ -30,7 +30,7 @@
             android:icon="@drawable/ic_downloads"
             android:title="@string/torrentslist" />
     </group>
-    <group android:id="@+id/group2">
+    <group>
         <item
             android:id="@+id/action_settings"
             android:icon="@drawable/ic_settings_black"

@@ -16,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -257,6 +258,8 @@ public class messagesActivity extends AppCompatActivity {
                     .getString("password", "");
 
             String url = CONNECTURL;
+
+            Log.e("LAUNCHING", "BROWSER....");
 
             try {
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
