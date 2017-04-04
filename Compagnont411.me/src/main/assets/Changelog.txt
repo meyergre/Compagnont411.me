@@ -1,3 +1,6 @@
+2017.04-179
+- Correction des accès API lors de l'utilisation d'un domaine personnalisé (non recommandé)
+
 2017.04-178
 - Optimisation des ressources de l'application
 - Réécriture du navigateur interne

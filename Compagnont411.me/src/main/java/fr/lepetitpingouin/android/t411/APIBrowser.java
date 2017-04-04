@@ -107,7 +107,9 @@ public class APIBrowser {
         final int BUFFER_SIZE = 4096;
 
         try {
-            URL url = new URL(this.url.replace(Default.IP_T411, prefs.getString("custom_domain", Default.IP_T411)));
+            String host = prefs.getString("custom_domain", "");
+            if(host.equals("")) host = Default.IP_T411;
+            URL url = new URL(this.url.replace(Default.IP_T411, host));
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestProperty("Authorization", this.auth);
             int responseCode = httpConn.getResponseCode();
@@ -165,26 +167,21 @@ public class APIBrowser {
         URL mUrl;
         String response = "";
         try {
-            mUrl = new URL(this.url.replace(Default.IP_T411, prefs.getString("custom_domain", Default.IP_T411)));
+            String host = prefs.getString("custom_domain", "");
+            if(host.equals("")) host = Default.IP_T411;
+            mUrl = new URL(this.url.replace(Default.IP_T411, host));
             if (this.proxy || this.customProxy) {
                 conn = (HttpsURLConnection) mUrl.openConnection(this.proxyServer);
             } else {
                 conn = (HttpsURLConnection) mUrl.openConnection();
             }
             conn.setRequestMethod("POST");
-            //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Authorization", this.auth);
 
             PrintWriter out = new PrintWriter(conn.getOutputStream());
             out.print(StringUtil.join(this.bodyParts, "&"));
             out.close();
 
-            /*Scanner inStream = new Scanner(conn.getInputStream(), "UTF-8");
-            while(inStream.hasNextLine()) {
-                response+=(inStream.nextLine());
-            }*/
-
-            //InputStream in = new BufferedInputStream(conn.getInputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line = "";
