@@ -288,11 +288,13 @@
         <item>GB/s</item>
     </string-array>
     <string name="confirmDeleteAllMessage">Voulez-vous réellement effacer TOUS les messages ?</string>
-    <string name="dlErrorNoFile">No file to download. Server replied HTTP code : %s</string>
-    <string name="dlErrorBadContentType">Bad encoding : %s. Try to log back in.</string>
-    <string name="bookmark_torrent_success">Torrent bookmarked</string>
-    <string name="bookmark_torrent_duplicate">Torrent already bookmarked</string>
-    <string name="bookmark_torrent_error">Internal server error</string>
-    <string name="bookmark_delete_success">Bookmark successfully deleted</string>
-    <string name="bookmark_notfound">Bookmark not found</string>
+    <string name="dlErrorNoFile">Aucun fichier disponible. Le serveur a renvoyé le code : %s</string>
+    <string name="dlErrorBadContentType">Mauvais encodage : %s. Essayez de vous reconnecter.</string>
+    <string name="bookmark_torrent_success">Torrent enregistré</string>
+    <string name="bookmark_torrent_duplicate">Torrent déjà enregistré</string>
+    <string name="bookmark_torrent_error">Erreur interne du serveur</string>
+    <string name="bookmark_delete_success">Torrent supprimé</string>
+    <string name="bookmark_notfound">Torrent introuvable...</string>
+    <string name="settings_declare_bug">Déclarer un bug</string>
+    <string name="settings_summary_declare_bug">Déclarer un bug (issue) sur GitHub</string>
 </resources>

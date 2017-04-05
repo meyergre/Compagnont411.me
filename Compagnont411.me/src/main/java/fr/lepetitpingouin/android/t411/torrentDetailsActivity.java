@@ -23,6 +23,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,8 +34,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -66,6 +69,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
     private String t_cat;
 
     String t_uploader;
+
+    private InterstitialAd mInterstitialAd;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -117,6 +122,11 @@ public class torrentDetailsActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+        mInterstitialAd.loadAd(adRequest);
+    }
+
     /**
      * Called when the activity is first created.
      */
@@ -133,6 +143,23 @@ public class torrentDetailsActivity extends AppCompatActivity {
         details_www.getSettings().setLoadWithOverviewMode(true);
 
         details_www.getSettings().setJavaScriptEnabled(true);
+
+        mInterstitialAd = new InterstitialAd(torrentDetailsActivity.this);
+        mInterstitialAd.setAdUnitId(Private.ADMOB_INTERSTITIAL_API_KEY);
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0))) {
+                    mInterstitialAd.show();
+                }
+            }
+
+            @Override
+            public void onAdClosed() {
+                //requestNewInterstitial();
+            }
+        });
+        requestNewInterstitial();
 
         //dialog = ProgressDialog.show(this, "t411.ch", this.getString(R.string.pleasewait), true, true);
         dialog = new ProgressDialog(this, R.style.AdTitleDialog);
@@ -277,6 +304,9 @@ public class torrentDetailsActivity extends AppCompatActivity {
         else {
             Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, t_uploader, t_cat);
             torrent.download();
+            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0)) &&  Math.ceil(Math.random() * 100) > 75 || Math.ceil(Math.random() * 100) > 96 ) {
+                requestNewInterstitial();
+            }
         }
     }
 
@@ -309,16 +339,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
             Document doc = null;
 
             try {
-                /*res = Jsoup
-                        .connect(Default.URL_SAY_THANKS + torrent_ID)
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                        .ignoreContentType(true).execute();
-
-                doc = res.parse();*/
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
                         .login(username, password)
                         .connect(Default.URL_SAY_THANKS + torrent_ID)
@@ -365,40 +385,20 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
             String username = prefs.getString("login", ""), password = prefs.getString("password", "");
 
+            SuperT411HttpBrowser browser = new SuperT411HttpBrowser(getApplicationContext())
+                    .login(username, password)
+                    .connect(torrent_URL);
+
+            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0))) {
+                new T411Logger(getApplicationContext()).writeLine("Torrent XXX, connexion nécessaire");
+                browser.forceLogin();
+            } else {
+                browser.skipLogin();
+            }
+
             try {
 
-                /*res = Jsoup
-                        .connect(Default.URL_LOGIN)
-                        .data("login", prefs.getString("login", ""), "password", prefs.getString("password", ""))
-                        .method(Connection.Method.POST)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true)
-                        .execute();
-
-                Map<String, String> Cookies = res.cookies();
-
-                res = Jsoup
-                        .connect(torrent_URL)
-                        .data("login", username, "password", password)
-                        .method(Method.POST)
-                        .cookies(Cookies)
-                        .userAgent(prefs.getString("User-Agent", Default.USER_AGENT))
-                        .timeout(Integer.valueOf(prefs.getString("timeoutValue", Default.timeout)) * 1000)
-.maxBodySize(0).followRedirects(true).ignoreContentType(true).ignoreHttpErrors(true)
-                        .ignoreContentType(true).execute();
-
-                doc = res.parse();*/
-
-                SuperT411HttpBrowser browser = new SuperT411HttpBrowser(getApplicationContext())
-                        .login(username, password)
-                        .connect(torrent_URL);
-
-                if (!CategoryIcon.isPrOn(getIntent().getIntExtra("icon", R.drawable.ic_new_t411))) {
-                    //browser.skipLogin();
-                } else {
-                    new T411Logger(getApplicationContext()).writeLine("Torrent XXX, connexion nécessaire");
-                }
+                browser.forceLogin();
 
                 doc = Jsoup.parse(browser.executeInAsyncTask());
 

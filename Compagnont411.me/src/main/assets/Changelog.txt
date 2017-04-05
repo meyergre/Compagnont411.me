@@ -1,3 +1,8 @@
+2017.04-180
+- Correction des accès aux torrents X
+- Correction de traductions
+- Amélioration de la gestion des cookies
+
 2017.04-179
 - Correction des accès API lors de l'utilisation d'un domaine personnalisé (non recommandé)
 

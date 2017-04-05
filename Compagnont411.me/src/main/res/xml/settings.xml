@@ -271,6 +271,12 @@
                 android:title="@string/sendLogs" />
         </PreferenceScreen>
 
+        <Preference android:title="@string/settings_declare_bug"
+            android:summary="@string/settings_summary_declare_bug">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/meyergre/Compagnont411.me/issues" />
+        </Preference>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

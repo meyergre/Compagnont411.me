@@ -302,4 +302,6 @@
     <string name="bookmark_torrent_error">Internal server error</string>
     <string name="bookmark_delete_success">Bookmark successfully deleted</string>
     <string name="bookmark_notfound">Bookmark not found</string>
+    <string name="settings_declare_bug">Declare a bug</string>
+    <string name="settings_summary_declare_bug">Browse to GitHub and open an issue</string>
 </resources>

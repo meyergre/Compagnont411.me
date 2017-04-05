@@ -71,7 +71,7 @@ public class t411UpdateService extends Service {
     }
 
     private void initBp() {
-        bp = new BillingProcessor(getApplicationContext(), Private.API_KEY, new BillingProcessor.IBillingHandler() {
+        bp = new BillingProcessor(getApplicationContext(), Private.ADMOB_API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
             }

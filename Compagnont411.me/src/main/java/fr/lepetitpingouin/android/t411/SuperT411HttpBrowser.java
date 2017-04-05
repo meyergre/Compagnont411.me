@@ -288,8 +288,10 @@ public class SuperT411HttpBrowser {
             for(Cookie c : httpclient.getCookieStore().getCookies()) {
                 tmpCookies += c.getName() + "=" + c.getValue() + ";";
             }
-            prefs.edit().putString("cookies", tmpCookies).apply();
-            new T411Logger(this.ctx).writeLine("Cookies enregistrés");
+            if(tmpCookies.contains("authKey")) {
+                prefs.edit().putString("cookies", tmpCookies).commit();
+                new T411Logger(this.ctx).writeLine("Cookies enregistrés : " + tmpCookies);
+            }
 
             StatusLine statusLine = response.getStatusLine();
             new T411Logger(this.ctx).writeLine("La connexion a répondu : " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase());
@@ -336,9 +338,10 @@ public class SuperT411HttpBrowser {
 
             httppost.setEntity(new UrlEncodedFormEntity(this.data));
 
+            this.cookies = prefs.getString("cookies", "");
             /* Si on a un cookie sauvegardé, on l'utilise */
             if(this.skipLogin && !this.cookies.equals("")) {
-                new T411Logger(this.ctx).writeLine("Connexion par les cookies enregistrés");
+                new T411Logger(this.ctx).writeLine("Connexion par les cookies enregistrés : " + this.cookies);
                 httppost.addHeader("Cookie", this.cookies);
             }
 

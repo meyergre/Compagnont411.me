@@ -20,9 +20,7 @@ import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -335,7 +333,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     }
 
     private void initBP() {
-        bp = new BillingProcessor(this, Private.API_KEY, new BillingProcessor.IBillingHandler() {
+        bp = new BillingProcessor(this, Private.ADMOB_API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
             }

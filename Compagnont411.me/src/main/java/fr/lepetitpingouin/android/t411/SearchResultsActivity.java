@@ -18,6 +18,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -179,8 +180,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     i.putExtra("url", Default.URL_GET_PREZ + t.id);
                     i.putExtra("nom", t.name);
                     i.putExtra("ID", t.id);
-                    i.putExtra("icon", Integer.valueOf(t.category));
-                    //i.putExtra("DlLater", connectUrl.equals(Default.URL_BOOKMARKS));
+                    i.putExtra("icon", new CategoryIcon(t.category).getIcon());
                 } else {
                     i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(Default.URL_GET_PREZ.replace("torrents/torrents/", "torrents/") + t.id));
