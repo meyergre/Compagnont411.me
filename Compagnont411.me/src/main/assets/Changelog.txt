@@ -2,6 +2,7 @@
 - Correction des accès aux torrents X
 - Correction de traductions
 - Amélioration de la gestion des cookies
+- Ajout d'un lien de déclaration de bug dans les paramètres
 
 2017.04-179
 - Correction des accès API lors de l'utilisation d'un domaine personnalisé (non recommandé)

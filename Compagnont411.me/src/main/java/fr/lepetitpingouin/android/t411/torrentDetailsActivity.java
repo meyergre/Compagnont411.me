@@ -159,7 +159,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 //requestNewInterstitial();
             }
         });
-        requestNewInterstitial();
 
         //dialog = ProgressDialog.show(this, "t411.ch", this.getString(R.string.pleasewait), true, true);
         dialog = new ProgressDialog(this, R.style.AdTitleDialog);
@@ -697,6 +696,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
             }
 
             dialog.dismiss();
+            requestNewInterstitial();
         }
     }
 
