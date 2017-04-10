@@ -301,7 +301,6 @@
     <string name="settings_use_safemode_fallback_summary">Si l\'API du site est injoignable, essayer de lire le code des pages du site\nATTENTION : fonctionnement en mode dégradé - certaines fonctionnalités peuvent être inutilisables (EXPERIMENTAL)</string>
     <string name="openLogs">Ouvrir le fichier journal</string>
     <string name="openLogs_summary">Ouvre le journal actuel dans un éditeur de texte (à installer séparément)</string>
-    <string name="apiError_nocategories">Erreur API : catégories partiellement disponibles</string>
     <string name="apiError_noresponse_secondtry">Pas de réponse de l\'API, nouvelle tentative</string>
     <string name="apiError_std">Pas de réponse du serveur</string>
     <string name="ignoreFailure">Ignorer</string>

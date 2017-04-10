@@ -39,6 +39,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -676,7 +677,12 @@ public class SearchActivity extends AppCompatActivity {
         public void onPostExecute(JSONObject json) {
             //Log.e("JSON=>", json.toString());
             if(json.has("error")) {
-                String error = getResources().getString(R.string.apiError_nocategories);
+                String error = "";
+                try {
+                    error = json.getString("error");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 Snackbar sk = Snackbar.make(toolbar, error, Snackbar.LENGTH_LONG);
                 sk.getView().setBackgroundColor(Color.RED);

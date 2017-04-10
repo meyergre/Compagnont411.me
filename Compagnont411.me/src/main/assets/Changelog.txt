@@ -1,6 +1,7 @@
 2017.04-183
-- Rétablissement partiel des catégories
+- Rétablissement des catégories à partir de données statiques
 - Réduction du nombre de publicités sur les torrents X
+- Mise à jour du composant IABv3
 - Réduction du nombre de publicités pour les abonnés au proxy
 - Ajout d'une option de suppression totale de la publicité (achat in-app unique)
 

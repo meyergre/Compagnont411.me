@@ -38,7 +38,7 @@ dependencies {
     compile 'com.android.support:palette-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'org.jsoup:jsoup:1.10.2'
-    compile 'com.anjlab.android.iab.v3:library:1.0.31'
+    compile 'com.anjlab.android.iab.v3:library:1.0.39'
     compile 'com.google.android.gms:play-services-ads:10.2.1'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }

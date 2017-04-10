@@ -691,7 +691,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
             }
 
             dialog.dismiss();
-            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0)) &&  Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 20 : 60 ) ) {
+            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0)) &&  Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 80 : 60 ) ) {
                 requestNewInterstitial();
             }
         }

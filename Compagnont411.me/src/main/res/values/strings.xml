@@ -308,7 +308,6 @@
     <string name="settings_use_safemode_fallback_summary">Fall back to HTML parsing when \"API unreachable\" error occurs (EXPERIMENTAL)</string>
     <string name="openLogs">Open log file</string>
     <string name="openLogs_summary">Open the current log file in a text editor</string>
-    <string name="apiError_nocategories">API Error : categories partially available</string>
     <string name="apiError_noresponse_secondtry">No API Response. Second try…</string>
     <string name="apiError_std">API Error</string>
     <string name="ignoreFailure">Ignore</string>
