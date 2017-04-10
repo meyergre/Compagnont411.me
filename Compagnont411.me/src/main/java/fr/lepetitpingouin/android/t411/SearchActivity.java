@@ -614,7 +614,9 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         private void extractFromJson(JSONObject json) {
+
             try {
+
                 Iterator<String> iter = json.keys();
                 HashMap<String, String> catMap = new HashMap<>();
 
@@ -672,7 +674,17 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         public void onPostExecute(JSONObject json) {
-            extractFromJson(json);
+            //Log.e("JSON=>", json.toString());
+            if(json.has("error")) {
+                String error = getResources().getString(R.string.apiError_nocategories);
+
+                Snackbar sk = Snackbar.make(toolbar, error, Snackbar.LENGTH_LONG);
+                sk.getView().setBackgroundColor(Color.RED);
+                sk.show();
+                extractFromJson(CategoryIcon.getHardcodedCategories());
+            } else {
+                extractFromJson(json);
+            }
         }
 
     }

@@ -176,6 +176,7 @@ public class torrentsActivity extends AppCompatActivity {
         handler = new Handler();
 
         connectUrl = getIntent().getStringExtra("url");
+        if(getIntent().getStringExtra("sender").equals("bookmarks")) connectUrl = Default.URL_BOOKMARKS;
         searchTerms = getIntent().getStringExtra("keywords");
 
         new T411Logger(getApplicationContext()).writeLine("Recherche lancée : " + searchTerms);
@@ -409,7 +410,7 @@ public class torrentsActivity extends AppCompatActivity {
             mAdView = (AdView) view.findViewById(R.id.adView);
             adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
             dialog.setCustomTitle(view);
-            mAdView.loadAd(adRequest);
+            if(!prefs.getBoolean("stop_pub", false)) mAdView.loadAd(adRequest);
             dialog.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -713,11 +714,13 @@ public class torrentsActivity extends AppCompatActivity {
 
             try {
                 Element elmtNext = doc.select(".pagebar a").last();
-                strNext = null;
-                if (elmtNext.hasAttr("rel")) {
-                    strNext = elmtNext.attr("href").substring(elmtNext.attr("href").lastIndexOf("=") + 1);
-                    next = (ImageButton) findViewById(R.id.navbtn_next);
-                    next.setVisibility(View.VISIBLE);
+                if(elmtNext != null) {
+                    strNext = null;
+                    if (elmtNext.hasAttr("rel")) {
+                        strNext = elmtNext.attr("href").substring(elmtNext.attr("href").lastIndexOf("=") + 1);
+                        next = (ImageButton) findViewById(R.id.navbtn_next);
+                        next.setVisibility(View.VISIBLE);
+                    }
                 }
 
             } catch (Exception e) {

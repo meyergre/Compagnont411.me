@@ -123,6 +123,10 @@ class T411Logger {
         writeLine("-- APP SETTINGS --");
         writeLine("Connexion HTTPS : " + (prefs.getBoolean("useHTTPS", false)?"ON":"OFF"));
         writeLine("Etat du proxy : " + (prefs.getBoolean("usePaidProxy", false)?"ON":"OFF"));
+        writeLine("\"Safe Mode\" : " + (prefs.getBoolean("safemode_fallback", true)?"ON":"OFF"));
+        if(!prefs.getString("custom_domain", "").equals("")) {
+            writeLine("Domaine personnalisé : " + prefs.getString("custom_domain", ""), WARN);
+        }
 
         writeLine("Dossier de téléchargement : " + prefs.getString("filePicker", Environment.getExternalStorageDirectory().getPath()));
     }

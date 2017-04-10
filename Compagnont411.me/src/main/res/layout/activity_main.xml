@@ -300,6 +300,8 @@
 
                     </LinearLayout>
 
+                    <include layout="@layout/include_safemode_banner" />
+
                     <LinearLayout
                         android:id="@+id/storage_permission"
                         android:layout_width="match_parent"

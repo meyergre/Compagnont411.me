@@ -44,23 +44,23 @@
                     android:layout_marginRight="4dp">
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical">
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/imageView"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:id="@+id/imageView"
                             android:layout_gravity="center_vertical"
                             android:src="@mipmap/ic_launcher" />
 
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical">
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                                 android:gravity="center_horizontal"
                                 android:text="App version"
                                 android:textColor="#66000000"
-                                android:textSize="24sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -96,55 +96,25 @@
                     android:layout_gravity="center">
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:id="@+id/paypal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/paypal"
+                        android:gravity="center"
+                        android:paddingLeft="15dip"
+                        android:paddingRight="15dip">
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/considerDonate"
-                                android:textColor="#012f54"
-                                android:textSize="16dp"
-                                android:textStyle="italic"
-                                android:gravity="left" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/support_the_dev"
-                                android:textSize="16dp"
-                                android:padding="4dp"
-                                android:gravity="left" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/paypal"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:background="@drawable/paypal"
-                            android:gravity="right|center"
-                            android:paddingLeft="15dip"
-                            android:paddingRight="15dip">
+                            android:gravity="center"
+                            android:text="@string/donate"
+                            android:textColor="#FF000000"
+                            android:textSize="18sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="@string/donate"
-                                android:textColor="#FF000000"
-                                android:textSize="18sp"
-                                android:layout_margin="4dp" />
-
-                        </LinearLayout>
                     </LinearLayout>
 
                     <TextView
@@ -159,22 +129,22 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:layout_margin="3dp"
-                    android:background="@drawable/torrent_card">
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:text="@string/about_inapp_subscription"
                         android:textColor="#012f54"
                         android:textSize="16dp"
-                        android:textStyle="italic"
-                        android:layout_gravity="center_horizontal" />
+                        android:textStyle="italic" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -185,62 +155,71 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/about_inapp_subscription_details"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:padding="4dp" />
+                        android:padding="4dp"
+                        android:text="@string/about_inapp_subscription_details"
+                        android:textSize="16dp" />
+
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/torrent_card"
-                    android:layout_margin="3dp"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:id="@+id/statBtm">
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/bg_card"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:text="@string/contribute_on_t411"
+                        android:text="@string/removeAds"
                         android:textColor="#012f54"
                         android:textSize="16dp"
-                        android:textStyle="italic"
-                        android:layout_gravity="center_horizontal" />
+                        android:textStyle="italic" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dip"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#ddd" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="1"
-                        android:text="@string/support_t411_text"
-                        android:textColor="#000"
-                        android:textSize="16dp"
-                        android:padding="4dp"
-                        android:layout_gravity="center_horizontal" />
-
-                    <Button
-                        android:id="@+id/about_t411"
-                        android:layout_width="150dp"
-                        android:layout_height="46dp"
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_margin="2dp"
-                        android:background="@drawable/androidt411_btn"
-                        android:paddingLeft="15dip"
-                        android:paddingRight="15dip"
-                        android:text="@string/learn_more"
-                        android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:text="@string/removeAdsSummary"
+                        android:textSize="16dp" />
 
+                    <LinearLayout
+                        android:id="@+id/removeAds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/paypal"
+                        android:gravity="center"
+                        android:paddingLeft="15dip"
+                        android:paddingRight="15dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:gravity="center"
+                            android:text="@string/removeAds"
+                            android:textColor="#FF000000"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

@@ -6,6 +6,7 @@
     android:layout_height="50dp"
     android:fitsSystemWindows="true"
     android:padding="0dp"
+    android:background="@drawable/clouds"
     android:orientation="vertical">
 
     <com.google.android.gms.ads.AdView

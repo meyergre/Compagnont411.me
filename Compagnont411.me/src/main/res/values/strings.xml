@@ -176,7 +176,7 @@
     <string name="torrent_read_prez">Read prez</string>
     <string name="torrent_context_add_to_later">Add to future downloads</string>
     <string name="torrent_context_del_from_later">Delete from future downloads</string>
-    <string name="support_the_dev">Support the developper !</string>
+    <string name="support_the_dev">Support the developer !</string>
     <string name="bitcoinCopied">My Bitcoin address has been coiped to your clipboard !</string>
     <string name="open_after_dl">Open torrent after download</string>
     <string name="description_open_after_dl">Open the file automatically once it\'s fully downloaded, with no notification.</string>
@@ -225,7 +225,7 @@
     <string name="preference_appLogs">Log app usage</string>
     <string name="preference_appLogs_summary">Record app usage to log files, that you can send to the developer on case of problems</string>
     <string name="sendLogs">Send logs</string>
-    <string name="sendLogs_summary">Send today\'s log to the developer, attached to an e-mail</string>
+    <string name="sendLogs_summary">Send today\'s log to the developer, attached to an e-mail. CAUTION : it may contain critical data (connection cookies, API token…)</string>
     <string name="settings_caption_logging">Logging</string>
     <string name="settings_caption_logging_summary">Enable debug logging to help developer in troubleshooting</string>
     <string name="initialLoad">Fetching your data for the 1st time…</string>
@@ -304,4 +304,15 @@
     <string name="bookmark_notfound">Bookmark not found</string>
     <string name="settings_declare_bug">Declare a bug</string>
     <string name="settings_summary_declare_bug">Browse to GitHub and open an issue</string>
+    <string name="settings_use_safemode_fallback">Safe Mode</string>
+    <string name="settings_use_safemode_fallback_summary">Fall back to HTML parsing when \"API unreachable\" error occurs (EXPERIMENTAL)</string>
+    <string name="openLogs">Open log file</string>
+    <string name="openLogs_summary">Open the current log file in a text editor</string>
+    <string name="apiError_nocategories">API Error : categories partially available</string>
+    <string name="apiError_noresponse_secondtry">No API Response. Second try…</string>
+    <string name="apiError_std">API Error</string>
+    <string name="ignoreFailure">Ignore</string>
+    <string name="safemode_needed">Safe Mode is turned OFF. If t411\'s API is down, the app will stop working.\nTap to enable.</string>
+    <string name="removeAdsSummary">Ads allows the developer to be \"paid\" for his work. Nevertheless, you can remove them all definitely from the app with a single in-app purchase.</string>
+    <string name="removeAds">Remove ads</string>
 </resources>

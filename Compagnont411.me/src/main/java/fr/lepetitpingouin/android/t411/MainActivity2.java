@@ -102,7 +102,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 .addTestDevice(Private.REAL_DEVICE) // Real device : Oneplus One Greg
                 .build();
 
-        mAdView.loadAd(adRequest);
+        if(!prefs.getBoolean("stop_pub", false)) mAdView.loadAd(adRequest);
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         drw.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -176,6 +176,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 super.onDrawerOpened(drawerView);
             }
         };*/
+
 
         //Setting the actionbarToggle to drawer layout
         //drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -295,8 +296,24 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         registerReceiver(receiver, filter);
         swrl.setRefreshing(false);
 
+
+        View safemodeFallback = findViewById(R.id.safemode_banner);
+        safemodeFallback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefs.edit().putBoolean("safemode_fallback", true).apply();
+                v.setVisibility(View.GONE);
+            }
+        });
+        if(prefs.getBoolean("safemode_fallback", true)) {
+            safemodeFallback.setVisibility(View.GONE);
+        } else {
+            safemodeFallback.setVisibility(View.VISIBLE);
+        }
+
         View permissionStorage = findViewById(R.id.storage_permission);
 
+        permissionStorage.setVisibility(View.GONE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionStorage.setVisibility(View.VISIBLE);
             permissionStorage.setOnClickListener(new View.OnClickListener() {
@@ -307,9 +324,6 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                     }
                 }
             });
-        }
-        else {
-            permissionStorage.setVisibility(View.GONE);
         }
 
         if(!prefs.getString("custom_domain", "").isEmpty()) {
@@ -333,7 +347,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     }
 
     private void initBP() {
-        bp = new BillingProcessor(this, Private.ADMOB_API_KEY, new BillingProcessor.IBillingHandler() {
+        bp = new BillingProcessor(this, Private.IAP_API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
             }
@@ -361,7 +375,11 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             new T411Logger(getApplicationContext()).writeLine("Proxy souscrit", T411Logger.INFO);
         } else {
             new T411Logger(getApplicationContext()).writeLine("Proxy non souscrit", T411Logger.INFO);
-
+        }
+        boolean stopPub = bp.isPurchased(Private.STOPPUB_ITEM_ID);
+        if(stopPub && prefs.getBoolean("stop_pub", false) != stopPub) {
+            new T411Logger(getApplicationContext()).writeLine("Stop pub acheté", T411Logger.INFO);
+            prefs.edit().putBoolean("stop_pub", stopPub).commit();
         }
     }
 
@@ -476,7 +494,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         try {
             stopService(new Intent(MainActivity2.this, t411UpdateService.class));
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
         startService(new Intent(MainActivity2.this, t411UpdateService.class));
 

@@ -11,11 +11,16 @@ import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 
 import java.io.File;
 
@@ -111,15 +116,29 @@ public class UserPrefsActivity extends PreferenceActivity {
         Preference sendLog = findPreference("sendLogs");
         final String logFile = new T411Logger(getApplicationContext()).logFilePath();
 
-        File log = new File(logFile);
+        final File log = new File(logFile);
         sendLog.setEnabled(log.exists());
 
         sendLog.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:meyergre@gmail.com"));
-                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + logFile));
-                i.putExtra(Intent.EXTRA_SUBJECT, "Compagnon t411 - envoi de logs");
+                //i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + logFile));
+                i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(log));
+                i.putExtra(Intent.EXTRA_SUBJECT, "[Compagnon t411] envoi de logs");
+                i.putExtra(Intent.EXTRA_TEXT, "Description du problème rencontré : \n\n");
+                startActivity(Intent.createChooser(i, ""));
+                return false;
+            }
+        });
+
+        Preference openLogs = findPreference("openLogs");
+        openLogs.setEnabled(log.exists());
+        openLogs.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setDataAndType(Uri.fromFile(log), "text/plain");
                 startActivity(Intent.createChooser(i, ""));
                 return false;
             }

@@ -82,7 +82,7 @@ public class ProxyActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        bp = new BillingProcessor(this, Private.ADMOB_API_KEY, new BillingProcessor.IBillingHandler() {
+        bp = new BillingProcessor(this, Private.IAP_API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
                 edit.putBoolean("showProxyAlert", true).apply();

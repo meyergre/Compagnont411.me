@@ -124,7 +124,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
-        mInterstitialAd.loadAd(adRequest);
+        if(!prefs.getBoolean("stop_pub", false)) mInterstitialAd.loadAd(adRequest);
     }
 
     /**
@@ -149,9 +149,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0))) {
-                    mInterstitialAd.show();
-                }
+                mInterstitialAd.show();
             }
 
             @Override
@@ -179,7 +177,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         dialog.show();
 
 
-        mAdView.loadAd(adRequest);
+        if(!prefs.getBoolean("stop_pub", false)) mAdView.loadAd(adRequest);
 
         setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayUseLogoEnabled(false);
@@ -303,7 +301,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         else {
             Torrent torrent = new Torrent(getApplicationContext(), torrent_Name, torrent_ID, t_taille, t_uploader, t_cat);
             torrent.download();
-            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0)) &&  Math.ceil(Math.random() * 100) > 75 || Math.ceil(Math.random() * 100) > 96 ) {
+            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0)) &&  Math.ceil(Math.random() * 100) > 75 || Math.ceil(Math.random() * 100) > ( prefs.getBoolean("usePaidProxy", false) ? 97 : 90 ) ) {
                 requestNewInterstitial();
             }
         }
@@ -396,8 +394,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
             }
 
             try {
-
-                browser.forceLogin();
 
                 doc = Jsoup.parse(browser.executeInAsyncTask());
 
@@ -691,12 +687,13 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 {tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_50)); }
 
             } catch (Exception e) {
-                //details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + doc.select(".block").first().text(), mimeType, encoding, "");
                 details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + e.getMessage(), mimeType, encoding, "");
             }
 
             dialog.dismiss();
-            requestNewInterstitial();
+            if (CategoryIcon.isPrOn(getIntent().getIntExtra("icon", 0)) &&  Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 20 : 60 ) ) {
+                requestNewInterstitial();
+            }
         }
     }
 

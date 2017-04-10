@@ -103,7 +103,7 @@ public class readMailActivity extends AppCompatActivity {
         mAdView = (AdView) view.findViewById(R.id.adView);
         adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
         dialog.setCustomTitle(view);
-        mAdView.loadAd(adRequest);
+        if(!prefs.getBoolean("stop_pub", false)) mAdView.loadAd(adRequest);
         dialog.show();
 
         mG.execute();

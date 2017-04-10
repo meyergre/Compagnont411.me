@@ -1,3 +1,20 @@
+2017.04-183
+- Rétablissement partiel des catégories
+- Réduction du nombre de publicités sur les torrents X
+- Réduction du nombre de publicités pour les abonnés au proxy
+- Ajout d'une option de suppression totale de la publicité (achat in-app unique)
+
+2017.04-182
+- Passage des TOPs par le Safe Mode (plus lents que via l'API, mais fonctionnels tant que le site l'est également)
+- Possibilité de passer le login en cas d'erreur API
+- Safe Mode activé par défaut
+
+2017.04-181
+- Ajout de contrôles sur la récupération des cookies
+- Ajout d'un message en cas d'erreur de l'API (connexion, téléchargement...)
+- Ajout d'un bouton de consultation du fichier de log (journal d'utilisation)
+- Ajout d'un "Safe Mode" dans les options avancées, permettant un accès dégradé au site en l'absence de réponse de l'API (EXPERIMENTAL)
+
 2017.04-180
 - Correction des accès aux torrents X
 - Correction de traductions

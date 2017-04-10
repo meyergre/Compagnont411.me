@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.BoolRes;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -157,7 +158,7 @@ public class Torrent implements Comparable {
         for(int i = 0; i < json.length(); i++) {
 
             try {
-                Log.e("json ", json.get(i).toString() + "/ID+ "+this.id);
+                //Log.e("json ", json.get(i).toString() + "/ID+ "+this.id);
                 if(deleted || !((JSONObject)json.get(i)).get("id").equals(this.id)) {
                     newJson.put(json.get(i));
                 } else {
@@ -354,7 +355,14 @@ public class Torrent implements Comparable {
         protected Boolean doInBackground(Object... arg0) {
             apiBrowser = new APIBrowser(context).connect(Default.API_T411 + Default.URL_API_GET_TORRENT + id);
             new T411Logger(context).writeLine("Téléchargement du fichier torrent...");
-            return apiBrowser.download(file);
+            boolean ret = apiBrowser.download(file);
+            if(!ret && prefs.getBoolean("safemode_fallback", true)) {
+                String login = prefs.getString("login", ""),
+                        password = prefs.getString("password", "");
+                new T411Logger(context).writeLine("Echec, tentative par la méthode alternative...");
+                ret = new SuperT411HttpBrowser(context).login(login, password).connect(Default.URL_GET_TORRENT + id).download(file);
+            }
+            return ret;
         }
 
         @Override
@@ -365,10 +373,15 @@ public class Torrent implements Comparable {
             Intent dlstatus = new Intent(Torrent.INTENT_UPDATE_STATUS);
 
             if(!result) {
+                String error = apiBrowser.errorMessage;
+                if(error == null) {
+                    error = "Serveur API injoignable, reessayez ultérieurement.";
+                }
                 new T411Logger(context).writeLine(apiBrowser.errorMessage, T411Logger.ERROR);
-                dlstatus.putExtra("message", apiBrowser.errorMessage);
+                dlstatus.putExtra("message", error);
                 dlstatus.putExtra("success", false);
                 context.sendBroadcast(dlstatus);
+                cancelNotify(Integer.valueOf(id));
             } else {
 
                 try {

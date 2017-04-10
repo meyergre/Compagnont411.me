@@ -172,11 +172,11 @@
             android:summary="@string/settings_caption_connection_summary"
             android:title="@string/settings_caption_connection">
 
-            <EditTextPreference
-                android:key="custom_domain"
-                android:dialogMessage="@string/settings_custom_domain_warning"
-                android:summary="@string/settings_custom_domain_summary"
-                android:title="@string/settings_custom_domain_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="safemode_fallback"
+                android:summary="@string/settings_use_safemode_fallback_summary"
+                android:title="@string/settings_use_safemode_fallback" />
 
             <CheckBoxPreference
                 android:defaultValue="true"
@@ -230,6 +230,12 @@
 
 
             </PreferenceScreen>
+
+            <EditTextPreference
+                android:key="custom_domain"
+                android:dialogMessage="@string/settings_custom_domain_warning"
+                android:summary="@string/settings_custom_domain_summary"
+                android:title="@string/settings_custom_domain_title" />
 <!--
             <PreferenceScreen
                 android:enabled="true"
@@ -269,6 +275,11 @@
                 android:key="sendLogs"
                 android:summary="@string/sendLogs_summary"
                 android:title="@string/sendLogs" />
+            <Preference android:title="@string/openLogs"
+                android:dependency="appLogs"
+                android:summary="@string/openLogs_summary"
+                android:key="openLogs">
+            </Preference>
         </PreferenceScreen>
 
         <Preference android:title="@string/settings_declare_bug"

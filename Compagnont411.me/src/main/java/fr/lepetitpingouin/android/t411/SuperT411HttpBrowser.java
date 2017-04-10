@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -24,6 +25,9 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.security.cert.X509Certificate;
@@ -70,6 +74,7 @@ public class SuperT411HttpBrowser {
     private Boolean forceLogin = false;
 
     private HttpHost httpproxy;
+    private byte[] byteResponse;
 
     public SuperT411HttpBrowser(Context context) {
         ctx = context;
@@ -159,6 +164,22 @@ public class SuperT411HttpBrowser {
         return this;
     }
 
+    public boolean download(File file) {
+        this.executeInAsyncTask();
+        try {
+            FileOutputStream writer = new FileOutputStream(file);
+
+            writer.write(this.byteResponse);
+            writer.flush();
+
+            writer.close();
+            return true;
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
     public SuperT411HttpBrowser connect(String mUrl) {
         this.url = mUrl.replace(Default.API_T411, prefs.getString("custom_domain", Default.IP_T411));
         if (prefs.getBoolean("useHTTPS", false) ) {
@@ -169,7 +190,7 @@ public class SuperT411HttpBrowser {
         return this;
     }
 
-    private SuperT411HttpBrowser resolveCaptcha(String token, String captcha) {
+    private boolean resolveCaptcha(String token, String captcha) {
 
         String[] elements = captcha.split("\\s");
         String operator = elements[1];
@@ -187,7 +208,7 @@ public class SuperT411HttpBrowser {
         this.qpT = token;
 
         new T411Logger(this.ctx).writeLine("Résolution du captcha : " + captcha + " " + result);
-        return this;
+        return result != 0;
     }
 
     public String getErrorMessage() {
@@ -288,9 +309,11 @@ public class SuperT411HttpBrowser {
             for(Cookie c : httpclient.getCookieStore().getCookies()) {
                 tmpCookies += c.getName() + "=" + c.getValue() + ";";
             }
-            if(tmpCookies.contains("authKey")) {
+            if(tmpCookies.contains("authKey") && !tmpCookies.contains("null")) {
                 prefs.edit().putString("cookies", tmpCookies).commit();
                 new T411Logger(this.ctx).writeLine("Cookies enregistrés : " + tmpCookies);
+            } else {
+                prefs.edit().remove("cookies").apply();
             }
 
             StatusLine statusLine = response.getStatusLine();
@@ -298,6 +321,7 @@ public class SuperT411HttpBrowser {
 
 
             if(Jsoup.parse(responseString).select("div.fade").first() != null) {
+                //Log.e("ERRORMESSAGE", Jsoup.parse(responseString).select("div.fade").first().text());
                 try {
                     String conError = Jsoup.parse(responseString).select("div.fade").first().text();
                     if (!conError.equals(null) && !conError.equals("") && !conError.contains("identifié")) {
@@ -311,9 +335,9 @@ public class SuperT411HttpBrowser {
 
                             try {
                                 Element doc = Jsoup.parse(responseString).select(".loginForm").first();
-                                resolveCaptcha(doc.select("input[name=captchaToken]").first().val(), doc.select("input[name=captchaQuery]").first().val());
+                                boolean captcha = resolveCaptcha(doc.select("input[name=captchaToken]").first().val(), doc.select("input[name=captchaQuery]").first().val());
 
-                                executeInAsyncTask();
+                                if( captcha ) executeInAsyncTask();
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
@@ -346,7 +370,9 @@ public class SuperT411HttpBrowser {
             }
 
             response = this.httpclient.execute(httppost);
-            responseString = EntityUtils.toString(response.getEntity(), this.encoding);
+            this.byteResponse = EntityUtils.toByteArray(response.getEntity());
+            //responseString = EntityUtils.toString(response.getEntity(), this.encoding);
+            responseString = new String(this.byteResponse, this.encoding);
 
             StatusLine statusLine = response.getStatusLine();
             new T411Logger(this.ctx).writeLine("La connexion a répondu : " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase());

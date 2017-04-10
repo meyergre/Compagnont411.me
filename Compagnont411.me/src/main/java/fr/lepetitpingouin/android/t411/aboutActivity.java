@@ -9,11 +9,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +25,7 @@ import java.io.InputStreamReader;
 
 public class aboutActivity extends AppCompatActivity {
     private static String version;
+    private BillingProcessor bp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,38 @@ public class aboutActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setTitle(getResources().getString(R.string.about));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final LinearLayout rmAds = (LinearLayout) findViewById(R.id.removeAds);
+
+        bp = new BillingProcessor(this, Private.IAP_API_KEY, new BillingProcessor.IBillingHandler() {
+            @Override
+            public void onProductPurchased(String s, TransactionDetails transactionDetails) {
+
+            }
+
+            @Override
+            public void onPurchaseHistoryRestored() {
+
+            }
+
+            @Override
+            public void onBillingError(int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onBillingInitialized() {
+                bp.loadOwnedPurchasesFromGoogle();
+                rmAds.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        bp.purchase(aboutActivity.this, Private.STOPPUB_ITEM_ID);
+                    }
+                });
+            }
+        });
+
 
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -57,17 +94,6 @@ public class aboutActivity extends AppCompatActivity {
                 Intent i = new Intent(
                         Intent.ACTION_VIEW,
                         Uri.parse(Default.URL_OTHERAPPS));
-                startActivity(i);
-            }
-        });
-
-        Button donateToT411 = (Button) findViewById(R.id.about_t411);
-        donateToT411.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i;
-                i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(Default.URL_DONATE));
                 startActivity(i);
             }
         });

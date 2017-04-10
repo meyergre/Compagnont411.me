@@ -216,7 +216,7 @@
     <string name="preference_appLogs">Journaliser</string>
     <string name="preference_appLogs_summary">Enregistre un journal de l\'application, qui peut être envoyé au développeur en cas de problème. Une fois l\'option activée, votre utilisation de l\'application sera enregistrée.</string>
     <string name="sendLogs">Envoyer le journal</string>
-    <string name="sendLogs_summary">Envoyer le journal du jour par e-mail au développeur</string>
+    <string name="sendLogs_summary">Envoyer le journal du jour par e-mail au développeur. ATTENTION : peut contenir des données sensibles (cookies de connexion, token API…)</string>
     <string name="settings_caption_logging">Journalisation</string>
     <string name="settings_caption_logging_summary">Activer la journalisation pour aider le développeur en cas de problème</string>
     <string name="initialLoad">Première récupération de données…</string>
@@ -227,7 +227,7 @@
     <string name="settings_proxy_host_title">Hôte</string>
     <string name="settings_proxy_host_summary">Indiquer le nom d\'hôte ou l\'adresse IP</string>
     <string name="settings_proxy_port_title">Port</string>
-    <string name="settings_proxy_port_summary">Pour des raisons de sécurité, afin d\'éviter l\'utilisation de proxys gratuits et peu sûrs, seul le port 411 est permis</string>
+    <string name="settings_proxy_port_summary">Pour des raisons de sécurité, afin d\'éviter l\'utilisation de proxys gratuits et peu sûrs, et de permettre aux initiés d\'utiliser leurs propores serveurs, seul le port 411 est permis.</string>
     <string name="settings_proxy_login_title">Login</string>
     <string name="settings_proxy_password_title">Mot de passe</string>
     <string name="settings_proxy_user_title">Utiliser un proxy</string>
@@ -294,7 +294,18 @@
     <string name="bookmark_torrent_duplicate">Torrent déjà enregistré</string>
     <string name="bookmark_torrent_error">Erreur interne du serveur</string>
     <string name="bookmark_delete_success">Torrent supprimé</string>
-    <string name="bookmark_notfound">Torrent introuvable...</string>
+    <string name="bookmark_notfound">Torrent introuvable…</string>
     <string name="settings_declare_bug">Déclarer un bug</string>
     <string name="settings_summary_declare_bug">Déclarer un bug (issue) sur GitHub</string>
+    <string name="settings_use_safemode_fallback">Safe mode</string>
+    <string name="settings_use_safemode_fallback_summary">Si l\'API du site est injoignable, essayer de lire le code des pages du site\nATTENTION : fonctionnement en mode dégradé - certaines fonctionnalités peuvent être inutilisables (EXPERIMENTAL)</string>
+    <string name="openLogs">Ouvrir le fichier journal</string>
+    <string name="openLogs_summary">Ouvre le journal actuel dans un éditeur de texte (à installer séparément)</string>
+    <string name="apiError_nocategories">Erreur API : catégories partiellement disponibles</string>
+    <string name="apiError_noresponse_secondtry">Pas de réponse de l\'API, nouvelle tentative</string>
+    <string name="apiError_std">Pas de réponse du serveur</string>
+    <string name="ignoreFailure">Ignorer</string>
+    <string name="safemode_needed">Safe Mode désactivé.\nEn cas de panne de l\'API du site, l\'application peut ne plus fonctionner. (Appuyez pour activer)</string>
+    <string name="removeAdsSummary">La publicité rapporte au développeur quelques euros par mois en échange de la gratuité de son travail. Néanmoins, il est possible de retirer toute la publicité de l\'application par un achat in-app unique.</string>
+    <string name="removeAds">Supprimer la pub</string>
 </resources>

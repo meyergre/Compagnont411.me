@@ -130,7 +130,7 @@ public class APIBrowser {
                     int index = disposition.indexOf("filename=");
                     if (index > 0) {
                     fileName = disposition.substring(index + 10, disposition.length() - 1);
-                        Log.e("FileName", fileName);
+                    //Log.e("FileName", fileName);
                 }
             }
 
@@ -194,8 +194,9 @@ public class APIBrowser {
             NotificationManager mNotificationManager = (NotificationManager) this.ctx.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(12345);
 
+            JSONObject o = new JSONObject();
             try {
-                JSONObject o = new JSONObject(response);
+                o = new JSONObject(response);
                 if(o.has("error")) {
 
                     String code = o.get("code").toString();
@@ -219,9 +220,19 @@ public class APIBrowser {
                 }
             } catch(Exception ex){
                 ex.printStackTrace();
+
+                this.errorCode = "000";
+                this.errorMessage = ctx.getResources().getString(R.string.apiError_std);
+
+                o.put("code", this.errorCode);
+                o.put("error", this.errorMessage);
+
+                response = o.toString();
             }
 
         } catch (Exception e) {
+            this.errorMessage = "Serveur API injoignable, reessayez ultérieurement.";
+            response = "";
             e.printStackTrace();
         }
 
@@ -231,7 +242,13 @@ public class APIBrowser {
 
     public JSONObject loadObject() {
         try {
-            return new JSONObject(this.load());
+            String ret = this.load();
+            if(ret.isEmpty() || ret.equals("ok")) {
+                this.errorMessage = "Serveur API injoignable, reessayez ultérieurement.";
+                ret = "{'error': '"+this.errorMessage+"'}";
+            }
+
+            return new JSONObject(ret);
         } catch (JSONException e) {
             e.printStackTrace();
             return new JSONObject();

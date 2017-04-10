@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:2.3.1'
     }
 }
 apply plugin: 'com.android.application'
@@ -18,8 +18,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 180
-        versionName "2017.04-180"
+        versionCode 183
+        versionName "2017.04-183"
         applicationId "fr.lepetitpingouin.android.t411"
 
         resConfigs "en", "fr"

@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -146,7 +147,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openDialog.show();
-                filtermAdView.loadAd(filteradRequest);
+                if(!prefs.getBoolean("stop_pub", false)) filtermAdView.loadAd(filteradRequest);
             }
         });
 
@@ -200,7 +201,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         mAdView = (AdView) view.findViewById(R.id.adView);
         adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
         dialog.setCustomTitle(view);
-        mAdView.loadAd(adRequest);
+        if(!prefs.getBoolean("stop_pub", false)) mAdView.loadAd(adRequest);
         dialog.show();
 
         if(getIntent().getStringExtra("sender").equals("top")) {
@@ -459,6 +460,43 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         @Override
         public void onPostExecute(String o) {
+            JSONObject json = new JSONObject();
+            try {
+                json = new JSONObject(o);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if(json.has("error") && prefs.getBoolean("safemode_fallback", true)) {
+                dialog.cancel();
+                Snackbar sb = Snackbar.make(lv, getResources().getString(R.string.apiError_noresponse_secondtry), 3000);
+                Intent secondTry = new Intent(getApplicationContext(), torrentsActivity.class);
+                secondTry.putExtra("sender", getIntent().getStringExtra("sender"));
+                secondTry.putExtra("cat", getIntent().getStringExtra("cat"));
+                secondTry.putExtra("order", getIntent().getStringExtra("order"));
+                secondTry.putExtra("type", getIntent().getStringExtra("type"));
+                secondTry.putExtra("keywords", getIntent().getStringExtra("keywords"));
+
+                if(getIntent().getStringExtra("url")!=null)
+                secondTry.putExtra("url", getIntent().getStringExtra("url")
+                        .replace(Default.API_T411_TOP_100, Default.T411_TOP_100)
+                        .replace(Default.API_T411_TOP_TODAY, Default.T411_TOP_TODAY)
+                        .replace(Default.API_T411_TOP_WEEK, Default.T411_TOP_WEEK)
+                        .replace(Default.API_T411_TOP_MONTH, Default.T411_TOP_MONTH)
+                );
+
+                startActivity(secondTry);
+                sb.show();
+
+                sb.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        finish();
+                    }
+                });
+            }
+
             JSONArray ret = new JSONArray();
             if(standardSearch) {
                 try {
@@ -511,6 +549,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
 
         private void extractFromJson(JSONObject json) {
+            if(json.has("error")) return;
             try {
 
                 Iterator<String> iter = json.keys();

@@ -3,6 +3,8 @@ package fr.lepetitpingouin.android.t411;
 class Default {
     public static final String IP_T411 = "t411.ai";
 
+    public static final String URL_T411 = "http://" + IP_T411;
+
     public static final String API_T411 = "https://api."+IP_T411;
     public static final String URL_API_GET_TORRENT = "/torrents/download/"; // + ID
     public static final String URL_API_BOOKMARKS = "/bookmarks";

@@ -87,7 +87,7 @@ public class WelcomeActivity extends AppCompatActivity {
         mAdView = (AdView) view.findViewById(R.id.adView);
         adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
         dialog.setCustomTitle(view);
-        mAdView.loadAd(adRequest);
+        if(!prefs.getBoolean("stop_pub", false)) mAdView.loadAd(adRequest);
     }
 
     public void onNext(View v) {
@@ -155,6 +155,19 @@ public class WelcomeActivity extends AppCompatActivity {
                     View snkView = snk.getView();
                     ((TextView)snkView.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
                     snkView.setBackgroundColor(Color.RED);
+                        if(value.getString("error").equals(getResources().getString(R.string.apiError_std)))
+                        snk.setAction(getResources().getString(R.string.ignoreFailure), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                edit.putString("login", mLogin);
+                                edit.putString("password", mPassword);
+                                edit.putBoolean("firstLogin", true);
+                                edit.putString("lastUsername", mLogin);
+                                edit.commit();
+                                startService(new Intent(getApplicationContext(), t411UpdateService.class));
+                                vf.showNext();
+                            }
+                        }).setActionTextColor(Color.WHITE);
                     snk.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -166,6 +179,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                edit.putString("lastUsername", mLogin);
                 edit.putString("login", this.mLogin);
                 edit.putString("password", this.mPassword);
                 edit.putBoolean("firstLogin", true);

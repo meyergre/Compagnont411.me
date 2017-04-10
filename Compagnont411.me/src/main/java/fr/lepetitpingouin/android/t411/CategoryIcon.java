@@ -1,5 +1,8 @@
 package fr.lepetitpingouin.android.t411;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by meyergre on 08/06/13.
  */
@@ -13,6 +16,18 @@ class CategoryIcon {
 
     public static boolean isPrOn(int icon) {
         return icon == R.drawable.ic_new_xxx || icon == R.drawable.ic_new_t411;
+    }
+
+    public static JSONObject getHardcodedCategories() {
+        JSONObject json = new JSONObject();
+
+        try {
+            json = new JSONObject("{ '395': {id: '395', name:'Audio'}, '404': {id: '404', name: 'eBook'}, '340': {id: '340', name: 'Emulation'}, '624': {id: '624', name: 'Jeu Vidéo'}, '392': {id: '392', name: 'GPS'}, '233': {id: '233', name: 'Application'}, '210': {id: '210', name: 'Film/Video'}, '456': {id: '456', name: 'xXx'} }");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 
     public int getIcon() {

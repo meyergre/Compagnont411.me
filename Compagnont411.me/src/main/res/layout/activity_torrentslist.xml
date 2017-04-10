@@ -13,27 +13,6 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/toolbar" />
 
-    <GridView
-        android:id="@+id/malistviewperso"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:cacheColorHint="#00000000"
-        android:padding="5dip"
-        android:divider="#00000000"
-        android:focusable="false"
-        android:longClickable="true"
-        android:clipToPadding="false"
-        android:listSelector="@drawable/androidt411_btn"
-        android:columnWidth="420dp"
-        android:numColumns="auto_fit"
-        android:background="#FFF" />
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#33000000"/>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="48dp"
@@ -66,6 +45,29 @@
             style="@style/Widget.AppCompat.Spinner.DropDown" />
 
     </LinearLayout>
+
+    <GridView
+        android:id="@+id/malistviewperso"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:padding="5dip"
+        android:divider="#00000000"
+        android:focusable="false"
+        android:longClickable="true"
+        android:clipToPadding="false"
+        android:listSelector="@drawable/androidt411_btn"
+        android:columnWidth="420dp"
+        android:numColumns="auto_fit"
+        android:background="#FFF" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"/>
+
+
 
     <LinearLayout
         android:layout_width="fill_parent"

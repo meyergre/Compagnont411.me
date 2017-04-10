@@ -49,10 +49,8 @@ public class t411UpdateService extends Service {
     private AlarmManager alarmManager;
     private SharedPreferences prefs;
     private boolean timeout = true;
-    Connection.Response res = null;
     private Document doc = null;
     private BillingProcessor bp;
-    private int retry = 0;
 
     private boolean isConnectedToWifi() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
@@ -64,14 +62,13 @@ public class t411UpdateService extends Service {
     @Override
     public void onCreate() {
         handler = new Handler();
-        this.retry = 0;
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         super.onCreate();
     }
 
     private void initBp() {
-        bp = new BillingProcessor(getApplicationContext(), Private.ADMOB_API_KEY, new BillingProcessor.IBillingHandler() {
+        bp = new BillingProcessor(getApplicationContext(), Private.IAP_API_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String s, TransactionDetails transactionDetails) {
             }
@@ -93,6 +90,11 @@ public class t411UpdateService extends Service {
                 if(!bp.isSubscribed(Private.PROXY_ITEM_ID) && prefs.getBoolean("usePaidProxy", false)) {
                     new T411Logger(getApplicationContext()).writeLine("Proxy actif en l'absence de souscription !! Désactivation de l'option", T411Logger.FATAL);
                     if(!BuildConfig.DEBUG) prefs.edit().putBoolean("usePaidProxy", false).apply();
+                }
+                boolean stopPub = bp.isPurchased(Private.STOPPUB_ITEM_ID);
+                if(stopPub && prefs.getBoolean("stop_pub", false) != stopPub) {
+                    new T411Logger(getApplicationContext()).writeLine("Stop pub acheté");
+                    prefs.edit().putBoolean("stop_pub", stopPub).commit();
                 }
             }
         });
@@ -336,7 +338,7 @@ public class t411UpdateService extends Service {
             if (mails != null)
                 editor.putInt("lastMails", mails);
 
-            editor.putString("usernumber", usernumber);
+            editor.putString("uid", usernumber);
 
             if (mails < prefs.getInt("lastMails", 0))
                 editor.putBoolean("mailsNeedRefresh", false);
@@ -540,13 +542,18 @@ public class t411UpdateService extends Service {
 
         @Override
         public void onPostExecute(JSONObject value) {
-            try {
-                prefs.edit().putString("APIToken",value.getString("token")).commit();
-                prefs.edit().putString("uid",value.getString("uid")).commit();
-                new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + value.getString("token"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-                new T411Logger(getApplicationContext()).writeLine("Erreur de récupération du token : " + e.getMessage());
+            if(value == new JSONObject() || value.has("error")) {
+                new T411Logger(getApplicationContext()).writeLine("Serveur API injoignable");
+                if(prefs.getBoolean("safemode_fallback", true)) new AsyncUpdate().execute();
+            } else {
+                try {
+                    prefs.edit().putString("APIToken", value.getString("token")).commit();
+                    prefs.edit().putString("uid", value.getString("uid")).commit();
+                    new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + value.getString("token"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    new T411Logger(getApplicationContext()).writeLine("Erreur de récupération du token : " + e.getMessage());
+                }
             }
         }
 
@@ -570,15 +577,19 @@ public class t411UpdateService extends Service {
 
         @Override
         public void onPostExecute(JSONObject value) {
+
+            //Log.e("JSONObject", value.toString());
             new grapher().execute();
             try {
                 if(value.has("error")) {
                     new T411Logger(getApplicationContext()).writeLine("Erreur API : " + value.get("error"), T411Logger.ERROR);
-                    new T411Logger(getApplicationContext()).writeLine("Fallback sur l'ancienne méthode d'update", T411Logger.INFO);
                     cancelNotify(12345);
                     //doNotify(0, getResources().getString(R.string.notif_apierror), getResources().getString(R.string.notif_apierror_fallback), 12345, null);
                     //Toast.makeText(getApplicationContext(), getResources().getString(R.string.notif_apierror) + " - " + getResources().getString(R.string.notif_apierror_fallback), Toast.LENGTH_LONG).show();
-                    new AsyncUpdate().execute();
+                    if(prefs.getBoolean("safemode_fallback", true)) {
+                        new T411Logger(getApplicationContext()).writeLine("Fallback sur l'ancienne méthode d'update", T411Logger.INFO);
+                        new AsyncUpdate().execute();
+                    }
                 } else {
 
                     prefs.edit().putString("lastUpload",BSize.quickConvert(value.getString("uploaded"))).commit();
@@ -617,6 +628,8 @@ public class t411UpdateService extends Service {
         protected void onPreExecute() {
             super.onPreExecute();
             new T411Logger(getApplicationContext()).writeLine("Récupération des données du graphique...");
+            prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
             this.userID = prefs.getString("uid", "");
             if(this.userID.equals("")) {
                 new asyncApiLogin().execute();

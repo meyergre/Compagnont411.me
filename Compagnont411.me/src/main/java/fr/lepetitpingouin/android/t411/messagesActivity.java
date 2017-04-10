@@ -259,7 +259,7 @@ public class messagesActivity extends AppCompatActivity {
 
             String url = CONNECTURL;
 
-            Log.e("LAUNCHING", "BROWSER....");
+            //Log.e("LAUNCHING", "BROWSER....");
 
             try {
                 doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext())
