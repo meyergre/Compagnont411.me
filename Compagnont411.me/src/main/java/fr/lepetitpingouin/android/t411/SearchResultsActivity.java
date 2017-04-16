@@ -35,8 +35,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +72,12 @@ public class SearchResultsActivity extends AppCompatActivity {
     private Dialog openDialog, catDialog;
     private List catList;
     private ListView maListViewPersoCat;
+    private InterstitialAd mInterstitialAd;
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+        if(!prefs.getBoolean("stop_pub", false)) mInterstitialAd.loadAd(adRequest);
+    }
 
 //    private String[] filters = new String[]{"Seeders ▼", "Seeders ▲", "Leechers ▼", "Leechers ▲", "Date ▼", "Date ▲", "Taille ▼", "Taille ▲"};
 
@@ -123,6 +131,20 @@ public class SearchResultsActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
         getSupportActionBar().setTitle(searchTerms);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(Private.ADMOB_INTERSTITIAL_API_KEY);
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+            }
+
+            @Override
+            public void onAdClosed() {
+                //requestNewInterstitial();
+            }
+        });
 
         this.openDialog = new Dialog(this);
         this.openDialog.setContentView(R.layout.dialog_api_filters);
@@ -341,6 +363,10 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                 return true;
             case R.id.torrent_context_menu_download:
+                if (CategoryIcon.isPrOn(Integer.valueOf(torrent_item.category)) &&  Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 80 : 60 )
+                        || Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 97 : 90 ) ) {
+                    requestNewInterstitial();
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     if(shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
 

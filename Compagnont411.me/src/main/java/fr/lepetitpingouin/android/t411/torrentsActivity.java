@@ -35,8 +35,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -96,6 +98,12 @@ public class torrentsActivity extends AppCompatActivity {
     private SimpleAdapter mSchedule;
     private SimpleAdapter mTorrentsAdapter;
 
+    private InterstitialAd mInterstitialAd;
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Private.REAL_DEVICE).build();
+        if(!prefs.getBoolean("stop_pub", false)) mInterstitialAd.loadAd(adRequest);
+    }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -158,6 +166,20 @@ public class torrentsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torrentslist);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(Private.ADMOB_INTERSTITIAL_API_KEY);
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mInterstitialAd.show();
+            }
+
+            @Override
+            public void onAdClosed() {
+                //requestNewInterstitial();
+            }
+        });
 
         new T411Logger(getApplicationContext()).writeLine("Lancement d'une recherche de torrent");
 
@@ -348,6 +370,10 @@ public class torrentsActivity extends AppCompatActivity {
 
                 return true;
             case R.id.torrent_context_menu_download:
+                if (CategoryIcon.isPrOn(Integer.valueOf(itemMmap.get("icon"))) &&  Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 80 : 60 )
+                        || Math.ceil(Math.random() * 100) > (prefs.getBoolean("usePaidProxy", false) ? 97 : 90 ) ) {
+                    requestNewInterstitial();
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     if(shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
 

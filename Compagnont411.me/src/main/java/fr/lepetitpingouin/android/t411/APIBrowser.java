@@ -194,40 +194,41 @@ public class APIBrowser {
             NotificationManager mNotificationManager = (NotificationManager) this.ctx.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(12345);
 
-            JSONObject o = new JSONObject();
-            try {
-                o = new JSONObject(response);
-                if(o.has("error")) {
+            if(!response.startsWith("[")) {
+                try {
+                    JSONObject o = new JSONObject(response);
+                    if (o.has("error")) {
 
-                    String code = o.get("code").toString();
-                    String error = o.get("error").toString();
+                        String code = o.get("code").toString();
+                        String error = o.get("error").toString();
 
-                    this.errorCode = code;
-                    this.errorMessage = error;
-                    if(code.startsWith("1") || code.startsWith("2")) { // erreur token ou utilisateur
-                        error += " - " + this.ctx.getResources().getString(R.string.notif_apierror_reconnect);
+                        this.errorCode = code;
+                        this.errorMessage = error;
+                        if (code.startsWith("1") || code.startsWith("2")) { // erreur token ou utilisateur
+                            error += " - " + this.ctx.getResources().getString(R.string.notif_apierror_reconnect);
+                        }
+
+                        NotificationCompat.Builder n = new NotificationCompat.Builder(this.ctx.getApplicationContext());
+                        n.setContentTitle(this.ctx.getResources().getString(R.string.notif_apierror) + " [" + code + "]");
+                        n.setSmallIcon(R.drawable.ic_notif_torrent_failure);
+                        n.setContentText(error);
+                        n.setDefaults(0);
+                        n.setSound(null);
+                        n.setOnlyAlertOnce(true);
+
+                        mNotificationManager.notify(12345, n.build());
                     }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JSONObject o = new JSONObject();
+                    this.errorCode = "000";
+                    this.errorMessage = ctx.getResources().getString(R.string.apiError_std);
 
-                    NotificationCompat.Builder n = new NotificationCompat.Builder(this.ctx.getApplicationContext());
-                    n.setContentTitle(this.ctx.getResources().getString(R.string.notif_apierror) + " ["+code+"]");
-                    n.setSmallIcon(R.drawable.ic_notif_torrent_failure);
-                    n.setContentText(error);
-                    n.setDefaults(0);
-                    n.setSound(null);
-                    n.setOnlyAlertOnce(true);
+                    o.put("code", this.errorCode);
+                    o.put("error", this.errorMessage);
 
-                    mNotificationManager.notify(12345, n.build());
+                    response = o.toString();
                 }
-            } catch(Exception ex){
-                ex.printStackTrace();
-
-                this.errorCode = "000";
-                this.errorMessage = ctx.getResources().getString(R.string.apiError_std);
-
-                o.put("code", this.errorCode);
-                o.put("error", this.errorMessage);
-
-                response = o.toString();
             }
 
         } catch (Exception e) {

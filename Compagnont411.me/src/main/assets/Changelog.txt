@@ -1,3 +1,6 @@
+2017.04-184
+- Ajustements suite au retour de l'API (TOP 100 / Jour / Semaine / Mois)
+
 2017.04-183
 - Rétablissement des catégories à partir de données statiques
 - Réduction du nombre de publicités sur les torrents X

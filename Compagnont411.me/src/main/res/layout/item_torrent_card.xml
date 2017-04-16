@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="none"
                         android:singleLine="false"
-                        android:textSize="9sp"
+                        android:textSize="11sp"
                         android:textColor="@color/t411_action_grey"
                         android:maxLines="2"
                         android:text="torrent uploader, date"
@@ -65,8 +65,8 @@
 
                 <ImageView
                     android:id="@+id/tIcon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/ic_new_t411"
                     android:focusable="false"
                     android:layout_marginRight="3dp"
@@ -116,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:text="Ratio :"
                             android:textColor="#000"
-                            android:textSize="8sp" />
+                            android:textSize="9sp" />
 
                         <TextView
                             android:id="@+id/ratioFrom"
@@ -124,7 +124,7 @@
                             android:layout_height="fill_parent"
                             android:text="-"
                             android:textColor="#88000000"
-                            android:textSize="8sp"
+                            android:textSize="9sp"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp" />
 
@@ -133,7 +133,7 @@
                             android:layout_height="fill_parent"
                             android:text="→"
                             android:textColor="#44000000"
-                            android:textSize="8sp" />
+                            android:textSize="9sp" />
 
                         <TextView
                             android:id="@+id/ratioTo"
@@ -141,7 +141,7 @@
                             android:layout_height="fill_parent"
                             android:text="-"
                             android:textColor="#88000000"
-                            android:textSize="8sp"
+                            android:textSize="9sp"
                             android:layout_marginLeft="5dp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -184,7 +184,7 @@
                                 android:layout_height="fill_parent"
                                 android:text="Seeders"
                                 android:textColor="@color/t411_green"
-                                android:textSize="8sp"
+                                android:textSize="9sp"
                                 android:singleLine="true" />
 
                         </LinearLayout>
@@ -213,7 +213,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Leechers"
                                 android:textColor="@color/t411_red"
-                                android:textSize="8sp"
+                                android:textSize="9sp"
                                 android:singleLine="true"
                                 android:gravity="center"
                                 android:layout_gravity="center_horizontal"
@@ -246,9 +246,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="complets"
+                            android:text="Complets"
                             android:textColor="#000"
-                            android:textSize="8sp"
+                            android:textSize="9sp"
                             android:singleLine="true"
                             android:gravity="center"
                             android:layout_weight="0" />
