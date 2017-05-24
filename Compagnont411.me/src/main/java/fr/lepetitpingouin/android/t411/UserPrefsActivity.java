@@ -94,7 +94,7 @@ public class UserPrefsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 if(o.toString().isEmpty()) {
-                    prefs.edit().remove("custom_domain");
+                    prefs.edit().remove("custom_domain").apply();
                 }
                 prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 preference.setSummary(prefs.getString("custom_domain", Default.IP_T411 + " (default)"));
@@ -109,6 +109,16 @@ public class UserPrefsActivity extends PreferenceActivity {
             public boolean onPreferenceClick(Preference preference) {
                 Intent i = new Intent(getApplicationContext(), ProxyActivity.class);
                 startActivity(i);
+                return false;
+            }
+        });
+
+        Preference clearHistory = findPreference("clearSearchHistory");
+        clearHistory.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                prefs.edit().remove("searchHistory").apply();
+                Toast.makeText(getApplicationContext(), "Historique vidé.", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });

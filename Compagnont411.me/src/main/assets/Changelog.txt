@@ -1,3 +1,19 @@
+2017.05-186
+- Corrections des liens de connexion au site
+- Corrections dans le navigateur interne (non-API)
+- Correction de l'accès aux torrents X
+- Introduction d'un système de news interne
+- Ajout de contrôles sur l'historique de recherches
+- Rétablissement de l'accès aux statistiques depuis le ratio en page d'accueil
+
+2017.05-185
+- Passage en .AL
+- Ajout de contrôles lors du chargement des présentations
+- Ajout d'un accès au répertoire des torrents depuis la liste des téléchargements
+- Amélioration de l'affichage de l'accueil en mode tablette
+- Premiers pas vers une meilleure compatibilité avec les Chromebooks
+- Correction d'anomalies dans le chargement de présentations des torrents X
+
 2017.04-184
 - Ajustements suite au retour de l'API (TOP 100 / Jour / Semaine / Mois)
 

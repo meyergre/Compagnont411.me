@@ -44,14 +44,13 @@ class T411Logger {
     }
     public void writeLine(String str, String level) {
 
+        String logLine = "[" + android.text.format.DateFormat.format("HH:mm:ss", new java.util.Date()).toString() + "] " + "[" + level + "]" + str + "\r\n";
+        Log.e("T411Logger", logLine);
         if(!prefs.getBoolean("appLogs", false)) return;
 
         String filename = android.text.format.DateFormat.format("yyyy-MM-dd", new java.util.Date()).toString() + "_T411.log";
 
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
-
-        String logLine = "[" + android.text.format.DateFormat.format("HH:mm:ss", new java.util.Date()).toString() + "] " + "[" + level + "]" + str + "\r\n";
-        Log.e("T411Logger", logLine);
 
         try {
 

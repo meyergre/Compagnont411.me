@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,9 +23,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,8 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -53,6 +59,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     private View navHeader;
     private BillingProcessor bp;
     private IntentFilter filter;
+    private NonScrollableListView newsList;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -60,17 +67,24 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Default.Appwidget_flag_updating)) {
                 swrl.setRefreshing(true);
+                initWidgets();
             } else {
                 swrl.setRefreshing(false);
+                initWidgets();
             }
-            initWidgets();
+
+            if(intent.getAction().equals(Default.Intent_Refresh_Newspaper)) {
+                initWidgets();
+            }
 
             if (intent.getAction().equals(INTENT_ERROR) && getIntent().hasExtra("message")) {
                 Snackbar.make(findViewById(R.id.tvDateUpdate), getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
+                initWidgets();
             }
 
         }
     };
+    private static NewsAdapter newsListAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +93,8 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
         //toolbar = (Toolbar)findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        this.newsList = (NonScrollableListView)findViewById(R.id.newsList);
 
         if (getIntent().hasExtra("message"))
             Snackbar.make(findViewById(R.id.tvDateUpdate), getIntent().getStringExtra("message"), Snackbar.LENGTH_SHORT).show();
@@ -177,6 +193,12 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             }
         };*/
 
+        findViewById(R.id.ratioStats).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), statsActivity.class));
+            }
+        });
 
         //Setting the actionbarToggle to drawer layout
         //drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -221,10 +243,20 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 ((TextView)findViewById(R.id.widget_ratio)).setText( prefs.getString("lastRatio", " "));
                 ((ImageView)findViewById(R.id.widget_avatar)).setImageBitmap(new AvatarFactory().getFromPrefs(prefs));
 
-
-                ((TextView)findViewById(R.id.widget_news1title)).setText(prefs.getString("title1", ""));
-                ((TextView)findViewById(R.id.widget_news2title)).setText(prefs.getString("title2", ""));
-                ((TextView)findViewById(R.id.widget_news3title)).setText(prefs.getString("title3", ""));
+                newsListAdapter = new NewsAdapter(getApplicationContext());
+                this.newsList.setAdapter(newsListAdapter);
+                this.newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        try {
+                            JSONObject o = newsListAdapter.getItem(position);
+                            //startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(o.getString("link"))));
+                            startActivity(new Intent(getApplicationContext(), newsActivity.class).putExtra("url", o.getString("link")));
+                        } catch(Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
 
                 String displayedDate = "";
                 if (!prefs.getString("lastDate", "").equals("")) {
@@ -278,6 +310,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
                 ((TextView)navHeader.findViewById(R.id.drw_username)).setText(prefs.getString("lastUsername", "Non connecté"));
 
             }
+
 
     @Override
     public void onResume() {

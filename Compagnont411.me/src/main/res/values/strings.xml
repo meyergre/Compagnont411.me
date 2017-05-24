@@ -314,4 +314,8 @@
     <string name="safemode_needed">Safe Mode is turned OFF. If t411\'s API is down, the app will stop working.\nTap to enable.</string>
     <string name="removeAdsSummary">Ads allows the developer to be \"paid\" for his work. Nevertheless, you can remove them all definitely from the app with a single in-app purchase.</string>
     <string name="removeAds">Remove ads</string>
+    <string name="menu_item_downloads_open_folder">Open folder...</string>
+    <string name="menu_item_downloads_open_folder_error_nofm">No file manager found.</string>
+    <string name="preference_appLogs_sensitive_summary">Include sensitive data (such as API token, cookies...) in the log file. Otherwise, all sensitive data will be replaced by \"???\"</string>
+    <string name="preference_sensitive_appLogs">Log sensitive data</string>
 </resources>

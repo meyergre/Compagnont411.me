@@ -101,23 +101,34 @@
         android:title="@string/search_and_download">
         <PreferenceCategory android:title="@string/search_results">
 
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="hadopi"
-                android:summary="Afficher un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
-                android:title="Avertissement hadopi" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="searchHistoryEnabled"
+                    android:summary="Conserver les recherches dans un historique, et les suggérer lors de la frappe"
+                    android:title="Historique de recherche" />
 
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="shareDirectLink"
-                android:summary="@string/description_share_direct_link"
-                android:title="@string/share_direct_link" />
+                <Preference
+                    android:key="clearSearchHistory"
+                    android:title="Vider l'historique"
+                    android:summary="Supprimer toutes les suggestions de l'historique de recherche" />
 
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="sortByDate"
-                android:summary="@string/description_sort_by_date"
-                android:title="@string/sort_by_date" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="hadopi"
+                    android:summary="Afficher un avertissement Hadopi en haut de la fiche de présentation du torrent si plusieurs commentaires en parlent. Disparait au clic sur le bandeau."
+                    android:title="Avertissement hadopi" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="shareDirectLink"
+                    android:summary="@string/description_share_direct_link"
+                    android:title="@string/share_direct_link" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="sortByDate"
+                    android:summary="@string/description_sort_by_date"
+                    android:title="@string/sort_by_date" />
 
         </PreferenceCategory>
 
@@ -270,6 +281,13 @@
                 android:key="appLogs"
                 android:summary="@string/preference_appLogs_summary"
                 android:title="@string/preference_appLogs" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:dependency="appLogs"
+                android:key="appLogs_sensitive"
+                android:summary="@string/preference_appLogs_sensitive_summary"
+                android:title="@string/preference_sensitive_appLogs"
+                />
             <Preference
                 android:dependency="appLogs"
                 android:key="sendLogs"

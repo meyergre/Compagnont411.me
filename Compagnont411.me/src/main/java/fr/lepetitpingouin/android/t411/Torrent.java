@@ -426,7 +426,7 @@ public class Torrent implements Comparable {
         }
     }
 
-    public String getTorrentPath() {
+    public static String getTorrentPath() {
         return new File(Environment.getExternalStorageDirectory().getPath(), DOWNLOAD_FOLDER).getPath();
     }
 

@@ -131,8 +131,12 @@ public class SearchActivity extends AppCompatActivity {
         tvCat = (TextView)findViewById(R.id.ddl_category);
 
         keywords = (AutoCompleteTextView) findViewById(R.id.action_search_keywords);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sh.getValues());
-        keywords.setAdapter(adapter);
+
+        if(prefs.getBoolean("searchHistoryEnabled", true)) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sh.getValues());
+            keywords.setAdapter(adapter);
+        }
+
         keywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

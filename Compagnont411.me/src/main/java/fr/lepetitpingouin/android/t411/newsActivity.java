@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -20,62 +21,12 @@ public class newsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newspaper);
 
-        prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Actualité");
 
-        TextView titre1 = (TextView) findViewById(R.id.news_titre1);
-        titre1.setText(prefs.getString("title1", "-"));
+        WebView warticle = (WebView) findViewById(R.id.www_article);
+        warticle.loadUrl(getIntent().getStringExtra("url"));
 
-        TextView titre2 = (TextView) findViewById(R.id.news_titre2);
-        titre2.setText(prefs.getString("title2", "-"));
-
-        TextView titre3 = (TextView) findViewById(R.id.news_titre3);
-        titre3.setText(prefs.getString("title3", "-"));
-
-        final String mimeType = "text/html";
-        final String encoding = "utf-8";
-        String customCSS = "<style>.readmore {display: none;}</style>";
-
-        WebView warticle1 = (WebView) findViewById(R.id.www_article1);
-        warticle1.loadDataWithBaseURL(null, customCSS + prefs.getString("article1", "..."), mimeType, encoding, "");
-
-        WebView warticle2 = (WebView) findViewById(R.id.www_article2);
-        warticle2.loadDataWithBaseURL(null, customCSS + prefs.getString("article2", "..."), mimeType, encoding, "");
-
-        WebView warticle3 = (WebView) findViewById(R.id.www_article3);
-        warticle3.loadDataWithBaseURL(null, customCSS + prefs.getString("article3", "..."), mimeType, encoding, "");
-
-        Button readMore1 = (Button) findViewById(R.id.news_readmore1);
-        readMore1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i;
-                i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(prefs.getString("readMore1", "")));
-                startActivity(i);
-            }
-        });
-
-        Button readMore2 = (Button) findViewById(R.id.news_readmore2);
-        readMore2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i;
-                i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(prefs.getString("readMore2", "")));
-                startActivity(i);
-            }
-        });
-
-        Button readMore3 = (Button) findViewById(R.id.news_readmore3);
-        readMore3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i;
-                i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(prefs.getString("readMore3", "")));
-                startActivity(i);
-            }
-        });
     }
 }

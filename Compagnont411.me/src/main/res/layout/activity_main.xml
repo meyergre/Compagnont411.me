@@ -123,11 +123,15 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/clouds" />
+                        android:layout_height="64dp"
+                        android:background="@drawable/bg_clouds"
+                        android:baselineAlignBottom="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_clouds"
+                        app:srcCompat="@drawable/bg_clouds" />
 
                     <RelativeLayout
+                        android:id="@+id/ratioStats"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -147,7 +151,6 @@
                             android:gravity="right|center_horizontal"
                             android:singleLine="true"
                             android:text="3.60 TB"
-                            android:textAlignment="textEnd"
                             android:textColor="@color/t411_green"
                             android:textSize="14sp" />
 
@@ -386,41 +389,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="4dp"
-                            android:text="NEWS DU SITE"
+                            android:text="ACTUALITÉ"
                             android:textColor="#777" />
 
-                        <Button
-                            android:id="@+id/widget_news1title"
+                        <fr.lepetitpingouin.android.t411.NonScrollableListView
+                            android:id="@+id/newsList"
+                            android:fillViewport="true"
+                            android:dividerHeight="0dp"
+                            android:divider="#00000000"
                             android:layout_width="match_parent"
-                            android:layout_height="42dp"
-                            android:background="#00000000"
-                            android:clickable="false"
-                            android:drawableLeft="@drawable/ic_btn_news"
-                            android:enabled="true"
-                            android:gravity="left|center_vertical"
-                            android:text="Titre de la news 1" />
-
-                        <Button
-                            android:id="@+id/widget_news2title"
-                            android:layout_width="match_parent"
-                            android:layout_height="42dp"
-                            android:background="#00000000"
-                            android:clickable="false"
-                            android:drawableLeft="@drawable/ic_btn_news"
-                            android:enabled="true"
-                            android:gravity="left|center_vertical"
-                            android:text="Titre de la news 2" />
-
-                        <Button
-                            android:id="@+id/widget_news3title"
-                            android:layout_width="match_parent"
-                            android:layout_height="42dp"
-                            android:background="#00000000"
-                            android:clickable="false"
-                            android:drawableLeft="@drawable/ic_btn_news"
-                            android:enabled="true"
-                            android:gravity="left|center_vertical"
-                            android:text="Titre de la news 3" />
+                            android:layout_height="wrap_content">
+                        </fr.lepetitpingouin.android.t411.NonScrollableListView>
 
 
                     </LinearLayout>

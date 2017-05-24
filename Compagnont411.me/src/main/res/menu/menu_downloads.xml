@@ -1,7 +1,14 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/dl_showHome"
         android:checkable="true"
         android:title="Afficher sur le lanceur"
+        />
+    <item
+        android:id="@+id/downloads_menu_open_folder"
+        android:title="@string/menu_item_downloads_open_folder"
+        android:icon="@drawable/ic_newfolder"
+        app:showAsAction="ifRoom"
         />
 </menu>

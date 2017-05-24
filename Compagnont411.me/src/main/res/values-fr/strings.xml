@@ -307,4 +307,8 @@
     <string name="safemode_needed">Safe Mode désactivé.\nEn cas de panne de l\'API du site, l\'application peut ne plus fonctionner. (Appuyez pour activer)</string>
     <string name="removeAdsSummary">La publicité rapporte au développeur quelques euros par mois en échange de la gratuité de son travail. Néanmoins, il est possible de retirer toute la publicité de l\'application par un achat in-app unique.</string>
     <string name="removeAds">Supprimer la pub</string>
+    <string name="menu_item_downloads_open_folder">Ouvrir le dossier</string>
+    <string name="menu_item_downloads_open_folder_error_nofm">Aucun gestionnaire de fichier trouvé.</string>
+    <string name="preference_appLogs_sensitive_summary">Inclure les données sensibles (token API, cookies…) dans le journal. Autrement, elles seront remplacées par des \"???\".</string>
+    <string name="preference_sensitive_appLogs">Données sensibles</string>
 </resources>

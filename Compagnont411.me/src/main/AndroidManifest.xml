@@ -11,6 +11,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
+    <!-- Some Chromebooks don't support touch. Although not essential,
+         it's a good idea to explicitly include this declaration. -->
+    <uses-feature android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -200,19 +205,19 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="t411.ai"
+                    android:host="t411.al"
                     android:pathPrefix="/torrents/"
                     android:scheme="http" />
                 <data
-                    android:host="www.t411.ai"
+                    android:host="www.t411.al"
                     android:pathPrefix="/torrents/"
                     android:scheme="http" />
                 <data
-                    android:host="t411.ai"
+                    android:host="t411.al"
                     android:pathPrefix="/torrents/"
                     android:scheme="https" />
                 <data
-                    android:host="www.t411.ai"
+                    android:host="www.t411.al"
                     android:pathPrefix="/torrents/"
                     android:scheme="https" />
             </intent-filter>

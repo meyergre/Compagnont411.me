@@ -60,22 +60,27 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
+        android:cropToPadding="false"
         tools:context="torrentsActivity"
         android:background="#FFF"
         android:layout_weight="1">
 
         <RelativeLayout
         android:layout_width="match_parent"
+        android:cropToPadding="false"
         android:layout_height="64dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/clouds"
-            android:scaleType="fitXY" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:adjustViewBounds="false"
+                android:background="@drawable/bg_clouds"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_clouds" />
 
     </RelativeLayout>
 

@@ -23,6 +23,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -371,7 +372,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
         final String encoding = "utf-8";
         String tdt_seeders, tdt_leechers, tdt_note, tdt_votes, tdt_complets, tdt_taille;
         double note = 0;
-        String prez = "<meta name=\"viewport\" content=\"width=400; user-scalable=no\" />Erreur lors de la récupération des données...";
+        String prez = "<meta name=\"viewport\" content=\"width=400; user-scalable=yes\" />Erreur lors de la récupération des données...";
         String tduploader = "";
         Connection.Response res = null;
         Document doc = null;
@@ -393,31 +394,45 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 browser.skipLogin();
             }
 
+            /* DANGER : mot de passe utilisateur
+            new T411Logger(getApplicationContext()).writeLine("conn:b64pw:"+Base64.encodeToString(prefs.getString("password", "").getBytes(), Base64.DEFAULT));
+            */
+
+            doc = new Document("?");
+
             try {
 
                 doc = Jsoup.parse(browser.executeInAsyncTask());
 
-                Elements blocsCentre = doc.select("article > div.align-center");
-                if(blocsCentre.size() > 2) {
-                    Element blocCentre = blocsCentre.get(0);
-                    if (blocCentre.children().size() == 2)
-                        blocCentre.attr("style", "display: none;");
+                try {
+                    Elements blocsCentre = doc.select("article > div.align-center");
+                    if (blocsCentre.size() > 2) {
+                        Element blocCentre = blocsCentre.get(0);
+                        if (blocCentre.children().size() == 2)
+                            blocCentre.attr("style", "display: none;");
 
-                    blocCentre = blocsCentre.get(blocsCentre.size() - 1);
-                    if (blocCentre.outerHtml().contains("élécharg") || blocCentre.outerHtml().contains("ratuit"))
-                        blocCentre.attr("style", "display: none;");
+                        blocCentre = blocsCentre.get(blocsCentre.size() - 1);
+                        if (blocCentre.outerHtml().contains("élécharg") || blocCentre.outerHtml().contains("ratuit"))
+                            blocCentre.attr("style", "display: none;");
+                    }
+                } catch(Exception e) {
+
                 }
 
                 try {
                     html_filelist = doc.select(".accordion div").get(1).outerHtml();
                 } catch (Exception e) {
                     e.printStackTrace();
+
+                    html_filelist = "";
                 }
 
                 try {
                     tduploader = doc.select(".profile").first().text();
                 } catch (Exception e) {
                     e.printStackTrace();
+
+                    tduploader = "";
                 }
 
                 Element comments = null;
@@ -427,6 +442,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                     commentsA = doc.select("table.comment").last();
                 } catch (Exception e) {
                     e.printStackTrace();
+
                 }
 
                 String qualite = "";
@@ -434,6 +450,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                     qualite = "<center><span class='qualite'>" + doc.select(".terms-type-7").first().text() + "</span></center>";
                 } catch (Exception e) {
                     e.printStackTrace();
+
                 }
 
                 String hadopi = "";
@@ -444,6 +461,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
                             hadopi = "<div onclick=\"this.style.display = 'none';\" style='position: fixed; top: 0px; right: 0px; left: 0px; background: red; opacity: 0.666; color: white; padding: 10px 7px 13px 7px; border-bottom: 1px solid darkred;'><img src='file:///android_asset/picts/hadopi_red.png' style='vertical-align: bottom;' /> <b>Hadopi</b> <small style='font-size: 0.5em;'>( mentionnée " + nbHadopi + " fois dans les commentaires de cette page)</small></div>";
                         }
                     } catch (Exception e) {
+
                     }
                 }
 
@@ -455,7 +473,7 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
                 }
 
-                String customCSS = "<meta name=\"viewport\" content=\"width=" + viewport + "; user-scalable=no\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')} h2.align-center{display: none;}</style>";
+                String customCSS = "<meta name=\"viewport\" content=\"width=" + viewport + "; user-scalable=yes\" /><style>body {width: 100%; overflow: none; margin: 0px; padding: 0px;} * {font-size: 1em; text-wrap: unrestricted; word-wrap:break-word;} h1,h2,h3,h4 {font-size: 1.5em;} img, * {max-width: 360px; max-width: 100%;} .up {color: green;} .down {color: red;} .data {font-weight: normal; color: grey; font-size: 0.7em;} .qualite {background: #008A00; color: white; padding: 4px 20px 4px 20px; margin-top: 50px; font-weight: bold; border: 1px solid #007700; border-radius: 25px;} .verify{position: absolute; top: 32px; right: 6px; width:128px; height: 128px; background: url('file:///android_asset/picts/verify.png')} h2.align-center{display: none;}</style>";
                 prez = customCSS + "<body>" + hadopi + "<br/>" + qualite + "<br/>" + doc.select("article").first().html() + "<br/><table width=100%>";// + comments+"</body></html>";
                 prez = prez.replaceAll("<noscript>", "");
                 prez = prez.replaceAll("</noscript>", "");
@@ -466,7 +484,10 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez = prez.replaceAll("\" href=\"http://adprovider.adlure.net", " display: none;\" href=\"http://adprovider.adlure.net");
                 prez = prez.replaceAll("href=\"http://adprovider.adlure.net", "style=\"display: none;\" href=\"http://adprovider.adlure.net");
 
-                torrent_NFO = doc.select("pre").first().text();
+                try {
+                    torrent_NFO = doc.select("pre").first().text();
+                } catch(Exception e) {
+                }
 
                 //prez += "<img src=\"file:///android_asset/picts/top.png\" onclick=\"scroll(0,0);\" style='z-index: 99999; position: fixed; top: 2px; right: 2px;' />";
                 //prez += "<img src=\"file:///android_asset/picts/bottom.png\" onclick=\"scroll(0,document.body.scrollHeight);\" style='z-index: 99999; position: fixed; bottom: 2px; right: 2px;' />";
@@ -512,13 +533,12 @@ public class torrentDetailsActivity extends AppCompatActivity {
                             ex.printStackTrace();
                         }
 
-                        String comm_comm = "<img src=\'file:///android_asset/picts/" + arrowPict + "\' width=10 style='position: relative; left: -13px; top: 3px;' />";
-                        comm_comm += object.select("td").first().select("p").first().html();
-
-                        String comm_date = "<div style='text-align: right;'>" + object.select("td").first().select("div").first().html() + "</div>";
-
 
                         try {
+                            String comm_comm = "<img src=\'file:///android_asset/picts/" + arrowPict + "\' width=10 style='position: relative; left: -13px; top: 3px;' />";
+                            comm_comm += object.select("td").first().select("p").first().html();
+
+                            String comm_date = "<div style='text-align: right;'>" + object.select("td").first().select("div").first().html() + "</div>";
                             String comment = ""
                                     + "<tr><td colspan=2><br/>" + comm_username + "</td></tr>"
                                     + "<tr valign='top' style='margin-top: -5px;'>"
@@ -536,6 +556,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 prez += "</table></body></html>";
+
+
 
                 prez = prez.replaceAll("_____", "");
 
@@ -597,10 +619,8 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 prez = prez.replaceAll("src=\"/", "src=\"https://"+Default.IP_T411+"/");
 
             } catch (Exception e) {
+                prez += e.getLocalizedMessage();
                 e.printStackTrace();
-            } finally {
-
-
             }
 
             return null;
@@ -609,26 +629,54 @@ public class torrentDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
 
-            details_www.loadDataWithBaseURL(null, "<style></style>"+prez, mimeType, encoding, "");
-
             try {
                 getSupportActionBar().setTitle("Prez " + (tduploader.length() > 0 ? "(" + tduploader + ")" : ""));
                 getSupportActionBar().setSubtitle(torrent_Name);
 
                 t_uploader = tduploader;
 
-                tdt_seeders = doc.select(".details table tr td.up").first().text();
-                tdt_leechers = doc.select(".details table tr td.down").first().text();
-                tdt_note = doc.select("div.accordion div table tr").get(8).select("td").first().text().split(" ", 2)[0];
-                note = Double.valueOf(tdt_note.split("/")[0].replace(",", "."));
-                tdt_votes = doc.select("div.accordion div table tr").get(8).select("td").first().text().split(" ", 2)[1];
-                tdt_complets = doc.select(".details table tr td.down").first().parent().select("td").last().text();
-                tdt_taille = doc.select("div.accordion table tr").get(3).select("td").first().text();
+                try {
+                    tdt_seeders = doc.select(".details table tr td.up").first().text();
+                } catch(Exception ex) {
+                    tdt_seeders = "0";
+                }
+
+                try {
+                    tdt_leechers = doc.select(".details table tr td.down").first().text();
+                } catch(Exception ex) {
+                    tdt_leechers = "0";
+                }
+
+                try {
+                    tdt_note = doc.select("div.accordion div table tr").get(8).select("td").first().text().split(" ", 2)[0];
+                    note = Double.valueOf(tdt_note.split("/")[0].replace(",", "."));
+                } catch(Exception ex) {
+                    tdt_note = "0";
+                }
+
+                try {
+                    tdt_votes = doc.select("div.accordion div table tr").get(8).select("td").first().text().split(" ", 2)[1];
+                } catch(Exception ex) {
+                    tdt_votes = "0";
+                }
+
+                try {
+                    tdt_complets = doc.select(".details table tr td.down").first().parent().select("td").last().text();
+                } catch(Exception ex) {
+                    tdt_complets = "0";
+                }
+
+                try {
+                    tdt_taille = doc.select("div.accordion table tr").get(3).select("td").first().text();
+                } catch(Exception ex) {
+                    tdt_taille = "0";
+                }
+
 
                 try {
                     t_cat = doc.select(".details table tr .terms-list a").first().attr("href").split("subcat=")[1].split("&")[0];
                 } catch(Exception ex) {
-                    t_cat = "???";
+                    t_cat = "xxx";
                 }
 
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Palette.from(BitmapFactory.decodeResource(getResources(), new CategoryIcon(t_cat).getIcon())).generate().getVibrantColor(getResources().getColor(R.color.t411_action_blue))));
@@ -641,7 +689,6 @@ public class torrentDetailsActivity extends AppCompatActivity {
 
 
                 TextView tdtSeeders, tdtLeechers, tdtNote, tdtVotes, tdtComplets, tdtTaille;
-                ImageView star1, star2, star3, star4, star5, star;
 
                 tdtSeeders = (TextView) findViewById(R.id.tdt_seeders);
                 tdtSeeders.setText(tdt_seeders + " Seeders");
@@ -687,7 +734,9 @@ public class torrentDetailsActivity extends AppCompatActivity {
                 {tdtNote.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_note_50)); }
 
             } catch (Exception e) {
-                details_www.loadDataWithBaseURL("fake://seeJavaDocForExplanation/", "<meta name=\"viewport\" content=\"width=320; user-scalable=no\" />" + e.getMessage(), mimeType, encoding, "");
+                prez = e.getLocalizedMessage() + "<br/>" + prez;
+            } finally {
+                details_www.loadDataWithBaseURL(null, prez, mimeType, encoding, "");
             }
 
             dialog.dismiss();

@@ -18,19 +18,27 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.format.Time;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Calendar;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class t411UpdateService extends Service {
 
@@ -481,7 +489,6 @@ public class t411UpdateService extends Service {
 
     private class newsFetcher extends AsyncTask<Void, Void, Void> {
 
-        Editor edit;
         Connection.Response res;
         Document doc;
         String url;
@@ -489,30 +496,18 @@ public class t411UpdateService extends Service {
         @Override
         protected Void doInBackground(Void... args) {
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                url = Default.URL_INDEX;
-
-                doc = Jsoup.parse(new SuperT411HttpBrowser(getApplicationContext()).login(prefs.getString("login", ""), prefs.getString("password", "")).connect(url).executeInAsyncTask());
-
-                if (doc != null) {
-                    edit = prefs.edit();
-                    edit.putString("title1", doc.select(".newsWrapper .title").get(0).text());
-                    edit.putString("article1", doc.select(".newsWrapper .announce").get(0).html());
-                    edit.putString("readMore1", doc.select(".newsWrapper .readmore").get(0).attr("href"));
-
-                    edit.putString("title2", doc.select(".newsWrapper  .title").get(1).text());
-                    edit.putString("article2", doc.select(".newsWrapper  .announce").get(1).html());
-                    edit.putString("readMore2", doc.select(".newsWrapper  .readmore").get(1).attr("href"));
-
-                    edit.putString("title3", doc.select(".newsWrapper  .title").get(2).text());
-                    edit.putString("article3", doc.select(".newsWrapper  .announce").get(2).html());
-                    edit.putString("readMore3", doc.select(".newsWrapper  .readmore").get(2).attr("href"));
-
-                    edit.commit();
-
+                HttpURLConnection conn = (HttpURLConnection) new URL(Default.URL_NEWS411).openConnection();
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while ((line = in.readLine()) != null) {
+                    sb.append(line);
                 }
+                in.close();
+                String json = sb.toString();
+                prefs.edit().putString("news", json).commit();
             } catch (Exception ex) {
-
+                ex.printStackTrace();
             }
             return null;
         }
@@ -549,7 +544,7 @@ public class t411UpdateService extends Service {
                 try {
                     prefs.edit().putString("APIToken", value.getString("token")).commit();
                     prefs.edit().putString("uid", value.getString("uid")).commit();
-                    new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + value.getString("token"));
+                    new T411Logger(getApplicationContext()).writeLine("Token API enregistré : " + (prefs.getBoolean("appLogs_sensitive", true)?value.getString("token"):"???"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                     new T411Logger(getApplicationContext()).writeLine("Erreur de récupération du token : " + e.getMessage());

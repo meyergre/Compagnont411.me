@@ -6,8 +6,15 @@
     android:layout_height="50dp"
     android:fitsSystemWindows="true"
     android:padding="0dp"
-    android:background="@drawable/clouds"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_clouds"
+        android:baselineAlignBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_clouds" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

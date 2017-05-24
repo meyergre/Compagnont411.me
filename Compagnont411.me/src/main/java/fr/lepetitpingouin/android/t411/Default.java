@@ -1,7 +1,7 @@
 package fr.lepetitpingouin.android.t411;
 
 class Default {
-    public static final String IP_T411 = "t411.ai";
+    public static final String IP_T411 = "t411.al";
 
     public static final String URL_T411 = "http://" + IP_T411;
 
@@ -32,7 +32,7 @@ class Default {
     public static final String URL_MESSAGE_ARC = "http://"+IP_T411+"/mailbox/archive/?id=";//+ID
     public static final String URL_OTHERAPPS = "http://play.google.com/store/search?q=pub:Gr%C3%A9gory+Meyer";
     public static final String URL_FRIENDPROFILE = "http://"+IP_T411+"/users/profile/?id=";
-
+    public static final String URL_NEWS411 = "http://news411.orym.net:3000/list";
 
 
     // Fr�quence de mise � jour par d�faut (en minutes)
@@ -45,8 +45,9 @@ class Default {
     public static String URL_INDEX = "http://"+IP_T411+"";
     public static String URL_USERPROFILE = "http://"+IP_T411+"/users/profile/";
     public static String URL_MAILS = "http://"+IP_T411+"/mailbox/";
-    //public static String URL_LOGIN = "http://"+IP_T411+"/users/login/"; // FINAL SLASH IS MANDATORY !!!!
-    public static String URL_LOGIN = "http://"+IP_T411+"/users/login/?returnto=%2Fusers%2Fprofile%2F";
+    public static String URL_LOGIN = "https://www."+IP_T411+"/users/login"; // FINAL SLASH IS MANDATORY !!!!
+    //public static String URL_LOGIN = "http://"+IP_T411+"/users/auth/"; // FINAL SLASH IS MANDATORY !!!!
+    //public static String URL_LOGIN = "http://"+IP_T411+"/users/login/?returnto=%2Fusers%2Fprofile%2F";
     public static String URL_LOGOUT = "http://"+IP_T411+"/users/logout/";
     public static String URL_SEARCH = "http://"+IP_T411+"/torrents/search/?name="; // + terms
     public static String URL_SAY_THANKS = "http://"+IP_T411+"/torrents/thanks/?id="; //+ ID
@@ -74,8 +75,9 @@ class Default {
     public static String Intent_Update_News = "android.appwidget.action.UPDATE_NEWS";
     public static String Intent_Refresh_Newspaper = "android.appwidget.action.REFRESH_NEWSPAPER";
 
-    //public static String USER_AGENT = "Android (Custom browser) WebKit/Based Compagnon/t411";
-    public static String USER_AGENT = "Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36";
+    //public static String USER_AGENT = "Android (HttpClient) WebKit/Based Compagnon/t411";
+    public static String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36";
 
     public static String BITCOIN_ADDRESS = "1Mp5oQy5BR4gvDkdZW5RUtpP3HTUcaZcBC";
+    public static String URL_PLAY_FILEEXPLORER = "http://play.google.com/store/search?q=file manager&c=apps";
 }

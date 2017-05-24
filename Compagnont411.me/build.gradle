@@ -18,9 +18,11 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 184
-        versionName "2017.04-184"
+        versionCode 186
+        versionName "2017.05-186"
         applicationId "fr.lepetitpingouin.android.t411"
+
+        useLibrary 'org.apache.http.legacy'
 
         resConfigs "en", "fr"
     }
@@ -40,5 +42,4 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.2'
     compile 'com.anjlab.android.iab.v3:library:1.0.39'
     compile 'com.google.android.gms:play-services-ads:10.2.1'
-    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }
